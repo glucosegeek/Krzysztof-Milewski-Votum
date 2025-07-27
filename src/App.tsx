@@ -475,7 +475,7 @@ Współpracuję z kancelarią, która ma na koncie setki wygranych spraw z banka
         }`}
       >
         <button 
-          className="font-bold py-2 px-4 md:py-4 md:px-8 rounded-lg text-lg transition-all hover:-translate-y-2 duration-300 transform hover:scale-105 shadow-none md:shadow-lg hover:shadow-xl border-2 md:border-4"
+          className="font-bold py-2 px-4 md:py-4 md:px-8 rounded-lg text-lg transition-all hover:-translate-y-2 duration-300 transform hover:scale-105 shadow-none md:shadow-lg hover:shadow-xl border-4"
           style={{ backgroundColor: '#F5F5F5', borderColor: '#D4AF37' }}
           onMouseEnter={(e) => e.target.style.backgroundColor = '#F5F5F5'}
           onMouseLeave={(e) => e.target.style.backgroundColor = '#F5F5F5'}
