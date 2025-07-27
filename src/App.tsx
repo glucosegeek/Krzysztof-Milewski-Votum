@@ -87,7 +87,7 @@ Pomagam kredytobiorcom walutowym w walce z nieuczciwymi umowami bankowymi.
               onMouseEnter={(e) => e.target.style.backgroundColor = '#F5F5F5'}
               onMouseLeave={(e) => e.target.style.backgroundColor = '#F5F5F5'}
             >
-              Bezpłatna analiza umowy
+              Bezpłatna konsultacja
             </button>
           </div>
         </div>
@@ -487,7 +487,7 @@ Współpracuję z kancelarią, która ma na koncie setki wygranych spraw z banka
             }
           }}
         >
-          Bezpłatna analiza umowy
+          Bezpłatna konsultacja
         </button>
       </div>
     </div>
