@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { 
   Shield, 
   FileText, 
@@ -18,11 +18,36 @@ import {
 } from 'lucide-react';
 
 function App() {
+  const [showStickyButton, setShowStickyButton] = useState(false);
+  const heroSectionRef = useRef<HTMLElement>(null);
+
   const [formData, setFormData] = useState({
     name: '',
     phone: '',
     message: ''
   });
+
+  useEffect(() => {
+    const handleScroll = () => {
+      if (heroSectionRef.current) {
+        const heroBottom = heroSectionRef.current.offsetTop + heroSectionRef.current.offsetHeight;
+        const scrollPosition = window.scrollY;
+        
+        if (scrollPosition > heroBottom) {
+          setShowStickyButton(true);
+        } else {
+          setShowStickyButton(false);
+        }
+      }
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    
+    // Cleanup function to remove event listener
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    };
+  }, []);
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     setFormData({
@@ -40,7 +65,7 @@ function App() {
   return (
     <div className="min-h-screen" style={{ backgroundColor: '#0A1A2F' }}>
       {/* Hero Section */}
-      <section className="relative overflow-hidden" style={{
+      <section ref={heroSectionRef} className="relative overflow-hidden" style={{
         backgroundImage: 'url(/hero-background.jpg)',
         backgroundSize: 'cover',
         backgroundPosition: 'center',
@@ -442,6 +467,29 @@ Współpracuję z kancelarią, która ma na koncie setki wygranych spraw z banka
           </div>
         </div>
       </footer>
+
+      {/* Sticky Button */}
+      <div 
+        className={`fixed bottom-4 left-1/2 transform -translate-x-1/2 z-50 transition-opacity duration-300 ${
+          showStickyButton ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'
+        }`}
+      >
+        <button 
+          className="font-bold py-4 px-8 rounded-lg text-lg transition-all hover:-translate-y-2 duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl border-4"
+          style={{ backgroundColor: '#F5F5F5', borderColor: '#D4AF37' }}
+          onMouseEnter={(e) => e.target.style.backgroundColor = '#F5F5F5'}
+          onMouseLeave={(e) => e.target.style.backgroundColor = '#F5F5F5'}
+          onClick={() => {
+            // Scroll to contact section
+            const contactSection = document.querySelector('section:last-of-type');
+            if (contactSection) {
+              contactSection.scrollIntoView({ behavior: 'smooth' });
+            }
+          }}
+        >
+          Bezpłatna analiza umowy
+        </button>
+      </div>
     </div>
   );
 }
