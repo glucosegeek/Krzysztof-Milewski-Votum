@@ -153,7 +153,7 @@ const FAQPage: React.FC = () => {
             </div>
             
             <div className="text-center p-8 rounded-2xl shadow-xl border-4" style={{ backgroundColor: '#F5F5F5', borderColor: '#D4AF37' }}>
-              <div className="text-4xl font-bold mb-2" style={{ color: '#0A1A2F' }}>95%</div>
+              <div className="text-4xl font-bold mb-2" style={{ color: '#0A1A2F' }}>99%</div>
               <div className="text-lg" style={{ color: '#0A1A2F' }}>Wskaźnik skuteczności</div>
             </div>
             
