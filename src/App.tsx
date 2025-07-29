@@ -18,8 +18,8 @@ function App() {
 
   return (
     <div className="min-h-screen">
-      <Navbar />
       <ConsultationModalProvider>
+        <Navbar />
         <Routes>
           <Route path="/" element={<HomePage />} />
           <Route path="/services/currency" element={<ServicesCurrencyPage />} />
