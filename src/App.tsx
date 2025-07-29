@@ -470,7 +470,7 @@ Współpracuję z kancelarią, która ma na koncie setki wygranych spraw z banka
 
       {/* Sticky Button */}
       <div 
-        className={`fixed bottom-4 left-1/2 transform -translate-x-1/2 z-50 transition-opacity duration-300 ${
+        className={`fixed bottom-4 left-4 z-50 transition-opacity duration-300 ${
           showStickyButton ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'
         }`}
       >
