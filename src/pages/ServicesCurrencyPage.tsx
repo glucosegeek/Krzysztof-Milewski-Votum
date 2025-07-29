@@ -1,8 +1,26 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { ArrowLeft, Scale, FileText, CheckCircle, AlertTriangle, Euro } from 'lucide-react';
+import { ArrowLeft, Scale, FileText, CheckCircle, AlertTriangle, Euro, DollarSign } from 'lucide-react';
 
 const ServicesCurrencyPage: React.FC = () => {
+  const [currentIconIndex, setCurrentIconIndex] = React.useState(0);
+  
+  const currencyIcons = [
+    { component: Euro, name: 'EUR' },
+    { component: DollarSign, name: 'USD' },
+    { component: Scale, name: 'CHF' }
+  ];
+  
+  React.useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentIconIndex((prevIndex) => (prevIndex + 1) % currencyIcons.length);
+    }, 2000); // Change icon every 2 seconds
+    
+    return () => clearInterval(interval);
+  }, [currencyIcons.length]);
+  
+  const CurrentIcon = currencyIcons[currentIconIndex].component;
+
   return (
     <div className="min-h-screen pt-16" style={{ backgroundColor: '#0A1A2F' }}>
       {/* Header */}
@@ -19,8 +37,8 @@ const ServicesCurrencyPage: React.FC = () => {
             </Link>
             
             <div className="text-center mb-16">
-              <div className="w-24 h-24 rounded-2xl shadow-xl border-4 flex items-center justify-center mx-auto mb-8" style={{ backgroundColor: '#F5F5F5', borderColor: '#D4AF37' }}>
-                <Euro size={48} style={{ color: '#0A1A2F' }} />
+              <div className="w-24 h-24 rounded-2xl shadow-xl border-4 flex items-center justify-center mx-auto mb-8 transition-all duration-500" style={{ backgroundColor: '#F5F5F5', borderColor: '#D4AF37' }}>
+                <CurrentIcon size={48} style={{ color: '#0A1A2F' }} />
               </div>
               <h1 className="text-4xl md:text-6xl font-bold mb-6" style={{ color: '#F5F5F5' }}>
                 Unieważnianie umów walutowych
