@@ -189,8 +189,9 @@ const KnowledgeBasePage: React.FC = () => {
                   Twoje ryzyko finansowe jest minimalne.
                 </p>
                 <div className="text-sm font-semibold" style={{ color: '#D4AF37' }}>
-                  Gwarancja transparentności kosztów
-               </button>
+                  <button>
+                    Gwarancja transparentności kosztów
+                 </button>
               </div>
             </div>
           </div>
