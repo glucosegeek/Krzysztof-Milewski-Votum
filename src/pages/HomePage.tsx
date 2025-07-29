@@ -131,7 +131,7 @@ const HomePage: React.FC = () => {
                     <div className="text-sm" style={{ color: '#F5F5F5' }}>Sprawy zakończonę sukcesem</div>
                   </div>
                   <div className="text-center">
-                    <div className="text-3xl font-bold" style={{ color: '#F5F5F5' }}>95%</div>
+                    <div className="text-3xl font-bold" style={{ color: '#F5F5F5' }}>99%</div>
                     <div className="text-sm" style={{ color: '#F5F5F5' }}>Wskaźnik skuteczności</div>
                   </div>
                   <div className="text-center">
