@@ -113,27 +113,3 @@ export const StickyButtonVisibilityProvider: React.FC<StickyButtonVisibilityProv
     </StickyButtonVisibilityContext.Provider>
   );
 };
-      (entries) => {
-        const [entry] = entries;
-        // Show button when hero section is NOT intersecting (not visible)
-        setShowButton(!entry.isIntersecting);
-      },
-      {
-        threshold: 0.1, // Trigger when 10% of hero section is visible
-        rootMargin: '-50px 0px 0px 0px' // Add some margin to trigger slightly before/after
-      }
-    );
-
-    observer.observe(heroElement);
-
-    return () => {
-      observer.disconnect();
-    };
-  }, [heroElement, location.pathname]);
-
-  return (
-    <StickyButtonVisibilityContext.Provider value={{ showButton, registerHeroSection }}>
-      {children}
-    </StickyButtonVisibilityContext.Provider>
-  );
-};
