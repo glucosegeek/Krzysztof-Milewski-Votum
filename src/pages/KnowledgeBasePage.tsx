@@ -136,8 +136,10 @@ const KnowledgeBasePage: React.FC = () => {
                 
                 <p className="leading-relaxed mb-6" style={{ color: '#F5F5F5' }}>
                   {article.excerpt}
+                      </p>
                <button
                  onClick={openModal}
+                        onClick={openModal}
                   className="text-sm font-semibold transition-colors hover:opacity-80"
                   style={{ color: '#D4AF37' }}
                 >
@@ -146,9 +148,6 @@ const KnowledgeBasePage: React.FC = () => {
               </div>
             ))}
           </div>
-            )
-            )
-            }
         </div>
       </section>
 
