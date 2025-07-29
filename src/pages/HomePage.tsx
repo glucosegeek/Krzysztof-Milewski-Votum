@@ -19,7 +19,6 @@ import {
 } from 'lucide-react';
 
 const HomePage: React.FC = () => {
-  const [showStickyButton, setShowStickyButton] = useState(false);
   const heroSectionRef = useRef<HTMLElement>(null);
   const contactSectionRef = useRef<HTMLElement>(null);
   const location = useLocation();
@@ -29,27 +28,6 @@ const HomePage: React.FC = () => {
     phone: '',
     message: ''
   });
-
-  useEffect(() => {
-    const handleScroll = () => {
-      if (heroSectionRef.current) {
-        const heroBottom = heroSectionRef.current.offsetTop + heroSectionRef.current.offsetHeight;
-        const scrollPosition = window.scrollY;
-        
-        if (scrollPosition > heroBottom) {
-          setShowStickyButton(true);
-        } else {
-          setShowStickyButton(false);
-        }
-      }
-    };
-
-    window.addEventListener('scroll', handleScroll);
-    
-    return () => {
-      window.removeEventListener('scroll', handleScroll);
-    };
-  }, []);
 
   // Handle scroll to contact section from navigation
   useEffect(() => {
@@ -471,20 +449,6 @@ const HomePage: React.FC = () => {
         </div>
       </footer>
 
-      {/* Sticky Button */}
-      <div 
-        className={`fixed bottom-4 left-4 z-50 transition-opacity duration-300 ${
-          showStickyButton ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'
-        }`}
-      >
-        <button 
-          className="font-bold py-2 px-4 md:py-4 md:px-8 rounded-none md:rounded-lg text-lg transition-all hover:-translate-y-2 duration-300 transform hover:scale-105 shadow-none md:shadow-lg hover:shadow-xl border-2 md:border-4 whitespace-nowrap"
-          style={{ backgroundColor: '#F5F5F5', borderColor: '#D4AF37' }}
-          onClick={() => contactSectionRef.current?.scrollIntoView({ behavior: 'smooth' })}
-        >
-          Bezpłatna konsultacja
-        </button>
-      </div>
     </div>
   );
 };

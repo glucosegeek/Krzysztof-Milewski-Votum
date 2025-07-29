@@ -1,6 +1,7 @@
 import React from 'react';
 import { Routes, Route } from 'react-router-dom';
 import Navbar from './components/Navbar';
+import StickyContactButton from './components/StickyContactButton';
 import HomePage from './pages/HomePage';
 import ServicesCurrencyPage from './pages/ServicesCurrencyPage';
 import ServicesSKDPage from './pages/ServicesSKDPage';
@@ -18,6 +19,7 @@ function App() {
         <Route path="/knowledge-base" element={<KnowledgeBasePage />} />
         <Route path="/faq" element={<FAQPage />} />
       </Routes>
+      <StickyContactButton />
     </div>
   );
 }
