@@ -174,9 +174,9 @@ const KnowledgeBasePage: React.FC = () => {
                   jeśli dotyczą klauzul abuzywnych. Możesz dochodzić swoich praw 
                   niezależnie od tego, kiedy zawarłeś umowę.
                 </p>
-                <div className="text-sm font-semibold" style={{ color: '#D4AF37' }}>
+                <button onClick={openModal} className="text-sm font-semibold" style={{ color: '#D4AF37' }}>
                   Aktualne na podstawie orzecznictwa TSUE
-                </div>
+                </button>
               </div>
               
               <div className="p-8 rounded-2xl shadow-xl border-4" style={{ backgroundColor: '#F5F5F5', borderColor: '#D4AF37' }}>
