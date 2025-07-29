@@ -187,12 +187,10 @@ const KnowledgeBasePage: React.FC = () => {
                   Pierwsza konsultacja jest zawsze bezpłatna. Działamy w oparciu 
                   o sukces - nie ponosisz kosztów, jeśli nie wygramy sprawy. 
                   Twoje ryzyko finansowe jest minimalne.
-                </p>
-                <div className="text-sm font-semibold" style={{ color: '#D4AF37' }}>
-                 
-                    Gwarancja transparentności kosztów
-                 </button>
-              </div>
+                </p>  
+                 <button onClick={openModal} className="text-sm font-semibold" style={{ color: '#D4AF37' }}>
+                  Gwarancja transparentności kosztów
+                </button>
             </div>
           </div>
         </div>
