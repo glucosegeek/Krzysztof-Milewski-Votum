@@ -1,8 +1,10 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { ArrowLeft, BookOpen, FileText, HelpCircle, Scale, AlertTriangle, CheckCircle } from 'lucide-react';
 
 const KnowledgeBasePage: React.FC = () => {
+  const [activeCategory, setActiveCategory] = useState("Wszystkie");
+
   const articles = [
     {
       id: 1,
@@ -50,6 +52,10 @@ const KnowledgeBasePage: React.FC = () => {
 
   const categories = ["Wszystkie", "Kredyty walutowe", "Prawo konsumenckie", "Postępowanie sądowe", "Koszty prawne", "Umowy SKD"];
 
+  const filteredArticles = activeCategory === "Wszystkie" 
+    ? articles 
+    : articles.filter(article => article.category === activeCategory);
+
   return (
     <div className="min-h-screen pt-16" style={{ backgroundColor: '#0A1A2F' }}>
       {/* Header */}
@@ -88,11 +94,12 @@ const KnowledgeBasePage: React.FC = () => {
             {categories.map((category) => (
               <button
                 key={category}
+                onClick={() => setActiveCategory(category)}
                 className="px-6 py-3 rounded-full border-2 transition-all hover:scale-105"
                 style={{ 
-                  backgroundColor: category === "Wszystkie" ? '#D4AF37' : 'transparent',
+                  backgroundColor: category === activeCategory ? '#D4AF37' : 'transparent',
                   borderColor: '#D4AF37',
-                  color: category === "Wszystkie" ? '#0A1A2F' : '#0A1A2F'
+                  color: category === activeCategory ? '#0A1A2F' : '#0A1A2F'
                 }}
               >
                 {category}
@@ -106,7 +113,7 @@ const KnowledgeBasePage: React.FC = () => {
       <section className="py-20" style={{ backgroundColor: '#F5F5F5' }}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {articles.map((article) => (
+            {filteredArticles.map((article) => (
               <div 
                 key={article.id}
                 className="p-8 rounded-2xl shadow-xl border-4 transition-all duration-300 hover:scale-105 hover:shadow-2xl cursor-pointer"
