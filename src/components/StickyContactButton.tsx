@@ -1,13 +1,13 @@
 import React from 'react';
-import { useNavigate } from 'react-router-dom';
 import { useStickyButtonVisibility } from '../context/StickyButtonVisibilityContext';
+import { useConsultationModal } from '../context/ConsultationModalContext';
 
 const StickyContactButton: React.FC = () => {
-  const navigate = useNavigate();
   const { showButton } = useStickyButtonVisibility();
+  const { openModal } = useConsultationModal();
 
   const handleClick = () => {
-    navigate('/', { state: { scrollToContact: true } });
+    openModal();
   };
 
   return (

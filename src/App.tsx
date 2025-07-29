@@ -1,9 +1,11 @@
 import React from 'react';
 import { Routes, Route } from 'react-router-dom';
 import { useStickyButtonVisibility } from './context/StickyButtonVisibilityContext';
+import { ConsultationModalProvider } from './context/ConsultationModalContext';
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
 import StickyContactButton from './components/StickyContactButton';
+import ConsultationModal from './components/ConsultationModal';
 import HomePage from './pages/HomePage';
 import ServicesCurrencyPage from './pages/ServicesCurrencyPage';
 import ServicesSKDPage from './pages/ServicesSKDPage';
@@ -17,16 +19,19 @@ function App() {
   return (
     <div className="min-h-screen">
       <Navbar />
-      <Routes>
-        <Route path="/" element={<HomePage />} />
-        <Route path="/services/currency" element={<ServicesCurrencyPage />} />
-        <Route path="/services/skd" element={<ServicesSKDPage />} />
-        <Route path="/knowledge-base" element={<KnowledgeBasePage />} />
-        <Route path="/faq" element={<FAQPage />} />
-        <Route path="/privacy-policy" element={<PrivacyPolicyPage />} />
-      </Routes>
-      <Footer registerFooterSection={registerFooterSection} />
-      <StickyContactButton />
+      <ConsultationModalProvider>
+        <Routes>
+          <Route path="/" element={<HomePage />} />
+          <Route path="/services/currency" element={<ServicesCurrencyPage />} />
+          <Route path="/services/skd" element={<ServicesSKDPage />} />
+          <Route path="/knowledge-base" element={<KnowledgeBasePage />} />
+          <Route path="/faq" element={<FAQPage />} />
+          <Route path="/privacy-policy" element={<PrivacyPolicyPage />} />
+        </Routes>
+        <Footer registerFooterSection={registerFooterSection} />
+        <StickyContactButton />
+        <ConsultationModal />
+      </ConsultationModalProvider>
     </div>
   );
 }
