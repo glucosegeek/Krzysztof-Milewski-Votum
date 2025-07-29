@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { useLocation } from 'react-router-dom';
+import { useStickyButtonVisibility } from '../context/StickyButtonVisibilityContext';
 import { 
   Shield, 
   FileText, 
@@ -22,6 +23,7 @@ const HomePage: React.FC = () => {
   const heroSectionRef = useRef<HTMLElement>(null);
   const contactSectionRef = useRef<HTMLElement>(null);
   const location = useLocation();
+  const { registerHeroSection } = useStickyButtonVisibility();
 
   const [formData, setFormData] = useState({
     name: '',
@@ -35,6 +37,13 @@ const HomePage: React.FC = () => {
       contactSectionRef.current.scrollIntoView({ behavior: 'smooth' });
     }
   }, [location.state]);
+
+  // Register hero section with visibility context
+  useEffect(() => {
+    if (heroSectionRef.current) {
+      registerHeroSection(heroSectionRef.current);
+    }
+  }, [registerHeroSection]);
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     setFormData({
