@@ -433,31 +433,6 @@ const HomePage: React.FC = () => {
         </div>
       </section>
 
-      {/* Footer */}
-      <footer className="py-12 border-t" style={{ backgroundColor: '#0A1A2F', color: '#F5F5F5', borderColor: 'rgba(212, 175, 55, 0.2)' }}>
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center">
-            <div className="mb-6">
-              <h3 className="text-xl font-bold mb-2" style={{ color: '#F5F5F5' }}>Specjalista ds. sporów sądowych CHF</h3>
-              <p style={{ color: '#F5F5F5' }}>
-                Reprezentowanie klientów we współpracy z Votum S.A.
-              </p>
-            </div>
-            
-            <div className="pt-8" style={{ borderTop: '1px solid rgba(245, 245, 245, 0.2)' }}>
-              <div className="pt-8" style={{ borderTop: '1px solid rgba(212, 175, 55, 0.3)' }}>
-                <p className="text-sm mb-4" style={{ color: '#F5F5F5' }}>
-                  <strong>Zastrzeżenie prawne:</strong> Niniejsza strona internetowa zawiera ogólne informacje na temat usług prawnych. Każda sprawa jest wyjątkowa, a wyniki osiągnięte w przeszłości nie gwarantują wyników w przyszłości. Konsultacja nie tworzy relacji prawnik-klient.
-                </p>
-                <p className="text-sm" style={{ color: '#F5F5F5' }}>
-                  © {new Date().getFullYear()} Wszelkie prawa zastrzeżone. Licencjonowany doradca prawny we współpracy z Votum S.A.
-                </p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </footer>
-
     </div>
   );
 };
