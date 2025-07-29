@@ -80,7 +80,7 @@ const Footer: React.FC<FooterProps> = ({ registerFooterSection }) => {
             </h3>
             <div className="flex space-x-4">
               <a
-                href="https://facebook.com"
+                href="https://www.facebook.com/ANTYTOKSYK"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="w-10 h-10 rounded-lg flex items-center justify-center transition-all hover:scale-110 border-2"
