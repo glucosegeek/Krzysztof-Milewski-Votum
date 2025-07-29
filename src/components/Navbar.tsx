@@ -15,7 +15,7 @@ const Navbar: React.FC = () => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-16">
           {/* Logo */}
-          <Link to="/home" className="flex items-center space-x-2">
+          <Link to="/index" className="flex items-center space-x-2">
             <Scale size={32} style={{ color: '#D4AF37' }} />
             <span className="text-xl font-bold" style={{ color: '#F5F5F5' }}>
               Krzysztof Milewski
