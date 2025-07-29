@@ -92,6 +92,14 @@ const FAQPage: React.FC = () => {
               </p>
               <button
                 onClick={openModal}
+                className="inline-block font-bold py-4 px-8 rounded-lg text-lg transition-all hover:-translate-y-2 duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl border-4 mt-8"
+                style={{ backgroundColor: '#D4AF37', borderColor: '#D4AF37', color: '#0A1A2F' }}
+              >
+                Umów bezpłatną konsultację
+              </button>
+            </div>
+          </div>
+        </div>
       </section>
 
       {/* FAQ Section */}
@@ -105,7 +113,7 @@ const FAQPage: React.FC = () => {
                 style={{ backgroundColor: '#0A1A2F', borderColor: '#D4AF37' }}
               >
                 <button
-              </button>
+                  onClick={() => toggleFAQ(faq.id)}
                   className="w-full p-6 text-left flex items-center justify-between transition-all hover:bg-opacity-90"
                   style={{ backgroundColor: 'transparent' }}
                 >
