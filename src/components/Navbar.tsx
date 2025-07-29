@@ -1,10 +1,25 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { ChevronDown, Scale, Menu, X } from 'lucide-react';
 
 const Navbar: React.FC = () => {
   const [isServicesOpen, setIsServicesOpen] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  useEffect(() => {
+  const handleScroll = () => {
+    if (isMobileMenuOpen) {
+      setIsMobileMenuOpen(false);
+      setIsServicesOpen(false); // Also close services dropdown if open
+    }
+  };
+
+  window.addEventListener('scroll', handleScroll);
+
+  // Cleanup function to remove the event listener
+  return () => {
+    window.removeEventListener('scroll', handleScroll);
+  };
+}, [isMobileMenuOpen]); // Dependency array: re-run effect if isMobileMenuOpen changes
   const navigate = useNavigate();
 
   const handleContactClick = () => {
