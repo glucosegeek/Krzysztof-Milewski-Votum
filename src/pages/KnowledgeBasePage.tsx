@@ -190,7 +190,7 @@ const KnowledgeBasePage: React.FC = () => {
                 </p>  
                  <button onClick={openModal} className="text-sm font-semibold" style={{ color: '#D4AF37' }}>
                     Gwarancja transparentności kosztów
-                  </button>
+                </button>
             </div>
           </div>
         </div>
