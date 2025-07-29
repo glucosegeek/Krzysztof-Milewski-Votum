@@ -10,65 +10,53 @@ const FAQPage: React.FC = () => {
       id: 1,
       question: "Czy konsultacja jest rzeczywiście bezpłatna?",
       answer: "Tak, pierwsza konsultacja jest całkowicie bezpłatna i bez zobowiązań. Podczas niej analizujemy Twoją sytuację, sprawdzamy dokumenty i informujemy o możliwościach prawnych. Nie ponosisz żadnych kosztów za tę usługę.",
-      category: "Koszty"
     },
     {
       id: 2,
       question: "Ile trwa proces sądowy z bankiem?",
       answer: "Czas trwania procesu sądowego może się różnić w zależności od złożoności sprawy i obciążenia sądu. Zazwyczaj postępowanie w pierwszej instancji trwa od 12 do 24 miesięcy. W przypadku apelacji proces może się wydłużyć o kolejne 6-12 miesięcy.",
-      category: "Proces sądowy"
     },
     {
       id: 3,
       question: "Co się stanie, jeśli przegram sprawę?",
       answer: "Działamy w oparciu o sukces, co oznacza, że nasze wynagrodzenie uzależnione jest od wygranej. W przypadku przegranej nie płacisz nam honorarium. Jednak mogą wystąpić koszty sądowe, które zazwyczaj pokrywa przegrywająca strona. Szczegóły omawiamy podczas konsultacji.",
-      category: "Ryzyko"
     },
     {
       id: 4,
       question: "Czy mogę dochodzić roszczeń, jeśli spłaciłem już kredyt?",
       answer: "Tak, możesz dochodzić zwrotu nadpłaconych kwot nawet po spłaceniu kredytu. Jeśli umowa zawierała klauzule abuzywne, masz prawo do odzyskania różnicy między tym, co zapłaciłeś, a tym, co powinieneś był zapłacić zgodnie z prawem.",
-      category: "Kredyty walutowe"
     },
     {
       id: 5,
       question: "Jakie dokumenty potrzebuję do analizy sprawy?",
       answer: "Do wstępnej analizy potrzebujemy: umowę kredytową, harmonogram spłat, wyciągi z konta kredytowego, korespondencję z bankiem. Jeśli nie masz wszystkich dokumentów, pomożemy Ci je uzyskać od banku.",
-      category: "Dokumenty"
     },
     {
       id: 6,
       question: "Czy każdy kredyt CHF można skutecznie zaskarżyć?",
       answer: "Nie każdy kredyt CHF automatycznie daje podstawy do wygranej sprawy. Sukces zależy od konkretnych zapisów w umowie, sposobu jej zawarcia i innych czynników. Dlatego każdą sprawę analizujemy indywidualnie podczas bezpłatnej konsultacji.",
-      category: "Kredyty walutowe"
     },
     {
       id: 7,
       question: "Co to znaczy 'działanie w oparciu o sukces'?",
       answer: "Oznacza to, że nasze wynagrodzenie uzależnione jest od pozytywnego wyniku sprawy. Jeśli nie wygramy, nie płacisz nam honorarium. Nasze wynagrodzenie stanowi procent od odzyskanej kwoty, co motywuje nas do jak najlepszego reprezentowania Twoich interesów.",
-      category: "Koszty"
     },
     {
       id: 8,
       question: "Czy mogę odstąpić od umowy SKD po jej podpisaniu?",
       answer: "Tak, w przypadku umów SKD (sprzedaży konsumenckiej na odległość) masz prawo odstąpić od umowy w terminie 14 dni bez podania przyczyny. Termin liczy się od dnia zawarcia umowy lub otrzymania produktu. Sprzedawca musi Cię o tym prawie poinformować.",
-      category: "Umowy SKD"
     },
     {
       id: 9,
       question: "Jak długo trwa analiza mojej umowy?",
       answer: "Wstępną analizę przeprowadzamy zazwyczaj w ciągu 2-3 dni roboczych od otrzymania dokumentów. Szczegółowa analiza prawna może zająć do tygodnia. O wynikach informujemy telefonicznie lub mailowo, a następnie omawiamy dalsze kroki.",
-      category: "Proces"
     },
     {
       id: 10,
       question: "Czy bank może podwyższyć ratę podczas procesu?",
       answer: "Bank nie może arbitralnie podwyższać rat podczas toczącego się procesu sądowego. Jeśli jednak nadal spłacasz kredyt, raty mogą się zmieniać zgodnie z zapisami umowy (np. ze względu na zmiany stóp procentowych). Szczegóły zależą od konkretnej umowy.",
-      category: "Proces sądowy"
     }
   ];
-
-  const categories = ["Wszystkie", "Koszty", "Proces sądowy", "Kredyty walutowe", "Umowy SKD", "Dokumenty", "Ryzyko", "Proces"];
 
   const toggleFAQ = (id: number) => {
     setOpenFAQ(openFAQ === id ? null : id);
@@ -105,27 +93,6 @@ const FAQPage: React.FC = () => {
         </div>
       </section>
 
-      {/* Categories */}
-      <section className="py-12" style={{ backgroundColor: '#F5F5F5' }}>
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex flex-wrap justify-center gap-4 mb-12">
-            {categories.map((category) => (
-              <button
-                key={category}
-                className="px-6 py-3 rounded-full border-2 transition-all hover:scale-105"
-                style={{ 
-                  backgroundColor: category === "Wszystkie" ? '#D4AF37' : 'transparent',
-                  borderColor: '#D4AF37',
-                  color: category === "Wszystkie" ? '#0A1A2F' : '#0A1A2F'
-                }}
-              >
-                {category}
-              </button>
-            ))}
-          </div>
-        </div>
-      </section>
-
       {/* FAQ Section */}
       <section className="py-20" style={{ backgroundColor: '#F5F5F5' }}>
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -142,9 +109,6 @@ const FAQPage: React.FC = () => {
                   style={{ backgroundColor: 'transparent' }}
                 >
                   <div className="flex items-center space-x-4">
-                    <span className="text-sm font-medium px-3 py-1 rounded-full" style={{ backgroundColor: '#D4AF37', color: '#0A1A2F' }}>
-                      {faq.category}
-                    </span>
                     <h3 className="text-lg font-semibold" style={{ color: '#F5F5F5' }}>
                       {faq.question}
                     </h3>
