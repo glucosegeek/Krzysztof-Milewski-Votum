@@ -70,6 +70,14 @@ const Footer: React.FC<FooterProps> = ({ registerFooterSection }) => {
               >
                 FAQ
               </Link>
+              <Link 
+                to="/privacy-policy" 
+                className="block transition-colors hover:opacity-80"
+                style={{ color: '#F5F5F5' }}
+                onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+              >
+                Polityka Prywatności
+              </Link>
             </div>
           </div>
 
@@ -133,16 +141,6 @@ const Footer: React.FC<FooterProps> = ({ registerFooterSection }) => {
               <p className="text-sm" style={{ color: '#F5F5F5' }}>
                 © {new Date().getFullYear()} Wszelkie prawa zastrzeżone. Licencjonowany doradca prawny we współpracy z Votum S.A.
               </p>
-            </div>
-            <div className="text-center md:text-right">
-              <Link 
-                to="/privacy-policy" 
-                className="text-sm transition-colors hover:opacity-80 underline"
-                style={{ color: '#D4AF37' }}
-                onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
-              >
-                Polityka Prywatności
-              </Link>
             </div>
           </div>
         </div>
