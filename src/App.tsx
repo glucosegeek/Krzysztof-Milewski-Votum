@@ -1,5 +1,6 @@
 import React from 'react';
 import { Routes, Route } from 'react-router-dom';
+import { useStickyButtonVisibility } from './context/StickyButtonVisibilityContext';
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
 import StickyContactButton from './components/StickyContactButton';
@@ -11,6 +12,8 @@ import FAQPage from './pages/FAQPage';
 import PrivacyPolicyPage from './pages/PrivacyPolicyPage';
 
 function App() {
+  const { registerFooterSection } = useStickyButtonVisibility();
+
   return (
     <div className="min-h-screen">
       <Navbar />
@@ -22,7 +25,7 @@ function App() {
         <Route path="/faq" element={<FAQPage />} />
         <Route path="/privacy-policy" element={<PrivacyPolicyPage />} />
       </Routes>
-      <Footer />
+      <Footer registerFooterSection={registerFooterSection} />
       <StickyContactButton />
     </div>
   );

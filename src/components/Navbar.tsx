@@ -1,13 +1,20 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { ChevronDown, Scale } from 'lucide-react';
+import { ChevronDown, Scale, Menu, X } from 'lucide-react';
 
 const Navbar: React.FC = () => {
   const [isServicesOpen, setIsServicesOpen] = useState(false);
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const navigate = useNavigate();
 
   const handleContactClick = () => {
     navigate('/', { state: { scrollToContact: true } });
+    setIsMobileMenuOpen(false);
+  };
+
+  const closeMobileMenu = () => {
+    setIsMobileMenuOpen(false);
+    setIsServicesOpen(false);
   };
 
   return (
@@ -15,7 +22,7 @@ const Navbar: React.FC = () => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-16">
           {/* Logo */}
-          <Link to="/" className="flex items-center space-x-2">
+          <Link to="/" className="flex items-center space-x-2" onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}>
             <Scale size={32} style={{ color: '#D4AF37' }} />
             <span className="text-xl font-bold" style={{ color: '#F5F5F5' }}>
               Krzysztof Milewski
@@ -90,15 +97,93 @@ const Navbar: React.FC = () => {
           {/* Mobile Menu Button */}
           <div className="md:hidden">
             <button
+              onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
               className="p-2 rounded-md transition-colors hover:bg-opacity-10 hover:bg-white"
               style={{ color: '#F5F5F5' }}
             >
-              <svg className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
-              </svg>
+              {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
             </button>
           </div>
         </div>
+
+        {/* Mobile Menu */}
+        {isMobileMenuOpen && (
+          <div className="md:hidden absolute top-full left-0 right-0 shadow-lg border-t-2" style={{ backgroundColor: '#0A1A2F', borderColor: '#D4AF37' }}>
+            <div className="px-4 py-2 space-y-1">
+              {/* Services Section */}
+              <div>
+                <button
+                  onClick={() => setIsServicesOpen(!isServicesOpen)}
+                  className="w-full flex items-center justify-between px-3 py-2 rounded-md text-sm font-medium transition-colors hover:bg-opacity-10 hover:bg-white"
+                  style={{ color: '#F5F5F5' }}
+                >
+                  <span>Usługi</span>
+                  <ChevronDown size={16} className={`transform transition-transform ${isServicesOpen ? 'rotate-180' : ''}`} />
+                </button>
+                
+                {isServicesOpen && (
+                  <div className="ml-4 space-y-1">
+                    <Link
+                      to="/services/currency"
+                      className="block px-3 py-2 text-sm transition-colors hover:bg-opacity-10 hover:bg-white rounded-md"
+                      style={{ color: '#F5F5F5' }}
+                      onClick={() => {
+                        closeMobileMenu();
+                        window.scrollTo({ top: 0, behavior: 'smooth' });
+                      }}
+                    >
+                      Unieważnianie umów walutowych
+                    </Link>
+                    <Link
+                      to="/services/skd"
+                      className="block px-3 py-2 text-sm transition-colors hover:bg-opacity-10 hover:bg-white rounded-md"
+                      style={{ color: '#F5F5F5' }}
+                      onClick={() => {
+                        closeMobileMenu();
+                        window.scrollTo({ top: 0, behavior: 'smooth' });
+                      }}
+                    >
+                      Unieważnianie umów SKD
+                    </Link>
+                  </div>
+                )}
+              </div>
+
+              {/* Other Links */}
+              <button
+                onClick={handleContactClick}
+                className="w-full text-left px-3 py-2 rounded-md text-sm font-medium transition-colors hover:bg-opacity-10 hover:bg-white"
+                style={{ color: '#F5F5F5' }}
+              >
+                Kontakt
+              </button>
+              
+              <Link
+                to="/knowledge-base"
+                className="block px-3 py-2 rounded-md text-sm font-medium transition-colors hover:bg-opacity-10 hover:bg-white"
+                style={{ color: '#F5F5F5' }}
+                onClick={() => {
+                  closeMobileMenu();
+                  window.scrollTo({ top: 0, behavior: 'smooth' });
+                }}
+              >
+                Baza wiedzy
+              </Link>
+              
+              <Link
+                to="/faq"
+                className="block px-3 py-2 rounded-md text-sm font-medium transition-colors hover:bg-opacity-10 hover:bg-white"
+                style={{ color: '#F5F5F5' }}
+                onClick={() => {
+                  closeMobileMenu();
+                  window.scrollTo({ top: 0, behavior: 'smooth' });
+                }}
+              >
+                FAQ
+              </Link>
+            </div>
+          </div>
+        )}
       </div>
     </nav>
   );
