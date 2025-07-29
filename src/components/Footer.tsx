@@ -44,7 +44,7 @@ const Footer: React.FC<FooterProps> = ({ registerFooterSection }) => {
                 style={{ color: '#F5F5F5' }}
                 onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
               >
-                Kredyty walutowe
+                Unieważnienie umów kredytowych
               </Link>
               <Link 
                 to="/services/skd" 
@@ -52,7 +52,7 @@ const Footer: React.FC<FooterProps> = ({ registerFooterSection }) => {
                 style={{ color: '#F5F5F5' }}
                 onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
               >
-                Umowy SKD
+                Unieważnienie umów SKD
               </Link>
               <Link 
                 to="/knowledge-base" 
