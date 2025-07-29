@@ -89,7 +89,7 @@ const Footer: React.FC<FooterProps> = ({ registerFooterSection }) => {
                 <Facebook size={20} style={{ color: '#0A1A2F' }} />
               </a>
               <a
-                href="https://instagram.com"
+                href="https://www.instagram.com/pan_od_toksycznych_kredytow/"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="w-10 h-10 rounded-lg flex items-center justify-center transition-all hover:scale-110 border-2"
