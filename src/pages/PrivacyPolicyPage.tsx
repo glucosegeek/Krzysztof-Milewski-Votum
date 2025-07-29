@@ -1,8 +1,11 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { ArrowLeft, Shield } from 'lucide-react';
+import { useConsultationModal } from '../context/ConsultationModalContext';
 
 const PrivacyPolicyPage: React.FC = () => {
+  const { openModal } = useConsultationModal();
+
   return (
     <div className="min-h-screen pt-16" style={{ backgroundColor: '#0A1A2F' }}>
       {/* Header */}
@@ -200,14 +203,13 @@ const PrivacyPolicyPage: React.FC = () => {
                   Jeśli masz pytania dotyczące przetwarzania Twoich danych osobowych 
                   lub chcesz skorzystać ze swoich praw, skontaktuj się z nami.
                 </p>
-                <Link 
-                  to="/"
-                  state={{ scrollToContact: true }}
+               <button
+                 onClick={openModal}
                   className="inline-block font-bold py-4 px-8 rounded-lg text-lg transition-all hover:-translate-y-2 duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl border-4"
                   style={{ backgroundColor: '#F5F5F5', borderColor: '#D4AF37', color: '#0A1A2F' }}
                 >
                   Skontaktuj się z nami
-                </Link>
+               </button>
               </div>
             </div>
           </div>

@@ -1,9 +1,11 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { ArrowLeft, BookOpen, FileText, HelpCircle, Scale, AlertTriangle, CheckCircle } from 'lucide-react';
+import { useConsultationModal } from '../context/ConsultationModalContext';
 
 const KnowledgeBasePage: React.FC = () => {
   const [activeCategory, setActiveCategory] = useState("Wszystkie");
+  const { openModal } = useConsultationModal();
 
   const articles = [
     {
@@ -134,9 +136,8 @@ const KnowledgeBasePage: React.FC = () => {
                 
                 <p className="leading-relaxed mb-6" style={{ color: '#F5F5F5' }}>
                   {article.excerpt}
-                </p>
-                
-                <button 
+               <button
+                 onClick={openModal}
                   className="text-sm font-semibold transition-colors hover:opacity-80"
                   style={{ color: '#D4AF37' }}
                 >
@@ -187,7 +188,7 @@ const KnowledgeBasePage: React.FC = () => {
                 </p>
                 <div className="text-sm font-semibold" style={{ color: '#D4AF37' }}>
                   Gwarancja transparentności kosztów
-                </div>
+               </button>
               </div>
             </div>
           </div>

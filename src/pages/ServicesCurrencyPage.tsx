@@ -1,9 +1,11 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { ArrowLeft, Scale, FileText, CheckCircle, AlertTriangle } from 'lucide-react';
+import { useConsultationModal } from '../context/ConsultationModalContext';
 
 const ServicesCurrencyPage: React.FC = () => {
   const [currentIconIndex, setCurrentIconIndex] = React.useState(0);
+  const { openModal } = useConsultationModal();
   
   const currencyIcons = [
     { name: 'EUR' },
@@ -164,14 +166,13 @@ const ServicesCurrencyPage: React.FC = () => {
                 Skontaktuj się z nami już dziś, aby otrzymać bezpłatną analizę swojej umowy kredytowej 
                 i dowiedzieć się o swoich możliwościach prawnych.
               </p>
-              <Link 
-                to="/"
-                state={{ scrollToContact: true }}
+              <button
+                onClick={openModal}
                 className="inline-block font-bold py-4 px-8 rounded-lg text-lg transition-all hover:-translate-y-2 duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl border-4"
                 style={{ backgroundColor: '#F5F5F5', borderColor: '#D4AF37', color: '#0A1A2F' }}
               >
                 Bezpłatna konsultacja
-              </Link>
+              </button>
             </div>
           </div>
         </div>

@@ -1,9 +1,11 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { ArrowLeft, HelpCircle, ChevronDown, ChevronUp } from 'lucide-react';
+import { useConsultationModal } from '../context/ConsultationModalContext';
 
 const FAQPage: React.FC = () => {
   const [openFAQ, setOpenFAQ] = useState<number | null>(null);
+  const { openModal } = useConsultationModal();
 
   const faqs = [
     {
@@ -88,9 +90,8 @@ const FAQPage: React.FC = () => {
                 Znajdź odpowiedzi na najważniejsze pytania dotyczące kredytów walutowych, 
                 umów SKD i procesu prawnego. Jeśli nie znajdziesz odpowiedzi, skontaktuj się z nami.
               </p>
-            </div>
-          </div>
-        </div>
+              <button
+                onClick={openModal}
       </section>
 
       {/* FAQ Section */}
@@ -104,7 +105,7 @@ const FAQPage: React.FC = () => {
                 style={{ backgroundColor: '#0A1A2F', borderColor: '#D4AF37' }}
               >
                 <button
-                  onClick={() => toggleFAQ(faq.id)}
+              </button>
                   className="w-full p-6 text-left flex items-center justify-between transition-all hover:bg-opacity-90"
                   style={{ backgroundColor: 'transparent' }}
                 >

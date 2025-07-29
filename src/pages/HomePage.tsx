@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { useLocation } from 'react-router-dom';
 import { useStickyButtonVisibility } from '../context/StickyButtonVisibilityContext';
+import { useConsultationModal } from '../context/ConsultationModalContext';
 import { 
   Shield, 
   FileText, 
@@ -21,22 +21,14 @@ import {
 
 const HomePage: React.FC = () => {
   const heroSectionRef = useRef<HTMLElement>(null);
-  const contactSectionRef = useRef<HTMLElement>(null);
-  const location = useLocation();
   const { registerHeroSection } = useStickyButtonVisibility();
+  const { openModal } = useConsultationModal();
 
   const [formData, setFormData] = useState({
     name: '',
     phone: '',
     message: ''
   });
-
-  // Handle scroll to contact section from navigation
-  useEffect(() => {
-    if (location.state?.scrollToContact && contactSectionRef.current) {
-      contactSectionRef.current.scrollIntoView({ behavior: 'smooth' });
-    }
-  }, [location.state]);
 
   // Register hero section with visibility context
   useEffect(() => {
@@ -79,7 +71,7 @@ const HomePage: React.FC = () => {
             <button 
               className="font-bold py-4 px-8 rounded-lg text-lg transition-all hover:-translate-y-2 duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl border-4"
               style={{ backgroundColor: '#F5F5F5', borderColor: '#D4AF37' }}
-              onClick={() => contactSectionRef.current?.scrollIntoView({ behavior: 'smooth' })}
+              onClick={openModal}
             >
               Bezpłatna konsultacja
             </button>
@@ -297,7 +289,7 @@ const HomePage: React.FC = () => {
       </section>
 
       {/* Contact */}
-      <section ref={contactSectionRef} className="py-20" style={{ backgroundColor: '#0A1A2F', color: '#F5F5F5' }}>
+      <section className="py-20" style={{ backgroundColor: '#0A1A2F', color: '#F5F5F5' }}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="max-w-4xl mx-auto">
             <div className="text-center mb-12">
