@@ -91,7 +91,7 @@ const HomePage: React.FC = () => {
               </div>
               <div>
                 <h2 className="text-4xl font-bold mb-6" style={{ color: '#F5F5F5' }}>
-                  Pomagam osobom z kredytem we frankach (CHF), dolarach (USD) oraz w euro (EUR)
+                  Pomagam osobom z kredytem we frankach (CHF), euro (EUR) oraz w dolarach (USD)
                 </h2>
                 <ul className="text-lg mb-6 leading-relaxed" style={{ color: '#F5F5F5' }}>
                   <li className="text-lg mb-6 leading-relaxed">🏦 Analiza umowy i wyliczenie korzyści – Sprawdzam, ile możesz zyskać na unieważnieniu umowy.</li>
