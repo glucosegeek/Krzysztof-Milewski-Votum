@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { ChevronDown, Scale, Menu, X } from 'lucide-react';
+import { ChevronDown, Scale, Menu, X, Gavel } from 'lucide-react';
 import { useConsultationModal } from '../context/ConsultationModalContext';
 
 const Navbar: React.FC = () => {
