@@ -190,7 +190,7 @@ Nie ryzykujesz nic – możesz tylko zyskać.</li>
             </p>
           </div>
           
-          <div className="grid md:grid-cols-5 gap-8">
+          <div className="grid md:grid-cols-3 gap-8">
             <div className="text-center relative transition-all duration-300 hover:scale-105 hover:shadow-3xl">
               <div className="w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-6 font-bold text-xl shadow-lg border-2" style={{ backgroundColor: '#F5F5F5', borderColor: '#D4AF37' }}>
                 1
