@@ -20,7 +20,23 @@ const AboutMePage: React.FC = () => {
               O mnie
             </h1>
             <p className="text-xl max-w-3xl mx-auto leading-relaxed">
-              Tutaj znajdą się informacje o Krzysztofie Milewskim.
+              Ekspert ds. unieważniania kredytów walutowych | Przedstawiciel Votum Consumer Care
+Strateg sprzedaży i marketingu z 30-letnim doświadczeniem
+
+Od niemal trzech dekad skutecznie zarządzam projektami, buduję ogólnopolskie zespoły sprzedażowe i wdrażam strategie promocyjne dla wielu topowych marek w różnych branżach. Dziś koncentruję się na nowoczesnym marketingu w mediach społecznościowych oraz wykorzystaniu AI do tworzenia efektywnych zespołów handlowych.
+
+W Votum Consumer Care pomagam osobom uwikłanym w toksyczne kredyty walutowe – zarówno aktywne, jak i spłacone – unieważnić umowy i odzyskać należne im środki. Na etapie wstępnej analizy wyliczam realne korzyści finansowe wynikające z unieważnienia umowy oraz rekomenduję najlepsze możliwe rozwiązanie.
+Doradzam na każdym etapie – od analizy po wyrok sądu.
+
+✅ Analiza wstępna i wyliczenie korzyści są całkowicie BEZPŁATNE.
+Nie ryzykujesz nic – możesz tylko zyskać.
+
+⸻
+
+🔥 Zrób pierwszy krok już dziś.
+
+Sprawdź swoją umowę. Zobacz, ile możesz odzyskać.
+📩 Skontaktuj się ze mną – to nic nie kosztuje, a może zmienić Twoją przyszłość.
             </p>
           </div>
         </div>
