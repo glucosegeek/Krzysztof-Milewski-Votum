@@ -173,11 +173,33 @@ const ConsultationModal: React.FC = () => {
             ></textarea>
           </div>
 
+<div>
+  <label className="flex items-start text-sm font-medium" style={{ color: '#F5F5F5' }}>
+    <input
+      type="checkbox"
+      id="privacy-consent"
+      name="privacyConsent"
+      checked={privacyConsent}
+      onChange={(e) => setPrivacyConsent(e.target.checked)}
+      className="mr-2 mt-1"
+      style={{ accentColor: '#D4AF37' }} // Styles the checkbox itself
+      required
+      aria-invalid={errors.privacyConsent ? "true" : "false"}
+      aria-describedby={errors.privacyConsent ? "privacy-consent-error" : undefined}
+    />
+    <span>
+      Wyrażam zgodę na przetwarzanie moich danych osobowych poprzez Krzysztof Milewski zgodnie z Rozporządzeniem Parlamentu Europejskiego I Rady (UE) 2016/679 z dnia 27 kwietnia 2016r. w sprawie ochrony osób fizycznych w związku z przetwarzaniem danych osobowych i w sprawie swobodnego przepływu takich danych oraz uchylenia dyrektywy 95/46/WE (ogólne rozporządzenie o ochronie danych) oraz zapoznałem/am się z informacjami dotyczącymi przetwarzania danych osobowych. <span style={{ color: '#D4AF37' }}>*</span>
+    </span>
+  </label>
+  {errors.privacyConsent && <p id="privacy-consent-error" className="text-red-500 text-sm mt-1">{errors.privacyConsent}</p>}
+</div>
+          
           <button
             type="submit"
             className="w-full font-bold py-4 px-8 rounded-lg text-lg transition-all hover:-translate-y-1 duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl border-4"
             style={{ backgroundColor: '#F5F5F5', borderColor: '#D4AF37', color: '#0A1A2F' }}
           >
+            disabled={!privacyConsent} // Add this line
             Umów bezpłatną konsultację
           </button>
               <p className="text-center text-sm mt-4" style={{ color: '#F5F5F5' }}>
