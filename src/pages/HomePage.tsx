@@ -240,6 +240,16 @@ Nie ryzykujesz nic – możesz tylko zyskać.</li>
                 Jeśli bank nie uwzględni roszczeń na etapie reklamacyjnym, zapewniamy wsparcie kancelarii prawnej, która może poprowadzić postępowanie sądowe w Twoim imieniu. Dzięki doświadczeniu prawników i starannie opracowanej strategii procesowej zwiększa się szansa na unieważnienie umowy lub odzyskanie nadpłaconych środków.
               </p>
             </div>
+
+            <div className="text-center relative transition-all duration-300 hover:scale-105 hover:shadow-3xl">
+              <div className="w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-6 font-bold text-xl shadow-lg border-2" style={{ backgroundColor: '#F5F5F5', borderColor: '#D4AF37' }}>
+                6
+              </div>
+              <h3 className="text-xl font-semibold mb-4" style={{ color: '#0A1A2F' }}>Wypłata świadczeń</h3>
+              <p style={{ color: '#0A1A2F' }}>
+                Po zakończeniu sprawy uczestniczymy w przekazaniu należnych Ci środków od banku. Dbamy o to, by proces wypłaty przebiegł sprawnie i bez zbędnych opóźnień – aż do momentu pełnego rozliczenia.
+              </p>
+            </div>
           </div>
         </div>
       </section>
