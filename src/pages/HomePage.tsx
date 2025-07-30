@@ -110,7 +110,7 @@ const [openStep, setOpenStep] = useState<number | null>(null);
               Ekspert ds. unieważniania kredytów walutowych (CHF | EUR | USD)
             </p>
             <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold mb-6 leading-tight">
-              <span className="block mt-2" style={{ color: '#D4AF37' }}>Votum Consumer Care</span>
+              <span style={{ color: '#D4AF37' }}>Votum Consumer Care</span>
             </h1>
             <button 
               className="font-bold py-4 px-8 rounded-lg text-lg transition-all hover:-translate-y-2 duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl border-4"
