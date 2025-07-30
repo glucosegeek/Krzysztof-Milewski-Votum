@@ -76,7 +76,6 @@ const ConsultationModal: React.FC = () => {
   }
 };
 
-
   if (!isModalOpen) return null;
 
   return (
