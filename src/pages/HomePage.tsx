@@ -91,13 +91,14 @@ const HomePage: React.FC = () => {
               </div>
               <div>
                 <h2 className="text-4xl font-bold mb-6" style={{ color: '#F5F5F5' }}>
-                  Pomagam osobom z kredytem we frankach (CHF)
+                  Pomagam osobom z kredytem we frankach (CHF), dolarach (USD) oraz w euro (EUR)
                 </h2>
                 <ul className="text-lg mb-6 leading-relaxed" style={{ color: '#F5F5F5' }}>
-                  <li className="text-lg mb-6 leading-relaxed">🏦 Analiza umowy kredytowej – Sprawdzam, czy umowa zawiera klauzule abuzywne.</li>
-                  <li className="text-lg mb-6 leading-relaxed">⚖️ Współpraca z kancelarią Votum – Twoją sprawą zajmują się doświadczeni prawnicy.</li>
-                  <li className="text-lg mb-6 leading-relaxed">📄 Przygotowanie dokumentów – Pomagam zgromadzić i przesłać potrzebne dokumenty.</li>
-                  <li className="text-lg mb-6 leading-relaxed">💰 Unieważnienie lub odfrankowienie umowy – Dążymy do całkowitego pozbycia się zadłużenia.</li>
+                  <li className="text-lg mb-6 leading-relaxed">🏦 Analiza umowy i wyliczenie korzyści – Sprawdzam, ile możesz zyskać na unieważnieniu umowy.</li>
+                  <li className="text-lg mb-6 leading-relaxed">⚖️ Współpraca z kancelarią Votum Consumer Care – Twoją sprawą zajmują się doświadczeni prawnicy z setkami wygranych.</li>
+                  <li className="text-lg mb-6 leading-relaxed">📊 30 lat doświadczenia w sprzedaży i marketingu – Wykorzystuję AI i nowoczesne narzędzia, by skutecznie Ci pomóc.</li>
+                  <li className="text-lg mb-6 leading-relaxed">📄 Pomoc na każdym etapie – Od analizy, przez dokumenty, aż po wyrok sądu.</li>
+                  <li className="text-lg mb-6 leading-relaxed">💰 Umowy aktywne i spłacone – Pomagam odzyskać należne środki lub pozbyć się zadłużenia.</li>
                 </ul>
                 <p className="text-lg mb-8 leading-relaxed" style={{ color: '#F5F5F5' }}>
                   Jestem agentem Votum S.A., specjalizującym się w sprawach kredytów walutowych.  
