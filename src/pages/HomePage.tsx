@@ -425,7 +425,7 @@ Nie ryzykujesz nic – możesz tylko zyskać.</li>
                   </div>
                   <div>
                     <div className="font-semibold" style={{ color: '#F5F5F5' }}>Telefon</div>
-                    <div style={{ color: '#F5F5F5' }}>+48 123 456 789</div>
+                    <div style={{ color: '#F5F5F5' }}>+48 601 227 876</div>
                   </div>
                 </div>
                 
