@@ -16,8 +16,7 @@ import {
   Gavel,
   LineChart,
   Briefcase,
-  Search,
-  Shield
+  Search
 } from 'lucide-react';
 
 const HomePage: React.FC = () => {
