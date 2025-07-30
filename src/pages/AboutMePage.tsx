@@ -72,9 +72,10 @@ const AboutMePage: React.FC = () => {
     style={{ color: '#F5F5F5', backgroundColor: 'transparent', border: 'none' }}
   >
     <span className="mr-2">📩</span>
-    <span>Skontaktuj się ze mną – to nic nie kosztuje, a może zmienić Twoją przyszłość.</span>
+    <span className="underline">Skontaktuj się ze mną – to nic nie kosztuje, a może zmienić Twoją przyszłość.</span>
   </button>
 </li>
+
 
       </ul>
   </div>
