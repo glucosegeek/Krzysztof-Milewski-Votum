@@ -84,8 +84,6 @@ const AboutMePage: React.FC = () => {
           </div>
         </div>
       </section>
-      {/* Add more content sections here */}
-    </div>
   );
 };
 
