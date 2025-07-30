@@ -56,7 +56,7 @@ const PrivacyPolicyPage: React.FC = () => {
                   <p style={{ color: '#F5F5F5' }}>
                     <strong>Dane kontaktowe:</strong><br />
                     Email: krzysztof.milewski@dsa.pl<br />
-                    Telefon: +48 123 456 789
+                    Telefon: +48 601 227 876
                   </p>
                 </div>
               </div>
