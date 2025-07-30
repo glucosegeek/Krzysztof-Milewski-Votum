@@ -1,8 +1,10 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { ArrowLeft } from 'lucide-react'; // Example icon, you can choose another
+import { ArrowLeft } from 'lucide-react';
+import { useConsultationModal } from '../context/ConsultationModalContext';
 
 const AboutMePage: React.FC = () => {
+  const { openModal } = useConsultationModal();
   return (
     <div className="min-h-screen pt-16" style={{ backgroundColor: '#0A1A2F', color: '#F5F5F5' }}>
       <section className="py-20">
