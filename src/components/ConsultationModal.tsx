@@ -84,11 +84,12 @@ const ConsultationModal: React.FC = () => {
       }}
     >
       <div
-        ref={modalRef}
-        className="relative w-full max-w-md p-8 rounded-2xl shadow-2xl border-4"
-        style={{ backgroundColor: '#0A1A2F', borderColor: '#D4AF37' }}
-        onClick={(e) => e.stopPropagation()} // Prevent clicks inside modal from closing it
-      >
+  ref={modalRef}
+  className="relative w-full max-w-md p-8 rounded-2xl shadow-2xl border-4 overflow-y-auto max-h-[90vh]" // Add these classes
+  style={{ backgroundColor: '#0A1A2F', borderColor: '#D4AF37' }}
+  onClick={(e) => e.stopPropagation()}
+>
+
         <button
           onClick={closeModal}
           className="absolute top-4 right-4 p-2 rounded-full transition-colors hover:bg-opacity-10 hover:bg-white"
@@ -175,25 +176,26 @@ const ConsultationModal: React.FC = () => {
           </div>
 
 <div className="mb-6">
-  <label className="flex items-start text-sm font-medium" style={{ color: '#F5F5F5' }}>
+  <label className="flex items-start text-sm font-medium w-full" style={{ color: '#F5F5F5' }}> {/* Add w-full */}
     <input
       type="checkbox"
       id="privacy-consent"
       name="privacyConsent"
       checked={privacyConsent}
       onChange={(e) => setPrivacyConsent(e.target.checked)}
-      className="mr-2 mt-1"
-      style={{ accentColor: '#D4AF37' }} // Styles the checkbox itself
+      className="mr-2 mt-1 flex-shrink-0" // Add flex-shrink-0
+      style={{ accentColor: '#D4AF37' }}
       required
       aria-invalid={errors.privacyConsent ? "true" : "false"}
       aria-describedby={errors.privacyConsent ? "privacy-consent-error" : undefined}
     />
-   <span className="leading-relaxed">
+   <span className="leading-relaxed flex-1"> {/* Add flex-1 */}
   Wyrażam zgodę na przetwarzanie moich danych osobowych poprzez Krzysztof Milewski zgodnie z Rozporządzeniem Parlamentu Europejskiego I Rady (UE) 2016/679 z dnia 27 kwietnia 2016r. w sprawie ochrony osób fizycznych w związku z przetwarzaniem danych osobowych i w sprawie swobodnego przepływu takich danych oraz uchylenia dyrektywy 95/46/WE (ogólne rozporządzenie o ochronie danych) oraz zapoznałem/am się z <Link to="/privacy-policy" className="text-yellow-300 underline">informacjami dotyczącymi przetwarzania danych osobowych</Link>. <span style={{ color: '#D4AF37' }}>*</span>
 </span>
   </label>
   {errors.privacyConsent && <p id="privacy-consent-error" className="text-red-500 text-sm mt-1">{errors.privacyConsent}</p>}
 </div>
+
           
           <button
             type="submit"
