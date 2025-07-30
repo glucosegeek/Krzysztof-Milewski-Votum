@@ -36,7 +36,7 @@ const [openStep, setOpenStep] = useState<number | null>(null);
     },
     {
       id: 2,
-      title: "📑Podpisanie umowy",
+      title: "Podpisanie umowy",
       description: "Po analizie Twojej sytuacji przygotujemy indywidualną ofertę współpracy, dopasowaną do rodzaju umowy kredytowej. Podpisanie umowy to początek kompleksowego działania – zawsze z myślą o Twoim bezpieczeństwie.",
     },
     {
