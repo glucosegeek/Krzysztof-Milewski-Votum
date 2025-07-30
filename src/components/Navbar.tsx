@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { ChevronDown, Scale, Menu, X, Gavel } from 'lucide-react';
+import { ChevronDown, Scale, Menu, X } from 'lucide-react';
 import { useConsultationModal } from '../context/ConsultationModalContext';
 
 const Navbar: React.FC = () => {
@@ -39,7 +39,7 @@ const Navbar: React.FC = () => {
         <div className="flex justify-between items-center h-16">
           {/* Logo */}
           <Link to="/" className="flex items-center space-x-2" onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}>
-            <Gavel size={32} style={{ color: '#D4AF37' }} />
+            <Scale size={32} style={{ color: '#D4AF37' }} />
             <span className="text-xl font-bold" style={{ color: '#F5F5F5' }}>
               Krzysztof Milewski
             </span>
