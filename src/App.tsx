@@ -28,6 +28,7 @@ function App() {
           <Route path="/knowledge-base" element={<KnowledgeBasePage />} />
           <Route path="/faq" element={<FAQPage />} />
           <Route path="/privacy-policy" element={<PrivacyPolicyPage />} />
+           <Route path="/about-me" element={<AboutMePage />} />
         </Routes>
         <Footer registerFooterSection={registerFooterSection} />
         <StickyContactButton />
