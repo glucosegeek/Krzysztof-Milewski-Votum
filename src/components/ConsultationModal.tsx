@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { X } from 'lucide-react';
 import { useConsultationModal } from '../context/ConsultationModalContext';
+import { Link } from 'react-router-dom';
 
 const ConsultationModal: React.FC = () => {
   const { isModalOpen, closeModal } = useConsultationModal();
@@ -173,7 +174,7 @@ const ConsultationModal: React.FC = () => {
             ></textarea>
           </div>
 
-<div>
+<div className="mb-6">
   <label className="flex items-start text-sm font-medium" style={{ color: '#F5F5F5' }}>
     <input
       type="checkbox"
@@ -187,9 +188,9 @@ const ConsultationModal: React.FC = () => {
       aria-invalid={errors.privacyConsent ? "true" : "false"}
       aria-describedby={errors.privacyConsent ? "privacy-consent-error" : undefined}
     />
-    <span>
-      Wyrażam zgodę na przetwarzanie moich danych osobowych poprzez Krzysztof Milewski zgodnie z Rozporządzeniem Parlamentu Europejskiego I Rady (UE) 2016/679 z dnia 27 kwietnia 2016r. w sprawie ochrony osób fizycznych w związku z przetwarzaniem danych osobowych i w sprawie swobodnego przepływu takich danych oraz uchylenia dyrektywy 95/46/WE (ogólne rozporządzenie o ochronie danych) oraz zapoznałem/am się z informacjami dotyczącymi przetwarzania danych osobowych. <span style={{ color: '#D4AF37' }}>*</span>
-    </span>
+   <span className="leading-relaxed">
+  Wyrażam zgodę na przetwarzanie moich danych osobowych poprzez Krzysztof Milewski zgodnie z Rozporządzeniem Parlamentu Europejskiego I Rady (UE) 2016/679 z dnia 27 kwietnia 2016r. w sprawie ochrony osób fizycznych w związku z przetwarzaniem danych osobowych i w sprawie swobodnego przepływu takich danych oraz uchylenia dyrektywy 95/46/WE (ogólne rozporządzenie o ochronie danych) oraz zapoznałem/am się z <Link to="/privacy-policy" className="text-yellow-300 underline">informacjami dotyczącymi przetwarzania danych osobowych</Link>. <span style={{ color: '#D4AF37' }}>*</span>
+</span>
   </label>
   {errors.privacyConsent && <p id="privacy-consent-error" className="text-red-500 text-sm mt-1">{errors.privacyConsent}</p>}
 </div>
