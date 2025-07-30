@@ -77,13 +77,14 @@ const AboutMePage: React.FC = () => {
 </li>
 
       </ul>
-    </div>
   </div>
 </div>
 
           </div>
         </div>
       </section>
+      {/* Add more content sections here */}
+    </div>
   );
 };
 
