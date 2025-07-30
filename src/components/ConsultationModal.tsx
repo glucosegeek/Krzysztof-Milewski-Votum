@@ -175,7 +175,7 @@ const ConsultationModal: React.FC = () => {
             Umów bezpłatną konsultację
           </button>
           <p className="text-center text-sm mt-4" style={{ color: '#F5F5F5' }}>
-            Kliknięcie przycisku przekieruje Cię do strony rezerwacji terminu w Calendly.
+            Kliknięcie przycisku przekieruje Cię do strony rezerwacji terminu w Calendly. Klikając w ten przycisk zgadzasz się na politykę prywatności.
           </p>
         </form>
       </div>
