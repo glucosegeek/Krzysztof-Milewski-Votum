@@ -225,7 +225,7 @@ Nie ryzykujesz nic – możesz tylko zyskać.</li>
               <div className="w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-6 font-bold text-xl shadow-lg border-2" style={{ backgroundColor: '#F5F5F5', borderColor: '#D4AF37' }}>
                 4
               </div>
-              <h3 className="text-xl font-semibold mb-4" style={{ color: '#0A1A2F' }}>⚖️Postępowanie sądowe</h3>
+              <h3 className="text-xl font-semibold mb-4" style={{ color: '#0A1A2F' }}>Zgłoszenie roszczeń</h3>
               <p style={{ color: '#0A1A2F' }}>
                 Kancelaria reprezentuje Cię w sądzie.
               </p>
