@@ -198,8 +198,8 @@ const ConsultationModal: React.FC = () => {
             type="submit"
             className="w-full font-bold py-4 px-8 rounded-lg text-lg transition-all hover:-translate-y-1 duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl border-4"
             style={{ backgroundColor: '#F5F5F5', borderColor: '#D4AF37', color: '#0A1A2F' }}
-          >
-            disabled={!privacyConsent} // Add this line
+          disabled={!privacyConsent}
+            >
             Umów bezpłatną konsultację
           </button>
               <p className="text-center text-sm mt-4" style={{ color: '#F5F5F5' }}>
