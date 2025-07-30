@@ -227,7 +227,7 @@ Nie ryzykujesz nic – możesz tylko zyskać.</li>
               </div>
               <h3 className="text-xl font-semibold mb-4" style={{ color: '#0A1A2F' }}>Zgłoszenie roszczeń</h3>
               <p style={{ color: '#0A1A2F' }}>
-                Kancelaria reprezentuje Cię w sądzie.
+                Po skompletowaniu niezbędnych dokumentów przygotowujemy i składamy w Twoimieniu reklamację do banku, jasno i precyzyjnie przedstawiając roszczenia. Dbamy o każdy szczegół – od podstawy prawnej po spełnienie wszystkich wymogów formalnych – aby zwiększyć szanse na pozytywne rozpatrzenie sprawy.
               </p>
             </div>
           
