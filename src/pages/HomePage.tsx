@@ -106,13 +106,12 @@ const [openStep, setOpenStep] = useState<number | null>(null);
             <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold mb-6 leading-tight">
               <span style={{ color: '#F5F5F5' }}>Krzysztof Milewski</span>
             </h1>
-            
-            <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold mb-6 leading-tight">
-              <span className="block mt-2" style={{ color: '#D4AF37' }}>Votum Consumer Care</span>
-            </h1>
             <p className="text-xl md:text-2xl mb-10 max-w-3xl mx-auto leading-relaxed" style={{ color: '#F5F5F5' }}>
               Ekspert ds. unieważniania kredytów walutowych (CHF | EUR | USD)
             </p>
+            <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold mb-6 leading-tight">
+              <span className="block mt-2" style={{ color: '#D4AF37' }}>Votum Consumer Care</span>
+            </h1>
             <button 
               className="font-bold py-4 px-8 rounded-lg text-lg transition-all hover:-translate-y-2 duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl border-4"
               style={{ backgroundColor: '#F5F5F5', borderColor: '#D4AF37' }}
