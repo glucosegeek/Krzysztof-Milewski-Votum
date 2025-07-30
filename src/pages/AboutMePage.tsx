@@ -79,9 +79,16 @@ const AboutMePage: React.FC = () => {
           <span>Zobacz, ile możesz odzyskać.</span>
         </li>
         <li className="flex items-center justify-center">
-          <span className="mr-2">📩</span>
-          <span>Skontaktuj się ze mną – to nic nie kosztuje, a może zmienić Twoją przyszłość.</span>
-        </li>
+  <button
+    onClick={openModal}
+    className="inline-flex items-center justify-center text-xl font-semibold transition-colors hover:opacity-80 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-[#0A1A2F] focus:ring-[#D4AF37] rounded-md px-2 py-1"
+    style={{ color: '#F5F5F5', backgroundColor: 'transparent', border: 'none' }}
+  >
+    <span className="mr-2">📩</span>
+    <span>Skontaktuj się ze mną – to nic nie kosztuje, a może zmienić Twoją przyszłość.</span>
+  </button>
+</li>
+
       </ul>
     </div>
   </div>
