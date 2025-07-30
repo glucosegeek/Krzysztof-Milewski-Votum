@@ -44,7 +44,7 @@ const ConsultationModal: React.FC = () => {
   }, [isModalOpen, closeModal]);
 
   const validate = () => {
-  const newErrors: { name?: string; email?: string; privacyConsent?: string } = {}; // Update type
+  const newErrors: { name?: string; email?: string; phone?: string; privacyConsent?: string } = {}; // Update type
   if (!name.trim()) {
     newErrors.name = 'Imię i nazwisko jest obowiązkowe.';
   }
@@ -53,12 +53,16 @@ const ConsultationModal: React.FC = () => {
   } else if (!/\S+@\S+\.\S+/.test(email)) {
     newErrors.email = 'Nieprawidłowy format email.';
   }
-  if (!privacyConsent) { // Add this block
+  if (!phone.trim()) { // Add this block for phone validation
+    newErrors.phone = 'Numer telefonu jest obowiązkowy.';
+  }
+  if (!privacyConsent) {
     newErrors.privacyConsent = 'Zgoda na przetwarzanie danych jest obowiązkowa.';
   }
   setErrors(newErrors);
   return Object.keys(newErrors).length === 0;
 };
+
 
 
   const handleSubmit = (e: React.FormEvent) => {
@@ -155,6 +159,31 @@ const ConsultationModal: React.FC = () => {
             {errors.email && <p id="email-error" className="text-red-500 text-sm mt-1">{errors.email}</p>}
           </div>
 
+          <div>
+            <label htmlFor="modal-phone" className="block text-sm font-medium mb-2" style={{ color: '#F5F5F5' }}>
+              Numer telefonu <span style={{ color: '#D4AF37' }}>*</span>
+            </label>
+            <input
+              type="tel" // Use type="tel" for phone numbers
+              id="modal-phone"
+              name="phone"
+              value={phone}
+              onChange={(e) => setPhone(e.target.value)}
+              className="w-full px-4 py-3 rounded-lg focus:outline-none focus:ring-2"
+              style={{
+                backgroundColor: 'rgba(245, 245, 245, 0.1)',
+                border: '1px solid rgba(245, 245, 245, 0.2)',
+                color: '#F5F5F5',
+                '--tw-ring-color': '#D4AF37',
+              }}
+              placeholder="Twój numer telefonu"
+              required
+              aria-invalid={errors.phone ? "true" : "false"}
+              aria-describedby={errors.phone ? "phone-error" : undefined}
+            />
+            {errors.phone && <p id="phone-error" className="text-red-500 text-sm mt-1">{errors.phone}</p>}
+          </div>
+          
           <div>
             <label htmlFor="modal-message" className="block text-sm font-medium mb-2" style={{ color: '#F5F5F5' }}>
               Wiadomość (opcjonalnie)
