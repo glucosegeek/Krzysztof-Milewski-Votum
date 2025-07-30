@@ -7,8 +7,10 @@ const ConsultationModal: React.FC = () => {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [message, setMessage] = useState('');
+  const [privacyConsent, setPrivacyConsent] = useState(false);
   const [errors, setErrors] = useState<{ name?: string; email?: string }>({});
   const modalRef = useRef<HTMLDivElement>(null);
+  
 
   useEffect(() => {
     if (isModalOpen) {
@@ -40,18 +42,22 @@ const ConsultationModal: React.FC = () => {
   }, [isModalOpen, closeModal]);
 
   const validate = () => {
-    const newErrors: { name?: string; email?: string } = {};
-    if (!name.trim()) {
-      newErrors.name = 'Imię i nazwisko jest obowiązkowe.';
-    }
-    if (!email.trim()) {
-      newErrors.email = 'Email jest obowiązkowy.';
-    } else if (!/\S+@\S+\.\S+/.test(email)) {
-      newErrors.email = 'Nieprawidłowy format email.';
-    }
-    setErrors(newErrors);
-    return Object.keys(newErrors).length === 0;
-  };
+  const newErrors: { name?: string; email?: string; privacyConsent?: string } = {}; // Update type
+  if (!name.trim()) {
+    newErrors.name = 'Imię i nazwisko jest obowiązkowe.';
+  }
+  if (!email.trim()) {
+    newErrors.email = 'Email jest obowiązkowy.';
+  } else if (!/\S+@\S+\.\S+/.test(email)) {
+    newErrors.email = 'Nieprawidłowy format email.';
+  }
+  if (!privacyConsent) { // Add this block
+    newErrors.privacyConsent = 'Zgoda na przetwarzanie danych jest obowiązkowa.';
+  }
+  setErrors(newErrors);
+  return Object.keys(newErrors).length === 0;
+};
+
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
