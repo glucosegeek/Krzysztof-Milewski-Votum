@@ -169,9 +169,9 @@ Nie ryzykujesz nic – możesz tylko zyskać.</li>
               <div className="w-20 h-20 rounded-2xl shadow-xl border-4 flex items-center justify-center mx-auto mb-6 transition-all duration-300 shadow-lg hover:shadow-xl group-hover:scale-105" style={{ backgroundColor: '#F5F5F5', borderColor: '#D4AF37' }}>
                 <Search size={40} style={{ color: '#0A1A2F' }} />
               </div>
-              <h3 className="text-xl font-semibold mb-4" style={{ color: '#F5F5F5' }}>Rzetelna analiza</h3>
+              <h3 className="text-xl font-semibold mb-4" style={{ color: '#F5F5F5' }}>Wsparcie opiekuna</h3>
               <p className="leading-relaxed" style={{ color: '#F5F5F5' }}>
-                Opieka nad Twoją sprawą od A do Z
+                Opieknun zajmuję się Twoją sprawą od A do Z
               </p>
             </div>
           </div>
