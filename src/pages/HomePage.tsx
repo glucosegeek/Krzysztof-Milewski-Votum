@@ -63,10 +63,10 @@ const HomePage: React.FC = () => {
           <div className="max-w-4xl mx-auto text-center">
             <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold mb-6 leading-tight">
               <span style={{ color: '#F5F5F5' }}>Krzysztof Milewski</span>
-              <span className="block mt-2" style={{ color: '#D4AF37' }}>Ekspert ds. unieważniania</span>
+              <span className="block mt-2" style={{ color: '#D4AF37' }}>Votum Consumer Care</span>
             </h1>
             <p className="text-xl md:text-2xl mb-10 max-w-3xl mx-auto leading-relaxed" style={{ color: '#F5F5F5' }}>
-              Votum Consumer Care
+              Ekspert ds. unieważniania kredytów walutowych (CHF | EUR | USD)
             </p>
             <button 
               className="font-bold py-4 px-8 rounded-lg text-lg transition-all hover:-translate-y-2 duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl border-4"
