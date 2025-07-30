@@ -102,6 +102,7 @@ const HomePage: React.FC = () => {
                   <li className="text-lg mb-6 leading-relaxed">✅ Analiza wstępna i wyliczenie korzyści są całkowicie BEZPŁATNE.
 Nie ryzykujesz nic – możesz tylko zyskać.</li>
                 </ul>
+                {/* To comment out */}
                 <div className="flex items-center space-x-6">
                   <div className="text-center">
                     <div className="text-3xl font-bold" style={{ color: '#F5F5F5' }}>200+</div>
@@ -112,10 +113,11 @@ Nie ryzykujesz nic – możesz tylko zyskać.</li>
                     <div className="text-sm" style={{ color: '#F5F5F5' }}>Wskaźnik skuteczności</div>
                   </div>
                   <div className="text-center">
-                    <div className="text-3xl font-bold" style={{ color: '#F5F5F5' }}>8+</div>
+                    <div className="text-3xl font-bold" style={{ color: '#F5F5F5' }}>30+</div>
                     <div className="text-sm" style={{ color: '#F5F5F5' }}>Lat doświadczenia</div>
                   </div>
                 </div>
+                {/* To comment out */}
               </div>
             </div>
           </div>
