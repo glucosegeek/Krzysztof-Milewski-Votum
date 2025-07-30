@@ -26,6 +26,46 @@ const HomePage: React.FC = () => {
   const { registerHeroSection } = useStickyButtonVisibility();
   const { openModal } = useConsultationModal();
 
+const [openStep, setOpenStep] = useState<number | null>(null);
+
+  const howItWorksSteps = [
+    {
+      id: 1,
+      title: "Analiza i oferta",
+      description: "Przeprowadzimy bezpłatną analizę umowy kredytowej i ocenę Twojej sytuacji prawnej. Na jej podstawie przygotujemy ofertę dalszego działania, dopasowaną do Twoich potrzeb i możliwości.",
+    },
+    {
+      id: 2,
+      title: "📑Podpisanie umowy",
+      description: "Po analizie Twojej sytuacji przygotujemy indywidualną ofertę współpracy, dopasowaną do rodzaju umowy kredytowej. Podpisanie umowy to początek kompleksowego działania – zawsze z myślą o Twoim bezpieczeństwie.",
+    },
+    {
+      id: 3,
+      title: "Zgromadzenie dokumentów",
+      description: "Wspólnie ustalimy, jakie dokumenty są niezbędne do rozpoczęcia postępowania – większość z nich możesz dostarczyć w formie elektronicznej. Na każdym etapie służymy wsparciem, aby cały proces przebiegł sprawnie i bez zbędnych formalności.",
+    },
+    {
+      id: 4,
+      title: "Zgłoszenie roszczeń",
+      description: "Po skompletowaniu niezbędnych dokumentów przygotowujemy i składamy w Twoimieniu reklamację do banku, jasno i precyzyjnie przedstawiając roszczenia. Dbamy o każdy szczegół – od podstawy prawnej po spełnienie wszystkich wymogów formalnych – aby zwiększyć szanse na pozytywne rozpatrzenie sprawy.",
+    },
+    {
+      id: 5,
+      title: "Wytoczenie powództwa",
+      description: "Jeśli bank nie uwzględni roszczeń na etapie reklamacyjnym, zapewniamy wsparcie kancelarii prawnej, która może poprowadzić postępowanie sądowe w Twoim imieniu. Dzięki doświadczeniu prawników i starannie opracowanej strategii procesowej zwiększa się szansa na unieważnienie umowy lub odzyskanie nadpłaconych środków.",
+    },
+    {
+      id: 6,
+      title: "Wypłata świadczeń",
+      description: "Po zakończeniu sprawy uczestniczymy w przekazaniu należnych Ci środków od banku. Dbamy o to, by proces wypłaty przebiegł sprawnie i bez zbędnych opóźnień – aż do momentu pełnego rozliczenia.",
+    },
+  ];
+
+  const toggleStep = (id: number) => {
+    setOpenStep(openStep === id ? null : id);
+  };
+
+  
   const [formData, setFormData] = useState({
     name: '',
     phone: '',
@@ -192,67 +232,62 @@ Nie ryzykujesz nic – możesz tylko zyskać.</li>
             </p>
           </div>
           
-          <div className="grid md:grid-cols-5 gap-8">
-            <div className="text-center relative transition-all duration-300 hover:scale-105 hover:shadow-3xl">
-              <div className="w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-6 font-bold text-xl shadow-lg border-2" style={{ backgroundColor: '#F5F5F5', borderColor: '#D4AF37' }}>
-                1
-              </div>
-              <h3 className="text-xl font-semibold mb-4" style={{ color: '#0A1A2F' }}>Analiza i oferta</h3>
-              <p style={{ color: '#0A1A2F' }}>
-                Przeprowadzimy bezpłatną analizę umowy kredytowej i ocenę Twojej sytuacji prawnej. Na jej podstawie przygotujemy ofertę dalszego działania, dopasowaną do Twoich potrzeb i możliwości.
-              </p>
-            </div>
-            
-            <div className="text-center relative transition-all duration-300 hover:scale-105 hover:shadow-3xl">
-              <div className="w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-6 font-bold text-xl shadow-lg border-2" style={{ backgroundColor: '#F5F5F5', borderColor: '#D4AF37' }}>
-                2
-              </div>
-              <h3 className="text-xl font-semibold mb-4" style={{ color: '#0A1A2F' }}>📑Podpisanie umowy</h3>
-              <p style={{ color: '#0A1A2F' }}>
-                Po analizie Twojej sytuacji przygotujemy indywidualną ofertę współpracy, dopasowaną do rodzaju umowy kredytowej. Podpisanie umowy to początek kompleksowego działania – zawsze z myślą o Twoim bezpieczeństwie.
-              </p>
-            </div>
-            
-            <div className="text-center relative transition-all duration-300 hover:scale-105 hover:shadow-3xl">
-              <div className="w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-6 font-bold text-xl shadow-lg border-2" style={{ backgroundColor: '#F5F5F5', borderColor: '#D4AF37' }}>
-                3
-              </div>
-              <h3 className="text-xl font-semibold mb-4" style={{ color: '#0A1A2F' }}>Zgromadzenie dokumentów</h3>
-              <p style={{ color: '#0A1A2F' }}>
-                Wspólnie ustalimy, jakie dokumenty są niezbędne do rozpoczęcia postępowania – większość z nich możesz dostarczyć w formie elektronicznej. Na każdym etapie służymy wsparciem, aby cały proces przebiegł sprawnie i bez zbędnych formalności.
-              </p>
-            </div>
-            
-            <div className="text-center relative transition-all duration-300 hover:scale-105 hover:shadow-3xl">
-              <div className="w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-6 font-bold text-xl shadow-lg border-2" style={{ backgroundColor: '#F5F5F5', borderColor: '#D4AF37' }}>
-                4
-              </div>
-              <h3 className="text-xl font-semibold mb-4" style={{ color: '#0A1A2F' }}>Zgłoszenie roszczeń</h3>
-              <p style={{ color: '#0A1A2F' }}>
-                Po skompletowaniu niezbędnych dokumentów przygotowujemy i składamy w Twoimieniu reklamację do banku, jasno i precyzyjnie przedstawiając roszczenia. Dbamy o każdy szczegół – od podstawy prawnej po spełnienie wszystkich wymogów formalnych – aby zwiększyć szanse na pozytywne rozpatrzenie sprawy.
-              </p>
-            </div>
-          
-            <div className="text-center relative transition-all duration-300 hover:scale-105 hover:shadow-3xl">
-              <div className="w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-6 font-bold text-xl shadow-lg border-2" style={{ backgroundColor: '#F5F5F5', borderColor: '#D4AF37' }}>
-                5
-              </div>
-              <h3 className="text-xl font-semibold mb-4" style={{ color: '#0A1A2F' }}>Wytoczenie powództwa</h3>
-              <p style={{ color: '#0A1A2F' }}>
-                Jeśli bank nie uwzględni roszczeń na etapie reklamacyjnym, zapewniamy wsparcie kancelarii prawnej, która może poprowadzić postępowanie sądowe w Twoim imieniu. Dzięki doświadczeniu prawników i starannie opracowanej strategii procesowej zwiększa się szansa na unieważnienie umowy lub odzyskanie nadpłaconych środków.
-              </p>
-            </div>
+          {/* How It Works */}
+<section className="py-20" style={{ backgroundColor: '#F5F5F5' }}>
+  <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div className="text-center mb-16">
+      <h2 className="text-4xl font-bold mb-4" style={{ color: '#0A1A2F' }}>
+        Jak to działa
+      </h2>
+      <p className="text-xl max-w-3xl mx-auto" style={{ color: '#0A1A2F' }}>
+        Jasna, przejrzysta ścieżka od konsultacji do pomyślnego rozwiązania
+      </p>
+    </div>
 
-            <div className="text-center relative transition-all duration-300 hover:scale-105 hover:shadow-3xl">
-              <div className="w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-6 font-bold text-xl shadow-lg border-2" style={{ backgroundColor: '#F5F5F5', borderColor: '#D4AF37' }}>
-                6
+    <div className="space-y-4"> {/* This div replaces the old grid */}
+      {howItWorksSteps.map((step) => (
+        <div
+          key={step.id}
+          className="rounded-2xl shadow-lg border-4 overflow-hidden"
+          style={{ backgroundColor: '#0A1A2F', borderColor: '#D4AF37' }}
+        >
+          <button
+            onClick={() => toggleStep(step.id)}
+            className="w-full p-6 text-left flex items-center justify-between transition-all hover:bg-opacity-90"
+            style={{ backgroundColor: 'transparent' }}
+          >
+            <div className="flex items-center space-x-4">
+              <div className="w-12 h-12 rounded-full flex items-center justify-center flex-shrink-0 font-bold text-xl shadow-lg border-2" style={{ backgroundColor: '#F5F5F5', borderColor: '#D4AF37', color: '#0A1A2F' }}>
+                {step.id}
               </div>
-              <h3 className="text-xl font-semibold mb-4" style={{ color: '#0A1A2F' }}>Wypłata świadczeń</h3>
-              <p style={{ color: '#0A1A2F' }}>
-                Po zakończeniu sprawy uczestniczymy w przekazaniu należnych Ci środków od banku. Dbamy o to, by proces wypłaty przebiegł sprawnie i bez zbędnych opóźnień – aż do momentu pełnego rozliczenia.
-              </p>
+              <h3 className="text-lg font-semibold" style={{ color: '#F5F5F5' }}>
+                {step.title}
+              </h3>
             </div>
-          </div>
+            <div className="flex-shrink-0 ml-4">
+              {openStep === step.id ? (
+                <ChevronUp size={24} style={{ color: '#D4AF37' }} />
+              ) : (
+                <ChevronDown size={24} style={{ color: '#D4AF37' }} />
+              )}
+            </div>
+          </button>
+
+          {openStep === step.id && (
+            <div className="px-6 pb-6">
+              <div className="pt-4 border-t" style={{ borderColor: 'rgba(212, 175, 55, 0.3)' }}>
+                <p className="text-lg leading-relaxed" style={{ color: '#F5F5F5' }}>
+                  {step.description}
+                </p>
+              </div>
+            </div>
+          )}
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
         </div>
       </section>
 
