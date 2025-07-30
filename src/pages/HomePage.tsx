@@ -155,7 +155,7 @@ Nie ryzykujesz nic – możesz tylko zyskać.</li>
               </p>
             </div>
             
-            <div className="text-center group">
+            {/* <div className="text-center group">
               <div className="w-20 h-20 rounded-2xl shadow-xl border-4 flex items-center justify-center mx-auto mb-6 transition-all duration-300 shadow-lg hover:shadow-xl group-hover:scale-105" style={{ backgroundColor: '#F5F5F5', borderColor: '#D4AF37' }}>
                 <Briefcase size={40} style={{ color: '#0A1A2F' }} />
               </div>
@@ -163,7 +163,7 @@ Nie ryzykujesz nic – możesz tylko zyskać.</li>
               <p className="leading-relaxed" style={{ color: '#F5F5F5' }}>
                 Działamy w oparciu o sukces
               </p>
-            </div>
+            </div> */}
             
             <div className="text-center group">
               <div className="w-20 h-20 rounded-2xl shadow-xl border-4 flex items-center justify-center mx-auto mb-6 transition-all duration-300 shadow-lg hover:shadow-xl group-hover:scale-105" style={{ backgroundColor: '#F5F5F5', borderColor: '#D4AF37' }}>
@@ -171,7 +171,7 @@ Nie ryzykujesz nic – możesz tylko zyskać.</li>
               </div>
               <h3 className="text-xl font-semibold mb-4" style={{ color: '#F5F5F5' }}>Rzetelna analiza</h3>
               <p className="leading-relaxed" style={{ color: '#F5F5F5' }}>
-                Tylko realne i zasadne sprawy
+                Opieka nad Twoją sprawą od A do Z
               </p>
             </div>
           </div>
