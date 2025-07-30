@@ -11,6 +11,7 @@ import ServicesCurrencyPage from './pages/ServicesCurrencyPage';
 import ServicesSKDPage from './pages/ServicesSKDPage';
 import KnowledgeBasePage from './pages/KnowledgeBasePage';
 import FAQPage from './pages/FAQPage';
+import AboutMePage from './pages/AboutMePage';
 import PrivacyPolicyPage from './pages/PrivacyPolicyPage';
 
 function App() {
