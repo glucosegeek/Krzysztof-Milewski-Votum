@@ -171,7 +171,7 @@ Nie ryzykujesz nic – możesz tylko zyskać.</li>
               </div>
               <h3 className="text-xl font-semibold mb-4" style={{ color: '#F5F5F5' }}>Wsparcie opiekuna</h3>
               <p className="leading-relaxed" style={{ color: '#F5F5F5' }}>
-                Opieknun zajmuję się Twoją sprawą od A do Z
+                Dedykowane wsparcie opiekuna przez całą sprawę
               </p>
             </div>
           </div>
