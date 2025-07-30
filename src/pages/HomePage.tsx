@@ -235,9 +235,9 @@ Nie ryzykujesz nic – możesz tylko zyskać.</li>
               <div className="w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-6 font-bold text-xl shadow-lg border-2" style={{ backgroundColor: '#F5F5F5', borderColor: '#D4AF37' }}>
                 5
               </div>
-              <h3 className="text-xl font-semibold mb-4" style={{ color: '#0A1A2F' }}>✅Unieważnienie umowy</h3>
+              <h3 className="text-xl font-semibold mb-4" style={{ color: '#0A1A2F' }}>Wytoczenie powództwa</h3>
               <p style={{ color: '#0A1A2F' }}>
-                Odzyskanie Twoich środków.
+                Jeśli bank nie uwzględni roszczeń na etapie reklamacyjnym, zapewniamy wsparcie kancelarii prawnej, która może poprowadzić postępowanie sądowe w Twoim imieniu. Dzięki doświadczeniu prawników i starannie opracowanej strategii procesowej zwiększa się szansa na unieważnienie umowy lub odzyskanie nadpłaconych środków.
               </p>
             </div>
           </div>
