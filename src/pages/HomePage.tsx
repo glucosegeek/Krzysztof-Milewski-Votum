@@ -219,19 +219,7 @@ Nie ryzykujesz nic – możesz tylko zyskać.</li>
           </div>
         </div>
       </section>
-
-      {/* How It Works */}
-      <section className="py-20" style={{ backgroundColor: '#F5F5F5' }}>
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl font-bold mb-4" style={{ color: '#0A1A2F' }}>
-              Jak to działa
-            </h2>
-            <p className="text-xl max-w-3xl mx-auto" style={{ color: '#0A1A2F' }}>
-              Jasna, przejrzysta ścieżka od konsultacji do pomyślnego rozwiązania
-            </p>
-          </div>
-          
+      
           {/* How It Works */}
 <section className="py-20" style={{ backgroundColor: '#F5F5F5' }}>
   <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
