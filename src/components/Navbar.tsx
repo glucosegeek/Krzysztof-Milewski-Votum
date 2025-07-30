@@ -123,14 +123,6 @@ const Navbar: React.FC = () => {
   O mnie
 </Link>
 
-<button
-  onClick={handleContactClick}
-  className="px-3 py-2 rounded-md text-sm font-medium transition-colors hover:bg-opacity-10 hover:bg-white"
-  style={{ color: '#F5F5F5' }}
->
-  O mnie
-</button>
-
           {/* Mobile Menu Button */}
           <div className="md:hidden">
             <button
