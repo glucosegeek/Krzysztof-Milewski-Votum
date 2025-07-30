@@ -223,60 +223,61 @@ Nie ryzykujesz nic – możesz tylko zyskać.</li>
       {/* How It Works */}
       <section className="py-20" style={{ backgroundColor: '#F5F5F5' }}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-<section className="py-20" style={{ backgroundColor: '#F5F5F5' }}>
-  <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-    <div className="text-center mb-16">
-      <h2 className="text-4xl font-bold mb-4" style={{ color: '#0A1A2F' }}>
-        Jak to działa
-      </h2>
-      <p className="text-xl max-w-3xl mx-auto" style={{ color: '#0A1A2F' }}>
-        Jasna, przejrzysta ścieżka od konsultacji do pomyślnego rozwiązania
-      </p>
-    </div>
-
-    <div className="space-y-4"> {/* This div replaces the old grid */}
-      {howItWorksSteps.map((step) => (
-        <div
-          key={step.id}
-          className="rounded-2xl shadow-lg border-4 overflow-hidden"
-          style={{ backgroundColor: '#0A1A2F', borderColor: '#D4AF37' }}
-        >
-          <button
-            onClick={() => toggleStep(step.id)}
-            className="w-full p-6 text-left flex items-center justify-between transition-all hover:bg-opacity-90"
-            style={{ backgroundColor: 'transparent' }}
-          >
-            <div className="flex items-center space-x-4">
-              <div className="w-12 h-12 rounded-full flex items-center justify-center flex-shrink-0 font-bold text-xl shadow-lg border-2" style={{ backgroundColor: '#F5F5F5', borderColor: '#D4AF37', color: '#0A1A2F' }}>
-                {step.id}
-              </div>
-              <h3 className="text-lg font-semibold" style={{ color: '#F5F5F5' }}>
-                {step.title}
-              </h3>
-            </div>
-            <div className="flex-shrink-0 ml-4">
-              {openStep === step.id ? (
-                <ChevronUp size={24} style={{ color: '#D4AF37' }} />
-              ) : (
-                <ChevronDown size={24} style={{ color: '#D4AF37' }} />
-              )}
-            </div>
-          </button>
-
-          {openStep === step.id && (
-            <div className="px-6 pb-6">
-              <div className="pt-4 border-t" style={{ borderColor: 'rgba(212, 175, 55, 0.3)' }}>
-                <p className="text-lg leading-relaxed" style={{ color: '#F5F5F5' }}>
-                  {step.description}
+          
+        <section className="py-20" style={{ backgroundColor: '#F5F5F5' }}>
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="text-center mb-16">
+              <h2 className="text-4xl font-bold mb-4" style={{ color: '#0A1A2F' }}>
+                Jak to działa
+              </h2>
+                <p className="text-xl max-w-3xl mx-auto" style={{ color: '#0A1A2F' }}>
+                  Jasna, przejrzysta ścieżka od konsultacji do pomyślnego rozwiązania
                 </p>
-              </div>
             </div>
-          )}
+
+          <div className="space-y-4"> {/* This div replaces the old grid */}
+            {howItWorksSteps.map((step) => (
+              <div
+                key={step.id}
+                className="rounded-2xl shadow-lg border-4 overflow-hidden"
+                style={{ backgroundColor: '#0A1A2F', borderColor: '#D4AF37' }}
+              >
+                <button
+                  onClick={() => toggleStep(step.id)}
+                  className="w-full p-6 text-left flex items-center justify-between transition-all hover:bg-opacity-90"
+                  style={{ backgroundColor: 'transparent' }}
+                >
+                  <div className="flex items-center space-x-4">
+                    <div className="w-12 h-12 rounded-full flex items-center justify-center flex-shrink-0 font-bold text-xl shadow-lg border-2" style={{ backgroundColor: '#F5F5F5', borderColor: '#D4AF37', color: '#0A1A2F' }}>
+                      {step.id}
+                    </div>
+                    <h3 className="text-lg font-semibold" style={{ color: '#F5F5F5' }}>
+                      {step.title}
+                    </h3>
+                  </div>
+                  <div className="flex-shrink-0 ml-4">
+                    {openStep === step.id ? (
+                      <ChevronUp size={24} style={{ color: '#D4AF37' }} />
+                    ) : (
+                      <ChevronDown size={24} style={{ color: '#D4AF37' }} />
+                    )}
+                  </div>
+                </button>
+      
+                {openStep === step.id && (
+                  <div className="px-6 pb-6">
+                    <div className="pt-4 border-t" style={{ borderColor: 'rgba(212, 175, 55, 0.3)' }}>
+                      <p className="text-lg leading-relaxed" style={{ color: '#F5F5F5' }}>
+                        {step.description}
+                      </p>
+                    </div>
+                  </div>
+                )}
+              </div>
+            ))}
+          </div>
         </div>
-      ))}
-    </div>
-  </div>
-</section>
+      </section>
 
         </div>
       </section>
