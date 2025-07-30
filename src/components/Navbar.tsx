@@ -48,7 +48,7 @@ const Navbar: React.FC = () => {
           {/* Navigation Links */}
           <div className="hidden md:flex items-center space-x-8">
             {/* Usługi Dropdown */}
-            <div className="relative">
+            <div className="relative" onMouseEnter={() => setIsServicesOpen(true)} onMouseLeave={() => setIsServicesOpen(false)}>
               <button
                 onClick={() => setIsServicesOpen(!isServicesOpen)}
                 className="flex items-center space-x-1 px-3 py-2 rounded-md text-sm font-medium transition-colors hover:bg-opacity-10 hover:bg-white"
