@@ -105,7 +105,9 @@ const [openStep, setOpenStep] = useState<number | null>(null);
           <div className="max-w-4xl mx-auto text-center">
             <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold mb-6 leading-tight">
               <span style={{ color: '#F5F5F5' }}>Krzysztof Milewski</span>
-              z
+            </h1>
+            
+            <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold mb-6 leading-tight">
               <span className="block mt-2" style={{ color: '#D4AF37' }}>Votum Consumer Care</span>
             </h1>
             <p className="text-xl md:text-2xl mb-10 max-w-3xl mx-auto leading-relaxed" style={{ color: '#F5F5F5' }}>
