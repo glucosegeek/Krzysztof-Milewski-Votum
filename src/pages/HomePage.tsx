@@ -195,9 +195,9 @@ Nie ryzykujesz nic – możesz tylko zyskać.</li>
               <div className="w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-6 font-bold text-xl shadow-lg border-2" style={{ backgroundColor: '#F5F5F5', borderColor: '#D4AF37' }}>
                 1
               </div>
-              <h3 className="text-xl font-semibold mb-4" style={{ color: '#0A1A2F' }}>📞Kontakt</h3>
+              <h3 className="text-xl font-semibold mb-4" style={{ color: '#0A1A2F' }}>Analiza i oferta</h3>
               <p style={{ color: '#0A1A2F' }}>
-                Krótka rozmowa lub wiadomość z opisem Twojej sytuacji.
+                Przeprowadzimy bezpłatną analizę umowy kredytowej i ocenę Twojej sytuacji prawnej. Na jej podstawie przygotujemy ofertę dalszego działania, dopasowaną do Twoich potrzeb i możliwości.
               </p>
             </div>
             
@@ -205,9 +205,9 @@ Nie ryzykujesz nic – możesz tylko zyskać.</li>
               <div className="w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-6 font-bold text-xl shadow-lg border-2" style={{ backgroundColor: '#F5F5F5', borderColor: '#D4AF37' }}>
                 2
               </div>
-              <h3 className="text-xl font-semibold mb-4" style={{ color: '#0A1A2F' }}>📑Analiza umowy</h3>
+              <h3 className="text-xl font-semibold mb-4" style={{ color: '#0A1A2F' }}>📑Podpisanie umowy</h3>
               <p style={{ color: '#0A1A2F' }}>
-                Bezpłatna weryfikacja Twojej dokumentacji kredytowej.
+                Po analizie Twojej sytuacji przygotujemy indywidualną ofertę współpracy, dopasowaną do rodzaju umowy kredytowej. Podpisanie umowy to początek kompleksowego działania – zawsze z myślą o Twoim bezpieczeństwie.
               </p>
             </div>
             
@@ -215,9 +215,9 @@ Nie ryzykujesz nic – możesz tylko zyskać.</li>
               <div className="w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-6 font-bold text-xl shadow-lg border-2" style={{ backgroundColor: '#F5F5F5', borderColor: '#D4AF37' }}>
                 3
               </div>
-              <h3 className="text-xl font-semibold mb-4" style={{ color: '#0A1A2F' }}>✍️Podpisanie umowy z Votum</h3>
+              <h3 className="text-xl font-semibold mb-4" style={{ color: '#0A1A2F' }}>Zgromadzenie dokumentów</h3>
               <p style={{ color: '#0A1A2F' }}>
-                Przekazujemy sprawę kancelarii.
+                Wspólnie ustalimy, jakie dokumenty są niezbędne do rozpoczęcia postępowania – większość z nich możesz dostarczyć w formie elektronicznej. Na każdym etapie służymy wsparciem, aby cały proces przebiegł sprawnie i bez zbędnych formalności.
               </p>
             </div>
             
