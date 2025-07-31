@@ -1,5 +1,5 @@
-import React from 'react';
-import { Routes, Route } from 'react-router-dom';
+import React, { useEffect } from 'react';
+import { Routes, Route, useLocation } from 'react-router-dom';
 import { useStickyButtonVisibility } from './context/StickyButtonVisibilityContext';
 import { ConsultationModalProvider } from './context/ConsultationModalContext';
 import Navbar from './components/Navbar';
@@ -16,7 +16,27 @@ import PrivacyPolicyPage from './pages/PrivacyPolicyPage';
 
 function App() {
   const { registerFooterSection } = useStickyButtonVisibility();
+  const location = useLocation();
 
+useEffect(() => {
+    if (location.hash) {
+      const element = document.getElementById(location.hash.substring(1));
+      if (element) {
+        element.scrollIntoView({ behavior: 'smooth' });
+      }
+    } else {
+      // Optional: scroll to top on page change if no hash
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+  }, [location]); // Re-run when location changes
+
+  return (
+    <div className="min-h-screen">
+      {/* ... rest of App component ... */}
+    </div>
+  );
+}
+  
   return (
     <div className="min-h-screen">
       <ConsultationModalProvider>
