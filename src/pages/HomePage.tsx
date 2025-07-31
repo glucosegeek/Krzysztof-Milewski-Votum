@@ -68,7 +68,7 @@ const [openStep, setOpenStep] = useState<number | null>(null);
   
   const [formData, setFormData] = useState({
   name: '',
-  email: '', // Add this line
+  email: '',
   phone: '',
   message: ''
 });
