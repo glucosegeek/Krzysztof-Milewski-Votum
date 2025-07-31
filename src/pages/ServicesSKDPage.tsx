@@ -161,7 +161,7 @@ const ServicesSKDPage: React.FC = () => {
                 
                 <div className="flex items-start space-x-4">
                   <div className="w-8 h-8 rounded-full flex items-center justify-center flex-shrink-0 mt-1" style={{ backgroundColor: '#D4AF37' }}>
-                    <span className="text-sm font-bold" style={{ color: '#F5F5F5' }}>3</span>
+                    <span className="text-sm font-bold" style={{ color: '#0A1A2F' }}>3</span>
                   </div>
                   <div>
                     <h3 className="text-xl font-semibold mb-2" style={{ color: '#0A1A2F' }}>
