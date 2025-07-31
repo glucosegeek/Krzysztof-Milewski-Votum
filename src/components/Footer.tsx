@@ -81,6 +81,22 @@ const Footer: React.FC<FooterProps> = ({ registerFooterSection }) => {
             </div>
           </div>
 
+        <div>
+            <h3 className="text-xl font-bold mb-4" style={{ color: '#F5F5F5' }}>
+              Kontakt
+            </h3>
+            <div className="space-y-2">
+              <p className="flex items-center space-x-2" style={{ color: '#F5F5F5' }}>
+                <span className="font-semibold">Telefon:</span>
+                <span>+48 601 227 876</span>
+              </p>
+              <p className="flex items-center space-x-2" style={{ color: '#F5F5F5' }}>
+                <span className="font-semibold">Email:</span>
+                <span>krzysztof.milewski@dsa.pl</span>
+              </p>
+            </div>
+          </div>
+          
           {/* Social Media */}
           <div>
             <h3 className="text-xl font-bold mb-4" style={{ color: '#F5F5F5' }}>
