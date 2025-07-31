@@ -11,7 +11,6 @@ import {
   MessageCircle,
   Star,
   Scale,
-  UserCheck,
   ClipboardList,
   Gavel,
   LineChart,
