@@ -28,7 +28,7 @@ const Footer: React.FC<FooterProps> = ({ registerFooterSection }) => {
               Agent Votum S.A. Spółka partnerska
             </p>
             <p style={{ color: '#F5F5F5' }}>
-              Specjalista ds. sporów sądowych CHF
+              Ekspert ds. unieważniania kredytów walutowych (CHF | EUR | USD)
             </p>
           </div>
 
