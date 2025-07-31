@@ -113,7 +113,7 @@ const ServicesCurrencyPage: React.FC = () => {
               <div className="space-y-6">
                 <div className="flex items-start space-x-4">
                   <div className="w-8 h-8 rounded-full flex items-center justify-center flex-shrink-0 mt-1" style={{ backgroundColor: '#D4AF37' }}>
-                    <CheckCircle size={20} style={{ color: '#0A1A2F' }} />
+                    <CheckCircle size={20} style={{ color: '#D4AF37' }} />
                   </div>
                   <div>
                     <h3 className="text-xl font-semibold mb-2" style={{ color: '#0A1A2F' }}>
