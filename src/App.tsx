@@ -32,13 +32,6 @@ useEffect(() => {
 
   return (
     <div className="min-h-screen">
-      {/* ... rest of App component ... */}
-    </div>
-  );
-}
-  
-  return (
-    <div className="min-h-screen">
       <ConsultationModalProvider>
         <Navbar />
         <Routes>
@@ -56,6 +49,7 @@ useEffect(() => {
       </ConsultationModalProvider>
     </div>
   );
+}
 }
 
 export default App;
