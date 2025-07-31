@@ -354,7 +354,29 @@ Nie ryzykujesz nic – możesz tylko zyskać.</li>
                       required
                     />
                   </div>
-                  
+                  {/* add here code to email */}
+                  <div>
+                    <label htmlFor="phone" className="block text-sm font-medium mb-2" style={{ color: '#F5F5F5' }}>
+                      Numer telefonu
+                    </label>
+                    <input
+                      type="tel"
+                      id="phone"
+                      name="phone"
+                      value={formData.phone}
+                      onChange={handleInputChange}
+                      className="w-full px-4 py-3 rounded-lg focus:outline-none focus:ring-2"
+                      style={{ 
+                        backgroundColor: 'rgba(245, 245, 245, 0.1)', 
+                        border: '1px solid rgba(245, 245, 245, 0.2)', 
+                        color: '#F5F5F5',
+                        '--tw-ring-color': '#D4AF37'
+                      }}
+                      placeholder="Numer telefonu"
+                      required
+                    />
+                  </div>
+                  {/* add here code to email */}
                   <div>
                     <label htmlFor="phone" className="block text-sm font-medium mb-2" style={{ color: '#F5F5F5' }}>
                       Numer telefonu
