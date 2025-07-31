@@ -158,7 +158,7 @@ const FAQPage: React.FC = () => {
               Chętnie odpowiemy na wszystkie Twoje pytania podczas bezpłatnej konsultacji.
             </p>
             <Link 
-              to="/"
+              to="/#contact-section"
               state={{ scrollToContact: true }}
               className="inline-block font-bold py-4 px-8 rounded-lg text-lg transition-all hover:-translate-y-2 duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl border-4"
               style={{ backgroundColor: '#F5F5F5', borderColor: '#D4AF37', color: '#0A1A2F' }}
