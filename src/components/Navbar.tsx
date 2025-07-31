@@ -185,6 +185,7 @@ const Navbar: React.FC = () => {
   Kontakt
 </Link>
 
+
               
               <Link
                 to="/knowledge-base"
