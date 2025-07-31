@@ -163,10 +163,7 @@ const validate = () => {
               <div>
                 <div className="w-80 h-80 rounded-2xl mx-auto lg:mx-0 flex items-center justify-center shadow-xl border-8 overflow-hidden" style={{ backgroundColor: '#F5F5F5', borderColor: '#D4AF37' }}>
   <img
-    backgroundImage: 'url(/hero-background.jpg)',
-        backgroundSize: 'cover',
-        backgroundPosition: 'center',
-        backgroundRepeat: 'no-repeat'
+    src="url(/hero-background.jpg)"
     alt="Krzysztof Milewski - Expert ds. unieważniania kredytów walutowych"
     className="w-full h-full object-cover" // Ensure the image covers the div
   />
