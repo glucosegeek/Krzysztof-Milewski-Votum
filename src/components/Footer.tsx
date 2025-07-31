@@ -24,9 +24,6 @@ const Footer: React.FC<FooterProps> = ({ registerFooterSection }) => {
             <h3 className="text-xl font-bold mb-4" style={{ color: '#F5F5F5' }}>
               Krzysztof Milewski
             </h3>
-            <p className="mb-2" style={{ color: '#F5F5F5' }}>
-              Agent Votum S.A. Spółka partnerska
-            </p>
             <p style={{ color: '#F5F5F5' }}>
               Ekspert ds. unieważniania kredytów walutowych (CHF | EUR | USD)
             </p>
