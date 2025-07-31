@@ -161,9 +161,6 @@ const validate = () => {
           <div className="max-w-4xl mx-auto">
             <div className="grid lg:grid-cols-2 gap-12 items-center">
               <div>
-                <div className="w-80 h-80 rounded-2xl mx-auto lg:mx-0 flex items-center justify-center shadow-xl border-8" style={{ backgroundColor: '#F5F5F5', borderColor: '#D4AF37' }}>
-                  <UserCheck size={120} style={{ color: '#0A1A2F' }} />
-                </div>
               </div>
               <div>
                 <h2 className="text-4xl font-bold mb-6" style={{ color: '#F5F5F5' }}>
