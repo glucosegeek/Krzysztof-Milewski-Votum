@@ -72,8 +72,35 @@ const [openStep, setOpenStep] = useState<number | null>(null);
   phone: '',
   message: ''
 });
+  
+const [errors, setErrors] = useState<{ name?: string; email?: string; phone?: string; message?: string }>({});
 
+const validate = () => {
+  const newErrors: { name?: string; email?: string; phone?: string; message?: string } = {};
 
+  if (!formData.name.trim()) {
+    newErrors.name = 'Imię i nazwisko jest obowiązkowe.';
+  }
+
+  if (!formData.email.trim()) {
+    newErrors.email = 'Email jest obowiązkowy.';
+  } else if (!/\S+@\S+\.\S+/.test(formData.email)) {
+    newErrors.email = 'Nieprawidłowy format email.';
+  }
+
+  // Basic phone number validation regex (adjust as needed for specific formats)
+  const phoneRegex = /^[+]?[(]?[0-9]{3}[)]?[-\s.]?[0-9]{3}[-\s.]?[0-9]{4,6}$/im;
+  if (!formData.phone.trim()) {
+    newErrors.phone = 'Numer telefonu jest obowiązkowy.';
+  } else if (!phoneRegex.test(formData.phone)) {
+    newErrors.phone = 'Nieprawidłowy format numeru telefonu.';
+  }
+
+  setErrors(newErrors);
+  return Object.keys(newErrors).length === 0;
+};
+
+  
   // Register hero section with visibility context
   useEffect(() => {
     if (heroSectionRef.current) {
