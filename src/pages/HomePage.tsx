@@ -394,7 +394,7 @@ Nie ryzykujesz nic – możesz tylko zyskać.</li>
                         color: '#F5F5F5',
                         '--tw-ring-color': '#D4AF37'
                       }}
-                      placeholder="Opowiedz mi o swojej sytuacji kredytowej w CHF."
+                      placeholder="Opowiedz mi o swojej sytuacji kredytowej."
                       required
                     ></textarea>
                   </div>
