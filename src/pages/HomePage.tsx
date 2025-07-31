@@ -429,15 +429,19 @@ Nie ryzykujesz nic – możesz tylko zyskać.</li>
                       value={formData.phone}
                       onChange={handleInputChange}
                       className="w-full px-4 py-3 rounded-lg focus:outline-none focus:ring-2"
-                      style={{ 
-                        backgroundColor: 'rgba(245, 245, 245, 0.1)', 
-                        border: '1px solid rgba(245, 245, 245, 0.2)', 
+                      style={{
+                        backgroundColor: 'rgba(245, 245, 245, 0.1)',
+                        border: '1px solid rgba(245, 245, 245, 0.2)',
                         color: '#F5F5F5',
                         '--tw-ring-color': '#D4AF37'
                       }}
                       placeholder="Numer telefonu"
                       required
+                      aria-invalid={errors.phone ? "true" : "false"} // Add this
+                      aria-describedby={errors.phone ? "phone-error" : undefined} // Add this
                     />
+                    {errors.phone && <p id="phone-error" className="text-red-500 text-sm mt-1">{errors.phone}</p>} {/* Add this */}
+
                   </div>
                   
                   <div>
