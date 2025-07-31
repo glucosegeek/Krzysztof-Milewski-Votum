@@ -30,7 +30,7 @@ const AboutMePage: React.FC = () => {
 {/* Image Placeholder for Client */}
 <div className="w-64 h-64 rounded-full mx-auto mb-12 overflow-hidden shadow-xl border-4" style={{ borderColor: '#D4AF37' }}>
   <img
-    src="https://images.pexels.com/photos/220453/pexels-photo-220453.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2" // Replace with your client's image URL
+    src="votum-background.jpg" // Replace with your client's image URL
     alt="Krzysztof Milewski"
     className="w-full h-full object-cover object-center"
   />
