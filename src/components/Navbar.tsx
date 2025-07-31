@@ -82,14 +82,13 @@ const Navbar: React.FC = () => {
 
             {/* Other Navigation Links */}
             <Link
-  to="/#contact-section"
-  className="px-3 py-2 rounded-md text-sm font-medium transition-colors hover:bg-opacity-10 hover:bg-white"
-  style={{ color: '#F5F5F5' }}
-  onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })} // Optional: ensure scroll to top if on different page before navigating
->
-  Kontakt
-</Link>
-
+                  to="/#contact-section"
+                  className="px-4 py-3 rounded-md text-sm font-medium transition-colors hover:bg-opacity-10 hover:bg-white"
+                  style={{ color: '#F5F5F5' }}
+                  onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+                >
+                  Kontakt
+            </Link>
             
             <Link
               to="/knowledge-base"
