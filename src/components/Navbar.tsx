@@ -174,18 +174,16 @@ const Navbar: React.FC = () => {
 
               {/* Other Links */}
               <Link
-  to="/#contact-section"
-  className="w-full text-left px-4 py-3 rounded-md text-sm font-medium transition-colors hover:bg-opacity-10 hover:bg-white"
-  style={{ color: '#F5F5F5' }}
-  onClick={() => {
-    closeMobileMenu();
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-  }}
->
-  Kontakt
-</Link>
-
-
+                  to="/#contact-section"
+                  className="w-full text-left px-4 py-3 rounded-md text-sm font-medium transition-colors hover:bg-opacity-10 hover:bg-white"
+                  style={{ color: '#F5F5F5' }}
+                  onClick={() => {
+                    closeMobileMenu();
+                    window.scrollTo({ top: 0, behavior: 'smooth' });
+                  }}
+                >
+                  Kontakt
+            </Link>
               
               <Link
                 to="/knowledge-base"
