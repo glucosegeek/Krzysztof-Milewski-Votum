@@ -161,6 +161,14 @@ const validate = () => {
           <div className="max-w-4xl mx-auto">
             <div className="grid lg:grid-cols-2 gap-12 items-center">
               <div>
+                <div className="w-80 h-80 rounded-2xl mx-auto lg:mx-0 flex items-center justify-center shadow-xl border-8 overflow-hidden" style={{ backgroundColor: '#F5F5F5', borderColor: '#D4AF37' }}>
+  <img
+    src="https://images.pexels.com/photos/220453/pexels-photo-220453.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2" // Replace with your image URL
+    alt="Krzysztof Milewski - Expert ds. unieważniania kredytów walutowych"
+    className="w-full h-full object-cover" // Ensure the image covers the div
+  />
+</div>
+
               </div>
               <div>
                 <h2 className="text-4xl font-bold mb-6" style={{ color: '#F5F5F5' }}>
