@@ -44,7 +44,7 @@ const ConsultationModal: React.FC = () => {
   }, [isModalOpen, closeModal]);
 
   const validate = () => {
-  const newErrors: { name?: string; email?: string; phone?: string; privacyConsent?: string } = {}; // Update type
+  const newErrors: { name?: string; email?: string; phone?: string; privacyConsent?: string } = {};
   if (!name.trim()) {
     newErrors.name = 'Imię i nazwisko jest obowiązkowe.';
   }
@@ -53,17 +53,20 @@ const ConsultationModal: React.FC = () => {
   } else if (!/\S+@\S+\.\S+/.test(email)) {
     newErrors.email = 'Nieprawidłowy format email.';
   }
-  if (!phone.trim()) { // Add this block for phone validation
+
+  const phoneRegex = /^[+]?[(]?[0-9]{3}[)]?[-\s.]?[0-9]{3}[-\s.]?[0-9]{4,6}$/im; // Basic phone number regex
+  if (!phone.trim()) {
     newErrors.phone = 'Numer telefonu jest obowiązkowy.';
+  } else if (!phoneRegex.test(phone)) {
+    newErrors.phone = 'Nieprawidłowy format numeru telefonu.';
   }
+
   if (!privacyConsent) {
     newErrors.privacyConsent = 'Zgoda na przetwarzanie danych jest obowiązkowa.';
   }
   setErrors(newErrors);
   return Object.keys(newErrors).length === 0;
 };
-
-
 
   const handleSubmit = (e: React.FormEvent) => {
   e.preventDefault();
