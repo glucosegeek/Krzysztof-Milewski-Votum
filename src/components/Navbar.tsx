@@ -23,11 +23,6 @@ const Navbar: React.FC = () => {
 }, [isMobileMenuOpen]); // Dependency array: re-run effect if isMobileMenuOpen changes
   const { openModal } = useConsultationModal();
 
-  const handleContactClick = () => {
-    openModal();
-    setIsMobileMenuOpen(false);
-  };
-
   const closeMobileMenu = () => {
     setIsMobileMenuOpen(false);
     setIsServicesOpen(false);
