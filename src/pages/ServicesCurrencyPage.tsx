@@ -116,10 +116,10 @@ const ServicesCurrencyPage: React.FC = () => {
                     <CheckCircle size={20} style={{ color: '#D4AF37' }} />
                   </div>
                   <div>
-                    <h3 className="text-xl font-semibold mb-2" style={{ color: '#0A1A2F' }}>
+                    <h3 className="text-xl font-semibold mb-2" style={{ color: '#F5F5F5' }}>
                       Analiza umowy kredytowej
                     </h3>
-                    <p className="text-lg leading-relaxed" style={{ color: '#0A1A2F' }}>
+                    <p className="text-lg leading-relaxed" style={{ color: '#F5F5F5' }}>
                       Szczegółowe sprawdzenie wszystkich klauzul umownych pod kątem ich zgodności z prawem 
                       i identyfikacja postanowień abuzywnych.
                     </p>
