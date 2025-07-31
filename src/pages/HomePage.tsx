@@ -371,36 +371,10 @@ Nie ryzykujesz nic – możesz tylko zyskać.</li>
                       Imię i nazwisko
                     </label>
                     <input
-  type="text"
-  id="name"
-  name="name"
-  value={formData.name}
-  onChange={handleInputChange}
-  className="w-full px-4 py-3 rounded-lg focus:outline-none focus:ring-2"
-  style={{
-    backgroundColor: 'rgba(245, 245, 245, 0.1)',
-    border: '1px solid rgba(245, 245, 245, 0.2)',
-    color: '#F5F5F5',
-    '--tw-ring-color': '#D4AF37'
-  }}
-  placeholder="Imię i nazwisko"
-  required
-  aria-invalid={errors.name ? "true" : "false"} // Add this
-  aria-describedby={errors.name ? "name-error" : undefined} // Add this
-/>
-{errors.name && <p id="name-error" className="text-red-500 text-sm mt-1">{errors.name}</p>} {/* Add this */}
-
-                  </div>
-                  
-                  <div>
-                      <label htmlFor="email" className="block text-sm font-medium mb-2" style={{ color: '#F5F5F5' }}>
-                        Email
-                      </label>
-                      <input
-                        type="email"
-                        id="email"
-                        name="email"
-                        value={formData.email}
+                        type="text"
+                        id="name"
+                        name="name"
+                        value={formData.name}
                         onChange={handleInputChange}
                         className="w-full px-4 py-3 rounded-lg focus:outline-none focus:ring-2"
                         style={{
@@ -409,9 +383,39 @@ Nie ryzykujesz nic – możesz tylko zyskać.</li>
                           color: '#F5F5F5',
                           '--tw-ring-color': '#D4AF37'
                         }}
-                        placeholder="Twój adres email"
+                        placeholder="Imię i nazwisko"
                         required
+                        aria-invalid={errors.name ? "true" : "false"} // Add this
+                        aria-describedby={errors.name ? "name-error" : undefined} // Add this
                       />
+                      {errors.name && <p id="name-error" className="text-red-500 text-sm mt-1">{errors.name}</p>} {/* Add this */}
+
+                  </div>
+                  
+                  <div>
+                      <label htmlFor="email" className="block text-sm font-medium mb-2" style={{ color: '#F5F5F5' }}>
+                        Email
+                      </label>
+                      <input
+                          type="email"
+                          id="email"
+                          name="email"
+                          value={formData.email}
+                          onChange={handleInputChange}
+                          className="w-full px-4 py-3 rounded-lg focus:outline-none focus:ring-2"
+                          style={{
+                            backgroundColor: 'rgba(245, 245, 245, 0.1)',
+                            border: '1px solid rgba(245, 245, 245, 0.2)',
+                            color: '#F5F5F5',
+                            '--tw-ring-color': '#D4AF37'
+                          }}
+                          placeholder="Twój adres email"
+                          required
+                          aria-invalid={errors.email ? "true" : "false"} // Add this
+                          aria-describedby={errors.email ? "email-error" : undefined} // Add this
+                        />
+                        {errors.email && <p id="email-error" className="text-red-500 text-sm mt-1">{errors.email}</p>} {/* Add this */}
+
                   </div>
 
                   <div>
