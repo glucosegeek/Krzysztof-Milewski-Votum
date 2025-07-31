@@ -149,7 +149,9 @@ const Footer: React.FC<FooterProps> = ({ registerFooterSection }) => {
           <div className="flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0">
             <div className="text-center md:text-left">
               <p className="text-sm mb-2" style={{ color: '#F5F5F5' }}>
-                <strong>Zastrzeżenie prawne:</strong> Niniejsza strona internetowa zawiera ogólne informacje na temat usług prawnych. Każda sprawa jest wyjątkowa, a wyniki osiągnięte w przeszłości nie gwarantują wyników w przyszłości. Konsultacja nie tworzy relacji prawnik-klient.
+                <strong>Zastrzeżenie prawne:</strong> Treści zawarte na tej stronie mają charakter wyłącznie informacyjny i nie stanowią porady prawnej.
+Każda sprawa jest indywidualna, a wcześniejsze wyniki nie stanowią gwarancji podobnych rezultatów w przyszłości.
+Konsultacja ma charakter informacyjny i nie tworzy relacji prawnik–klient. Jej celem jest przedstawienie możliwych działań w sprawach dotyczących nieuczciwych umów kredytowych.
               </p>
               <p className="text-sm" style={{ color: '#F5F5F5' }}>
                 © {new Date().getFullYear()} Wszelkie prawa zastrzeżone.
