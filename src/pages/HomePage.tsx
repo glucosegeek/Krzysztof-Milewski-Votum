@@ -318,7 +318,7 @@ Nie ryzykujesz nic – możesz tylko zyskać.</li>
       </section>
 
       {/* Contact */}
-      <section className="py-20" style={{ backgroundColor: '#0A1A2F', color: '#F5F5F5' }}>
+      <section id="contact-section" className="py-20" style={{ backgroundColor: '#0A1A2F', color: '#F5F5F5' }}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="max-w-4xl mx-auto">
             <div className="text-center mb-12">
