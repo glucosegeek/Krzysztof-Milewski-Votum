@@ -117,7 +117,7 @@ const validate = () => {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    if (validate()) { // Add this conditional check
+    if (validate()) {
     console.log('Form submitted:', formData);
     // In a real application, you would send this data to your backend
     // For now, we just log it.
@@ -371,21 +371,25 @@ Nie ryzykujesz nic – możesz tylko zyskać.</li>
                       Imię i nazwisko
                     </label>
                     <input
-                      type="text"
-                      id="name"
-                      name="name"
-                      value={formData.name}
-                      onChange={handleInputChange}
-                      className="w-full px-4 py-3 rounded-lg focus:outline-none focus:ring-2"
-                      style={{ 
-                        backgroundColor: 'rgba(245, 245, 245, 0.1)', 
-                        border: '1px solid rgba(245, 245, 245, 0.2)', 
-                        color: '#F5F5F5',
-                        '--tw-ring-color': '#D4AF37'
-                      }}
-                      placeholder="Imię i nazwisko"
-                      required
-                    />
+  type="text"
+  id="name"
+  name="name"
+  value={formData.name}
+  onChange={handleInputChange}
+  className="w-full px-4 py-3 rounded-lg focus:outline-none focus:ring-2"
+  style={{
+    backgroundColor: 'rgba(245, 245, 245, 0.1)',
+    border: '1px solid rgba(245, 245, 245, 0.2)',
+    color: '#F5F5F5',
+    '--tw-ring-color': '#D4AF37'
+  }}
+  placeholder="Imię i nazwisko"
+  required
+  aria-invalid={errors.name ? "true" : "false"} // Add this
+  aria-describedby={errors.name ? "name-error" : undefined} // Add this
+/>
+{errors.name && <p id="name-error" className="text-red-500 text-sm mt-1">{errors.name}</p>} {/* Add this */}
+
                   </div>
                   
                   <div>
