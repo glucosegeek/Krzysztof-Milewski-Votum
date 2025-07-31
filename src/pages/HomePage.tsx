@@ -117,7 +117,11 @@ const validate = () => {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
+    if (validate()) { // Add this conditional check
     console.log('Form submitted:', formData);
+    // In a real application, you would send this data to your backend
+    // For now, we just log it.
+  }
   };
 
   return (
