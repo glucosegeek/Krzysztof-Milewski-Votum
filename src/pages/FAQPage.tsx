@@ -146,39 +146,6 @@ const FAQPage: React.FC = () => {
         </div>
       </section>
 
-      {/* Quick Stats */}
-      <section className="py-20" style={{ backgroundColor: '#0A1A2F' }}>
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-12">
-            <h2 className="text-4xl font-bold mb-6" style={{ color: '#F5F5F5' }}>
-              Nasze doświadczenie w liczbach
-            </h2>
-          </div>
-          
-          <div className="grid md:grid-cols-4 gap-8">
-            <div className="text-center p-8 rounded-2xl shadow-xl border-4" style={{ backgroundColor: '#F5F5F5', borderColor: '#D4AF37' }}>
-              <div className="text-4xl font-bold mb-2" style={{ color: '#0A1A2F' }}>200+</div>
-              <div className="text-lg" style={{ color: '#0A1A2F' }}>Wygranych spraw</div>
-            </div>
-            
-            <div className="text-center p-8 rounded-2xl shadow-xl border-4" style={{ backgroundColor: '#F5F5F5', borderColor: '#D4AF37' }}>
-              <div className="text-4xl font-bold mb-2" style={{ color: '#0A1A2F' }}>99%</div>
-              <div className="text-lg" style={{ color: '#0A1A2F' }}>Wskaźnik skuteczności</div>
-            </div>
-            
-            <div className="text-center p-8 rounded-2xl shadow-xl border-4" style={{ backgroundColor: '#F5F5F5', borderColor: '#D4AF37' }}>
-              <div className="text-4xl font-bold mb-2" style={{ color: '#0A1A2F' }}>8+</div>
-              <div className="text-lg" style={{ color: '#0A1A2F' }}>Lat doświadczenia</div>
-            </div>
-            
-            <div className="text-center p-8 rounded-2xl shadow-xl border-4" style={{ backgroundColor: '#F5F5F5', borderColor: '#D4AF37' }}>
-              <div className="text-4xl font-bold mb-2" style={{ color: '#0A1A2F' }}>24h</div>
-              <div className="text-lg" style={{ color: '#0A1A2F' }}>Średni czas odpowiedzi</div>
-            </div>
-          </div>
-        </div>
-      </section>
-
       {/* CTA Section */}
       <section className="py-20" style={{ backgroundColor: '#F5F5F5' }}>
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
