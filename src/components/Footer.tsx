@@ -152,7 +152,7 @@ const Footer: React.FC<FooterProps> = ({ registerFooterSection }) => {
                 <strong>Zastrzeżenie prawne:</strong> Niniejsza strona internetowa zawiera ogólne informacje na temat usług prawnych. Każda sprawa jest wyjątkowa, a wyniki osiągnięte w przeszłości nie gwarantują wyników w przyszłości. Konsultacja nie tworzy relacji prawnik-klient.
               </p>
               <p className="text-sm" style={{ color: '#F5F5F5' }}>
-                © {new Date().getFullYear()} Wszelkie prawa zastrzeżone. Licencjonowany doradca prawny we współpracy z Votum S.A.
+                © {new Date().getFullYear()} Wszelkie prawa zastrzeżone.
               </p>
             </div>
           </div>
