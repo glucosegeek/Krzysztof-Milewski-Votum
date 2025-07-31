@@ -67,10 +67,12 @@ const [openStep, setOpenStep] = useState<number | null>(null);
 
   
   const [formData, setFormData] = useState({
-    name: '',
-    phone: '',
-    message: ''
-  });
+  name: '',
+  email: '', // Add this line
+  phone: '',
+  message: ''
+});
+
 
   // Register hero section with visibility context
   useEffect(() => {
@@ -356,26 +358,27 @@ Nie ryzykujesz nic – możesz tylko zyskać.</li>
                   </div>
                   {/* add here code to email */}
                   <div>
-                    <label htmlFor="phone" className="block text-sm font-medium mb-2" style={{ color: '#F5F5F5' }}>
-                      Numer telefonu
-                    </label>
-                    <input
-                      type="tel"
-                      id="phone"
-                      name="phone"
-                      value={formData.phone}
-                      onChange={handleInputChange}
-                      className="w-full px-4 py-3 rounded-lg focus:outline-none focus:ring-2"
-                      style={{ 
-                        backgroundColor: 'rgba(245, 245, 245, 0.1)', 
-                        border: '1px solid rgba(245, 245, 245, 0.2)', 
-                        color: '#F5F5F5',
-                        '--tw-ring-color': '#D4AF37'
-                      }}
-                      placeholder="Numer telefonu"
-                      required
-                    />
+                      <label htmlFor="email" className="block text-sm font-medium mb-2" style={{ color: '#F5F5F5' }}>
+                        Email
+                      </label>
+                      <input
+                        type="email"
+                        id="email"
+                        name="email"
+                        value={formData.email}
+                        onChange={handleInputChange}
+                        className="w-full px-4 py-3 rounded-lg focus:outline-none focus:ring-2"
+                        style={{
+                          backgroundColor: 'rgba(245, 245, 245, 0.1)',
+                          border: '1px solid rgba(245, 245, 245, 0.2)',
+                          color: '#F5F5F5',
+                          '--tw-ring-color': '#D4AF37'
+                        }}
+                        placeholder="Twój adres email"
+                        required
+                      />
                   </div>
+
                   {/* add here code to email */}
                   <div>
                     <label htmlFor="phone" className="block text-sm font-medium mb-2" style={{ color: '#F5F5F5' }}>
