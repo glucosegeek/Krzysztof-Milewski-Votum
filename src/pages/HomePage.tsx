@@ -146,6 +146,7 @@ const [openStep, setOpenStep] = useState<number | null>(null);
                   <li className="text-lg mb-6 leading-relaxed">✅ Analiza wstępna i wyliczenie korzyści są całkowicie BEZPŁATNE.
 Nie ryzykujesz nic – możesz tylko zyskać.</li>
                 </ul>
+                {/* To add later, when we will have more data */}
                 {/* <div className="flex items-center space-x-6">
                   <div className="text-center">
                     <div className="text-3xl font-bold" style={{ color: '#F5F5F5' }}>200+</div>
