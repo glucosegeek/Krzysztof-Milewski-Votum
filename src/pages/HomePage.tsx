@@ -356,7 +356,7 @@ Nie ryzykujesz nic – możesz tylko zyskać.</li>
                       required
                     />
                   </div>
-                  {/* add here code to email */}
+                  
                   <div>
                       <label htmlFor="email" className="block text-sm font-medium mb-2" style={{ color: '#F5F5F5' }}>
                         Email
@@ -379,7 +379,6 @@ Nie ryzykujesz nic – możesz tylko zyskać.</li>
                       />
                   </div>
 
-                  {/* add here code to email */}
                   <div>
                     <label htmlFor="phone" className="block text-sm font-medium mb-2" style={{ color: '#F5F5F5' }}>
                       Numer telefonu
