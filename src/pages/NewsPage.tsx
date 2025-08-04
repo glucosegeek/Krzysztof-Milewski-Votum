@@ -74,17 +74,26 @@ const NewsPage: React.FC = () => {
   };
 
   const parseDateString = (dateString: string): Date => {
-    let date = new Date(dateString);
-    const parsedDate = parseDateString(article.date); // Call the clean parseDateString here
-  let formattedDate = article.date; // Initialize with original as fallback
+    // Attempt 1: Try parsing DD.MM.YYYY format by reordering to YYYY-MM-DD for reliable Date parsing
+    const parts = dateString.split('.');
+    if (parts.length === 3) {
+      const day = parts[0];
+      const month = parts[1];
+      const year = parts[2];
+      const date = new Date(`${year}-${month}-${day}`);
+      if (!isNaN(date.getTime())) {
+        return date;
+      }
+    }
 
-if (!isNaN(parsedDate.getTime())) { // Check if parsing was successful
-    const day = String(parsedDate.getDate()).padStart(2, '0');
-    const month = String(parsedDate.getMonth() + 1).padStart(2, '0'); // Month is 0-indexed
-    const year = parsedDate.getFullYear();
-    formattedDate = `${day}.${month}.${year}`; // This is where the DD.MM.YYYY format is created
-  }
- return { ...article, content: newContentLines.join('\n'), date: formattedDate }; // Assign the formattedDate
+    // Fallback: Try parsing directly (might work for some standard formats if the above fails)
+    let date = new Date(dateString);
+    if (!isNaN(date.getTime())) {
+      return date;
+    }
+
+    // Return an invalid date if no format matches
+    return new Date('');
   };
 
   useEffect(() => {
