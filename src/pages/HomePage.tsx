@@ -31,17 +31,17 @@ const [openStep, setOpenStep] = useState<number | null>(null);
     {
       id: 1,
       title: "Analiza i oferta",
-      description: "Przeprowadzimy bezpłatną analizę umowy kredytowej i ocenę Twojej sytuacji prawnej. Na jej podstawie przygotujemy ofertę dalszego działania, dopasowaną do Twoich potrzeb i możliwości.",
+      description: "Przeprowadzę bezpłatną analizę umowy kredytowej i ocenę Twojej sytuacji prawnej. Na jej podstawie przygotuję ofertę dalszego działania, dopasowaną do Twoich potrzeb i możliwości.",
     },
     {
       id: 2,
       title: "Podpisanie umowy",
-      description: "Po analizie Twojej sytuacji przygotujemy indywidualną ofertę współpracy, dopasowaną do rodzaju umowy kredytowej. Podpisanie umowy to początek kompleksowego działania – zawsze z myślą o Twoim bezpieczeństwie.",
+      description: "Po analizie Twojej sytuacji przygotuję indywidualną ofertę współpracy, dopasowaną do rodzaju umowy kredytowej. Podpisanie umowy to początek kompleksowego działania – zawsze z myślą o Twoim bezpieczeństwie.",
     },
     {
       id: 3,
       title: "Zgromadzenie dokumentów",
-      description: "Wspólnie ustalimy, jakie dokumenty są niezbędne do rozpoczęcia postępowania – większość z nich możesz dostarczyć w formie elektronicznej. Na każdym etapie służymy wsparciem, aby cały proces przebiegł sprawnie i bez zbędnych formalności.",
+      description: "Wspólnie ustalimy, jakie dokumenty są niezbędne do rozpoczęcia postępowania – większość z nich możesz dostarczyć w formie elektronicznej. Na każdym etapie służę wsparciem, aby cały proces przebiegł sprawnie i bez zbędnych formalności.",
     },
     {
       id: 4,
