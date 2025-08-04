@@ -53,6 +53,7 @@ const NewsPage: React.FC = () => {
         const id = row.c[idIndex]?.v?.toString() || '';
         const title = row.c[titleIndex]?.v?.toString() || '';
         const date = row.c[dateIndex]?.v?.toString() || '';
+        console.log('1. Raw date from Google Sheet:', date);
         const content = row.c[contentIndex]?.v?.toString() || '';
 
         // Only add articles with required fields
