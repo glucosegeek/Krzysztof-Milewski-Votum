@@ -236,12 +236,12 @@ const NewsPage: React.FC = () => {
                       Opublikowano: {article.date}
                     </p>
                   )}
-                  <p 
+                  <div 
                     className="text-lg leading-relaxed news-article-content" 
                     style={{ color: '#F5F5F5' }} 
                     dangerouslySetInnerHTML={{ __html: article.content }}
                   >
-                  </p>
+                  </div>
                 </div>
               ))}
             </div>
