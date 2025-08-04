@@ -22,18 +22,6 @@ const newsArticles = [
       title: "Odsetki od nieważnej umowy frankowej należne już od dnia złożenia pozwu – wyrok SN z 29 kwietnia 2025 r.",
       date: "2025-07-20",
       content: "Sąd Najwyższy potwierdził, że umowy frankowe zawierające niedozwolone klauzule indeksacyjne (waloryzacja kursem CHF ustalanym jednostronnie przez bank) są nieważne. W efekcie kredytobiorca ma prawo domagać się zwrotu wszystkich wpłaconych środków. W rozpatrywanej sprawie SN uznał, że bank popadł w opóźnienie już w momencie otrzymania wezwania do zapłaty od klientki – jeszcze przed złożeniem pozwu. Zasądzenie odsetek ustawowych za opóźnienie od dnia wniesienia sprawy (19 sierpnia 2017 r.) było więc zasadne. Wyrok: SN, sygn. II CSKP 1211/22 z 29.04.2025 r. Sędziowie: Monika Koba, Karol Weitz, Agnieszka Piotrowska. To ważne orzeczenie wzmacnia pozycję frankowiczów i potwierdza prawo do pełnego zwrotu wpłat – z ustawowymi odsetkami."
-    },
-    {
-      id: 3,
-      title: "Sukcesy kancelarii Votum Consumer Care w lipcu",
-      date: "2025-07-15",
-      content: "W rozpatrywanej sprawie SN uznał, że bank popadł w opóźnienie już w momencie otrzymania wezwania do zapłaty od klientki – jeszcze przed złożeniem pozwu. Zasądzenie odsetek ustawowych za opóźnienie od dnia wniesienia sprawy (19 sierpnia 2017 r.) było więc zasadne."
-    },
-    {
-      id: 4,
-      title: "Sukcesy kancelarii Votum Consumer Care w lipcu",
-      date: "2025-07-15",
-      content: "Wyrok: SN, sygn. II CSKP 1211/22 z 29.04.2025 r. Sędziowie: Monika Koba, Karol Weitz, Agnieszka Piotrowska"
     }
   ];
   
