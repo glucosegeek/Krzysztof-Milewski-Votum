@@ -8,19 +8,19 @@ const newsArticles = [
       id: 1,
       title: "Nowe orzeczenie TSUE w sprawie kredytów frankowych",
       date: "2025-07-28",
-      content: "Trybunał Sprawiedliwości Unii Europejskiej wydał kolejne ważne orzeczenie, które umacnia pozycję frankowiczów w sporach z bankami. Orzeczenie dotyczyło kwestii przedawnienia roszczeń banków o zwrot kapitału po unieważnieniu umowy kredytowej."
+      content: "Odsetki od nieważnej umowy frankowej należne już od dnia złożenia pozwu – wyrok SN z 29 kwietnia 2025 r."
     },
     {
       id: 2,
       title: "Zmiany w prawie konsumenckim dotyczące umów SKD",
       date: "2025-07-20",
-      content: "Weszły w życie nowe przepisy chroniące konsumentów przed nieuczciwymi praktykami w umowach sprzedaży konsumenckiej na odległość. Zmiany obejmują m.in. wydłużenie terminu na odstąpienie od umowy."
+      content: "Sąd Najwyższy potwierdził, że umowy frankowe zawierające niedozwolone klauzule indeksacyjne (waloryzacja kursem CHF ustalanym jednostronnie przez bank) są nieważne. W efekcie kredytobiorca ma prawo domagać się zwrotu wszystkich wpłaconych środków."
     },
     {
       id: 3,
       title: "Sukcesy kancelarii Votum Consumer Care w lipcu",
       date: "2025-07-15",
-      content: "W minionym miesiącu kancelaria Votum Consumer Care odnotowała rekordową liczbę wygranych spraw przeciwko bankom, co potwierdza wysoką skuteczność w walce o prawa kredytobiorców."
+      content: "W rozpatrywanej sprawie SN uznał, że bank popadł w opóźnienie już w momencie otrzymania wezwania do zapłaty od klientki – jeszcze przed złożeniem pozwu. Zasądzenie odsetek ustawowych za opóźnienie od dnia wniesienia sprawy (19 sierpnia 2017 r.) było więc zasadne."
     }
   ];
   
@@ -43,25 +43,25 @@ const newsArticles = [
             Tutaj znajdziesz najnowsze wiadomości i aktualizacje.
           </p>
           <section className="py-20">
-  <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-    <div className="space-y-12">
-      {newsArticles.map((article) => (
-        <div key={article.id} className="p-8 rounded-2xl shadow-xl border-4" style={{ backgroundColor: '#0A1A2F', borderColor: '#D4AF37' }}>
-          <h2 className="text-3xl font-bold mb-4" style={{ color: '#F5F5F5' }}>
-            {article.title}
-          </h2>
-          <p className="text-sm mb-4" style={{ color: '#D4AF37' }}>
-            Opublikowano: {article.date}
-          </p>
-          <p className="text-lg leading-relaxed" style={{ color: '#F5F5F5' }}>
-            {article.content}
-          </p>
-          {/* You can add a "Read More" link here if you plan to have full article pages */}
-        </div>
-      ))}
-    </div>
-  </div>
-</section>
+              <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div className="space-y-12">
+                  {newsArticles.map((article) => (
+                    <div key={article.id} className="p-8 rounded-2xl shadow-xl border-4" style={{ backgroundColor: '#0A1A2F', borderColor: '#D4AF37' }}>
+                      <h2 className="text-3xl font-bold mb-4" style={{ color: '#F5F5F5' }}>
+                        {article.title}
+                      </h2>
+                      <p className="text-sm mb-4" style={{ color: '#D4AF37' }}>
+                        Opublikowano: {article.date}
+                      </p>
+                      <p className="text-lg leading-relaxed" style={{ color: '#F5F5F5' }}>
+                        {article.content}
+                      </p>
+                      {/* You can add a "Read More" link here if you plan to have full article pages */}
+                    </div>
+                  ))}
+                </div>
+              </div>
+          </section>
 
         </div>
       </section>
