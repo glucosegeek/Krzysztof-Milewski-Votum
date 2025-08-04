@@ -127,47 +127,44 @@ const NewsPage: React.FC = () => {
 
       // --- START OF NEW CONTENT PROCESSING LOGIC ---
       const processedData = parsedData.map(article => {
-        let rawContent = article.content;
+  let rawContent = article.content;
 
-        // Step 1: Replace TAB character with <li>
-        // This line needs to be changed:
-        rawContent = rawContent.replace(/\t/g, '<li>'); // <--- CHANGE THIS LINE
+  const lines = rawContent.split('\n');
+  let newContentLines: string[] = [];
+  let inList = false;
 
-        // Step 2: Process lines to wrap <li> items in <ul>
-        const lines = rawContent.split('\n');
-        let newContentLines: string[] = [];
-        let inList = false;
+  lines.forEach((line) => {
+    const trimmedLine = line.trim();
+    // Check if the line starts with a tab followed by a bullet point and a space
+    const isListItem = line.startsWith('\t• ');
 
-        lines.forEach((line) => {
-          const trimmedLine = line.trim();
-          const startsWithLi = trimmedLine.startsWith('<li>');
+    if (isListItem) {
+      if (!inList) {
+        newContentLines.push('<ul>');
+        inList = true;
+      }
+      // Remove the leading tab and bullet point, then wrap in <li>
+      // The substring(3) removes '\t• '
+      newContentLines.push(`<li>${line.substring(3)}</li>`);
+    } else {
+      if (inList) {
+        newContentLines.push('</ul>');
+        inList = false;
+      }
+      // For non-list lines, just add them. Newlines will be handled by CSS.
+      newContentLines.push(line);
+    }
+  });
 
-          if (startsWithLi && !inList) {
-            // Start of a new list
-            newContentLines.push('<ul>');
-            newContentLines.push(line);
-            inList = true;
-          } else if (startsWithLi && inList) {
-            // Continuation of an existing list
-            newContentLines.push(line);
-          } else if (!startsWithLi && inList) {
-            // End of a list
-            newContentLines.push('</ul>');
-            newContentLines.push(line);
-            inList = false;
-          } else {
-            // Not a list item, and not currently in a list
-            newContentLines.push(line);
-          }
-        });
+  // Close any open list at the end of the content
+  if (inList) {
+    newContentLines.push('</ul>');
+  }
 
-        // If the content ends with a list, close the <ul> tag
-        if (inList) {
-          newContentLines.push('</ul>');
-        }
+  // Join the processed lines. The newlines here will be rendered by `white-space: pre-wrap;`
+  return { ...article, content: newContentLines.join('\n') };
+});
 
-        return { ...article, content: newContentLines.join('\n') };
-      });
         // --- END OF NEW CONTENT PROCESSING LOGIC ---
 
         // Sort articles by date (newest first)
