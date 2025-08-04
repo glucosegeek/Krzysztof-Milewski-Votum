@@ -96,7 +96,7 @@ const NewsPage: React.FC = () => {
       setError(null);
 
       const response = await fetch(
-        'https://docs.google.com/spreadsheets/d/e/2PACX-1vT9F_eSy0D8zahz0Eo8Je6a_MY2bmDCEpvN8HZC_iXu97szUrLtVS8cYR9awQSJLHSanX-FaTMxTiI9/gviz/tq?tqx=out:json&gid=0',
+        'https://docs.google.com/spreadsheets/d/1lzN_O5z6z4Ed-Lvo0TK9PqU4bQ3sJqUD7poNnuhi6RY/gviz/tq?gid=0#gid=0&tqx=out:json',
         {
           method: 'GET',
           headers: {
