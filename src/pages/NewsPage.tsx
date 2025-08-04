@@ -75,6 +75,7 @@ const NewsPage: React.FC = () => {
   };
 
   const parseDateString = (dateString: string): Date => {
+    console.log('2. parseDateString input:', dateString); // ADD THIS LINE
     // Attempt 1: Try parsing DD.MM.YYYY format by reordering to YYYY-MM-DD for reliable Date parsing
     const parts = dateString.split('.');
     if (parts.length === 3) {
@@ -83,6 +84,7 @@ const NewsPage: React.FC = () => {
       const year = parts[2];
       const date = new Date(`${day}-${month}-${year}`);
       if (!isNaN(date.getTime())) {
+         console.log('3. parseDateString returning valid Date object:', date); // ADD THIS LINE
         return date;
       }
     }
@@ -94,6 +96,7 @@ const NewsPage: React.FC = () => {
     }
 
     // Return an invalid date if no format matches
+    console.log('3. parseDateString returning Invalid Date:', date); // ADD THIS LINE (for fallback)
     return new Date('');
   };
 
