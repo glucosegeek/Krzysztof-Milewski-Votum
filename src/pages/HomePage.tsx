@@ -51,7 +51,7 @@ const [openStep, setOpenStep] = useState<number | null>(null);
     {
       id: 5,
       title: "Wytoczenie powództwa",
-      description: "Jeśli bank nie uwzględni roszczeń na etapie reklamacyjnym, zapewniamy wsparcie kancelarii prawnej, która może poprowadzić postępowanie sądowe w Twoim imieniu. Dzięki doświadczeniu prawników i starannie opracowanej strategii procesowej zwiększa się szansa na unieważnienie umowy lub odzyskanie nadpłaconych środków.",
+      description: "Jeśli bank nie uwzględni roszczeń na etapie reklamacyjnym, zapewniam wsparcie kancelarii prawnej, która może poprowadzić postępowanie sądowe w Twoim imieniu. Dzięki doświadczeniu prawników i starannie opracowanej strategii procesowej zwiększa się szansa na unieważnienie umowy lub odzyskanie nadpłaconych środków.",
     },
     {
       id: 6,
