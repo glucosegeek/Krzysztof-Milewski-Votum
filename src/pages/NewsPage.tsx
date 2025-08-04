@@ -74,10 +74,13 @@ const NewsPage: React.FC = () => {
   };
 
   const parseDateString = (dateString: string): Date => {
-    let date = new Date(dateString);
-    if (!isNaN(date.getTime())) {
-      return date;
-    }
+    let formattedDate = article.date; // Fallback to original if parsing fails
+if (!isNaN(parsedDate.getTime())) {
+  const day = String(parsedDate.getDate()).padStart(2, '0');
+  const month = String(parsedDate.getMonth() + 1).padStart(2, '0'); // Month is 0-indexed
+  const year = parsedDate.getFullYear();
+  formattedDate = `${day}.${month}.${year}`;
+}
 
     const parts = dateString.split('.');
     if (parts.length === 3) {
