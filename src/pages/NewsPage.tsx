@@ -78,22 +78,16 @@ const NewsPage: React.FC = () => {
     if (!isNaN(date.getTime())) {
       return date;
     }
-    let formattedDate = article.date; // Fallback to original if parsing fails
-if (!isNaN(parsedDate.getTime())) {
-  const day = String(parsedDate.getDate()).padStart(2, '0');
-  const month = String(parsedDate.getMonth() + 1).padStart(2, '0'); // Month is 0-indexed
-  const year = parsedDate.getFullYear();
-  formattedDate = `${day}.${month}.${year}`;
-}
+    const parsedDate = parseDateString(article.date); // Call the clean parseDateString here
+  let formattedDate = article.date; // Initialize with original as fallback
 
-    const parts = dateString.split('.');
-    if (parts.length === 3) {
-      date = new Date(`${parts[2]}-${parts[1]}-${parts[0]}`);
-      if (!isNaN(date.getTime())) {
-        return date;
-      }
-    }
-    return new Date('');
+if (!isNaN(parsedDate.getTime())) { // Check if parsing was successful
+    const day = String(parsedDate.getDate()).padStart(2, '0');
+    const month = String(parsedDate.getMonth() + 1).padStart(2, '0'); // Month is 0-indexed
+    const year = parsedDate.getFullYear();
+    formattedDate = `${day}.${month}.${year}`; // This is where the DD.MM.YYYY format is created
+  }
+ return { ...article, content: newContentLines.join('\n'), date: formattedDate }; // Assign the formattedDate
   };
 
   useEffect(() => {
