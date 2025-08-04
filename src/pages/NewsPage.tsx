@@ -59,8 +59,9 @@ const newsArticles = [
                       <p className="text-sm mb-4" style={{ color: '#D4AF37' }}>
                         Opublikowano: {article.date}
                       </p>
-                      <p className="text-lg leading-relaxed" style={{ color: '#F5F5F5' }} dangerouslySetInnerHTML={{ __html: article.content }}>
+                      <p className="text-lg leading-relaxed news-article-content" style={{ color: '#F5F5F5' }} dangerouslySetInnerHTML={{ __html: article.content }}>
 </p>
+
 
 
                       {/* You can add a "Read More" link here if you plan to have full article pages */}
