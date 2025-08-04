@@ -92,47 +92,50 @@ const NewsPage: React.FC = () => {
       const csvText = await response.text();
       const parsedData = parseCsv(csvText);
 
-      // --- START OF NEW, ROBUST CONTENT PROCESSING LOGIC ---
+      // --- START OF NEW CONTENT PROCESSING LOGIC ---
       const processedData = parsedData.map(article => {
-        let finalHtmlChunks: string[] = [];
-        let currentListItems: string[] = [];
+        let rawContent = article.content;
 
-        // Split the content by newline to process line by line
-        const lines = article.content.split('\n');
+        // Step 1: Replace TAB character with <li>
+        // This line needs to be changed:
+        rawContent = rawContent.replace(/\t/g, '<li>'); // <--- CHANGE THIS LINE
+
+        // Step 2: Process lines to wrap <li> items in <ul>
+        const lines = rawContent.split('\n');
+        let newContentLines: string[] = [];
+        let inList = false;
 
         lines.forEach((line) => {
           const trimmedLine = line.trim();
+          const startsWithLi = trimmedLine.startsWith('<li>');
 
-          // Check if the line starts with a tab character
-          if (line.startsWith('\t')) {
-            // This is a list item
-            // Remove the leading tab, trim, and wrap in <li>
-            currentListItems.push(`<li>${trimmedLine.substring(1).trim()}</li>`);
+          if (startsWithLi && !inList) {
+            // Start of a new list
+            newContentLines.push('<ul>');
+            newContentLines.push(line);
+            inList = true;
+          } else if (startsWithLi && inList) {
+            // Continuation of an existing list
+            newContentLines.push(line);
+          } else if (!startsWithLi && inList) {
+            // End of a list
+            newContentLines.push('</ul>');
+            newContentLines.push(line);
+            inList = false;
           } else {
-            // This is not a list item (it's a paragraph or an empty line)
-
-            // If there were accumulated list items, close the current list block
-            if (currentListItems.length > 0) {
-              finalHtmlChunks.push(`<ul>${currentListItems.join('')}</ul>`);
-              currentListItems = []; // Reset for the next list block
-            }
-
-            // If the line is not empty, treat it as a paragraph
-            if (trimmedLine.length > 0) {
-              finalHtmlChunks.push(`<p>${trimmedLine}</p>`);
-            }
+            // Not a list item, and not currently in a list
+            newContentLines.push(line);
           }
         });
 
-        // After the loop, if there are any remaining list items, add them to the chunks
-        if (currentListItems.length > 0) {
-          finalHtmlChunks.push(`<ul>${currentListItems.join('')}</ul>`);
+        // If the content ends with a list, close the <ul> tag
+        if (inList) {
+          newContentLines.push('</ul>');
         }
 
-        // Join all HTML chunks with a newline for source readability (browser will handle rendering)
-        return { ...article, content: finalHtmlChunks.join('\n') };
+        return { ...article, content: newContentLines.join('\n') };
       });
-      // --- END OF NEW, ROBUST CONTENT PROCESSING LOGIC ---
+        // --- END OF NEW CONTENT PROCESSING LOGIC ---
 
         // Sort articles by date (newest first)
         const sortedData = processedData.sort((a, b) => {
@@ -229,22 +232,19 @@ const NewsPage: React.FC = () => {
                   style={{ backgroundColor: '#0A1A2F', borderColor: '#D4AF37' }}
                 >
                   <h2 className="text-3xl font-bold mb-4" style={{ color: '#F5F5F5' }}>
-  {article.title}
-</h2>
-{article.date && (
-  <p className="text-sm mb-4" style={{ color: '#D4AF37' }}>
-    Opublikowano: {article.date}
-  </p>
-)}
-<div
-  className="text-lg leading-relaxed news-article-content"
-  style={{ color: '#F5F5F5' }}
-  // Comment out the dangerouslySetInnerHTML line
-  // dangerouslySetInnerHTML={{ __html: article.content }}
->
-  {/* Add this <pre> tag to display the raw HTML string */}
-  <pre>{article.content}</pre>
-</div>
+                    {article.title}
+                  </h2>
+                  {article.date && (
+                    <p className="text-sm mb-4" style={{ color: '#D4AF37' }}>
+                      Opublikowano: {article.date}
+                    </p>
+                  )}
+                  <div 
+                    className="text-lg leading-relaxed news-article-content" 
+                    style={{ color: '#F5F5F5' }} 
+                    dangerouslySetInnerHTML={{ __html: article.content }}
+                  >
+                  </div>
                 </div>
               ))}
             </div>
