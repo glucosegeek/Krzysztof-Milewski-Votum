@@ -21,6 +21,12 @@ const newsArticles = [
       title: "Sukcesy kancelarii Votum Consumer Care w lipcu",
       date: "2025-07-15",
       content: "W rozpatrywanej sprawie SN uznał, że bank popadł w opóźnienie już w momencie otrzymania wezwania do zapłaty od klientki – jeszcze przed złożeniem pozwu. Zasądzenie odsetek ustawowych za opóźnienie od dnia wniesienia sprawy (19 sierpnia 2017 r.) było więc zasadne."
+    },
+    {
+      id: 4,
+      title: "Sukcesy kancelarii Votum Consumer Care w lipcu",
+      date: "2025-07-15",
+      content: "Wyrok: SN, sygn. II CSKP 1211/22 z 29.04.2025 r. Sędziowie: Monika Koba, Karol Weitz, Agnieszka Piotrowska"
     }
   ];
   
