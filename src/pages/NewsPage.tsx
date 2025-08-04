@@ -55,8 +55,9 @@ const newsArticles = [
                         Opublikowano: {article.date}
                       </p>
                       <p className="text-lg leading-relaxed" style={{ color: '#F5F5F5' }}>
-                        {article.content}
-                      </p>
+  {article.content}
+</p>
+
                       {/* You can add a "Read More" link here if you plan to have full article pages */}
                     </div>
                   ))}
