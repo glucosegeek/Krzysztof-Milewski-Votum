@@ -96,7 +96,7 @@ const NewsPage: React.FC = () => {
       setError(null);
 
       const response = await fetch(
-        'https://docs.google.com/spreadsheets/d/e/2PACX-1vT9F_eSy0D8zahz0Eo8Je6a_MY2bmDCEpvN8HZC_iXu97szUrLtVS8cYR9awQSJLHSanX-FaTMxTiI9/pub?gid=0&single=true&output=json',
+        'https://docs.google.com/spreadsheets/d/e/2PACX-1vT9F_eSy0D8zahz0Eo8Je6a_MY2bmDCEpvN8HZC_iXu97szUrLtVS8cYR9awQSJLHSanX-FaTMxTiI9/gviz/tq?tqx=out:json&gid=0',
         {
           method: 'GET',
           headers: {
@@ -109,7 +109,12 @@ const NewsPage: React.FC = () => {
         throw new Error(`HTTP error! status: ${response.status}`);
       }
 
-      const jsonData = await response.json();
+      const responseText = await response.text();
+      
+      // Remove the Google Visualization API wrapper
+      const jsonString = responseText.replace(/^.*?google\.visualization\.Query\.setResponse\(/, '').replace(/\);?\s*$/, '');
+      const jsonData = JSON.parse(jsonString);
+      
       const parsedData = parseGoogleSheetsJson(jsonData);
 
       // --- START OF NEW CONTENT PROCESSING LOGIC ---
