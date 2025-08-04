@@ -179,9 +179,9 @@ const validate = () => {
                   <li className="text-lg mb-6 leading-relaxed">🏦 Analizuję umowy i wyliczam korzyści – Sprawdzam, ile możesz zyskać na unieważnieniu umowy.</li>
                   <li className="text-lg mb-6 leading-relaxed">⚖️ Jestem przedstawicielem Votum Consumer CARE które współpracuje z największymi i najlepszymi kancelariami zajmującymi się toksycznymi kredytami tak walutowymi jak i w ramach SKD</li>
                   <li className="text-lg mb-6 leading-relaxed">📊 30 lat doświadczenia w sprzedaży i marketingu – Wykorzystuję AI i nowoczesne narzędzia, by skutecznie Ci pomóc.</li>
-                  <li className="text-lg mb-6 leading-relaxed">📄 Pomoc na każdym etapie – Od analizy, przez dokumenty, aż po wyrok sądu.</li>
+                  <li className="text-lg mb-6 leading-relaxed">📄 Pomagam na każdym etapie – Od analizy, przez dokumenty, aż po wyrok sądu.</li>
                   <li className="text-lg mb-6 leading-relaxed">💰 Umowy aktywne i spłacone – Pomagam odzyskać należne środki lub pozbyć się zadłużenia.</li>
-                  <li className="text-lg mb-6 leading-relaxed">✅ Analiza wstępna i wyliczenie korzyści są całkowicie BEZPŁATNE.
+                  <li className="text-lg mb-6 leading-relaxed">✅ Analizuję wstępnie i wyliczam korzyści są całkowicie BEZPŁATNE.
 Nie ryzykujesz nic – możesz tylko zyskać.</li>
                 </ul>
                 {/* To add later, when we will have more data */}
@@ -210,7 +210,7 @@ Nie ryzykujesz nic – możesz tylko zyskać.</li>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
             <h2 className="text-4xl font-bold mb-4" style={{ color: '#F5F5F5' }}>
-              Dlaczego warto działać z Votum?
+              Dlaczego warto działać z Votum Consumer Care - ma być pełna nazwa
             </h2>
             <p className="text-xl max-w-3xl mx-auto" style={{ color: '#F5F5F5' }}>
               Kompleksowe wsparcie prawne opracowane specjalnie z myślą o sporach dotyczących kredytów walutowych
@@ -232,9 +232,9 @@ Nie ryzykujesz nic – możesz tylko zyskać.</li>
               <div className="w-20 h-20 rounded-2xl shadow-xl border-4 flex items-center justify-center mx-auto mb-6 transition-all duration-300 shadow-lg hover:shadow-xl group-hover:scale-105" style={{ backgroundColor: '#F5F5F5', borderColor: '#D4AF37'  }}>
                 <Scale size={40} style={{ color: '#0A1A2F' }} />
               </div>
-              <h3 className="text-xl font-semibold mb-4" style={{ color: '#F5F5F5' }}>Doświadczona kancelaria</h3>
+              <h3 className="text-xl font-semibold mb-4" style={{ color: '#F5F5F5' }}>Współpraca w ramach jednolitej procedury</h3>
               <p className="leading-relaxed" style={{ color: '#F5F5F5' }}>
-                8+ lat skutecznej walki z bankami.
+                Współpraca z największymi i najlepszymi kancelariami
               </p>
             </div>
             
