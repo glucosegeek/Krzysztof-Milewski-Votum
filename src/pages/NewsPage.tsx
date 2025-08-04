@@ -80,7 +80,7 @@ const NewsPage: React.FC = () => {
       const day = parts[0];
       const month = parts[1];
       const year = parts[2];
-      const date = new Date(`${year}-${month}-${day}`);
+      const date = new Date(`${day}-${month}-${year}`);
       if (!isNaN(date.getTime())) {
         return date;
       }
