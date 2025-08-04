@@ -70,70 +70,71 @@ const NewsPage: React.FC = () => {
   };
 
   useEffect(() => {
-    const fetchNews = async () => {
-      try {
-        setLoading(true);
-        setError(null);
-        
-        const response = await fetch(
-          'https://docs.google.com/spreadsheets/d/e/2PACX-1vT9F_eSy0D8zahz0Eo8Je6a_MY2bmDCEpvN8HZC_iXu97szUrLtVS8cYR9awQSJLHSanX-FaTMxTiI9/pub?output=csv',
-          {
-            method: 'GET',
-            headers: {
-              'Accept': 'text/csv',
-            },
-          }
-        );
-        
-        if (!response.ok) {
-          throw new Error(`HTTP error! status: ${response.status}`);
+  const fetchNews = async () => {
+    try {
+      setLoading(true);
+      setError(null);
+
+      const response = await fetch(
+        'https://docs.google.com/spreadsheets/d/e/2PACX-1vT9F_eSy0D8zahz0Eo8Je6a_MY2bmDCEpvN8HZC_iXu97szUrLtVS8cYR9awQSJLHSanX-FaTMxTiI9/pub?gid=0&single=true&output=csv',
+        {
+          method: 'GET',
+          headers: {
+            'Accept': 'text/csv',
+          },
         }
-        
-        const csvText = await response.text();
-        const parsedData = parseCsv(csvText);
-        
-        // --- START OF NEW CONTENT PROCESSING LOGIC ---
-        const processedData = parsedData.map(article => {
-          let rawContent = article.content;
+      );
 
-          // Step 1: Replace <bullet point> with <li>
-          rawContent = rawContent.replace(/<bullet point>/g, '<li>');
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
 
-          // Step 2: Process lines to wrap <li> items in <ul>
-          const lines = rawContent.split('\n');
-          let newContentLines: string[] = [];
-          let inList = false;
+      const csvText = await response.text();
+      const parsedData = parseCsv(csvText);
 
-          lines.forEach((line) => {
-            const trimmedLine = line.trim();
-            const startsWithLi = trimmedLine.startsWith('<li>');
+      // --- START OF NEW CONTENT PROCESSING LOGIC ---
+      const processedData = parsedData.map(article => {
+        let rawContent = article.content;
 
-            if (startsWithLi && !inList) {
-              // Start of a new list
-              newContentLines.push('<ul>');
-              newContentLines.push(line);
-              inList = true;
-            } else if (startsWithLi && inList) {
-              // Continuation of an existing list
-              newContentLines.push(line);
-            } else if (!startsWithLi && inList) {
-              // End of a list
-              newContentLines.push('</ul>');
-              newContentLines.push(line);
-              inList = false;
-            } else {
-              // Not a list item, and not currently in a list
-              newContentLines.push(line);
-            }
-          });
+        // Step 1: Replace TAB character with <li>
+        // This line needs to be changed:
+        rawContent = rawContent.replace(/\t/g, '<li>'); // <--- CHANGE THIS LINE
 
-          // If the content ends with a list, close the <ul> tag
-          if (inList) {
+        // Step 2: Process lines to wrap <li> items in <ul>
+        const lines = rawContent.split('\n');
+        let newContentLines: string[] = [];
+        let inList = false;
+
+        lines.forEach((line) => {
+          const trimmedLine = line.trim();
+          const startsWithLi = trimmedLine.startsWith('<li>');
+
+          if (startsWithLi && !inList) {
+            // Start of a new list
+            newContentLines.push('<ul>');
+            newContentLines.push(line);
+            inList = true;
+          } else if (startsWithLi && inList) {
+            // Continuation of an existing list
+            newContentLines.push(line);
+          } else if (!startsWithLi && inList) {
+            // End of a list
             newContentLines.push('</ul>');
+            newContentLines.push(line);
+            inList = false;
+          } else {
+            // Not a list item, and not currently in a list
+            newContentLines.push(line);
           }
-
-          return { ...article, content: newContentLines.join('\n') };
         });
+
+        // If the content ends with a list, close the <ul> tag
+        if (inList) {
+          newContentLines.push('</ul>');
+        }
+
+        return { ...article, content: newContentLines.join('\n') };
+      });
         // --- END OF NEW CONTENT PROCESSING LOGIC ---
 
         // Sort articles by date (newest first)
