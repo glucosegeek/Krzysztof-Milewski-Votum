@@ -1,3 +1,22 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+.news-article-content ul {
+  list-style: none; /* Remove default bullet */
+  padding-left: 0; /* Remove default padding */
+}
+
+.news-article-content ul li {
+  position: relative;
+  padding-left: 1.5em; /* Space for custom bullet */
+  margin-bottom: 0.5em; /* Space between list items */
+}
+
+.news-article-content ul li::before {
+  content: '•'; /* Custom bullet character */
+  color: #D4AF37; /* Gold color for bullet */
+  position: absolute;
+  left: 0;
+  font-size: 1.2em; /* Make bullet slightly larger */
+  line-height: inherit; /* Align with text */
+}
