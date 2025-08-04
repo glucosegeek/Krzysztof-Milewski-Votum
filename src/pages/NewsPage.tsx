@@ -237,14 +237,14 @@ const NewsPage: React.FC = () => {
                     </p>
                   )}
                   <div
-  className="text-lg leading-relaxed news-article-content"
-  style={{ color: '#F5F5F5' }}
-  // Comment out the dangerouslySetInnerHTML line
-  // dangerouslySetInnerHTML={{ __html: article.content }}
->
-  {/* Add this <pre> tag to display the raw HTML string */}
-  <pre>{article.content}</pre>
-</div>
+                      className="text-lg leading-relaxed news-article-content"
+                      style={{ color: '#F5F5F5' }}
+                      // Comment out the dangerouslySetInnerHTML line
+                      // dangerouslySetInnerHTML={{ __html: article.content }}
+                    >
+                      {/* Add this <pre> tag to display the raw HTML string */}
+                      <pre>{article.content}</pre>
+                  </div>
                 </div>
               ))}
             </div>
