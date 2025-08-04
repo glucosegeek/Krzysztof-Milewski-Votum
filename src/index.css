@@ -20,3 +20,7 @@
   font-size: 1.2em; /* Make bullet slightly larger */
   line-height: inherit; /* Align with text */
 }
+
+.news-article-content {
+  white-space: pre-wrap; /* This will preserve newlines and spaces */
+}
