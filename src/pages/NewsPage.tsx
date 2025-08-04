@@ -112,7 +112,15 @@ const NewsPage: React.FC = () => {
       const responseText = await response.text();
       
       // Remove the Google Visualization API wrapper
-      const jsonString = responseText.replace({});
+      const jsonStart = responseText.indexOf('{');
+      const jsonEnd = responseText.lastIndexOf('}');
+      let jsonString = '';
+      if (jsonStart !== -1 && jsonEnd !== -1 && jsonEnd > jsonStart) {
+        jsonString = responseText.substring(jsonStart, jsonEnd + 1);
+      } else {
+        console.error('Could not find valid JSON in responseText:', responseText);
+        throw new Error('Invalid JSON response from Google Sheets.');
+      }
       const jsonData = JSON.parse(jsonString);
       
       const parsedData = parseGoogleSheetsJson(jsonData);
