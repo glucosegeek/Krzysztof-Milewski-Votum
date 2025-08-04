@@ -92,50 +92,47 @@ const NewsPage: React.FC = () => {
       const csvText = await response.text();
       const parsedData = parseCsv(csvText);
 
-      // --- START OF NEW CONTENT PROCESSING LOGIC ---
+      // --- START OF NEW, ROBUST CONTENT PROCESSING LOGIC ---
       const processedData = parsedData.map(article => {
-        let rawContent = article.content;
+        let finalHtmlChunks: string[] = [];
+        let currentListItems: string[] = [];
 
-        // Step 1: Replace TAB character with <li>
-        // This line needs to be changed:
-        rawContent = rawContent.replace(/\t/g, '<li>'); // <--- CHANGE THIS LINE
-
-        // Step 2: Process lines to wrap <li> items in <ul>
-        const lines = rawContent.split('\n');
-        let newContentLines: string[] = [];
-        let inList = false;
+        // Split the content by newline to process line by line
+        const lines = article.content.split('\n');
 
         lines.forEach((line) => {
           const trimmedLine = line.trim();
-          const startsWithLi = trimmedLine.startsWith('<li>');
 
-          if (startsWithLi && !inList) {
-            // Start of a new list
-            newContentLines.push('<ul>');
-            newContentLines.push(line);
-            inList = true;
-          } else if (startsWithLi && inList) {
-            // Continuation of an existing list
-            newContentLines.push(line);
-          } else if (!startsWithLi && inList) {
-            // End of a list
-            newContentLines.push('</ul>');
-            newContentLines.push(line);
-            inList = false;
+          // Check if the line starts with a tab character
+          if (line.startsWith('\t')) {
+            // This is a list item
+            // Remove the leading tab, trim, and wrap in <li>
+            currentListItems.push(`<li>${trimmedLine.substring(1).trim()}</li>`);
           } else {
-            // Not a list item, and not currently in a list
-            newContentLines.push(line);
+            // This is not a list item (it's a paragraph or an empty line)
+
+            // If there were accumulated list items, close the current list block
+            if (currentListItems.length > 0) {
+              finalHtmlChunks.push(`<ul>${currentListItems.join('')}</ul>`);
+              currentListItems = []; // Reset for the next list block
+            }
+
+            // If the line is not empty, treat it as a paragraph
+            if (trimmedLine.length > 0) {
+              finalHtmlChunks.push(`<p>${trimmedLine}</p>`);
+            }
           }
         });
 
-        // If the content ends with a list, close the <ul> tag
-        if (inList) {
-          newContentLines.push('</ul>');
+        // After the loop, if there are any remaining list items, add them to the chunks
+        if (currentListItems.length > 0) {
+          finalHtmlChunks.push(`<ul>${currentListItems.join('')}</ul>`);
         }
 
-        return { ...article, content: newContentLines.join('\n') };
+        // Join all HTML chunks with a newline for source readability (browser will handle rendering)
+        return { ...article, content: finalHtmlChunks.join('\n') };
       });
-        // --- END OF NEW CONTENT PROCESSING LOGIC ---
+      // --- END OF NEW, ROBUST CONTENT PROCESSING LOGIC ---
 
         // Sort articles by date (newest first)
         const sortedData = processedData.sort((a, b) => {
