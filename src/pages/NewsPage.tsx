@@ -42,6 +42,27 @@ const newsArticles = [
           <p className="text-xl max-w-3xl mx-auto leading-relaxed">
             Tutaj znajdziesz najnowsze wiadomości i aktualizacje.
           </p>
+          <section className="py-20">
+  <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div className="space-y-12">
+      {newsArticles.map((article) => (
+        <div key={article.id} className="p-8 rounded-2xl shadow-xl border-4" style={{ backgroundColor: '#0A1A2F', borderColor: '#D4AF37' }}>
+          <h2 className="text-3xl font-bold mb-4" style={{ color: '#F5F5F5' }}>
+            {article.title}
+          </h2>
+          <p className="text-sm mb-4" style={{ color: '#D4AF37' }}>
+            Opublikowano: {article.date}
+          </p>
+          <p className="text-lg leading-relaxed" style={{ color: '#F5F5F5' }}>
+            {article.content}
+          </p>
+          {/* You can add a "Read More" link here if you plan to have full article pages */}
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
         </div>
       </section>
       {/* Add your news content here */}
