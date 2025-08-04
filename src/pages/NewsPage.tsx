@@ -172,7 +172,8 @@ const NewsPage: React.FC = () => {
   }
         
   // Join the processed lines. The newlines here will be rendered by `white-space: pre-wrap;`
-  return { ...article, content: newContentLines.join('\n') };
+  return { ...article, content: newContentLines.join('\n'), date: formattedDate };
+
 });
 
         // --- END OF NEW CONTENT PROCESSING LOGIC ---
