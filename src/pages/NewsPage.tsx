@@ -47,7 +47,12 @@ const newsArticles = [
               <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div className="space-y-12">
                   {newsArticles.map((article) => (
-                    <div key={article.id} className="p-8 rounded-2xl shadow-xl border-4" style={{ backgroundColor: '#0A1A2F', borderColor: '#D4AF37' }}>
+                   <div
+  key={article.id}
+  className="p-8 rounded-2xl shadow-xl border-4 transition-all duration-300 hover:scale-105 hover:shadow-2xl cursor-pointer"
+  style={{ backgroundColor: '#0A1A2F', borderColor: '#D4AF37' }}
+>
+
                       <h2 className="text-3xl font-bold mb-4" style={{ color: '#F5F5F5' }}>
                         {article.title}
                       </h2>
