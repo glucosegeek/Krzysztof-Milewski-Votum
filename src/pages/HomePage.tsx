@@ -56,7 +56,7 @@ const [openStep, setOpenStep] = useState<number | null>(null);
     {
       id: 6,
       title: "Wypłata świadczeń",
-      description: "Po zakończeniu sprawy uczestniczymy w przekazaniu należnych Ci środków od banku. Dbamy o to, by proces wypłaty przebiegł sprawnie i bez zbędnych opóźnień – aż do momentu pełnego rozliczenia.",
+      description: "Po zakończeniu sprawy uczestniczę w przekazaniu należnych Ci środków od banku. Dbamy o to, by proces wypłaty przebiegł sprawnie i bez zbędnych opóźnień – aż do momentu pełnego rozliczenia.",
     },
   ];
 
