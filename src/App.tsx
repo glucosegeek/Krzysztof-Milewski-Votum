@@ -40,6 +40,7 @@ useEffect(() => {
           <Route path="/services/currency" element={<ServicesCurrencyPage />} />
           <Route path="/services/skd" element={<ServicesSKDPage />} />
           <Route path="/knowledge-base" element={<KnowledgeBasePage />} />
+          <Route path="/news" element={<NewsPage />} />
           <Route path="/faq" element={<FAQPage />} />
           <Route path="/privacy-policy" element={<PrivacyPolicyPage />} />
            <Route path="/about-me" element={<AboutMePage />} />
