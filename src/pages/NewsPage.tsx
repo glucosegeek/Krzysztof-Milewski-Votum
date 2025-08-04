@@ -159,7 +159,6 @@ const NewsPage: React.FC = () => {
     fetchNews();
   }, []);
 
-  // ... rest of your component's JSX
 
 
   return (
