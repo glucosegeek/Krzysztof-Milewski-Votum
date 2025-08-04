@@ -14,43 +14,63 @@ const NewsPage: React.FC = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
-  const parseCsv = (csvText: string): NewsArticle[] => {
-    const lines = csvText.trim().split('\n');
-    if (lines.length <= 1) return [];
-
-    const headers = lines[0].split(',').map(header => header.trim());
-    const data = lines.slice(1).map(line => {
-      const values: string[] = [];
-      let currentValue = '';
-      let insideQuotes = false;
-      
-      for (let i = 0; i < line.length; i++) {
-        const char = line[i];
-        if (char === '"') {
-          insideQuotes = !insideQuotes;
-        } else if (char === ',' && !insideQuotes) {
-          values.push(currentValue.trim());
-          currentValue = '';
-        } else {
-          currentValue += char;
-        }
+  const parseGoogleSheetsJson = (jsonData: any): NewsArticle[] => {
+    try {
+      // Google Sheets JSON structure has table.rows and table.cols
+      const table = jsonData.table;
+      if (!table || !table.rows || !table.cols) {
+        console.error('Invalid Google Sheets JSON structure');
+        return [];
       }
-      values.push(currentValue.trim()); // Add the last value
 
-      const row: { [key: string]: string } = {};
-      headers.forEach((header, index) => {
-        row[header] = values[index] ? values[index].replace(/^"|"$/g, '') : '';
-      });
+      // Get column headers
+      const headers = table.cols.map((col: any) => col.label || col.id || '');
       
-      return {
-        id: row.id || '',
-        title: row.title || '',
-        date: row.date || '',
-        content: row.content || ''
-      } as NewsArticle;
-    });
-    
-    return data.filter(article => article.id && article.title);
+      // Find column indices
+      const idIndex = headers.findIndex((h: string) => h.toLowerCase().includes('id'));
+      const titleIndex = headers.findIndex((h: string) => h.toLowerCase().includes('title'));
+      const dateIndex = headers.findIndex((h: string) => h.toLowerCase().includes('date'));
+      const contentIndex = headers.findIndex((h: string) => h.toLowerCase().includes('content'));
+
+      if (idIndex === -1 || titleIndex === -1 || contentIndex === -1) {
+        console.error('Required columns not found in Google Sheets');
+        return [];
+      }
+
+      // Parse rows
+      const articles: NewsArticle[] = [];
+      
+      table.rows.forEach((row: any, index: number) => {
+        // Skip header row if it exists
+        if (index === 0 && row.c && row.c[titleIndex] && 
+            row.c[titleIndex].v && 
+            row.c[titleIndex].v.toString().toLowerCase().includes('title')) {
+          return;
+        }
+
+        if (!row.c) return;
+
+        const id = row.c[idIndex]?.v?.toString() || '';
+        const title = row.c[titleIndex]?.v?.toString() || '';
+        const date = row.c[dateIndex]?.v?.toString() || '';
+        const content = row.c[contentIndex]?.v?.toString() || '';
+
+        // Only add articles with required fields
+        if (id && title && content) {
+          articles.push({
+            id,
+            title,
+            date,
+            content
+          });
+        }
+      });
+
+      return articles;
+    } catch (error) {
+      console.error('Error parsing Google Sheets JSON:', error);
+      return [];
+    }
   };
 
   const parseDateString = (dateString: string): Date => {
@@ -76,11 +96,11 @@ const NewsPage: React.FC = () => {
       setError(null);
 
       const response = await fetch(
-        'https://docs.google.com/spreadsheets/d/e/2PACX-1vT9F_eSy0D8zahz0Eo8Je6a_MY2bmDCEpvN8HZC_iXu97szUrLtVS8cYR9awQSJLHSanX-FaTMxTiI9/pub?gid=0&single=true&output=csv',
+        'https://docs.google.com/spreadsheets/d/e/2PACX-1vT9F_eSy0D8zahz0Eo8Je6a_MY2bmDCEpvN8HZC_iXu97szUrLtVS8cYR9awQSJLHSanX-FaTMxTiI9/pub?gid=0&single=true&output=json',
         {
           method: 'GET',
           headers: {
-            'Accept': 'text/csv',
+            'Accept': 'application/json',
           },
         }
       );
@@ -89,8 +109,8 @@ const NewsPage: React.FC = () => {
         throw new Error(`HTTP error! status: ${response.status}`);
       }
 
-      const csvText = await response.text();
-      const parsedData = parseCsv(csvText);
+      const jsonData = await response.json();
+      const parsedData = parseGoogleSheetsJson(jsonData);
 
       // --- START OF NEW CONTENT PROCESSING LOGIC ---
       const processedData = parsedData.map(article => {
