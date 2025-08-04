@@ -177,7 +177,7 @@ const validate = () => {
                 </h2>
                 <ul className="text-lg mb-6 leading-relaxed" style={{ color: '#F5F5F5' }}>
                   <li className="text-lg mb-6 leading-relaxed">🏦 Analiza umowy i wyliczenie korzyści – Sprawdzam, ile możesz zyskać na unieważnieniu umowy.</li>
-                  <li className="text-lg mb-6 leading-relaxed">⚖️ Współpraca z kancelarią Votum Consumer Care – Twoją sprawą zajmują się doświadczeni prawnicy z setkami wygranych.</li>
+                  <li className="text-lg mb-6 leading-relaxed">⚖️ Jestem przedstawicielem Votum Consumer CARE które współpracuje z największymi i najlepszymi kancelariami zajmującymi się toksycznymi kredytami tak walutowymi jak i w ramach SKD</li>
                   <li className="text-lg mb-6 leading-relaxed">📊 30 lat doświadczenia w sprzedaży i marketingu – Wykorzystuję AI i nowoczesne narzędzia, by skutecznie Ci pomóc.</li>
                   <li className="text-lg mb-6 leading-relaxed">📄 Pomoc na każdym etapie – Od analizy, przez dokumenty, aż po wyrok sądu.</li>
                   <li className="text-lg mb-6 leading-relaxed">💰 Umowy aktywne i spłacone – Pomagam odzyskać należne środki lub pozbyć się zadłużenia.</li>
