@@ -7,7 +7,7 @@ const newsArticles = [
     {
       id: 1,
       title: "Sankcja kredytu darmowego – Sąd Najwyższy czeka na TSUE",
-      date: "2025-07-28",
+      date: "20.07.2025",
       content: `30 lipca 2025 r. w Izbie Cywilnej Sądu Najwyższego odbyła się rozprawa w sprawie III CZP 15/25 dotycząca tzw. sankcji kredytu darmowego (SKD). Sprawa trafiła do SN na skutek pytań prawnych zadanych przez Sąd Okręgowy w Poznaniu. Dotyczą one m.in.:
       <ul>
         <li>-> momentu, w którym konsument może skutecznie złożyć oświadczenie o SKD,</li>
@@ -20,7 +20,7 @@ const newsArticles = [
     {
       id: 2,
       title: "Odsetki od nieważnej umowy frankowej należne już od dnia złożenia pozwu – wyrok SN z 29 kwietnia 2025 r.",
-      date: "2025-07-20",
+      date: "20.07.2025",
       content: "Sąd Najwyższy potwierdził, że umowy frankowe zawierające niedozwolone klauzule indeksacyjne (waloryzacja kursem CHF ustalanym jednostronnie przez bank) są nieważne. W efekcie kredytobiorca ma prawo domagać się zwrotu wszystkich wpłaconych środków. W rozpatrywanej sprawie SN uznał, że bank popadł w opóźnienie już w momencie otrzymania wezwania do zapłaty od klientki – jeszcze przed złożeniem pozwu. Zasądzenie odsetek ustawowych za opóźnienie od dnia wniesienia sprawy (19 sierpnia 2017 r.) było więc zasadne. Wyrok: SN, sygn. II CSKP 1211/22 z 29.04.2025 r. Sędziowie: Monika Koba, Karol Weitz, Agnieszka Piotrowska. To ważne orzeczenie wzmacnia pozycję frankowiczów i potwierdza prawo do pełnego zwrotu wpłat – z ustawowymi odsetkami."
     }
   ];
