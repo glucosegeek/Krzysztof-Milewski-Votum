@@ -229,22 +229,22 @@ const NewsPage: React.FC = () => {
                   style={{ backgroundColor: '#0A1A2F', borderColor: '#D4AF37' }}
                 >
                   <h2 className="text-3xl font-bold mb-4" style={{ color: '#F5F5F5' }}>
-                    {article.title}
-                  </h2>
-                  {article.date && (
-                    <p className="text-sm mb-4" style={{ color: '#D4AF37' }}>
-                      Opublikowano: {article.date}
-                    </p>
-                  )}
-                  <div
-                      className="text-lg leading-relaxed news-article-content"
-                      style={{ color: '#F5F5F5' }}
-                      // Comment out the dangerouslySetInnerHTML line
-                      // dangerouslySetInnerHTML={{ __html: article.content }}
-                    >
-                      {/* Add this <pre> tag to display the raw HTML string */}
-                      <pre>{article.content}</pre>
-                  </div>
+  {article.title}
+</h2>
+{article.date && (
+  <p className="text-sm mb-4" style={{ color: '#D4AF37' }}>
+    Opublikowano: {article.date}
+  </p>
+)}
+<div
+  className="text-lg leading-relaxed news-article-content"
+  style={{ color: '#F5F5F5' }}
+  // Comment out the dangerouslySetInnerHTML line
+  // dangerouslySetInnerHTML={{ __html: article.content }}
+>
+  {/* Add this <pre> tag to display the raw HTML string */}
+  <pre>{article.content}</pre>
+</div>
                 </div>
               ))}
             </div>
