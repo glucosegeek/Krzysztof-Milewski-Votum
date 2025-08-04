@@ -75,9 +75,6 @@ const NewsPage: React.FC = () => {
 
   const parseDateString = (dateString: string): Date => {
     let date = new Date(dateString);
-    if (!isNaN(date.getTime())) {
-      return date;
-    }
     const parsedDate = parseDateString(article.date); // Call the clean parseDateString here
   let formattedDate = article.date; // Initialize with original as fallback
 
