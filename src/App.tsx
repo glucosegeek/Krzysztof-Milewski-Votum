@@ -10,8 +10,7 @@ import HomePage from './pages/HomePage';
 import ServicesCurrencyPage from './pages/ServicesCurrencyPage';
 import ServicesSKDPage from './pages/ServicesSKDPage';
 import KnowledgeBasePage from './pages/KnowledgeBasePage';
-import NewsPage from './pages/NewsPage'; // Add this line
-
+import NewsPage from './pages/NewsPage';
 import FAQPage from './pages/FAQPage';
 import AboutMePage from './pages/AboutMePage';
 import PrivacyPolicyPage from './pages/PrivacyPolicyPage';
