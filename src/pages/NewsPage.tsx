@@ -112,7 +112,7 @@ const NewsPage: React.FC = () => {
       const responseText = await response.text();
       
       // Remove the Google Visualization API wrapper
-      const jsonString = responseText.replace({/^.*?google\.visualization\.Query\.setResponse\(/, '').replace(/\);?\s*$/, ''});
+      const jsonString = responseText.replace({});
       const jsonData = JSON.parse(jsonString);
       
       const parsedData = parseGoogleSheetsJson(jsonData);
