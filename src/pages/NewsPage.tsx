@@ -20,7 +20,6 @@ const NewsPage: React.FC = () => {
 
     const headers = lines[0].split(',').map(header => header.trim());
     const data = lines.slice(1).map(line => {
-      // Handle CSV parsing with potential commas in content
       const values: string[] = [];
       let currentValue = '';
       let insideQuotes = false;
@@ -40,7 +39,7 @@ const NewsPage: React.FC = () => {
 
       const row: { [key: string]: string } = {};
       headers.forEach((header, index) => {
-        row[header] = values[index] ? values[index].replace(/"/g, '') : '';
+        row[header] = values[index] ? values[index].replace(/^"|"$/g, '') : '';
       });
       
       return {
@@ -51,7 +50,23 @@ const NewsPage: React.FC = () => {
       } as NewsArticle;
     });
     
-    return data.filter(article => article.id && article.title); // Filter out empty rows
+    return data.filter(article => article.id && article.title);
+  };
+
+  const parseDateString = (dateString: string): Date => {
+    let date = new Date(dateString);
+    if (!isNaN(date.getTime())) {
+      return date;
+    }
+
+    const parts = dateString.split('.');
+    if (parts.length === 3) {
+      date = new Date(`${parts[2]}-${parts[1]}-${parts[0]}`);
+      if (!isNaN(date.getTime())) {
+        return date;
+      }
+    }
+    return new Date('');
   };
 
   useEffect(() => {
@@ -77,10 +92,59 @@ const NewsPage: React.FC = () => {
         const csvText = await response.text();
         const parsedData = parseCsv(csvText);
         
-        // Sort articles by date (newest first) if dates are provided
-        const sortedData = parsedData.sort((a, b) => {
-          if (!a.date || !b.date) return 0;
-          return new Date(b.date).getTime() - new Date(a.date).getTime();
+        // --- START OF NEW CONTENT PROCESSING LOGIC ---
+        const processedData = parsedData.map(article => {
+          let rawContent = article.content;
+
+          // Step 1: Replace <bullet point> with <li>
+          rawContent = rawContent.replace(/<bullet point>/g, '<li>');
+
+          // Step 2: Process lines to wrap <li> items in <ul>
+          const lines = rawContent.split('\n');
+          let newContentLines: string[] = [];
+          let inList = false;
+
+          lines.forEach((line) => {
+            const trimmedLine = line.trim();
+            const startsWithLi = trimmedLine.startsWith('<li>');
+
+            if (startsWithLi && !inList) {
+              // Start of a new list
+              newContentLines.push('<ul>');
+              newContentLines.push(line);
+              inList = true;
+            } else if (startsWithLi && inList) {
+              // Continuation of an existing list
+              newContentLines.push(line);
+            } else if (!startsWithLi && inList) {
+              // End of a list
+              newContentLines.push('</ul>');
+              newContentLines.push(line);
+              inList = false;
+            } else {
+              // Not a list item, and not currently in a list
+              newContentLines.push(line);
+            }
+          });
+
+          // If the content ends with a list, close the <ul> tag
+          if (inList) {
+            newContentLines.push('</ul>');
+          }
+
+          return { ...article, content: newContentLines.join('\n') };
+        });
+        // --- END OF NEW CONTENT PROCESSING LOGIC ---
+
+        // Sort articles by date (newest first)
+        const sortedData = processedData.sort((a, b) => {
+          const dateA = parseDateString(a.date);
+          const dateB = parseDateString(b.date);
+
+          if (isNaN(dateA.getTime()) || isNaN(dateB.getTime())) {
+            return 0;
+          }
+          return dateB.getTime() - dateA.getTime();
         });
         
         setNewsArticles(sortedData);
@@ -94,6 +158,9 @@ const NewsPage: React.FC = () => {
 
     fetchNews();
   }, []);
+
+  // ... rest of your component's JSX
+
 
   return (
     <div className="min-h-screen pt-16" style={{ backgroundColor: '#0A1A2F', color: '#F5F5F5' }}>
