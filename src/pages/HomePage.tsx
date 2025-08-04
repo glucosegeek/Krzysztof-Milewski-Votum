@@ -46,7 +46,7 @@ const [openStep, setOpenStep] = useState<number | null>(null);
     {
       id: 4,
       title: "Zgłoszenie roszczeń",
-      description: "Po skompletowaniu niezbędnych dokumentów przygotowujemy i składamy w Twoimieniu reklamację do banku, jasno i precyzyjnie przedstawiając roszczenia. Dbamy o każdy szczegół – od podstawy prawnej po spełnienie wszystkich wymogów formalnych – aby zwiększyć szanse na pozytywne rozpatrzenie sprawy.",
+      description: "Po skompletowaniu niezbędnych dokumentów przygotowuję i złożę w Twoim imieniu reklamację do banku, jasno i precyzyjnie przedstawiając roszczenia. Dbam o każdy szczegół – od podstawy prawnej po spełnienie wszystkich wymogów formalnych – aby zwiększyć szanse na pozytywne rozpatrzenie sprawy.",
     },
     {
       id: 5,
