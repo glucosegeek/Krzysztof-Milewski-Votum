@@ -6,9 +6,9 @@ const NewsPage: React.FC = () => {
 const newsArticles = [
     {
       id: 1,
-      title: "Nowe orzeczenie TSUE w sprawie kredytów frankowych",
+      title: "Sankcja kredytu darmowego – Sąd Najwyższy czeka na TSUE",
       date: "2025-07-28",
-      content: "Odsetki od nieważnej umowy frankowej należne już od dnia złożenia pozwu – wyrok SN z 29 kwietnia 2025 r."
+      content: "30 lipca 2025 r. w Izbie Cywilnej Sądu Najwyższego odbyła się rozprawa w sprawie III CZP 15/25 dotycząca tzw. sankcji kredytu darmowego (SKD). Sprawa trafiła do SN na skutek pytań prawnych zadanych przez Sąd Okręgowy w Poznaniu. Dotyczą one m.in.: •	momentu, w którym konsument może skutecznie złożyć oświadczenie o SKD, 	•	abuzywności postanowień umownych i jej wpływu na skuteczność oświadczenia, 	•	legalności naliczania odsetek od prowizji, której kredytobiorca nie otrzymał,	•	nieprawidłowego wyliczania RRSO i całkowitej kwoty do zapłaty. Sąd Najwyższy nie wydał uchwały – zdecydował o wstrzymaniu się z rozstrzygnięciem do czasu orzeczenia Trybunału Sprawiedliwości UE w sprawie C-566/24. To decyzja, która pokazuje powagę sprawy – potencjalne skutki mogą być przełomowe. Jeżeli TSUE opowie się po stronie konsumentów, możliwa będzie fala roszczeń wobec banków, podobnie jak miało to miejsce w sprawach frankowych."
     },
     {
       id: 2,
