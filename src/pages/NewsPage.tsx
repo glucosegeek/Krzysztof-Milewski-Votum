@@ -161,6 +161,16 @@ const NewsPage: React.FC = () => {
     newContentLines.push('</ul>');
   }
 
+// Format the date for display
+  const parsedDate = parseDateString(article.date);
+  let formattedDate = article.date; // Fallback to original if parsing fails
+  if (!isNaN(parsedDate.getTime())) {
+    const day = String(parsedDate.getDate()).padStart(2, '0');
+    const month = String(parsedDate.getMonth() + 1).padStart(2, '0'); // Month is 0-indexed
+    const year = parsedDate.getFullYear();
+    formattedDate = `${day}.${month}.${year}`;
+  }
+        
   // Join the processed lines. The newlines here will be rendered by `white-space: pre-wrap;`
   return { ...article, content: newContentLines.join('\n') };
 });
