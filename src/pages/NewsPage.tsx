@@ -76,29 +76,42 @@ const NewsPage: React.FC = () => {
 
   const parseDateString = (dateString: string): Date => {
     console.log('2. parseDateString input:', dateString); // ADD THIS LINE
-    // Attempt 1: Try parsing DD.MM.YYYY format by reordering to YYYY-MM-DD for reliable Date parsing
-    const parts = dateString.split('.');
-    if (parts.length === 3) {
-      const day = parts[0];
-      const month = parts[1];
-      const year = parts[2];
-      const date = new Date(`${day}-${month}-${year}`);
-      if (!isNaN(date.getTime())) {
-         console.log('3. parseDateString returning valid Date object:', date); // ADD THIS LINE
-        return date;
-      }
-    }
-
-    // Fallback: Try parsing directly (might work for some standard formats if the above fails)
-    let date = new Date(dateString);
+     // Attempt 1: Handle "Date(YYYY,MM,DD)" format from Google Sheets API
+  const googleSheetsDateMatch = dateString.match(/^Date\((\d{4}),(\d{1,2}),(\d{1,2})\)$/);
+  if (googleSheetsDateMatch) {
+    const year = parseInt(googleSheetsDateMatch[1], 10);
+    const month = parseInt(googleSheetsDateMatch[2], 10); // Month is 0-indexed in JS Date constructor
+    const day = parseInt(googleSheetsDateMatch[3], 10);
+    const date = new Date(year, month, day);
     if (!isNaN(date.getTime())) {
+      console.log('3. parseDateString returning valid Date object (from GS format):', date);
       return date;
     }
+  }
+ // Attempt 2: Try parsing DD.MM.YYYY format by reordering to YYYY-MM-DD for reliable Date parsing
+  const parts = dateString.split('.');
+  if (parts.length === 3) {
+    const day = parts[0];
+    const month = parts[1];
+    const year = parts[2];
+    const date = new Date(`${year}-${month}-${day}`); // This expects YYYY-MM-DD
+    if (!isNaN(date.getTime())) {
+      console.log('3. parseDateString returning valid Date object (from DD.MM.YYYY):', date);
+      return date;
+    }
+  }
 
-    // Return an invalid date if no format matches
-    console.log('3. parseDateString returning Invalid Date:', date); // ADD THIS LINE (for fallback)
-    return new Date('');
-  };
+     // Fallback: Try parsing directly (might work for some standard formats if the above fails)
+  let date = new Date(dateString);
+  if (!isNaN(date.getTime())) {
+    console.log('3. parseDateString returning valid Date object (from direct parse):', date);
+    return date;
+  }
+
+  // Return an invalid date if no format matches
+  console.log('3. parseDateString returning Invalid Date:', date);
+  return new Date('');
+};
 
   useEffect(() => {
   const fetchNews = async () => {
