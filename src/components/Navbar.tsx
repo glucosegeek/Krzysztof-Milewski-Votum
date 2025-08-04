@@ -99,6 +99,7 @@ const Navbar: React.FC = () => {
               Baza wiedzy
             </Link>
 
+            
             <Link
               to="/news"
               className="px-3 py-2 rounded-md text-sm font-medium transition-colors hover:bg-opacity-10 hover:bg-white"
