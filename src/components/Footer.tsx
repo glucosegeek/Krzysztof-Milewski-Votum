@@ -25,7 +25,7 @@ const Footer: React.FC<FooterProps> = ({ registerFooterSection }) => {
               Krzysztof Milewski
             </h3>
             <p style={{ color: '#F5F5F5' }}>
-              Ekspert ds. unieważniania kredytów walutowych (CHF | EUR | USD)
+              Ekspert ds. unieważniania kredytów walutowych (CHF | EUR | USD) oraz kredytów SKD
             </p>
           </div>
 
