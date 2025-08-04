@@ -99,35 +99,14 @@ const Navbar: React.FC = () => {
               Baza wiedzy
             </Link>
 
-{/* Other Navigation Links */}
-<Link
-  to="/knowledge-base"
-  className="px-3 py-2 rounded-md text-sm font-medium transition-colors hover:bg-opacity-10 hover:bg-white"
-  style={{ color: '#F5F5F5' }}
-  onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
->
-  Baza wiedzy
-</Link>
-
-{/* Add this new link */}
-<Link
-  to="/news"
-  className="px-3 py-2 rounded-md text-sm font-medium transition-colors hover:bg-opacity-10 hover:bg-white"
-  style={{ color: '#F5F5F5' }}
-  onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
->
-  Aktualności
-</Link>
-
-<Link
-  to="/faq"
-  className="px-3 py-2 rounded-md text-sm font-medium transition-colors hover:bg-opacity-10 hover:bg-white"
-  style={{ color: '#F5F5F5' }}
-  onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
->
-  FAQ
-</Link>
-
+            <Link
+              to="/news"
+              className="px-3 py-2 rounded-md text-sm font-medium transition-colors hover:bg-opacity-10 hover:bg-white"
+              style={{ color: '#F5F5F5' }}
+              onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+            >
+              Aktualności
+            </Link>
             
             <Link
               to="/faq"
