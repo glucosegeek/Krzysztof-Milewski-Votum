@@ -86,7 +86,7 @@ const NewsPage: React.FC = () => {
         return date;
       }
     }
-    return new Date('');
+    return new ('');
   };
 
   useEffect(() => {
