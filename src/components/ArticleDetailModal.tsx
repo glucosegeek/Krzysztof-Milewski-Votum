@@ -1,4 +1,3 @@
-```typescript
 import React, { useEffect, useRef } from 'react';
 import { X } from 'lucide-react';
 
@@ -89,4 +88,3 @@ const ArticleDetailModal: React.FC<ArticleDetailModalProps> = ({ article, onClos
 };
 
 export default ArticleDetailModal;
-```
