@@ -14,7 +14,6 @@ const ConsultationModal: React.FC = () => {
   const modalRef = useRef<HTMLDivElement>(null);
   const [showSuccessMessage, setShowSuccessMessage] = useState(false);
 
-
   useEffect(() => {
     if (isModalOpen) {
       document.body.style.overflow = 'hidden'; // Prevent scrolling background
