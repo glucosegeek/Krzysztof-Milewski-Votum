@@ -1,156 +1,187 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { ArrowLeft, Scale, FileText, DollarSign, Shield, Gavel, BookOpen, Search } from 'lucide-react';
 import { useConsultationModal } from '../context/ConsultationModalContext';
-import ArticleDetailModal from '../components/ArticleDetailModal'; // Import the new modal
+import ArticleDetailModal from '../components/ArticleDetailModal';
 
 interface Article {
   id: number;
   title: string;
   excerpt: string;
-  fullContent: string; // Added fullContent
+  fullContent: string;
   icon: React.ReactNode;
+  iconName: string;
   category: string;
 }
 
 const KnowledgeBasePage: React.FC = () => {
   const [searchTerm, setSearchTerm] = useState('');
   const [selectedCategory, setSelectedCategory] = useState('all');
+  const [articles, setArticles] = useState<Article[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
   const { openModal } = useConsultationModal();
 
   // State for the ArticleDetailModal
   const [showArticleModal, setShowArticleModal] = useState(false);
   const [selectedArticle, setSelectedArticle] = useState<Article | null>(null);
 
-  const articles: Article[] = [
-    {
-      id: 1,
-      title: "Kredyty frankowe – co to jest i dlaczego są problemem?",
-      excerpt: "Kredyty frankowe to hipoteczne kredyty w walutach obcych, które stały się problemem z powodu wzrostu kursu walut i nieuczciwych klauzul w umowach. Doprowadziło to do wysokich rat i zadłużenia, stając się podstawą do roszczeń sądowych.",
-      fullContent: `
-        <p>Kredyty frankowe to rodzaj kredytów hipotecznych, które były udzielane w Polsce w latach 2004-2011, głównie w walucie szwajcarskiej (CHF), ale także w euro (EUR) czy dolarach (USD). Ich popularność wynikała z niższych stóp procentowych w Szwajcarii w porównaniu do Polski, co przekładało się na niższe początkowe raty.</p>
-        <p><strong>Dlaczego stały się problemem?</strong></p>
-        <ul>
-          <li>Gwałtowny wzrost kursu franka szwajcarskiego (CHF) po 2008 roku, a zwłaszcza po 2015 roku, spowodował drastyczny wzrost wysokości rat kredytowych.</li>
-          <li>Wiele umów zawierało tzw. klauzule abuzywne (niedozwolone), które dawały bankom jednostronną swobodę w ustalaniu kursów walutowych do przeliczania rat.</li>
-          <li>Banki często nie informowały kredytobiorców o pełnym ryzyku walutowym, co naruszało prawa konsumentów.</li>
-          <li>W efekcie, zadłużenie wielu kredytobiorców znacznie przewyższało wartość nieruchomości, a spłata kredytu stała się ogromnym obciążeniem finansowym.</li>
-        </ul>
-        <p>Te problemy stały się podstawą do masowego dochodzenia roszczeń w sądzie, a orzecznictwo sądów polskich i Trybunału Sprawiedliwości Unii Europejskiej (TSUE) w dużej mierze potwierdziło racje kredytobiorców.</p>
-      `,
-      icon: <Scale size={24} />,
-      category: "kredyty-walutowe",
-    },
-    {
-      id: 2,
-      title: "Jak unieważnić umowę kredytu frankowego?",
-      excerpt: "Unieważnienie umowy kredytu frankowego to proces sądowy mający na celu stwierdzenie nieważności umowy lub usunięcie nieuczciwych klauzul. Może to być odfrankowienie (przeliczenie na PLN) lub całkowite unieważnienie umowy ze zwrotem wpłaconych rat.",
-      fullContent: `
-        <p>Unieważnienie umowy kredytu frankowego to proces prawny, który ma na celu wyeliminowanie nieuczciwych zapisów z umowy lub stwierdzenie jej całkowitej nieważności. Istnieją dwie główne ścieżki:</p>
-        <ul>
-          <li><strong>Odfrankowienie (tzw. "mała sankcja")</strong>: Polega na usunięciu z umowy klauzul indeksacyjnych lub denominacyjnych, co skutkuje przeliczeniem kredytu na złotówki, ale z zachowaniem oprocentowania opartego na stawce LIBOR/SARON. Kredytobiorca spłaca kredyt w PLN, a bank zwraca nadpłacone kwoty.</li>
-          <li><strong>Całkowite unieważnienie umowy (tzw. "duża sankcja")</strong>: Sąd stwierdza, że umowa jest nieważna od samego początku. Strony muszą zwrócić sobie wzajemnie świadczenia – bank zwraca wszystkie wpłacone raty i opłaty, a kredytobiorca zwraca kwotę kapitału, którą otrzymał od banku. W praktyce często oznacza to, że bank musi zwrócić kredytobiorcy znaczną sumę pieniędzy.</li>
-        </ul>
-        <p><strong>Kroki do unieważnienia umowy:</strong></p>
-        <ol>
-          <li><strong>Analiza umowy</strong>: Prawnik analizuje umowę kredytową pod kątem klauzul abuzywnych.</li>
-          <li><strong>Wezwanie do zapłaty/reklamacja</strong>: Wysłanie do banku wezwania do zapłaty lub reklamacji.</li>
-          <li><strong>Pozew sądowy</strong>: W przypadku braku porozumienia, złożenie pozwu do sądu.</li>
-          <li><strong>Postępowanie sądowe</strong>: Reprezentacja w sądzie, gromadzenie dowodów, przesłuchania.</li>
-          <li><strong>Wyrok</strong>: Ostateczne orzeczenie sądu.</li>
-        </ol>
-        <p>Współpraca z doświadczoną kancelarią prawną jest kluczowa dla sukcesu w tego typu sprawach.</p>
-      `,
-      icon: <FileText size={24} />,
-      category: "kredyty-walutowe",
-    },
-    {
-      id: 3,
-      title: "Koszty procesu sądowego o kredyt frankowy – ile to kosztuje?",
-      excerpt: "Koszty procesu sądowego o kredyt frankowy mogą być znaczące. Wiele kancelarii stosuje model 'success fee', gdzie honorarium jest płatne po wygranej sprawie. Główne koszty to opłata sądowa, zastępstwo procesowe i ewentualnie biegły. W przypadku wygranej, większość kosztów pokrywa bank.",
-      fullContent: `
-        <p>Koszty związane z procesem sądowym o kredyt frankowy mogą wydawać się wysokie, jednak wiele kancelarii, w tym Votum Consumer Care, oferuje elastyczne modele rozliczeń, które minimalizują ryzyko finansowe dla kredytobiorcy.</p>
-        <p><strong>Główne składniki kosztów:</strong></p>
-        <ul>
-          <li><strong>Opłata sądowa od pozwu</strong>: Jest to stała opłata, zazwyczaj 1000 zł, niezależnie od wartości przedmiotu sporu.</li>
-          <li><strong>Koszty zastępstwa procesowego (honorarium prawnika)</strong>: To największa część kosztów. Wiele kancelarii stosuje model "success fee" (wynagrodzenie za sukces), co oznacza, że znaczna część honorarium jest płatna dopiero po wygranej sprawie. Może to być procent od odzyskanej kwoty lub stała suma.</li>
-          <li><strong>Koszty biegłego sądowego</strong>: W niektórych sprawach sąd może powołać biegłego (np. z zakresu rachunkowości) do wyliczenia roszczeń. Koszty te są zazwyczaj dzielone między strony lub pokrywane przez stronę przegrywającą.</li>
-          <li><strong>Koszty korespondencji i inne drobne opłaty</strong>.</li>
-        </ul>
-        <p><strong>Ważne:</strong> W przypadku wygranej sprawy, sąd zazwyczaj zasądza zwrot kosztów procesu od banku na rzecz kredytobiorcy. Oznacza to, że bank pokrywa większość poniesionych przez Ciebie wydatków, w tym opłatę sądową i część honorarium prawnika.</p>
-        <p>Dzięki modelowi "success fee" możesz rozpocząć proces bez ponoszenia dużych kosztów początkowych, co czyni dochodzenie roszczeń bardziej dostępnym.</p>
-      `,
-      icon: <DollarSign size={24} />,
-      category: "kredyty-walutowe",
-    },
-    {
-      id: 4,
-      title: "Umowy SKD – co to jest i jak się przed nimi bronić?",
-      excerpt: "Umowy SKD to umowy zawierane na odległość (telefon, internet). Problemy to nieuczciwe praktyki, ukryte koszty i brak informacji o prawie do odstąpienia. Konsumenci mają prawo odstąpić od umowy w ciągu 14 dni.",
-      fullContent: `
-        <p>Umowy Sprzedaży Konsumenckiej na Odległość (SKD) to kontrakty zawierane z konsumentem bez jednoczesnej fizycznej obecności obu stron, np. przez telefon, internet, pocztę, czy poza lokalem przedsiębiorstwa (np. podczas prezentacji handlowych w hotelach).</p>
-        <p><strong>Najczęstsze problemy z umowami SKD:</strong></p>
-        <ul>
-          <li><strong>Nieuczciwe praktyki sprzedażowe</strong>: Wprowadzanie w błąd, wywieranie presji, manipulacja informacjami.</li>
-          <li><strong>Ukryte koszty</strong>: Brak pełnej informacji o wszystkich opłatach i warunkach przed zawarciem umowy.</li>
-          <li><strong>Brak informacji o prawie do odstąpienia</strong>: Sprzedawca nie informuje konsumenta o jego prawie do odstąpienia od umowy w określonym terminie.</li>
-          <li><strong>Produkty finansowe</strong>: Często dotyczą skomplikowanych produktów finansowych, ubezpieczeń, czy usług telekomunikacyjnych, których warunki są trudne do zrozumienia.</li>
-        </ul>
-        <p><strong>Jak się bronić?</strong></p>
-        <ol>
-          <li><strong>Prawo do odstąpienia</strong>: Konsument ma prawo odstąpić od umowy SKD w terminie 14 dni od jej zawarcia (lub od otrzymania towaru) bez podawania przyczyny. Jeśli sprzedawca nie poinformował o tym prawie, termin ten może wydłużyć się nawet do 12 miesięcy.</li>
-          <li><strong>Dokładne czytanie umów</strong>: Zawsze dokładnie zapoznaj się z treścią umowy przed jej podpisaniem.</li>
-          <li><strong>Dokumentowanie komunikacji</strong>: Zachowuj wszelką korespondencję, nagrania rozmów (jeśli są dostępne) i dokumenty.</li>
-          <li><strong>Zgłoszenie nieprawidłowości</strong>: W przypadku podejrzenia nieuczciwych praktyk, skontaktuj się z prawnikiem lub rzecznikiem praw konsumentów.</li>
-        </ol>
-        <p>Pomagamy w analizie umów SKD i dochodzeniu roszczeń, w tym w unieważnianiu umów zawartych niezgodnie z prawem.</p>
-      `,
-      icon: <BookOpen size={24} />,
-      category: "umowy-skd",
-    },
-    {
-      id: 5,
-      title: "Rola Votum S.A. w sprawach frankowych i SKD",
-      excerpt: "Votum S.A. to wiodąca firma w dochodzeniu roszczeń od banków w sprawach kredytów frankowych i umów SKD. Współpracuje z kancelariami prawnymi, oferując kompleksowe wsparcie od analizy po reprezentację sądową. Działa w oparciu o model 'success fee', minimalizując ryzyko finansowe dla klienta.",
-      fullContent: `
-        <p>Votum S.A. jest liderem na polskim rynku w zakresie dochodzenia roszczeń od instytucji finansowych, w szczególności w sprawach dotyczących kredytów frankowych oraz umów Sprzedaży Konsumenckiej na Odległość (SKD).</p>
-        <p><strong>Jak Votum S.A. wspiera klientów:</strong></p>
-        <ul>
-          <li><strong>Kompleksowa analiza</strong>: Przeprowadzają szczegółową analizę umowy kredytowej lub SKD pod kątem klauzul abuzywnych i możliwości dochodzenia roszczeń.</li>
-          <li><strong>Współpraca z kancelariami</strong>: Votum S.A. współpracuje z siecią doświadczonych kancelarii prawnych, które specjalizują się w prawie bankowym i konsumenckim, zapewniając najwyższą jakość usług prawnych.</li>
-          <li><strong>Przygotowanie dokumentacji</strong>: Pomagają w zgromadzeniu wszystkich niezbędnych dokumentów i przygotowaniu pozwu.</li>
-          <li><strong>Reprezentacja sądowa</strong>: Zapewniają pełną reprezentację klienta na każdym etapie postępowania sądowego, aż do prawomocnego wyroku.</li>
-          <li><strong>Model "success fee"</strong>: Oferują model wynagrodzenia oparty na sukcesie, co oznacza, że klient płaci główne honorarium dopiero po wygranej sprawie. Minimalizuje to ryzyko finansowe dla kredytobiorcy.</li>
-          <li><strong>Wsparcie i doradztwo</strong>: Klienci otrzymują stałe wsparcie i doradztwo na każdym etapie procesu.</li>
-        </ul>
-        <p>Dzięki Votum S.A. tysiące kredytobiorców odzyskało swoje pieniądze i uwolniło się od toksycznych kredytów, a konsumenci uzyskali pomoc w sporach z nieuczciwymi sprzedawcami.</p>
-      `,
-      icon: <Shield size={24} />,
-      category: "ogolne",
-    },
-    {
-      id: 6,
-      title: "Najnowsze orzecznictwo TSUE i Sądu Najwyższego w sprawach frankowych",
-      excerpt: "Orzeczenia TSUE i Sądu Najwyższego są kluczowe dla spraw frankowych. Potwierdzają abuzywny charakter klauzul i umacniają pozycję kredytobiorców. Najnowsze wyroki często skutkują unieważnieniem umów i zwrotem nadpłaconych kwot.",
-      fullContent: `
-        <p>Orzecznictwo Trybunału Sprawiedliwości Unii Europejskiej (TSUE) oraz Sądu Najwyższego w Polsce odgrywa fundamentalną rolę w kształtowaniu linii orzeczniczej w sprawach kredytów frankowych. Te wyroki mają charakter wiążący i stanowią podstawę dla sądów krajowych.</p>
-        <p><strong>Kluczowe orzeczenia TSUE:</strong></p>
-        <ul>
-          <li><strong>Wyrok w sprawie Dziubak (C-260/18)</strong>: Potwierdził, że polskie sądy mogą unieważniać umowy kredytowe zawierające nieuczciwe klauzule walutowe, a konsument nie może być zmuszony do utrzymania takiej umowy.</li>
-          <li><strong>Wyrok w sprawie K.B. i in. (C-19/20)</strong>: Wskazał, że bankom nie przysługuje wynagrodzenie za korzystanie z kapitału w przypadku unieważnienia umowy kredytu frankowego, co jest niezwykle korzystne dla kredytobiorców.</li>
-          <li><strong>Kolejne orzeczenia</strong>: TSUE konsekwentnie stoi na stanowisku ochrony konsumentów, co umacnia ich pozycję w sporach z bankami.</li>
-        </ul>
-        <p><strong>Orzecznictwo Sądu Najwyższego:</strong></p>
-        <ul>
-          <li>Sąd Najwyższy, kierując się wyrokami TSUE, również wydał szereg uchwał i orzeczeń korzystnych dla frankowiczów, ujednolicając orzecznictwo sądów niższych instancji.</li>
-          <li>Potwierdzono m.in. możliwość unieważniania umów oraz brak podstaw do roszczeń banków o wynagrodzenie za korzystanie z kapitału.</li>
-        </ul>
-        <p>Te orzeczenia sprawiły, że sprawy frankowe stały się znacznie bardziej przewidywalne i korzystne dla kredytobiorców, co zachęca do dochodzenia swoich praw w sądzie.</p>
-      `,
-      icon: <Gavel size={24} />,
-      category: "orzecznictwo",
-    },
-  ];
+  // Icon mapping
+  const iconMap: { [key: string]: React.ReactNode } = {
+    'Scale': <Scale size={24} />,
+    'FileText': <FileText size={24} />,
+    'DollarSign': <DollarSign size={24} />,
+    'Shield': <Shield size={24} />,
+    'Gavel': <Gavel size={24} />,
+    'BookOpen': <BookOpen size={24} />,
+  };
+
+  const parseGoogleSheetsJson = (jsonData: any): any[] => {
+    try {
+      const table = jsonData.table;
+      if (!table || !table.rows || !table.cols) {
+        console.error('Invalid Google Sheets JSON structure');
+        return [];
+      }
+
+      const headers = table.cols.map((col: any) => col.label || col.id || '');
+      
+      const idIndex = headers.findIndex((h: string) => h.toLowerCase().includes('id'));
+      const titleIndex = headers.findIndex((h: string) => h.toLowerCase().includes('title'));
+      const excerptIndex = headers.findIndex((h: string) => h.toLowerCase().includes('excerpt'));
+      const fullContentIndex = headers.findIndex((h: string) => h.toLowerCase().includes('fullcontent') || h.toLowerCase().includes('full_content'));
+      const iconNameIndex = headers.findIndex((h: string) => h.toLowerCase().includes('iconname') || h.toLowerCase().includes('icon_name'));
+      const categoryIndex = headers.findIndex((h: string) => h.toLowerCase().includes('category'));
+
+      if (idIndex === -1 || titleIndex === -1 || excerptIndex === -1 || fullContentIndex === -1 || iconNameIndex === -1 || categoryIndex === -1) {
+        console.error('Required columns not found in Google Sheets');
+        return [];
+      }
+
+      const rawArticles: any[] = [];
+      
+      table.rows.forEach((row: any, index: number) => {
+        if (index === 0 && row.c && row.c[titleIndex] && 
+            row.c[titleIndex].v && 
+            row.c[titleIndex].v.toString().toLowerCase().includes('title')) {
+          return;
+        }
+
+        if (!row.c) return;
+
+        const id = row.c[idIndex]?.v?.toString() || '';
+        const title = row.c[titleIndex]?.v?.toString() || '';
+        const excerpt = row.c[excerptIndex]?.v?.toString() || '';
+        const fullContent = row.c[fullContentIndex]?.v?.toString() || '';
+        const iconName = row.c[iconNameIndex]?.v?.toString() || '';
+        const category = row.c[categoryIndex]?.v?.toString() || '';
+
+        if (id && title && excerpt && fullContent && iconName && category) {
+          rawArticles.push({
+            id: parseInt(id, 10),
+            title,
+            excerpt,
+            fullContent,
+            iconName,
+            category
+          });
+        }
+      });
+
+      return rawArticles;
+    } catch (error) {
+      console.error('Error parsing Google Sheets JSON:', error);
+      return [];
+    }
+  };
+
+  const processArticleContent = (rawContent: string): string => {
+    const lines = rawContent.split('\n');
+    let processedLines: string[] = [];
+    let inList = false;
+
+    lines.forEach((line) => {
+      const trimmedLine = line.trim();
+      const isListItem = line.startsWith('\t• ');
+
+      if (isListItem) {
+        if (!inList) {
+          processedLines.push('<ul>');
+          inList = true;
+        }
+        processedLines.push(`<li>${line.substring(3)}</li>`);
+      } else {
+        if (inList) {
+          processedLines.push('</ul>');
+          inList = false;
+        }
+        if (trimmedLine) {
+          processedLines.push(`<p>${line}</p>`);
+        } else {
+          processedLines.push(line);
+        }
+      }
+    });
+
+    if (inList) {
+      processedLines.push('</ul>');
+    }
+
+    return processedLines.join('\n');
+  };
+
+  useEffect(() => {
+    const fetchKnowledgeBaseArticles = async () => {
+      try {
+        setLoading(true);
+        setError(null);
+
+        const response = await fetch(
+          'https://docs.google.com/spreadsheets/d/1ypoRLuL0-k1RzsbQ_OEiYJZRZ8LfJF_lssq0vnyzH3A/gviz/tq?gid=0&tqx=out:json',
+          {
+            method: 'GET',
+            headers: {
+              'Accept': 'application/json',
+            },
+          }
+        );
+
+        if (!response.ok) {
+          throw new Error(`HTTP error! status: ${response.status}`);
+        }
+
+        const responseText = await response.text();
+        
+        const jsonStart = responseText.indexOf('{');
+        const jsonEnd = responseText.lastIndexOf('}');
+        let jsonString = '';
+        if (jsonStart !== -1 && jsonEnd !== -1 && jsonEnd > jsonStart) {
+          jsonString = responseText.substring(jsonStart, jsonEnd + 1);
+        } else {
+          console.error('Could not find valid JSON in responseText:', responseText);
+          throw new Error('Invalid JSON response from Google Sheets.');
+        }
+        const jsonData = JSON.parse(jsonString);
+        
+        const rawArticles = parseGoogleSheetsJson(jsonData);
+
+        const processedArticles: Article[] = rawArticles.map(article => ({
+          ...article,
+          icon: iconMap[article.iconName] || <BookOpen size={24} />,
+          fullContent: processArticleContent(article.fullContent)
+        }));
+        
+        setArticles(processedArticles);
+      } catch (e: any) {
+        console.error('Error fetching knowledge base articles:', e);
+        setError(e.message || 'Wystąpił błąd podczas ładowania artykułów');
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchKnowledgeBaseArticles();
+  }, []);
 
   const categories = [
     { name: "Wszystkie", value: "all" },
@@ -244,13 +275,42 @@ const KnowledgeBasePage: React.FC = () => {
       {/* Articles Grid */}
       <section className="py-20" style={{ backgroundColor: '#F5F5F5' }}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          {filteredArticles.length === 0 ? (
+          {loading && (
+            <div className="text-center">
+              <div className="inline-block animate-spin rounded-full h-8 w-8 border-b-2" style={{ borderColor: '#D4AF37' }}></div>
+              <p className="text-xl mt-4" style={{ color: '#0A1A2F' }}>
+                Ładowanie artykułów...
+              </p>
+            </div>
+          )}
+          
+          {error && (
+            <div className="text-center p-8 rounded-2xl shadow-xl border-4" style={{ backgroundColor: '#0A1A2F', borderColor: '#D4AF37' }}>
+              <p className="text-xl text-red-400 mb-4">
+                Błąd podczas ładowania artykułów
+              </p>
+              <p className="text-sm" style={{ color: '#F5F5F5' }}>
+                {error}
+              </p>
+              <button
+                onClick={() => window.location.reload()}
+                className="mt-4 px-6 py-2 rounded-lg border-2 transition-colors hover:bg-opacity-10 hover:bg-white"
+                style={{ borderColor: '#D4AF37', color: '#D4AF37' }}
+              >
+                Spróbuj ponownie
+              </button>
+            </div>
+          )}
+          
+          {!loading && !error && filteredArticles.length === 0 && (
             <div className="text-center p-8 rounded-2xl shadow-xl border-4" style={{ backgroundColor: '#0A1A2F', borderColor: '#D4AF37' }}>
               <p className="text-xl" style={{ color: '#F5F5F5' }}>
                 Brak artykułów spełniających kryteria wyszukiwania.
               </p>
             </div>
-          ) : (
+          )}
+          
+          {!loading && !error && filteredArticles.length > 0 && (
             <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
               {filteredArticles.map((article) => (
                 <div
@@ -264,13 +324,12 @@ const KnowledgeBasePage: React.FC = () => {
                   <h2 className="text-2xl font-bold mb-4 text-center" style={{ color: '#F5F5F5' }}>
                     {article.title}
                   </h2>
-                  {/* Added h-24 and overflow-hidden for consistent height */}
-                  <p className="text-lg leading-relaxed mb-6 text-center h-24 overflow-hidden" style={{ color: '#c' }}>
+                  <p className="text-lg leading-relaxed mb-6 text-center h-24 overflow-hidden" style={{ color: '#F5F5F5' }}>
                     {article.excerpt}
                   </p>
                   <div className="text-center">
                     <button
-                      onClick={() => handleReadMoreClick(article)} // Updated onClick handler
+                      onClick={() => handleReadMoreClick(article)}
                       className="inline-block font-bold py-3 px-6 rounded-lg text-md transition-all hover:-translate-y-1 duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl border-4"
                       style={{ backgroundColor: '#F5F5F5', borderColor: '#D4AF37', color: '#0A1A2F' }}
                     >
