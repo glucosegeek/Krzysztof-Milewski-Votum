@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { ArrowLeft } from 'lucide-react';
+import NewsArticleDetailModal from '../components/NewsArticleDetailModal';
 
 interface NewsArticle {
   id: string;
@@ -13,6 +14,8 @@ const NewsPage: React.FC = () => {
   const [newsArticles, setNewsArticles] = useState<NewsArticle[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+  const [showNewsArticleModal, setShowNewsArticleModal] = useState(false);
+  const [selectedNewsArticle, setSelectedNewsArticle] = useState<NewsArticle | null>(null);
 
   const parseGoogleSheetsJson = (jsonData: any): NewsArticle[] => {
     try {
@@ -225,6 +228,15 @@ const NewsPage: React.FC = () => {
     fetchNews();
   }, []);
 
+  const handleReadMoreClick = (article: NewsArticle) => {
+    setSelectedNewsArticle(article);
+    setShowNewsArticleModal(true);
+  };
+
+  const closeNewsArticleModal = () => {
+    setShowNewsArticleModal(false);
+    setSelectedNewsArticle(null);
+  };
 
 
   return (
@@ -293,7 +305,7 @@ const NewsPage: React.FC = () => {
               {newsArticles.map((article) => (
                 <div
                   key={article.id}
-                  className="p-8 rounded-2xl shadow-xl border-4 transition-all duration-300 hover:scale-105 hover:shadow-2xl cursor-pointer"
+                  className="p-8 rounded-2xl shadow-xl border-4"
                   style={{ backgroundColor: '#0A1A2F', borderColor: '#D4AF37' }}
                 >
                   <h2 className="text-3xl font-bold mb-4" style={{ color: '#F5F5F5' }}>
@@ -305,10 +317,19 @@ const NewsPage: React.FC = () => {
                     </p>
                   )}
                   <div 
-                    className="text-lg leading-relaxed news-article-content" 
+                    className="text-lg leading-relaxed news-article-content h-32 overflow-hidden" 
                     style={{ color: '#F5F5F5' }} 
                     dangerouslySetInnerHTML={{ __html: article.content }}
                   >
+                  </div>
+                  <div className="mt-6 text-center">
+                    <button
+                      onClick={() => handleReadMoreClick(article)}
+                      className="inline-block font-bold py-3 px-6 rounded-lg text-md transition-all hover:-translate-y-1 duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl border-4"
+                      style={{ backgroundColor: '#F5F5F5', borderColor: '#D4AF37', color: '#0A1A2F' }}
+                    >
+                      Czytaj więcej →
+                    </button>
                   </div>
                 </div>
               ))}
@@ -316,6 +337,11 @@ const NewsPage: React.FC = () => {
           )}
         </div>
       </section>
+
+      {/* News Article Detail Modal */}
+      {showNewsArticleModal && selectedNewsArticle && (
+        <NewsArticleDetailModal article={selectedNewsArticle} onClose={closeNewsArticleModal} />
+      )}
     </div>
   );
 };
