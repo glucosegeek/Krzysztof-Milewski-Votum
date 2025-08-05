@@ -1,53 +1,6 @@
 import React, { useEffect, useRef } from 'react';
 import { X } from 'lucide-react';
 
-/* Add this to src/index.css */
-.knowledge-base-article-content p {
-  margin-bottom: 1em; /* Space between paragraphs */
-}
-
-.knowledge-base-article-content ul,
-.knowledge-base-article-content ol {
-  list-style-position: inside; /* Keep bullet/number inside content flow */
-  margin-bottom: 1em; /* Space after lists */
-  padding-left: 1.5em; /* Indent lists */
-}
-
-.knowledge-base-article-content ul li {
-  list-style-type: disc; /* Default bullet for unordered lists */
-  margin-bottom: 0.5em; /* Space between list items */
-}
-
-.knowledge-base-article-content ol li {
-  list-style-type: decimal; /* Default numbers for ordered lists */
-  margin-bottom: 0.5em; /* Space between list items */
-}
-
-.knowledge-base-article-content strong {
-  color: #D4AF37; /* Apply your accent color to strong text */
-}
-
-.knowledge-base-article-content h1,
-.knowledge-base-article-content h2,
-.knowledge-base-article-content h3,
-.knowledge-base-article-content h4,
-.knowledge-base-article-content h5,
-.knowledge-base-article-content h6 {
-  margin-top: 1.5em; /* Space before headings */
-  margin-bottom: 0.8em; /* Space after headings */
-  font-weight: bold;
-  color: #F5F5F5; /* Ensure headings are visible */
-}
-
-.knowledge-base-article-content h2 {
-  font-size: 1.75em; /* Example size for h2 */
-}
-
-.knowledge-base-article-content h3 {
-  font-size: 1.5em; /* Example size for h3 */
-}
-
-
 interface Article {
   id: number;
   title: string;
