@@ -291,7 +291,7 @@ const KnowledgeBasePage: React.FC = () => {
             <h2 className="text-3xl font-bold mb-6" style={{ color: '#F5F5F5' }}>
               Nie znalazłeś odpowiedzi na swoje pytanie?
             </h2>
-            <p className="text-xl mb-8 max-w-2xl mx-auto leading-relaxed" style={{ color: '#0A1A2F' }}>
+            <p className="text-xl mb-8 max-w-2xl mx-auto leading-relaxed" style={{ color: '#F5F5F5' }}>
               Skontaktuj się z nami bezpośrednio. Każda sytuacja jest inna i wymaga indywidualnego podejścia. 
               Chętnie odpowiemy na wszystkie Twoje pytania podczas bezpłatnej konsultacji.
             </p>
