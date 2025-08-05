@@ -57,11 +57,17 @@ const ConsultationModal: React.FC = () => {
       newErrors.email = 'Nieprawidłowy format email.';
     }
 
-    // Basic phone number validation regex (adjust as needed for specific formats)
-    const phoneRegex = /^[+]?[(]?[0-9]{3}[)]?[-\s.]?[0-9]{3}[-\s.]?[0-9]{4,6}$/im;
-    if (!phone.trim() || phone.trim() === '+48') { // Check for empty or just "+48"
+    // Updated regex for Polish phone numbers:
+    // Allows for +48 prefix (optional), followed by 9 digits,
+    // with optional spaces or hyphens between groups of 3 digits.
+    const phoneRegex = /^(?:\+48)?(?:[ -]?\d{3}){3}$/;
+    
+    // Clean the phone number for validation by removing spaces and hyphens
+    const cleanedPhone = phone.replace(/[\s-]/g, '');
+
+    if (!cleanedPhone.trim() || cleanedPhone.trim() === '+48') { // Check for empty or just "+48"
       newErrors.phone = 'Numer telefonu jest obowiązkowy.';
-    } else if (!phoneRegex.test(phone)) {
+    } else if (!phoneRegex.test(cleanedPhone)) { // Validate the cleaned number
       newErrors.phone = 'Nieprawidłowy format numeru telefonu.';
     }
 
