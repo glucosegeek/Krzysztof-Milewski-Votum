@@ -288,7 +288,7 @@ const KnowledgeBasePage: React.FC = () => {
       <section className="py-20" style={{ backgroundColor: '#0A1A2F' }}>
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <div className="p-12 rounded-2xl shadow-xl border-4" style={{ backgroundColor: '#0A1A2F', borderColor: '#D4AF37' }}>
-            <h2 className="text-3xl font-bold mb-6" style={{ color: '#<div className="p-12 rounded-2xl shadow-xl border-4" style={{ backgroundColor: '#0A1A2F', borderColor: '#D4AF37' }}>' }}>
+            <h2 className="text-3xl font-bold mb-6" style={{ color: '#F5F5F5' }}>
               Nie znalazłeś odpowiedzi na swoje pytanie?
             </h2>
             <p className="text-xl mb-8 max-w-2xl mx-auto leading-relaxed" style={{ color: '#0A1A2F' }}>
