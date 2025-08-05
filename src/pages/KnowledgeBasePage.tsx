@@ -26,7 +26,7 @@ const KnowledgeBasePage: React.FC = () => {
     {
       id: 1,
       title: "Kredyty frankowe – co to jest i dlaczego są problemem?",
-      excerpt: "Kredyty frankowe to kredyty hipoteczne udzielane w walucie szwajcarskiej (CHF). Ich popularność w Polsce wynikała z niższych stóp procentowych w Szwajcarii. Jednak gwałtowny wzrost kursu franka szwajcarskiego spowodował, że raty kredytów stały się dla wielu kredytobiorców niebotycznie wysokie, a zadłużenie znacznie przewyższało wartość nieruchomości. Wiele umów zawierało klauzule abuzywne, co stało się podstawą do dochodzenia roszczeń w sądzie.",
+      excerpt: "Kredyty frankowe to hipoteczne kredyty w walutach obcych, które stały się problemem z powodu wzrostu kursu walut i nieuczciwych klauzul w umowach. Doprowadziło to do wysokich rat i zadłużenia, stając się podstawą do roszczeń sądowych.",
       fullContent: `
         <p>Kredyty frankowe to rodzaj kredytów hipotecznych, które były udzielane w Polsce w latach 2004-2011, głównie w walucie szwajcarskiej (CHF), ale także w euro (EUR) czy dolarach (USD). Ich popularność wynikała z niższych stóp procentowych w Szwajcarii w porównaniu do Polski, co przekładało się na niższe początkowe raty.</p>
         <p><strong>Dlaczego stały się problemem?</strong></p>
@@ -44,7 +44,7 @@ const KnowledgeBasePage: React.FC = () => {
     {
       id: 2,
       title: "Jak unieważnić umowę kredytu frankowego?",
-      excerpt: "Unieważnienie umowy kredytu frankowego jest procesem sądowym, który ma na celu stwierdzenie nieważności całej umowy lub usunięcie z niej nieuczciwych klauzul. Najczęściej stosowaną podstawą jest tzw. odfrankowienie, czyli przeliczenie kredytu na złotówki z zachowaniem oprocentowania LIBOR/SARON, lub całkowite unieważnienie umowy, co skutkuje zwrotem wszystkich wpłaconych rat.",
+      excerpt: "Unieważnienie umowy kredytu frankowego to proces sądowy mający na celu stwierdzenie nieważności umowy lub usunięcie nieuczciwych klauzul. Może to być odfrankowienie (przeliczenie na PLN) lub całkowite unieważnienie umowy ze zwrotem wpłaconych rat.",
       fullContent: `
         <p>Unieważnienie umowy kredytu frankowego to proces prawny, który ma na celu wyeliminowanie nieuczciwych zapisów z umowy lub stwierdzenie jej całkowitej nieważności. Istnieją dwie główne ścieżki:</p>
         <ul>
@@ -67,7 +67,7 @@ const KnowledgeBasePage: React.FC = () => {
     {
       id: 3,
       title: "Koszty procesu sądowego o kredyt frankowy – ile to kosztuje?",
-      excerpt: "Koszty procesu sądowego o kredyt frankowy mogą być znaczące, ale w wielu kancelariach stosuje się model wynagrodzenia 'success fee', gdzie główna część honorarium jest płatna dopiero po wygranej sprawie. Do kosztów zalicza się opłata sądowa od pozwu, koszty zastępstwa procesowego oraz ewentualne koszty biegłego. W przypadku wygranej, większość tych kosztów pokrywa bank.",
+      excerpt: "Koszty procesu sądowego o kredyt frankowy mogą być znaczące. Wiele kancelarii stosuje model 'success fee', gdzie honorarium jest płatne po wygranej sprawie. Główne koszty to opłata sądowa, zastępstwo procesowe i ewentualnie biegły. W przypadku wygranej, większość kosztów pokrywa bank.",
       fullContent: `
         <p>Koszty związane z procesem sądowym o kredyt frankowy mogą wydawać się wysokie, jednak wiele kancelarii, w tym Votum Consumer Care, oferuje elastyczne modele rozliczeń, które minimalizują ryzyko finansowe dla kredytobiorcy.</p>
         <p><strong>Główne składniki kosztów:</strong></p>
@@ -86,7 +86,7 @@ const KnowledgeBasePage: React.FC = () => {
     {
       id: 4,
       title: "Umowy SKD – co to jest i jak się przed nimi bronić?",
-      excerpt: "Umowy Sprzedaży Konsumenckiej na Odległość (SKD) to umowy zawierane poza lokalem przedsiębiorstwa, np. przez telefon, internet. Często dotyczą produktów finansowych, ubezpieczeń czy usług telekomunikacyjnych. Problemem są nieuczciwe praktyki sprzedażowe, ukryte koszty czy brak informacji o prawie do odstąpienia od umowy. Konsumenci mają prawo do odstąpienia od takiej umowy w ciągu 14 dni.",
+      excerpt: "Umowy SKD to umowy zawierane na odległość (telefon, internet). Problemy to nieuczciwe praktyki, ukryte koszty i brak informacji o prawie do odstąpienia. Konsumenci mają prawo odstąpić od umowy w ciągu 14 dni.",
       fullContent: `
         <p>Umowy Sprzedaży Konsumenckiej na Odległość (SKD) to kontrakty zawierane z konsumentem bez jednoczesnej fizycznej obecności obu stron, np. przez telefon, internet, pocztę, czy poza lokalem przedsiębiorstwa (np. podczas prezentacji handlowych w hotelach).</p>
         <p><strong>Najczęstsze problemy z umowami SKD:</strong></p>
@@ -111,7 +111,7 @@ const KnowledgeBasePage: React.FC = () => {
     {
       id: 5,
       title: "Rola Votum S.A. w sprawach frankowych i SKD",
-      excerpt: "Votum S.A. to jedna z największych firm w Polsce specjalizujących się w dochodzeniu roszczeń od banków w sprawach kredytów frankowych. Współpracuje z doświadczonymi kancelariami prawnymi, oferując kompleksowe wsparcie od analizy umowy, przez przygotowanie dokumentacji, aż po reprezentację w sądzie. Działają w oparciu o model 'success fee', co minimalizuje ryzyko finansowe dla klienta.",
+      excerpt: "Votum S.A. to wiodąca firma w dochodzeniu roszczeń od banków w sprawach kredytów frankowych i umów SKD. Współpracuje z kancelariami prawnymi, oferując kompleksowe wsparcie od analizy po reprezentację sądową. Działa w oparciu o model 'success fee', minimalizując ryzyko finansowe dla klienta.",
       fullContent: `
         <p>Votum S.A. jest liderem na polskim rynku w zakresie dochodzenia roszczeń od instytucji finansowych, w szczególności w sprawach dotyczących kredytów frankowych oraz umów Sprzedaży Konsumenckiej na Odległość (SKD).</p>
         <p><strong>Jak Votum S.A. wspiera klientów:</strong></p>
@@ -131,7 +131,7 @@ const KnowledgeBasePage: React.FC = () => {
     {
       id: 6,
       title: "Najnowsze orzecznictwo TSUE i Sądu Najwyższego w sprawach frankowych",
-      excerpt: "Orzeczenia Trybunału Sprawiedliwości Unii Europejskiej (TSUE) oraz Sądu Najwyższego w Polsce mają kluczowe znaczenie dla spraw frankowych. Potwierdzają one abuzywny charakter wielu klauzul w umowach kredytowych i umacniają pozycję kredytobiorców. Najnowsze wyroki często skutkują unieważnieniem umów i zwrotem nadpłaconych kwot.",
+      excerpt: "Orzeczenia TSUE i Sądu Najwyższego są kluczowe dla spraw frankowych. Potwierdzają abuzywny charakter klauzul i umacniają pozycję kredytobiorców. Najnowsze wyroki często skutkują unieważnieniem umów i zwrotem nadpłaconych kwot.",
       fullContent: `
         <p>Orzecznictwo Trybunału Sprawiedliwości Unii Europejskiej (TSUE) oraz Sądu Najwyższego w Polsce odgrywa fundamentalną rolę w kształtowaniu linii orzeczniczej w sprawach kredytów frankowych. Te wyroki mają charakter wiążący i stanowią podstawę dla sądów krajowych.</p>
         <p><strong>Kluczowe orzeczenia TSUE:</strong></p>
@@ -264,7 +264,8 @@ const KnowledgeBasePage: React.FC = () => {
                   <h2 className="text-2xl font-bold mb-4 text-center" style={{ color: '#F5F5F5' }}>
                     {article.title}
                   </h2>
-                  <p className="text-lg leading-relaxed mb-6 text-center" style={{ color: '#F5F5F5' }}>
+                  {/* Added h-24 and overflow-hidden for consistent height */}
+                  <p className="text-lg leading-relaxed mb-6 text-center h-24 overflow-hidden" style={{ color: '#F5F5F5' }}>
                     {article.excerpt}
                   </p>
                   <div className="text-center">
