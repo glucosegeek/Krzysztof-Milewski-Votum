@@ -80,7 +80,7 @@ const ArticleDetailModal: React.FC<ArticleDetailModalProps> = ({ article, onClos
 
         <div className="text-lg leading-relaxed space-y-4" style={{ color: '#F5F5F5' }}>
           {/* Using dangerouslySetInnerHTML for content that might contain HTML tags */}
-          <div dangerouslySetInnerHTML={{ __html: article.fullContent }} />
+          <div className="knowledge-base-article-content" dangerouslySetInnerHTML={{ __html: article.fullContent }} />
         </div>
       </div>
     </div>
