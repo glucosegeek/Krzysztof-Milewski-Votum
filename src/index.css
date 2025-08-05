@@ -24,6 +24,11 @@
 .news-article-content {
   white-space: pre-wrap; /* This will preserve newlines and spaces */
 }
+
+.knowledge-base-article-content {
+  white-space: pre-wrap; /* This will preserve newlines and spaces */
+}
+
 .knowledge-base-article-content p {
   margin-bottom: 1em; /* Space between paragraphs */
 }
