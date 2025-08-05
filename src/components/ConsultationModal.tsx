@@ -71,8 +71,8 @@ const ConsultationModal: React.FC = () => {
   const handleSubmit = (e: React.FormEvent) => {
   e.preventDefault();
   if (validate()) {
-    // In a real application, you would send this data to your backend
-    console.log('Form Data:', { name, email, phone, message }); // Add phone here
+    console.log('Form Data:', { name, email, phone, message });
+    showSuccessMessage = true;
     // Redirect to Calendly
     window.open('https://calendly.com/krzysztof-milewski-dsa/30-minutowe-spotkanie', '_blank');
     closeModal(); // Close the modal after redirection
