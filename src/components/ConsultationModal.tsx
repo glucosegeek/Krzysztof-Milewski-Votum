@@ -192,7 +192,17 @@ const ConsultationModal: React.FC = () => {
                   id="modal-phone"
                   name="phone"
                   value={phone}
-                  onChange={(e) => setPhone(e.target.value)}
+                  onChange={(e) => {
+                    const prefix = '+48 ';
+                    let newValue = e.target.value;
+
+                    // If the new value doesn't start with the prefix, or is shorter than the prefix,
+                    // reset it to the prefix.
+                    if (!newValue.startsWith(prefix) || newValue.length < prefix.length) {
+                      newValue = prefix;
+                    }
+                    setPhone(newValue);
+                  }}
                   className="w-full px-4 py-3 rounded-lg focus:outline-none focus:ring-2"
                   style={{
                     backgroundColor: 'rgba(245, 245, 245, 0.1)',
