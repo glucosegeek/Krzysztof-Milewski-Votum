@@ -7,10 +7,9 @@ import ArticleDetailModal from '../components/ArticleDetailModal';
 interface Article {
   id: number;
   title: string;
-  excerpt: string;
   fullContent: string;
-  icon: React.ReactNode;
   iconName: string;
+  icon: React.ReactNode;
   category: string;
 }
 
@@ -48,12 +47,11 @@ const KnowledgeBasePage: React.FC = () => {
       
       const idIndex = headers.findIndex((h: string) => h.toLowerCase().includes('id'));
       const titleIndex = headers.findIndex((h: string) => h.toLowerCase().includes('title'));
-      const excerptIndex = headers.findIndex((h: string) => h.toLowerCase().includes('excerpt'));
       const fullContentIndex = headers.findIndex((h: string) => h.toLowerCase().includes('fullcontent') || h.toLowerCase().includes('full_content'));
-      const iconNameIndex = headers.findIndex((h: string) => h.toLowerCase().includes('iconname') || h.toLowerCase().includes('icon_name'));
+      const iconIndex = headers.findIndex((h: string) => h.toLowerCase().includes('icon'));
       const categoryIndex = headers.findIndex((h: string) => h.toLowerCase().includes('category'));
 
-      if (idIndex === -1 || titleIndex === -1 || excerptIndex === -1 || fullContentIndex === -1 || iconNameIndex === -1 || categoryIndex === -1) {
+      if (idIndex === -1 || titleIndex === -1 || fullContentIndex === -1 || iconIndex === -1 || categoryIndex === -1) {
         console.error('Required columns not found in Google Sheets');
         return [];
       }
@@ -71,16 +69,14 @@ const KnowledgeBasePage: React.FC = () => {
 
         const id = row.c[idIndex]?.v?.toString() || '';
         const title = row.c[titleIndex]?.v?.toString() || '';
-        const excerpt = row.c[excerptIndex]?.v?.toString() || '';
         const fullContent = row.c[fullContentIndex]?.v?.toString() || '';
-        const iconName = row.c[iconNameIndex]?.v?.toString() || '';
+        const iconName = row.c[iconIndex]?.v?.toString() || '';
         const category = row.c[categoryIndex]?.v?.toString() || '';
 
-        if (id && title && excerpt && fullContent && iconName && category) {
+        if (id && title && fullContent && iconName && category) {
           rawArticles.push({
             id: parseInt(id, 10),
             title,
-            excerpt,
             fullContent,
             iconName,
             category
@@ -193,7 +189,7 @@ const KnowledgeBasePage: React.FC = () => {
 
   const filteredArticles = articles.filter((article) => {
     const matchesSearch = article.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
-                          article.excerpt.toLowerCase().includes(searchTerm.toLowerCase());
+                          article.fullContent.toLowerCase().includes(searchTerm.toLowerCase());
     const matchesCategory = selectedCategory === 'all' || article.category === selectedCategory;
     return matchesSearch && matchesCategory;
   });
@@ -324,9 +320,11 @@ const KnowledgeBasePage: React.FC = () => {
                   <h2 className="text-2xl font-bold mb-4 text-center" style={{ color: '#F5F5F5' }}>
                     {article.title}
                   </h2>
-                  <p className="text-lg leading-relaxed mb-6 text-center h-24 overflow-hidden" style={{ color: '#F5F5F5' }}>
-                    {article.excerpt}
-                  </p>
+                  <div 
+                    className="text-lg leading-relaxed mb-6 text-center h-24 overflow-hidden knowledge-base-article-content" 
+                    style={{ color: '#F5F5F5' }}
+                    dangerouslySetInnerHTML={{ __html: article.fullContent }}
+                  />
                   <div className="text-center">
                     <button
                       onClick={() => handleReadMoreClick(article)}
