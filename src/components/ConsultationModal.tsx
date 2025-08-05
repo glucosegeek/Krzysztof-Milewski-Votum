@@ -7,7 +7,7 @@ const ConsultationModal: React.FC = () => {
   const { isModalOpen, closeModal } = useConsultationModal();
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
-  const [phone, setPhone] = useState(''); // Add this line
+  const [phone, setPhone] = useState('+48');
   const [message, setMessage] = useState('');
   const [privacyConsent, setPrivacyConsent] = useState(false);
   const [errors, setErrors] = useState<{ name?: string; email?: string; phone?: string; privacyConsent?: string }>({});
