@@ -12,7 +12,8 @@ const ConsultationModal: React.FC = () => {
   const [privacyConsent, setPrivacyConsent] = useState(false);
   const [errors, setErrors] = useState<{ name?: string; email?: string; phone?: string; privacyConsent?: string }>({});
   const modalRef = useRef<HTMLDivElement>(null);
-  
+  const [showSuccessMessage, setShowSuccessMessage] = useState(false);
+
 
   useEffect(() => {
     if (isModalOpen) {
