@@ -30,13 +30,15 @@
 
 .knowledge-base-article-content ul,
 .knowledge-base-article-content ol {
-  list-style-position: none; /* Keep bullet/number inside content flow */
+  list-style: none; /* Keep bullet/number inside content flow */
   margin-bottom: 1em; /* Space after lists */
   padding-left: 0; /* Indent lists */
 }
 
 .knowledge-base-article-content ul li {
   list-style-type: disc; /* Default bullet for unordered lists */
+  padding-left: 1.5em;
+  position: relative;
   margin-bottom: 0.5em; /* Space between list items */
 }
 
@@ -44,6 +46,16 @@
   list-style-type: decimal; /* Default numbers for ordered lists */
   margin-bottom: 0.5em; /* Space between list items */
 }
+
+.knowledge-base-article-content ul li::before {
+  content: '•'; /* Custom bullet character */
+  color: #D4AF37; /* Gold color for bullet */
+  position: absolute;
+  left: 0;
+  font-size: 1.2em; /* Make bullet slightly larger */
+  line-height: inherit; /* Align with text */
+}
+
 
 .knowledge-base-article-content strong {
   color: #D4AF37; /* Apply your accent color to strong text */
