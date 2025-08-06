@@ -4,7 +4,7 @@ import { useConsultationModal } from '../context/ConsultationModalContext';
 import { Link } from 'react-router-dom';
 
 const ConsultationModal: React.FC = () => {
-  const { isModalOpen, closeModal } = useConsultationModal();
+  const { isModalOpen, closeModal, submittedData } = useConsultationModal();
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [phone, setPhone] = useState('+48 '); // Default area code
