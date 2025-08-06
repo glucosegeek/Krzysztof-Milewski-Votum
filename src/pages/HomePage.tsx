@@ -503,15 +503,6 @@ Nie ryzykujesz nic – możesz tylko zyskać.</li>
                 {errors.privacyConsent && <p className="text-red-400 text-sm mt-1">{errors.privacyConsent}</p>}
               </div>
 
-              <div className="text-center">
-                <button
-                  type="submit"
-                  className="font-bold py-4 px-8 rounded-lg text-lg transition-all hover:-translate-y-2 duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl border-4"
-                  style={{ backgroundColor: '#F5F5F5', borderColor: '#D4AF37', color: '#0A1A2F' }}
-                >
-                  Bezpłatna konsultacja
-                </button>
-              </div>
             </form>
             
             <div className="grid lg:grid-cols-1 gap-12 mt-12">         
