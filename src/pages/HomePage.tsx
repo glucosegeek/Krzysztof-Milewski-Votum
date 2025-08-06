@@ -106,58 +106,6 @@ const [openStep, setOpenStep] = useState<number | null>(null);
     return Object.keys(newErrors).length === 0;
   };
   
-  useEffect(() => {
-  if (isModalOpen) {
-    document.body.style.overflow = 'hidden';
-    if (submittedData) { // If data was passed from HomePage, immediately show success
-      setShowSuccessMessage(true);
-      // Trigger Calendly redirection after a short delay
-      setTimeout(() => {
-        window.open('https://calendly.com/krzysztof-milewski-dsa/30-minutowe-spotkanie', '_blank');
-        closeModal();
-      }, 2000); // Show message for 2 seconds
-    } else { // If no data was passed (opened from hero button), show the form
-      setShowSuccessMessage(false); // Ensure form is shown
-      // Reset internal form fields
-      setName('');
-      setEmail('');
-      setPhone('+48 ');
-      setMessage('');
-      setPrivacyConsent(false);
-      setErrors({});
-    }
-    // Focus the first input when modal opens for accessibility (only if form is shown)
-    if (!submittedData && modalRef.current) {
-      const firstInput = modalRef.current.querySelector('input, textarea') as HTMLElement;
-      if (firstInput) {
-        firstInput.focus();
-      }
-    }
-  } else {
-    document.body.style.overflow = ''; // Restore scrolling
-    // Reset all states when modal closes
-    setShowSuccessMessage(false); // Crucial reset
-    setName('');
-    setEmail('');
-    setPhone('+48 ');
-    setMessage('');
-    setPrivacyConsent(false);
-    setErrors({});
-  }
-
-  const handleEscape = (event: KeyboardEvent) => {
-    if (event.key === 'Escape') {
-      closeModal();
-    }
-  };
-
-  document.addEventListener('keydown', handleEscape);
-  return () => {
-    document.removeEventListener('keydown', handleEscape);
-  };
-}, [isModalOpen, closeModal, submittedData]); // Add submittedData to dependency array
-
-
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
     

@@ -12,15 +12,23 @@ const ConsultationModal: React.FC = () => {
   const [privacyConsent, setPrivacyConsent] = useState(false);
   const [errors, setErrors] = useState<{ name?: string; email?: string; phone?: string; privacyConsent?: string }>({});
   const modalRef = useRef<HTMLDivElement>(null);
-  const [showSuccessMessage, setShowSuccessMessage] = useState(false); // State for success message
 
   useEffect(() => {
     if (isModalOpen) {
       document.body.style.overflow = 'hidden'; // Prevent scrolling background
+      if (submittedData) {
+        // If data was passed from HomePage, trigger Calendly redirection after a short delay
+        setTimeout(() => {
+          window.open('https://calendly.com/krzysztof-milewski-dsa/30-minutowe-spotkanie', '_blank');
+          closeModal();
+        }, 2000); // Show message for 2 seconds
+      }
       // Focus the first input when modal opens for accessibility
-      const firstInput = modalRef.current?.querySelector('input, textarea') as HTMLElement;
-      if (firstInput) {
-        firstInput.focus();
+      if (!submittedData) {
+        const firstInput = modalRef.current?.querySelector('input, textarea') as HTMLElement;
+        if (firstInput) {
+          firstInput.focus();
+        }
       }
     } else {
       document.body.style.overflow = ''; // Restore scrolling
@@ -31,7 +39,6 @@ const ConsultationModal: React.FC = () => {
       setMessage('');
       setPrivacyConsent(false); // Reset privacy consent
       setErrors({});
-      setShowSuccessMessage(false); // Reset success message state
     }
 
     const handleEscape = (event: KeyboardEvent) => {
@@ -44,7 +51,7 @@ const ConsultationModal: React.FC = () => {
     return () => {
       document.removeEventListener('keydown', handleEscape);
     };
-  }, [isModalOpen, closeModal]);
+  }, [isModalOpen, closeModal, submittedData]);
 
   const validate = () => {
     const newErrors: { name?: string; email?: string; phone?: string; privacyConsent?: string } = {};
@@ -84,15 +91,8 @@ const ConsultationModal: React.FC = () => {
       console.log('Form Data:', { name, email, phone, message });
       
       // Simulate sending data (in a real app, you'd send to a backend/Supabase Edge Function here)
-      // For now, we just show the success message and then redirect/close.
-
-      setShowSuccessMessage(true); // Show success message
-
-      // Delay redirection and modal closure to allow user to see the success message
-      setTimeout(() => {
-        window.open('https://calendly.com/krzysztof-milewski-dsa/30-minutowe-spotkanie', '_blank');
-        closeModal(); // Close the modal after redirection
-      }, 2000); // Show message for 2 seconds
+      // Trigger the same flow as when data is passed from HomePage
+      openModal({ name, email, phone, message, privacyConsent });
     }
   };
 
@@ -123,8 +123,8 @@ const ConsultationModal: React.FC = () => {
           <X size={24} />
         </button>
 
-        {showSuccessMessage ? (
-          <div className="text-center py-12 animate-fade-in"> {/* Added animate-fade-in */}
+        {submittedData ? (
+          <div className="text-center py-12">
             <h2 className="text-3xl font-bold mb-4" style={{ color: '#F5F5F5' }}>
               Wiadomość została wysłana!
             </h2>
