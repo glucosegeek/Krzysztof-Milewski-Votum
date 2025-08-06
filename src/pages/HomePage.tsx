@@ -381,138 +381,140 @@ Nie ryzykujesz nic – możesz tylko zyskać.</li>
       {/* Contact */}
       <section id="contact-section" className="py-20" style={{ backgroundColor: '#0A1A2F', color: '#F5F5F5' }}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="max-w-4xl mx-auto">
-            <div className="text-center mb-12">
-              <h2 className="text-4xl font-bold mb-4" style={{ color: '#F5F5F5' }}>
-                Porozmawiajmy o Twojej umowie kredytowej
-              </h2>
-              <p className="text-xl" style={{ color: '#F5F5F5' }}>
-                Rozpocznij swoją drogę do poprawy sytuacji finansowej od bezpłatnej konsultacji
-              </p>
+          <div className="max-w-4xl mx-auto text-center mb-12">
+            <h2 className="text-4xl font-bold mb-4" style={{ color: '#F5F5F5' }}>
+              Porozmawiajmy o Twojej umowie kredytowej
+            </h2>
+            <p className="text-xl" style={{ color: '#F5F5F5' }}>
+              Rozpocznij swoją drogę do poprawy sytuacji finansowej od bezpłatnej konsultacji
+            </p>
+          </div>
+          
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 max-w-4xl mx-auto">
+            <div>
+              <form onSubmit={handleSubmit} className="space-y-6">
+                <div className="grid md:grid-cols-2 gap-6">
+                  <div>
+                    <label htmlFor="name" className="block text-sm font-medium mb-2" style={{ color: '#F5F5F5' }}>
+                      Imię i nazwisko <span style={{ color: '#D4AF37' }}>*</span>
+                    </label>
+                    <input
+                      type="text"
+                      id="name"
+                      name="name"
+                      value={formData.name}
+                      onChange={handleInputChange}
+                      className="w-full px-4 py-3 rounded-lg focus:outline-none focus:ring-2"
+                      style={{
+                        backgroundColor: 'rgba(245, 245, 245, 0.1)',
+                        border: '1px solid rgba(245, 245, 245, 0.2)',
+                        color: '#F5F5F5',
+                        '--tw-ring-color': '#D4AF37',
+                      }}
+                      placeholder="Twoje imię i nazwisko"
+                      required
+                    />
+                    {errors.name && <p className="text-red-400 text-sm mt-1">{errors.name}</p>}
+                  </div>
+
+                  <div>
+                    <label htmlFor="email" className="block text-sm font-medium mb-2" style={{ color: '#F5F5F5' }}>
+                      Email <span style={{ color: '#D4AF37' }}>*</span>
+                    </label>
+                    <input
+                      type="email"
+                      id="email"
+                      name="email"
+                      value={formData.email}
+                      onChange={handleInputChange}
+                      className="w-full px-4 py-3 rounded-lg focus:outline-none focus:ring-2"
+                      style={{
+                        backgroundColor: 'rgba(245, 245, 245, 0.1)',
+                        border: '1px solid rgba(245, 245, 245, 0.2)',
+                        color: '#F5F5F5',
+                        '--tw-ring-color': '#D4AF37',
+                      }}
+                      placeholder="Twój adres email"
+                      required
+                    />
+                    {errors.email && <p className="text-red-400 text-sm mt-1">{errors.email}</p>}
+                  </div>
+                </div>
+
+                <div>
+                  <label htmlFor="phone" className="block text-sm font-medium mb-2" style={{ color: '#F5F5F5' }}>
+                    Numer telefonu <span style={{ color: '#D4AF37' }}>*</span>
+                  </label>
+                  <input
+                    type="tel"
+                    id="phone"
+                    name="phone"
+                    value={formData.phone}
+                    onChange={handleInputChange}
+                    className="w-full px-4 py-3 rounded-lg focus:outline-none focus:ring-2"
+                    style={{
+                      backgroundColor: 'rgba(245, 245, 245, 0.1)',
+                      border: '1px solid rgba(245, 245, 245, 0.2)',
+                      color: '#F5F5F5',
+                      '--tw-ring-color': '#D4AF37',
+                    }}
+                    placeholder="Twój numer telefonu"
+                    required
+                  />
+                  {errors.phone && <p className="text-red-400 text-sm mt-1">{errors.phone}</p>}
+                </div>
+
+                <div>
+                  <label htmlFor="message" className="block text-sm font-medium mb-2" style={{ color: '#F5F5F5' }}>
+                    Wiadomość (opcjonalnie)
+                  </label>
+                  <textarea
+                    id="message"
+                    name="message"
+                    value={formData.message}
+                    onChange={handleInputChange}
+                    rows={4}
+                    className="w-full px-4 py-3 rounded-lg focus:outline-none focus:ring-2"
+                    style={{
+                      backgroundColor: 'rgba(245, 245, 245, 0.1)',
+                      border: '1px solid rgba(245, 245, 245, 0.2)',
+                      color: '#F5F5F5',
+                      '--tw-ring-color': '#D4AF37',
+                    }}
+                    placeholder="Krótko opisz swoją sprawę (opcjonalnie)"
+                  ></textarea>
+                </div>
+
+                <div className="mb-6">
+                  <label className="flex items-start text-sm font-medium w-full" style={{ color: '#F5F5F5' }}>
+                    <input
+                      type="checkbox"
+                      id="privacy-consent"
+                      name="privacyConsent"
+                      checked={privacyConsent}
+                      onChange={(e) => setPrivacyConsent(e.target.checked)}
+                      className="mr-2 mt-1 flex-shrink-0"
+                      style={{ accentColor: '#D4AF37' }}
+                      required
+                    />
+                    <span className="leading-relaxed flex-1">
+                      Wyrażam zgodę na przetwarzanie moich danych osobowych poprzez Krzysztof Milewski zgodnie z Rozporządzeniem Parlamentu Europejskiego I Rady (UE) 2016/679 z dnia 27 kwietnia 2016r. w sprawie ochrony osób fizycznych w związku z przetwarzaniem danych osobowych i w sprawie swobodnego przepływu takich danych oraz uchylenia dyrektywy 95/46/WE (ogólne rozporządzenie o ochronie danych) oraz zapoznałem/am się z <Link to="/privacy-policy" className="text-yellow-300 underline">informacjami dotyczącymi przetwarzania danych osobowych</Link>. <span style={{ color: '#D4AF37' }}>*</span>
+                    </span>
+                  </label>
+                  {errors.privacyConsent && <p className="text-red-400 text-sm mt-1">{errors.privacyConsent}</p>}
+                </div>
+                
+                <button
+                  type="submit"
+                  className="w-full font-bold py-4 px-8 rounded-lg text-lg transition-all hover:-translate-y-1 duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl border-4 active:scale-95 active:shadow-inner"
+                  style={{ backgroundColor: '#F5F5F5', borderColor: '#D4AF37', color: '#0A1A2F' }}
+                >
+                  Umów bezpłatną konsultację
+                </button>
+              </form>
             </div>
             
-            <form onSubmit={handleSubmit} className="max-w-2xl mx-auto mt-12 space-y-6">
-              <div className="grid md:grid-cols-2 gap-6">
-                <div>
-                  <label htmlFor="name" className="block text-sm font-medium mb-2" style={{ color: '#F5F5F5' }}>
-                    Imię i nazwisko <span style={{ color: '#D4AF37' }}>*</span>
-                  </label>
-                  <input
-                    type="text"
-                    id="name"
-                    name="name"
-                    value={formData.name}
-                    onChange={handleInputChange}
-                    className="w-full px-4 py-3 rounded-lg focus:outline-none focus:ring-2"
-                    style={{
-                      backgroundColor: 'rgba(245, 245, 245, 0.1)',
-                      border: '1px solid rgba(245, 245, 245, 0.2)',
-                      color: '#F5F5F5',
-                      '--tw-ring-color': '#D4AF37',
-                    }}
-                    placeholder="Twoje imię i nazwisko"
-                    required
-                  />
-                  {errors.name && <p className="text-red-400 text-sm mt-1">{errors.name}</p>}
-                </div>
-
-                <div>
-                  <label htmlFor="email" className="block text-sm font-medium mb-2" style={{ color: '#F5F5F5' }}>
-                    Email <span style={{ color: '#D4AF37' }}>*</span>
-                  </label>
-                  <input
-                    type="email"
-                    id="email"
-                    name="email"
-                    value={formData.email}
-                    onChange={handleInputChange}
-                    className="w-full px-4 py-3 rounded-lg focus:outline-none focus:ring-2"
-                    style={{
-                      backgroundColor: 'rgba(245, 245, 245, 0.1)',
-                      border: '1px solid rgba(245, 245, 245, 0.2)',
-                      color: '#F5F5F5',
-                      '--tw-ring-color': '#D4AF37',
-                    }}
-                    placeholder="Twój adres email"
-                    required
-                  />
-                  {errors.email && <p className="text-red-400 text-sm mt-1">{errors.email}</p>}
-                </div>
-              </div>
-
-              <div>
-                <label htmlFor="phone" className="block text-sm font-medium mb-2" style={{ color: '#F5F5F5' }}>
-                  Numer telefonu <span style={{ color: '#D4AF37' }}>*</span>
-                </label>
-                <input
-                  type="tel"
-                  id="phone"
-                  name="phone"
-                  value={formData.phone}
-                  onChange={handleInputChange}
-                  className="w-full px-4 py-3 rounded-lg focus:outline-none focus:ring-2"
-                  style={{
-                    backgroundColor: 'rgba(245, 245, 245, 0.1)',
-                    border: '1px solid rgba(245, 245, 245, 0.2)',
-                    color: '#F5F5F5',
-                    '--tw-ring-color': '#D4AF37',
-                  }}
-                  placeholder="Twój numer telefonu"
-                  required
-                />
-                {errors.phone && <p className="text-red-400 text-sm mt-1">{errors.phone}</p>}
-              </div>
-
-              <div>
-                <label htmlFor="message" className="block text-sm font-medium mb-2" style={{ color: '#F5F5F5' }}>
-                  Wiadomość (opcjonalnie)
-                </label>
-                <textarea
-                  id="message"
-                  name="message"
-                  value={formData.message}
-                  onChange={handleInputChange}
-                  rows={4}
-                  className="w-full px-4 py-3 rounded-lg focus:outline-none focus:ring-2"
-                  style={{
-                    backgroundColor: 'rgba(245, 245, 245, 0.1)',
-                    border: '1px solid rgba(245, 245, 245, 0.2)',
-                    color: '#F5F5F5',
-                    '--tw-ring-color': '#D4AF37',
-                  }}
-                  placeholder="Krótko opisz swoją sprawę (opcjonalnie)"
-                ></textarea>
-              </div>
-
-              <div className="mb-6">
-                <label className="flex items-start text-sm font-medium w-full" style={{ color: '#F5F5F5' }}>
-                  <input
-                    type="checkbox"
-                    id="privacy-consent"
-                    name="privacyConsent"
-                    checked={privacyConsent}
-                    onChange={(e) => setPrivacyConsent(e.target.checked)}
-                    className="mr-2 mt-1 flex-shrink-0"
-                    style={{ accentColor: '#D4AF37' }}
-                    required
-                  />
-                  <span className="leading-relaxed flex-1">
-                    Wyrażam zgodę na przetwarzanie moich danych osobowych poprzez Krzysztof Milewski zgodnie z Rozporządzeniem Parlamentu Europejskiego I Rady (UE) 2016/679 z dnia 27 kwietnia 2016r. w sprawie ochrony osób fizycznych w związku z przetwarzaniem danych osobowych i w sprawie swobodnego przepływu takich danych oraz uchylenia dyrektywy 95/46/WE (ogólne rozporządzenie o ochronie danych) oraz zapoznałem/am się z <Link to="/privacy-policy" className="text-yellow-300 underline">informacjami dotyczącymi przetwarzania danych osobowych</Link>. <span style={{ color: '#D4AF37' }}>*</span>
-                  </span>
-                </label>
-                {errors.privacyConsent && <p className="text-red-400 text-sm mt-1">{errors.privacyConsent}</p>}
-              </div>
-            <button
-  type="submit"
-  className="w-full font-bold py-4 px-8 rounded-lg text-lg transition-all hover:-translate-y-1 duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl border-4 active:scale-95 active:shadow-inner"
-  style={{ backgroundColor: '#F5F5F5', borderColor: '#D4AF37', color: '#0A1A2F' }}
->
-  Umów bezpłatną konsultację
-</button>
-            </form>
-            
-            <div className="grid lg:grid-cols-1 gap-12 mt-12">         
-              <div className="space-y-8">
+            <div className="space-y-8">
                 <h3 className="text-2xl font-bold mb-6" style={{ color: '#F5F5F5' }}>Skontaktuj się z nami</h3>
                 
                 <div className="flex items-center space-x-4">
@@ -552,7 +554,6 @@ Nie ryzykujesz nic – możesz tylko zyskać.</li>
                   </p>
                 </div>
               </div>
-            </div>
           </div>
         </div>
       </section>
