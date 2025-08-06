@@ -4,10 +4,10 @@ interface ConsultationModalContextType {
   isModalOpen: boolean;
   openModal: (data?: { name: string; email: string; phone: string; message: string; privacyConsent: boolean }) => void;
   closeModal: () => void;
+  submittedData: any | null;
 }
 
 const ConsultationModalContext = createContext<ConsultationModalContextType | undefined>(undefined);
-const [submittedData, setSubmittedData] = useState<any | null>(null);
 
 export const useConsultationModal = () => {
   const context = useContext(ConsultationModalContext);
@@ -23,6 +23,7 @@ interface ConsultationModalProviderProps {
 
 export const ConsultationModalProvider: React.FC<ConsultationModalProviderProps> = ({ children }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [submittedData, setSubmittedData] = useState<any | null>(null);
 
   const openModal = (data: any | null = null) => { // Modified
   if (data) {
