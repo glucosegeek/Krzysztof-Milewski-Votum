@@ -26,6 +26,10 @@ const HomePage: React.FC = () => {
   const { registerHeroSection } = useStickyButtonVisibility();
   const { isModalOpen, closeModal, submittedData, openModal } = useConsultationModal();
 
+  useEffect(() => {
+    registerHeroSection(heroSectionRef.current);
+  }, [registerHeroSection]);
+
 const [openStep, setOpenStep] = useState<number | null>(null);
 
   const howItWorksSteps = [

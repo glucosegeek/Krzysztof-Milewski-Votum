@@ -36,21 +36,6 @@ export const StickyButtonVisibilityProvider: React.FC<StickyButtonVisibilityProv
   };
 
   useEffect(() => {
-    // Always show button on non-home pages
-    if (location.pathname !== '/') {
-      // But still hide if footer is visible
-      if (!footerElement) {
-        setShowButton(true);
-        return;
-      }
-    } else {
-      // If we're on home page but no hero element is registered yet, hide button
-      if (!heroElement) {
-        setShowButton(false);
-        return;
-      }
-    }
-
     let heroIntersecting = false;
     let footerIntersecting = false;
 
