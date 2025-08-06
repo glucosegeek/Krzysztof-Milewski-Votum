@@ -2,11 +2,12 @@ import React, { createContext, useContext, useState, ReactNode } from 'react';
 
 interface ConsultationModalContextType {
   isModalOpen: boolean;
-  openModal: () => void;
+  openModal: (data?: { name: string; email: string; phone: string; message: string; privacyConsent: boolean }) => void;
   closeModal: () => void;
 }
 
 const ConsultationModalContext = createContext<ConsultationModalContextType | undefined>(undefined);
+const [submittedData, setSubmittedData] = useState<any | null>(null);
 
 export const useConsultationModal = () => {
   const context = useContext(ConsultationModalContext);
