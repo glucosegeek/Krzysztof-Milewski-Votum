@@ -376,11 +376,7 @@ Nie ryzykujesz nic – możesz tylko zyskać.</li>
                           Bezpłatna konsultacja
                         </button>
             </div>
-            <div className="grid lg:grid-cols-2 gap-12">
-              <div>
-                
-              </div>
-              
+            <div className="grid lg:grid-cols-1 gap-12">              
               <div className="space-y-8">
                 <h3 className="text-2xl font-bold mb-6" style={{ color: '#F5F5F5' }}>Skontaktuj się z nami</h3>
                 
