@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { useStickyButtonVisibility } from '../context/StickyButtonVisibilityContext';
 import { useConsultationModal } from '../context/ConsultationModalContext';
+import { Link } from 'react-router-dom';
 import { 
   Shield, 
   FileText, 
@@ -64,41 +65,46 @@ const [openStep, setOpenStep] = useState<number | null>(null);
     setOpenStep(openStep === id ? null : id);
   };
 
-  
   const [formData, setFormData] = useState({
-  name: '',
-  email: '',
-  phone: '',
-  message: ''
-});
+    name: '',
+    email: '',
+    phone: '+48 ',
+    message: ''
+  });
   
-const [errors, setErrors] = useState<{ name?: string; email?: string; phone?: string; message?: string }>({});
+  const [privacyConsent, setPrivacyConsent] = useState(false);
+  const [errors, setErrors] = useState<{ name?: string; email?: string; phone?: string; message?: string; privacyConsent?: string }>({});
 
-const validate = () => {
-  const newErrors: { name?: string; email?: string; phone?: string; message?: string } = {};
+  const validate = () => {
+    const newErrors: { name?: string; email?: string; phone?: string; message?: string; privacyConsent?: string } = {};
 
-  if (!formData.name.trim()) {
-    newErrors.name = 'Imię i nazwisko jest obowiązkowe.';
-  }
+    if (!formData.name.trim()) {
+      newErrors.name = 'Imię i nazwisko jest obowiązkowe.';
+    }
 
-  if (!formData.email.trim()) {
-    newErrors.email = 'Email jest obowiązkowy.';
-  } else if (!/\S+@\S+\.\S+/.test(formData.email)) {
-    newErrors.email = 'Nieprawidłowy format email.';
-  }
+    if (!formData.email.trim()) {
+      newErrors.email = 'Email jest obowiązkowy.';
+    } else if (!/\S+@\S+\.\S+/.test(formData.email)) {
+      newErrors.email = 'Nieprawidłowy format email.';
+    }
 
-  // Basic phone number validation regex (adjust as needed for specific formats)
-  const phoneRegex = /^[+]?[(]?[0-9]{3}[)]?[-\s.]?[0-9]{3}[-\s.]?[0-9]{4,6}$/im;
-  if (!formData.phone.trim()) {
-    newErrors.phone = 'Numer telefonu jest obowiązkowy.';
-  } else if (!phoneRegex.test(formData.phone)) {
-    newErrors.phone = 'Nieprawidłowy format numeru telefonu.';
-  }
+    // Basic phone number validation regex (adjust as needed for specific formats)
+    const phoneRegex = /^(?:\+48)?(?:[ -]?\d{3}){3}$/;
+    const cleanedPhone = formData.phone.replace(/[\s-]/g, '');
+    
+    if (!cleanedPhone.trim() || cleanedPhone.trim() === '+48') {
+      newErrors.phone = 'Numer telefonu jest obowiązkowy.';
+    } else if (!phoneRegex.test(cleanedPhone)) {
+      newErrors.phone = 'Nieprawidłowy format numeru telefonu.';
+    }
 
-  setErrors(newErrors);
-  return Object.keys(newErrors).length === 0;
-};
+    if (!privacyConsent) {
+      newErrors.privacyConsent = 'Zgoda na przetwarzanie danych jest obowiązkowa.';
+    }
 
+    setErrors(newErrors);
+    return Object.keys(newErrors).length === 0;
+  };
   
   // Register hero section with visibility context
   useEffect(() => {
@@ -108,19 +114,36 @@ const validate = () => {
   }, [registerHeroSection]);
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    setFormData({
-      ...formData,
-      [e.target.name]: e.target.value
-    });
+    const { name, value } = e.target;
+    
+    if (name === 'phone') {
+      const prefix = '+48 ';
+      let newValue = value;
+
+      // If the new value doesn't start with the prefix, or is shorter than the prefix,
+      // reset it to the prefix.
+      if (!newValue.startsWith(prefix) || newValue.length < prefix.length) {
+        newValue = prefix;
+      }
+      
+      setFormData({
+        ...formData,
+        [name]: newValue
+      });
+    } else {
+      setFormData({
+        ...formData,
+        [name]: value
+      });
+    }
   };
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (validate()) {
-    console.log('Form submitted:', formData);
-    // In a real application, you would send this data to your backend
-    // For now, we just log it.
-  }
+      console.log('Form submitted:', formData);
+      openModal();
+    }
   };
 
   return (
@@ -367,15 +390,130 @@ Nie ryzykujesz nic – możesz tylko zyskać.</li>
                 Rozpocznij swoją drogę do poprawy sytuacji finansowej od bezpłatnej konsultacji
               </p>
             </div>
-            <div className="text-center" style={{ color: '#0A1A2F' }}>
-                        <button 
-                          className="font-bold py-4 px-8 rounded-lg text-lg transition-all hover:-translate-y-2 duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl border-4"
-                          style={{ backgroundColor: '#F5F5F5', borderColor: '#D4AF37' }}
-                          onClick={openModal}
-                        >
-                          Bezpłatna konsultacja
-                        </button>
-            </div>
+            
+            <form onSubmit={handleSubmit} className="max-w-2xl mx-auto mt-12 space-y-6">
+              <div className="grid md:grid-cols-2 gap-6">
+                <div>
+                  <label htmlFor="name" className="block text-sm font-medium mb-2" style={{ color: '#F5F5F5' }}>
+                    Imię i nazwisko <span style={{ color: '#D4AF37' }}>*</span>
+                  </label>
+                  <input
+                    type="text"
+                    id="name"
+                    name="name"
+                    value={formData.name}
+                    onChange={handleInputChange}
+                    className="w-full px-4 py-3 rounded-lg focus:outline-none focus:ring-2"
+                    style={{
+                      backgroundColor: 'rgba(245, 245, 245, 0.1)',
+                      border: '1px solid rgba(245, 245, 245, 0.2)',
+                      color: '#F5F5F5',
+                      '--tw-ring-color': '#D4AF37',
+                    }}
+                    placeholder="Twoje imię i nazwisko"
+                    required
+                  />
+                  {errors.name && <p className="text-red-400 text-sm mt-1">{errors.name}</p>}
+                </div>
+
+                <div>
+                  <label htmlFor="email" className="block text-sm font-medium mb-2" style={{ color: '#F5F5F5' }}>
+                    Email <span style={{ color: '#D4AF37' }}>*</span>
+                  </label>
+                  <input
+                    type="email"
+                    id="email"
+                    name="email"
+                    value={formData.email}
+                    onChange={handleInputChange}
+                    className="w-full px-4 py-3 rounded-lg focus:outline-none focus:ring-2"
+                    style={{
+                      backgroundColor: 'rgba(245, 245, 245, 0.1)',
+                      border: '1px solid rgba(245, 245, 245, 0.2)',
+                      color: '#F5F5F5',
+                      '--tw-ring-color': '#D4AF37',
+                    }}
+                    placeholder="Twój adres email"
+                    required
+                  />
+                  {errors.email && <p className="text-red-400 text-sm mt-1">{errors.email}</p>}
+                </div>
+              </div>
+
+              <div>
+                <label htmlFor="phone" className="block text-sm font-medium mb-2" style={{ color: '#F5F5F5' }}>
+                  Numer telefonu <span style={{ color: '#D4AF37' }}>*</span>
+                </label>
+                <input
+                  type="tel"
+                  id="phone"
+                  name="phone"
+                  value={formData.phone}
+                  onChange={handleInputChange}
+                  className="w-full px-4 py-3 rounded-lg focus:outline-none focus:ring-2"
+                  style={{
+                    backgroundColor: 'rgba(245, 245, 245, 0.1)',
+                    border: '1px solid rgba(245, 245, 245, 0.2)',
+                    color: '#F5F5F5',
+                    '--tw-ring-color': '#D4AF37',
+                  }}
+                  placeholder="Twój numer telefonu"
+                  required
+                />
+                {errors.phone && <p className="text-red-400 text-sm mt-1">{errors.phone}</p>}
+              </div>
+
+              <div>
+                <label htmlFor="message" className="block text-sm font-medium mb-2" style={{ color: '#F5F5F5' }}>
+                  Wiadomość (opcjonalnie)
+                </label>
+                <textarea
+                  id="message"
+                  name="message"
+                  value={formData.message}
+                  onChange={handleInputChange}
+                  rows={4}
+                  className="w-full px-4 py-3 rounded-lg focus:outline-none focus:ring-2"
+                  style={{
+                    backgroundColor: 'rgba(245, 245, 245, 0.1)',
+                    border: '1px solid rgba(245, 245, 245, 0.2)',
+                    color: '#F5F5F5',
+                    '--tw-ring-color': '#D4AF37',
+                  }}
+                  placeholder="Krótko opisz swoją sprawę (opcjonalnie)"
+                ></textarea>
+              </div>
+
+              <div className="mb-6">
+                <label className="flex items-start text-sm font-medium w-full" style={{ color: '#F5F5F5' }}>
+                  <input
+                    type="checkbox"
+                    id="privacy-consent"
+                    name="privacyConsent"
+                    checked={privacyConsent}
+                    onChange={(e) => setPrivacyConsent(e.target.checked)}
+                    className="mr-2 mt-1 flex-shrink-0"
+                    style={{ accentColor: '#D4AF37' }}
+                    required
+                  />
+                  <span className="leading-relaxed flex-1">
+                    Wyrażam zgodę na przetwarzanie moich danych osobowych poprzez Krzysztof Milewski zgodnie z Rozporządzeniem Parlamentu Europejskiego I Rady (UE) 2016/679 z dnia 27 kwietnia 2016r. w sprawie ochrony osób fizycznych w związku z przetwarzaniem danych osobowych i w sprawie swobodnego przepływu takich danych oraz uchylenia dyrektywy 95/46/WE (ogólne rozporządzenie o ochronie danych) oraz zapoznałem/am się z <Link to="/privacy-policy" className="text-yellow-300 underline">informacjami dotyczącymi przetwarzania danych osobowych</Link>. <span style={{ color: '#D4AF37' }}>*</span>
+                  </span>
+                </label>
+                {errors.privacyConsent && <p className="text-red-400 text-sm mt-1">{errors.privacyConsent}</p>}
+              </div>
+
+              <div className="text-center">
+                <button
+                  type="submit"
+                  className="font-bold py-4 px-8 rounded-lg text-lg transition-all hover:-translate-y-2 duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl border-4"
+                  style={{ backgroundColor: '#F5F5F5', borderColor: '#D4AF37', color: '#0A1A2F' }}
+                >
+                  Bezpłatna konsultacja
+                </button>
+              </div>
+            </form>
+            
             <div className="grid lg:grid-cols-1 gap-12 mt-12">         
               <div className="space-y-8">
                 <h3 className="text-2xl font-bold mb-6" style={{ color: '#F5F5F5' }}>Skontaktuj się z nami</h3>
