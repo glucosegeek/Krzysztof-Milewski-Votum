@@ -24,8 +24,7 @@ import {
 const HomePage: React.FC = () => {
   const heroSectionRef = useRef<HTMLElement>(null);
   const { registerHeroSection } = useStickyButtonVisibility();
-  const { isModalOpen, closeModal, submittedData } = useConsultationModal(); // Modified
-
+  const { isModalOpen, closeModal, submittedData } = useConsultationModal(); 
 
 const [openStep, setOpenStep] = useState<number | null>(null);
 
