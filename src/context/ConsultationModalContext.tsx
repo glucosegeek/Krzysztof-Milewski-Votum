@@ -24,7 +24,14 @@ interface ConsultationModalProviderProps {
 export const ConsultationModalProvider: React.FC<ConsultationModalProviderProps> = ({ children }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
-  const openModal = () => setIsModalOpen(true);
+  const openModal = (data: any | null = null) => { // Modified
+  if (data) {
+    setSubmittedData(data);
+  } else {
+    setSubmittedData(null); // Clear previous data if opened without data (e.g., from hero button)
+  }
+  setIsModalOpen(true);
+};
   const closeModal = () => setIsModalOpen(false);
 
   return (
