@@ -139,12 +139,12 @@ const [openStep, setOpenStep] = useState<number | null>(null);
   };
 
   const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    if (validate()) {
-      console.log('Form submitted:', formData);
-      openModal();
-    }
-  };
+  e.preventDefault();
+  if (validate()) {
+    // console.log('Form submitted:', formData); // Remove this line
+    openModal(formData); // Pass the form data to the modal context
+  }
+};
 
   return (
     <div className="min-h-screen pt-16" style={{ backgroundColor: '#0A1A2F' }}>
