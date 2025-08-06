@@ -502,7 +502,6 @@ Nie ryzykujesz nic – możesz tylko zyskać.</li>
                 </label>
                 {errors.privacyConsent && <p className="text-red-400 text-sm mt-1">{errors.privacyConsent}</p>}
               </div>
-
             </form>
             
             <div className="grid lg:grid-cols-1 gap-12 mt-12">         
