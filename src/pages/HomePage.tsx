@@ -550,7 +550,7 @@ Nie ryzykujesz nic – możesz tylko zyskać.</li>
                 <div className="pt-6">
                   <p className="text-sm leading-relaxed" style={{ color: '#F5F5F5' }}>
                     Wszystkie konsultacje są całkowicie poufne i bezpłatne. 
-                    Zazwyczaj odpowiadam w ciągu 2 godzin w dni robocze.
+                    Na pytania odpowiadam natychmiast w dni robocze.
                   </p>
                 </div>
               </div>
