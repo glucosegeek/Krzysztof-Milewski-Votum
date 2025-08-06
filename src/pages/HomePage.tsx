@@ -367,7 +367,7 @@ Nie ryzykujesz nic – możesz tylko zyskać.</li>
                 Rozpocznij swoją drogę do poprawy sytuacji finansowej od bezpłatnej konsultacji
               </p>
             </div>
-            <div className="text-center mt-8" style={{ color: '#0A1A2F' }}>
+            <div className="text-center" style={{ color: '#0A1A2F' }}>
                         <button 
                           className="font-bold py-4 px-8 rounded-lg text-lg transition-all hover:-translate-y-2 duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl border-4"
                           style={{ backgroundColor: '#F5F5F5', borderColor: '#D4AF37' }}
