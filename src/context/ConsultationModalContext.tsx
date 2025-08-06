@@ -35,7 +35,7 @@ export const ConsultationModalProvider: React.FC<ConsultationModalProviderProps>
   const closeModal = () => setIsModalOpen(false);
 
   return (
-    <ConsultationModalContext.Provider value={{ isModalOpen, openModal, closeModal }}>
+    <ConsultationModalContext.Provider value={{ isModalOpen, openModal, closeModal, submittedData }}>
       {children}
     </ConsultationModalContext.Provider>
   );
