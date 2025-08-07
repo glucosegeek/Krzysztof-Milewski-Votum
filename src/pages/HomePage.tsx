@@ -196,13 +196,11 @@ const [openStep, setOpenStep] = useState<number | null>(null);
                   Pomagam osobom z kredytem we frankach (CHF), euro (EUR) oraz w dolarach (USD)
                 </h2>
                 <ul className="text-lg mb-6 leading-relaxed" style={{ color: '#F5F5F5' }}>
-                  <li className="text-lg mb-6 leading-relaxed">🏦 Analizuję umowy i wyliczam korzyści – Sprawdzam, ile możesz zyskać na unieważnieniu umowy.</li>
-                  <li className="text-lg mb-6 leading-relaxed">⚖️ Jestem przedstawicielem Votum Consumer CARE które współpracuje z największymi i najlepszymi kancelariami zajmującymi się toksycznymi kredytami tak walutowymi jak i w ramach SKD</li>
-                  <li className="text-lg mb-6 leading-relaxed">📊 30 lat doświadczenia w sprzedaży i marketingu – Wykorzystuję AI i nowoczesne narzędzia, by skutecznie Ci pomóc.</li>
-                  <li className="text-lg mb-6 leading-relaxed">📄 Pomagam na każdym etapie – Od analizy, przez dokumenty, aż po wyrok sądu.</li>
-                  <li className="text-lg mb-6 leading-relaxed">💰 Umowy aktywne i spłacone – Pomagam odzyskać należne środki lub pozbyć się zadłużenia.</li>
-                  <li className="text-lg mb-6 leading-relaxed">✅ Analizuję wstępnie i wyliczam korzyści są całkowicie BEZPŁATNE.
+                  <li className="text-lg mb-6 leading-relaxed">✅ Analizuję wstępnie i wyliczam korzyści.
 Nie ryzykujesz nic – możesz tylko zyskać.</li>
+                  <li className="text-lg mb-6 leading-relaxed">💰 Umowy aktywne i spłacone – Pomagam odzyskać należne środki lub pozbyć się zadłużenia.</li>
+                  <li className="text-lg mb-6 leading-relaxed">📄 Pomagam na każdym etapie – Od analizy, przez dokumenty, aż po wyrok sądu.</li>
+                  <li className="text-lg mb-6 leading-relaxed">Moje usługi na tym etapie są całkowicie bezpłatne. Nic nie ryzykujesz a możesz tylko zyskać!</li>
                 </ul>
                 {/* To add later, when we will have more data */}
                 {/* <div className="flex items-center space-x-6">
