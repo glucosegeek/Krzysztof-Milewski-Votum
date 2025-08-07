@@ -244,7 +244,7 @@ Nie ryzykujesz nic – możesz tylko zyskać.</li>
               </div>
               <h3 className="text-xl font-semibold mb-4" style={{ color: '#F5F5F5' }}>Wysoka skuteczność</h3>
               <p className="leading-relaxed" style={{ color: '#F5F5F5' }}>
-                Setki wygranych spraw 99,5% skuteczności.
+                Tysiące wygranych spraw 99,5% skuteczności.
               </p>
             </div>
             
