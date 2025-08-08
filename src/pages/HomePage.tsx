@@ -381,7 +381,7 @@ Nie ryzykujesz nic – możesz tylko zyskać.</li>
               Porozmawiajmy o Twojej toksycznej umowie kredytowej!
             </h2>
             <p className="text-xl" style={{ color: '#F5F5F5' }}>
-              Rozpocznij swoją drogę do poprawy sytuacji finansowej od bezpłatnej konsultacji
+              Wszystko zaczyna się od decyzji - Twojej decyzji
             </p>
           </div>
           
