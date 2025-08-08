@@ -81,24 +81,15 @@ const Navbar: React.FC = () => {
 
 
             {/* Other Navigation Links */}
-            <Link
-                  to="/#contact-section"
-                  className="px-4 py-3 rounded-md text-sm font-medium transition-colors hover:bg-opacity-10 hover:bg-white"
-                  style={{ color: '#F5F5F5' }}
-                  onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
-                >
-                  Kontakt
-            </Link>
-            
-            <Link
-              to="/knowledge-base"
-              className="px-3 py-2 rounded-md text-sm font-medium transition-colors hover:bg-opacity-10 hover:bg-white"
-              style={{ color: '#F5F5F5' }}
-              onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
-            >
-              Baza wiedzy
-            </Link>
 
+<Link
+  to="/about-me"
+  className="px-3 py-2 rounded-md text-sm font-medium transition-colors hover:bg-opacity-10 hover:bg-white"
+  style={{ color: '#F5F5F5' }}
+  onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+>
+  O mnie
+</Link>
             
             <Link
               to="/news"
@@ -107,6 +98,15 @@ const Navbar: React.FC = () => {
               onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
             >
               Aktualności
+            </Link>
+
+<Link
+              to="/knowledge-base"
+              className="px-3 py-2 rounded-md text-sm font-medium transition-colors hover:bg-opacity-10 hover:bg-white"
+              style={{ color: '#F5F5F5' }}
+              onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+            >
+              Baza wiedzy
             </Link>
             
             <Link
@@ -117,14 +117,15 @@ const Navbar: React.FC = () => {
             >
               FAQ
             </Link>
+
             <Link
-  to="/about-me"
-  className="px-3 py-2 rounded-md text-sm font-medium transition-colors hover:bg-opacity-10 hover:bg-white"
-  style={{ color: '#F5F5F5' }}
-  onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
->
-  O mnie
-</Link>
+                  to="/#contact-section"
+                  className="px-4 py-3 rounded-md text-sm font-medium transition-colors hover:bg-opacity-10 hover:bg-white"
+                  style={{ color: '#F5F5F5' }}
+                  onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+                >
+                  Kontakt
+            </Link>
           </div>
 
           {/* Mobile Menu Button */}
