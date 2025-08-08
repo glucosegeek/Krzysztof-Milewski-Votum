@@ -41,6 +41,16 @@ const Navbar: React.FC = () => {
 
           {/* Navigation Links */}
           <div className="hidden md:flex items-center space-x-8">
+ <Link
+              to="/news"
+              className="px-3 py-2 rounded-md text-sm font-medium transition-colors hover:bg-opacity-10 hover:bg-white"
+              style={{ color: '#F5F5F5' }}
+              onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+            >
+              Aktualności
+            </Link>
+            {/* Other Navigation Links */}
+
             {/* Usługi Dropdown */}
             <div
   className="relative"
@@ -79,9 +89,6 @@ const Navbar: React.FC = () => {
   )}
 </div>
 
-
-            {/* Other Navigation Links */}
-
 <Link
   to="/about-me"
   className="px-3 py-2 rounded-md text-sm font-medium transition-colors hover:bg-opacity-10 hover:bg-white"
@@ -91,15 +98,6 @@ const Navbar: React.FC = () => {
   O mnie
 </Link>
             
-            <Link
-              to="/news"
-              className="px-3 py-2 rounded-md text-sm font-medium transition-colors hover:bg-opacity-10 hover:bg-white"
-              style={{ color: '#F5F5F5' }}
-              onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
-            >
-              Aktualności
-            </Link>
-
 <Link
               to="/knowledge-base"
               className="px-3 py-2 rounded-md text-sm font-medium transition-colors hover:bg-opacity-10 hover:bg-white"
