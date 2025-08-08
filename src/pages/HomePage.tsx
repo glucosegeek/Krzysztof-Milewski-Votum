@@ -223,7 +223,7 @@ const conciergeItems = [
               </div>
               <div>
                 <h2 className="text-4xl font-bold mb-6" style={{ color: '#F5F5F5' }}>
-                  Pomagam osobom z kredytem we frankach (CHF), euro (EUR) oraz w dolarach (USD)
+                  Pomagam osobom z kredytem we frankach (CHF), euro (EUR) oraz w dolarach (USD) oraz z kredytem SKD
                 </h2>
                 <ul className="text-lg mb-6 leading-relaxed" style={{ color: '#F5F5F5' }}>
                   <li className="text-lg mb-6 leading-relaxed">✅ Analizuję wstępnie i wyliczam korzyści.
