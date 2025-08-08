@@ -232,21 +232,6 @@ Nie ryzykujesz nic – możesz tylko zyskać.</li>
                   <li className="text-lg mb-6 leading-relaxed">📄 Pomagam na każdym etapie – Od analizy, przez dokumenty, aż po wyrok sądu.</li>
                   <li className="text-lg mb-6 leading-relaxed">Moje usługi na tym etapie są całkowicie bezpłatne. Nic nie ryzykujesz a możesz tylko zyskać!</li>
                 </ul>
-                {/* To add later, when we will have more data */}
-                {/* <div className="flex items-center space-x-6">
-                  <div className="text-center">
-                    <div className="text-3xl font-bold" style={{ color: '#F5F5F5' }}>200+</div>
-                    <div className="text-sm" style={{ color: '#F5F5F5' }}>Sprawy zakończonę sukcesem</div>
-                  </div>
-                  <div className="text-center">
-                    <div className="text-3xl font-bold" style={{ color: '#F5F5F5' }}>99%</div>
-                    <div className="text-sm" style={{ color: '#F5F5F5' }}>Wskaźnik skuteczności</div>
-                  </div>
-                  <div className="text-center">
-                    <div className="text-3xl font-bold" style={{ color: '#F5F5F5' }}>30+</div>
-                    <div className="text-sm" style={{ color: '#F5F5F5' }}>Lat doświadczenia</div>
-                  </div>
-                </div> */}
               </div>
             </div>
           </div>
