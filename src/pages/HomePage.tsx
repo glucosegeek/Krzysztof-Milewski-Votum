@@ -344,7 +344,6 @@ Nie ryzykujesz nic – możesz tylko zyskać.</li>
         </p>
     </div>
 </div>
-
       </section>
       
       {/* How It Works */}
