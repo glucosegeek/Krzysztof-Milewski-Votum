@@ -381,7 +381,8 @@ Nie ryzykujesz nic – możesz tylko zyskać.</li>
               Porozmawiajmy o Twojej toksycznej umowie kredytowej!
             </h2>
             <p className="text-xl" style={{ color: '#F5F5F5' }}>
-              Wszystko zaczyna się od decyzji - Twojej decyzji
+              Wszystko zaczyna się od decyzji - Twojej decyzji.
+              Tu zaczyna się Twoja droga do wiecznych wakacji kredytowych czyli uniewąznienia toksycznej umowy!
             </p>
           </div>
           
