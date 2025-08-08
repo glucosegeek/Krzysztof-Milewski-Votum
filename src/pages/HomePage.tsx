@@ -383,7 +383,7 @@ Nie ryzykujesz nic – możesz tylko zyskać.</li>
             <p className="text-xl" style={{ color: '#F5F5F5' }}>
               Wszystko zaczyna się od decyzji - Twojej decyzji.              
             </p>
-            <p className="text-xl py-2" style={{ color: '#D4AF37' }}>Tu zaczyna się Twoja droga do wiecznych wakacji kredytowych czyli uniewąznienia toksycznej umowy!</p>
+            <p className="text-xl my-2" style={{ color: '#D4AF37' }}>Tu zaczyna się Twoja droga do wiecznych wakacji kredytowych czyli uniewąznienia toksycznej umowy!</p>
           </div>
           
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 max-w-4xl mx-auto">
