@@ -153,7 +153,9 @@ const Footer: React.FC<FooterProps> = ({ registerFooterSection }) => {
       style={{ backgroundColor: '#F5F5F5', borderColor: '#D4AF37' }}
       aria-label="Pobierz z Apple App Store"
     >
-      <Apple size={20} style={{ color: '#0A1A2F' }} />
+      <svg viewBox="0 0 24 24" fill="currentColor" className="w-5 h-5" style={{ color: '#0A1A2F' }}>
+  <path d="M12 0C9.8 0 8.1 1.7 8.1 3.8c0 1.9 1.2 3.5 2.9 4.2-1.1.8-1.8 2.1-1.8 3.6 0 2.5 1.9 4.5 4.3 4.5 2.4 0 4.3-2 4.3-4.5 0-1.5-.7-2.8-1.8-3.6 1.7-.7 2.9-2.3 2.9-4.2C15.9 1.7 14.2 0 12 0zM12 18.5c-2.8 0-5.1 2.3-5.1 5.1 0 .2 0 .4.1.6.1.2.2.4.4.5.2.1.4.2.6.2.2 0 .4-.1.6-.2.2-.1.4-.2.5-.4.1-.2.2-.4.2-.6 0-2.8 2.3-5.1 5.1-5.1 2.8 0 5.1 2.3 5.1 5.1 0 .2 0 .4-.1.6-.1.2-.2.4-.4.5-.2.1-.4.2-.6.2-.2 0-.4-.1-.6-.2-.2-.1-.4-.2-.5-.4-.1-.2-.2-.4-.2-.6 0-2.8-2.3-5.1-5.1-5.1z"/>
+</svg>
     </a>
     <a
       href="https://play.google.com/store/apps/details?id=pl.votum_sa.mojasprawa&pli=1"
@@ -164,8 +166,8 @@ const Footer: React.FC<FooterProps> = ({ registerFooterSection }) => {
       aria-label="Pobierz z Google Play Store"
     >
       <svg viewBox="0 0 24 24" fill="currentColor" className="w-5 h-5" style={{ color: '#0A1A2F' }}>
-  <path d="M3 0L21 12L3 24V0Z" />
-</svg>
+        <path d="M3 0L21 12L3 24V0Z" />
+      </svg>
     </a>
   </div>
           </div>
