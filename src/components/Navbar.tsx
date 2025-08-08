@@ -40,44 +40,7 @@ const Navbar: React.FC = () => {
           </Link>
 
           {/* Navigation Links */}
-          <div className="hidden md:flex items-center space-x-8">
-            {/* Usługi Dropdown */}
-            <div
-  className="relative"
-  onMouseEnter={() => setIsServicesOpen(true)}
-  onMouseLeave={() => setIsServicesOpen(false)}
->
-  <button
-    className="flex items-center space-x-1 px-3 py-2 rounded-md text-sm font-medium transition-colors hover:bg-opacity-10 hover:bg-white"
-    style={{ color: '#F5F5F5' }}
-  >
-    <span>Usługi</span>
-    <ChevronDown size={16} className={`transform transition-transform ${isServicesOpen ? 'rotate-180' : ''}`} />
-  </button>
-
-  {isServicesOpen && (
-    <div className="absolute top-full left-0 mt-1 w-64 rounded-md shadow-lg border-2" style={{ backgroundColor: '#0A1A2F', borderColor: '#D4AF37' }}>
-      <div className="py-1">
-        <Link
-          to="/services/currency"
-          className="block px-4 py-2 text-sm transition-colors hover:bg-opacity-10 hover:bg-white"
-          style={{ color: '#F5F5F5' }}
-          onClick={() => setIsServicesOpen(false)}
-        >
-          Unieważnianie umów walutowych
-        </Link>
-        <Link
-          to="/services/skd"
-          className="block px-4 py-2 text-sm transition-colors hover:bg-opacity-10 hover:bg-white"
-          style={{ color: '#F5F5F5' }}
-          onClick={() => setIsServicesOpen(false)}
-        >
-          Unieważnianie umów SKD
-        </Link>
-      </div>
-    </div>
-  )}
-</div>
+          
 
 
             {/* Other Navigation Links */}
