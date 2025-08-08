@@ -231,7 +231,7 @@ Nie ryzykujesz nic – możesz tylko zyskać.</li>
               Dlaczego warto działać z Votum Consumer Care
             </h2>
             <p className="text-xl max-w-3xl mx-auto" style={{ color: '#F5F5F5' }}>
-              Kompleksowe wsparcie prawne opracowane specjalnie z myślą o sporach dotyczących kredytów walutowych
+              Jestem Przedstawicielem Votum Consumer Care, które zapewnia kompleksowe wsparcie prawne opracowane specjalnie z myślą o toksycznych kredytach walutowych oraz w ramach SKD  ( Sankcja Kredytu Darmowego).
             </p>
           </div>
           
