@@ -153,11 +153,7 @@ const Footer: React.FC<FooterProps> = ({ registerFooterSection }) => {
       style={{ backgroundColor: '#F5F5F5', borderColor: '#D4AF37' }}
       aria-label="Pobierz z Apple App Store"
     >
-      <svg viewBox="0 0 24 24" fill="currentColor" className="w-5 h-5" style={{ color: '#0A1A2F' }}>
-  <path d="M12 0C8.686 0 6.01 2.676 6.01 6c0 2.676 1.338 5.01 3.348 6.348C8.01 13.676 6.672 16.01 6.672 18.686c0 3.314 2.676 6 6 6s6-2.686 6-6c0-2.676-1.338-5.01-3.348-6.348C15.99 10.338 17.328 8 17.328 5.328c0-3.314-2.676-6-6-6zM12 18.5c-2.8 0-5.1 2.3-5.1 5.1 0 .2 0 .4.1.6.1.2.2.4.4.5.2.1.4.2.6.2.2 0 .4-.1.6-.2.2-.1.4-.2.5-.4.1-.2.2-.4.2-.6 0-2.8 2.3-5.1 5.1-5.1 2.8 0 5.1 2.3 5.1 5.1 0 .2 0 .4-.1.6-.1.2-.2.4-.4.5-.2.1-.4.2-.6.2-.2 0-.4-.1-.6-.2-.2-.1-.4-.2-.5-.4-.1-.2-.2-.4-.2-.6 0-2.8-2.3-5.1-5.1-5.1z"/>
-</svg>
-
-
+     <Apple size={20} style={{ color: '#0A1A2F' }} />
     </a>
     <a
       href="https://play.google.com/store/apps/details?id=pl.votum_sa.mojasprawa&pli=1"
