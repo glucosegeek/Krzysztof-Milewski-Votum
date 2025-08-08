@@ -302,6 +302,50 @@ Nie ryzykujesz nic – możesz tylko zyskać.</li>
       {/* Consierge Personal Asistent */}
 
       <section className="py-20" style={{ backgroundColor: '#F5F5F5' }}>
+        <div className="space-y-4">
+  {conciergeItems.map((item) => (
+    <div
+      key={item.id}
+      className="rounded-2xl shadow-lg border-4 overflow-hidden"
+      style={{ backgroundColor: '#0A1A2F', borderColor: '#D4AF37' }}
+    >
+      <button
+        onClick={() => toggleConciergeItem(item.id)}
+        className="w-full p-6 text-left flex items-center justify-between transition-all hover:bg-opacity-90"
+        style={{ backgroundColor: 'transparent' }}
+      >
+        <div className="flex items-center space-x-4">
+          {/* You can decide if you want a number or just the icon here */}
+          {/* For consistency with "Jak to działa", you could use a number */}
+          <div className="w-12 h-12 rounded-full flex items-center justify-center flex-shrink-0 font-bold text-xl shadow-lg border-2" style={{ backgroundColor: '#F5F5F5', borderColor: '#D4AF37', color: '#0A1A2F' }}>
+            {item.id}
+          </div>
+          <h3 className="text-lg font-semibold" style={{ color: '#F5F5F5' }}>
+            {item.title}
+          </h3>
+        </div>
+        <div className="flex-shrink-0 ml-4">
+          {openConciergeItem === item.id ? (
+            <ChevronUp size={24} style={{ color: '#D4AF37' }} />
+          ) : (
+            <ChevronDown size={24} style={{ color: '#D4AF37' }} />
+          )}
+        </div>
+      </button>
+
+      {openConciergeItem === item.id && (
+        <div className="px-6 pb-6">
+          <div className="pt-4 border-t" style={{ borderColor: 'rgba(212, 175, 55, 0.3)' }}>
+            <p className="text-lg leading-relaxed" style={{ color: '#F5F5F5' }}>
+              {item.description}
+            </p>
+          </div>
+        </div>
+      )}
+    </div>
+  ))}
+</div>
+
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
     <div className="text-center mb-16">
         <h2 className="text-4xl font-bold mb-4" style={{ color: '#0A1A2F' }}>
@@ -345,49 +389,6 @@ Nie ryzykujesz nic – możesz tylko zyskać.</li>
             W modelu <strong>CONSIERGE</strong>, ja jestem Twoim opiekunem, a zespół doświadczonych prawników pracuje w tle, by zapewnić Ci optymalne rozwiązanie Twojej sprawy.
         </p>
     </div>
-</div>
-<div className="space-y-4">
-  {conciergeItems.map((item) => (
-    <div
-      key={item.id}
-      className="rounded-2xl shadow-lg border-4 overflow-hidden"
-      style={{ backgroundColor: '#0A1A2F', borderColor: '#D4AF37' }}
-    >
-      <button
-        onClick={() => toggleConciergeItem(item.id)}
-        className="w-full p-6 text-left flex items-center justify-between transition-all hover:bg-opacity-90"
-        style={{ backgroundColor: 'transparent' }}
-      >
-        <div className="flex items-center space-x-4">
-          {/* You can decide if you want a number or just the icon here */}
-          {/* For consistency with "Jak to działa", you could use a number */}
-          <div className="w-12 h-12 rounded-full flex items-center justify-center flex-shrink-0 font-bold text-xl shadow-lg border-2" style={{ backgroundColor: '#F5F5F5', borderColor: '#D4AF37', color: '#0A1A2F' }}>
-            {item.id}
-          </div>
-          <h3 className="text-lg font-semibold" style={{ color: '#F5F5F5' }}>
-            {item.title}
-          </h3>
-        </div>
-        <div className="flex-shrink-0 ml-4">
-          {openConciergeItem === item.id ? (
-            <ChevronUp size={24} style={{ color: '#D4AF37' }} />
-          ) : (
-            <ChevronDown size={24} style={{ color: '#D4AF37' }} />
-          )}
-        </div>
-      </button>
-
-      {openConciergeItem === item.id && (
-        <div className="px-6 pb-6">
-          <div className="pt-4 border-t" style={{ borderColor: 'rgba(212, 175, 55, 0.3)' }}>
-            <p className="text-lg leading-relaxed" style={{ color: '#F5F5F5' }}>
-              {item.description}
-            </p>
-          </div>
-        </div>
-      )}
-    </div>
-  ))}
 </div>
 
       </section>
