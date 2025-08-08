@@ -239,7 +239,7 @@ Nie ryzykujesz nic – możesz tylko zyskać.</li>
       </section>
 
       {/* What I Do */}
-      <section className="py-15" style={{ backgroundColor: '#0A1A2F' }}>
+      <section className="py-20" style={{ backgroundColor: '#0A1A2F' }}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
             <h2 className="text-4xl font-bold mb-4" style={{ color: '#F5F5F5' }}>
