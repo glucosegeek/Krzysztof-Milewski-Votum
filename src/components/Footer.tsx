@@ -141,8 +141,7 @@ const Footer: React.FC<FooterProps> = ({ registerFooterSection }) => {
                 <Linkedin size={20} style={{ color: '#0A1A2F' }} />
               </a>
             </div>
-          </div>
-           <h3 className="text-xl font-bold mb-4 mt-8" style={{ color: '#F5F5F5' }}> {/* Added mt-8 for spacing */}
+             <h3 className="text-xl font-bold mb-4 mt-8" style={{ color: '#F5F5F5' }}> {/* Added mt-8 for spacing */}
     Pobierz naszą aplikację na swój telefon
   </h3>
   <div className="flex space-x-4">
@@ -167,6 +166,8 @@ const Footer: React.FC<FooterProps> = ({ registerFooterSection }) => {
       <GooglePlay size={20} style={{ color: '#0A1A2F' }} />
     </a>
   </div>
+          </div>
+          
         </div>
 
         {/* Bottom Section */}
