@@ -272,7 +272,51 @@ Nie ryzykujesz nic – możesz tylko zyskać.</li>
       {/* Consierge Personal Asistent */}
 
       <section className="py-20" style={{ backgroundColor: '#F5F5F5' }}>
-          
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div className="text-center mb-16">
+        <h2 className="text-4xl font-bold mb-4" style={{ color: '#0A1A2F' }}>
+            Obsługa Klienta w filozofii Consierge - osobisty asystent
+        </h2>
+    </div>
+    <div className="max-w-4xl mx-auto text-lg leading-relaxed" style={{ color: '#0A1A2F' }}>
+        <p className="mb-6">
+            W moim modelu obsługi klienta przyjmuję rolę <strong>CONSIERGA</strong>, będącego Twoim głównym punktem kontaktu i wsparcia. Moja rola to <strong>Front Office</strong>, dzięki czemu jesteś zawsze <strong>zaopiekowany</strong>, a cały proces jest dla Ciebie komfortowy i przejrzysty.
+        </p>
+        <h3 className="text-2xl font-bold mb-4" style={{ color: '#0A1A2F' }}>
+            Jak działa to w praktyce?
+        </h3>
+        <ul className="list-none space-y-4">
+            <li className="flex items-start">
+                <span className="w-2 h-2 rounded-full mt-3 flex-shrink-0" style={{ backgroundColor: '#D4AF37' }}></span>
+                <p className="ml-4">
+                    <strong>Holistyczna opieka</strong>: To ja jestem Twoim pierwszym kontaktem. Zbiorę od Ciebie wszystkie niezbędne informacje i dokumenty, a następnie przekazuję je do współpracującej ze mną kancelarii, która specjalizuje się w sprawach kredytów frankowych lub SKD.
+                </p>
+            </li>
+            <li className="flex items-start">
+                <span className="w-2 h-2 rounded-full mt-3 flex-shrink-0" style={{ backgroundColor: '#D4AF37' }}></span>
+                <p className="ml-4">
+                    <strong>Współpraca z ekspertami</strong>: Kancelaria zajmie się całą, formalną stroną prawną, w tym kontaktem z bankiem. Natomiast w sądzie reprezentować Cię będzie Pełnomocnik, który jest ekspertem w tej dziedzinie. Dzięki temu masz pewność, że sprawą zajmują się specjaliści na każdym etapie.
+                </p>
+            </li>
+            <li className="flex items-start">
+                <span className="w-2 h-2 rounded-full mt-3 flex-shrink-0" style={{ backgroundColor: '#D4AF37' }}></span>
+                <p className="ml-4">
+                    <strong>Ty jesteś w centrum</strong>: Moją misją jest, abyś czuł się <strong>zaopiekowany</strong> i na bieżąco informowany, bez konieczności zagłębiania się w skomplikowane kwestie prawne. To ja przekażę Ci wszystkie najważniejsze informacje i wyjaśnię je w przystępny sposób.
+                </p>
+            </li>
+            <li className="flex items-start">
+                <span className="w-2 h-2 rounded-full mt-3 flex-shrink-0" style={{ backgroundColor: '#D4AF37' }}></span>
+                <p className="ml-4">
+                    <strong>Minimalny wysiłek z Twojej strony</strong>: Dzięki takiemu podziałowi ról, Twój udział w procesie ograniczony jest do absolutnego minimum. Dbam o to, aby wszystkie działania przebiegały płynnie i bezproblemowo, pozwalając Ci odzyskać kontrolę nad finansami bez niepotrzebnego stresu.
+                </p>
+            </li>
+        </ul>
+        <p className="mt-8">
+            W modelu <strong>CONSIERGE</strong>, ja jestem Twoim opiekunem, a zespół doświadczonych prawników pracuje w tle, by zapewnić Ci optymalne rozwiązanie Twojej sprawy.
+        </p>
+    </div>
+</div>
+
       </section>
       
       {/* How It Works */}
