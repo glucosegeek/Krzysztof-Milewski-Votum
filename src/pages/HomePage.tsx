@@ -353,7 +353,7 @@ Nie ryzykujesz nic – możesz tylko zyskać.</li>
       </section>
       
       {/* How It Works */}
-      <section className="py-5" style={{ backgroundColor: '#F5F5F5' }}>
+      <section className="py-20" style={{ backgroundColor: '#F5F5F5' }}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           
         <section className="py-20" style={{ backgroundColor: '#F5F5F5' }}>
