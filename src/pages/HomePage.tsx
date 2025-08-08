@@ -312,8 +312,6 @@ Nie ryzykujesz nic – możesz tylko zyskać.</li>
         style={{ backgroundColor: 'transparent' }}
       >
         <div className="flex items-center space-x-4">
-          {/* You can decide if you want a number or just the icon here */}
-          {/* For consistency with "Jak to działa", you could use a number */}
           <div className="w-12 h-12 rounded-full flex items-center justify-center flex-shrink-0 font-bold text-xl shadow-lg border-2" style={{ backgroundColor: '#F5F5F5', borderColor: '#D4AF37', color: '#0A1A2F' }}>
             {item.id}
           </div>
