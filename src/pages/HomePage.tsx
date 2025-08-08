@@ -32,14 +32,36 @@ const HomePage: React.FC = () => {
 
 const [openStep, setOpenStep] = useState<number | null>(null);
 
+// Concierge items
 const [openConciergeItem, setOpenConciergeItem] = useState<number | null>(null);
-
 const toggleConciergeItem = (id: number) => {
   setOpenConciergeItem(openConciergeItem === id ? null : id);
 };
-
-
   
+const conciergeItems = [
+  {
+    id: 1,
+    title: "Holistyczna opieka",
+    description: "To ja jestem Twoim pierwszym kontaktem. Zbiorę od Ciebie wszystkie niezbędne informacje i dokumenty, a następnie przekazuję je do współpracującej ze mną kancelarii, która specjalizuje się w sprawach kredytów frankowych lub SKD.",
+  },
+  {
+    id: 2,
+    title: "Współpraca z ekspertami",
+    description: "Kancelaria zajmie się całą, formalną stroną prawną, w tym kontaktem z bankiem. Natomiast w sądzie reprezentować Cię będzie Pełnomocnik, który jest ekspertem w tej dziedzinie. Dzięki temu masz pewność, że sprawą zajmują się specjaliści na każdym etapie.",
+  },
+  {
+    id: 3,
+    title: "Ty jesteś w centrum",
+    description: "Moją misją jest, abyś czuł się zaopiekowany i na bieżąco informowany, bez konieczności zagłębiania się w skomplikowane kwestie prawne. To ja przekażę Ci wszystkie najważniejsze informacje i wyjaśnię je w przystępny sposób.",
+  },
+  {
+    id: 4,
+    title: "Minimalny wysiłek z Twojej strony",
+    description: "Dzięki takiemu podziałowi ról, Twój udział w procesie ograniczony jest do absolutnego minimum. Dbam o to, aby wszystkie działania przebiegały płynnie i bezproblemowo, pozwalając Ci odzyskać kontrolę nad finansami bez niepotrzebnego stresu.",
+  },
+];
+
+// How it works 
   const howItWorksSteps = [
     {
       id: 1,
@@ -294,35 +316,78 @@ Nie ryzykujesz nic – możesz tylko zyskać.</li>
             Jak działa to w praktyce?
         </h3>
         <ul className="list-none space-y-4">
-            <li className="flex items-start">
-                <span className="w-2 h-2 rounded-full mt-3 flex-shrink-0" style={{ backgroundColor: '#D4AF37' }}></span>
-                <p className="ml-4">
-                    <strong>Holistyczna opieka</strong>: To ja jestem Twoim pierwszym kontaktem. Zbiorę od Ciebie wszystkie niezbędne informacje i dokumenty, a następnie przekazuję je do współpracującej ze mną kancelarii, która specjalizuje się w sprawach kredytów frankowych lub SKD.
-                </p>
-            </li>
-            <li className="flex items-start">
-                <span className="w-2 h-2 rounded-full mt-3 flex-shrink-0" style={{ backgroundColor: '#D4AF37' }}></span>
-                <p className="ml-4">
-                    <strong>Współpraca z ekspertami</strong>: Kancelaria zajmie się całą, formalną stroną prawną, w tym kontaktem z bankiem. Natomiast w sądzie reprezentować Cię będzie Pełnomocnik, który jest ekspertem w tej dziedzinie. Dzięki temu masz pewność, że sprawą zajmują się specjaliści na każdym etapie.
-                </p>
-            </li>
-            <li className="flex items-start">
-                <span className="w-2 h-2 rounded-full mt-3 flex-shrink-0" style={{ backgroundColor: '#D4AF37' }}></span>
-                <p className="ml-4">
-                    <strong>Ty jesteś w centrum</strong>: Moją misją jest, abyś czuł się <strong>zaopiekowany</strong> i na bieżąco informowany, bez konieczności zagłębiania się w skomplikowane kwestie prawne. To ja przekażę Ci wszystkie najważniejsze informacje i wyjaśnię je w przystępny sposób.
-                </p>
-            </li>
-            <li className="flex items-start">
-                <span className="w-2 h-2 rounded-full mt-3 flex-shrink-0" style={{ backgroundColor: '#D4AF37' }}></span>
-                <p className="ml-4">
-                    <strong>Minimalny wysiłek z Twojej strony</strong>: Dzięki takiemu podziałowi ról, Twój udział w procesie ograniczony jest do absolutnego minimum. Dbam o to, aby wszystkie działania przebiegały płynnie i bezproblemowo, pozwalając Ci odzyskać kontrolę nad finansami bez niepotrzebnego stresu.
-                </p>
-            </li>
-        </ul>
+    <li className="flex items-start">
+        <span className="w-2 h-2 rounded-full mt-3 flex-shrink-0" style={{ backgroundColor: '#D4AF37' }}></span>
+        <p className="ml-4">
+            <strong>Holistyczna opieka</strong>: To ja jestem Twoim pierwszym kontaktem. Zbiorę od Ciebie wszystkie niezbędne informacje i dokumenty, a następnie przekazuję je do współpracującej ze mną kancelarii, która specjalizuje się w sprawach kredytów frankowych lub SKD.
+        </p>
+    </li>
+    <li className="flex items-start">
+        <span className="w-2 h-2 rounded-full mt-3 flex-shrink-0" style={{ backgroundColor: '#D4AF37' }}></span>
+        <p className="ml-4">
+            <strong>Współpraca z ekspertami</strong>: Kancelaria zajmie się całą, formalną stroną prawną, w tym kontaktem z bankiem. Natomiast w sądzie reprezentować Cię będzie Pełnomocnik, który jest ekspertem w tej dziedzinie. Dzięki temu masz pewność, że sprawą zajmują się specjaliści na każdym etapie.
+        </p>
+    </li>
+    <li className="flex items-start">
+        <span className="w-2 h-2 rounded-full mt-3 flex-shrink-0" style={{ backgroundColor: '#D4AF37' }}></span>
+        <p className="ml-4">
+            <strong>Ty jesteś w centrum</strong>: Moją misją jest, abyś czuł się <strong>zaopiekowany</strong> i na bieżąco informowany, bez konieczności zagłębiania się w skomplikowane kwestie prawne. To ja przekażę Ci wszystkie najważniejsze informacje i wyjaśnię je w przystępny sposób.
+        </p>
+    </li>
+    <li className="flex items-start">
+        <span className="w-2 h-2 rounded-full mt-3 flex-shrink-0" style={{ backgroundColor: '#D4AF37' }}></span>
+        <p className="ml-4">
+            <strong>Minimalny wysiłek z Twojej strony</strong>: Dzięki takiemu podziałowi ról, Twój udział w procesie ograniczony jest do absolutnego minimum. Dbam o to, aby wszystkie działania przebiegały płynnie i bezproblemowo, pozwalając Ci odzyskać kontrolę nad finansami bez niepotrzebnego stresu.
+        </p>
+    </li>
+</ul>
         <p className="mt-8">
             W modelu <strong>CONSIERGE</strong>, ja jestem Twoim opiekunem, a zespół doświadczonych prawników pracuje w tle, by zapewnić Ci optymalne rozwiązanie Twojej sprawy.
         </p>
     </div>
+</div>
+<div className="space-y-4">
+  {conciergeItems.map((item) => (
+    <div
+      key={item.id}
+      className="rounded-2xl shadow-lg border-4 overflow-hidden"
+      style={{ backgroundColor: '#0A1A2F', borderColor: '#D4AF37' }}
+    >
+      <button
+        onClick={() => toggleConciergeItem(item.id)}
+        className="w-full p-6 text-left flex items-center justify-between transition-all hover:bg-opacity-90"
+        style={{ backgroundColor: 'transparent' }}
+      >
+        <div className="flex items-center space-x-4">
+          {/* You can decide if you want a number or just the icon here */}
+          {/* For consistency with "Jak to działa", you could use a number */}
+          <div className="w-12 h-12 rounded-full flex items-center justify-center flex-shrink-0 font-bold text-xl shadow-lg border-2" style={{ backgroundColor: '#F5F5F5', borderColor: '#D4AF37', color: '#0A1A2F' }}>
+            {item.id}
+          </div>
+          <h3 className="text-lg font-semibold" style={{ color: '#F5F5F5' }}>
+            {item.title}
+          </h3>
+        </div>
+        <div className="flex-shrink-0 ml-4">
+          {openConciergeItem === item.id ? (
+            <ChevronUp size={24} style={{ color: '#D4AF37' }} />
+          ) : (
+            <ChevronDown size={24} style={{ color: '#D4AF37' }} />
+          )}
+        </div>
+      </button>
+
+      {openConciergeItem === item.id && (
+        <div className="px-6 pb-6">
+          <div className="pt-4 border-t" style={{ borderColor: 'rgba(212, 175, 55, 0.3)' }}>
+            <p className="text-lg leading-relaxed" style={{ color: '#F5F5F5' }}>
+              {item.description}
+            </p>
+          </div>
+        </div>
+      )}
+    </div>
+  ))}
 </div>
 
       </section>
