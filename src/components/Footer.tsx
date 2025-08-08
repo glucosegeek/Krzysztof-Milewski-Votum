@@ -1,6 +1,6 @@
 import React, { useRef, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { Facebook, Instagram, Linkedin } from 'lucide-react';
+import { Facebook, Instagram, Linkedin, Apple, GooglePlay } from 'lucide-react';
 
 interface FooterProps {
   registerFooterSection: (element: HTMLElement | null) => void;
@@ -142,6 +142,31 @@ const Footer: React.FC<FooterProps> = ({ registerFooterSection }) => {
               </a>
             </div>
           </div>
+           <h3 className="text-xl font-bold mb-4 mt-8" style={{ color: '#F5F5F5' }}> {/* Added mt-8 for spacing */}
+    Pobierz naszą aplikację na swój telefon
+  </h3>
+  <div className="flex space-x-4">
+    <a
+      href="https://apps.apple.com/pl/app/moja-sprawa/id6736989155?l=pl"
+      target="_blank"
+      rel="noopener noreferrer"
+      className="w-10 h-10 rounded-lg flex items-center justify-center transition-all hover:scale-110 border-2"
+      style={{ backgroundColor: '#F5F5F5', borderColor: '#D4AF37' }}
+      aria-label="Pobierz z Apple App Store"
+    >
+      <Apple size={20} style={{ color: '#0A1A2F' }} />
+    </a>
+    <a
+      href="https://play.google.com/store/apps/details?id=pl.votum_sa.mojasprawa&pli=1"
+      target="_blank"
+      rel="noopener noreferrer"
+      className="w-10 h-10 rounded-lg flex items-center justify-center transition-all hover:scale-110 border-2"
+      style={{ backgroundColor: '#F5F5F5', borderColor: '#D4AF37' }}
+      aria-label="Pobierz z Google Play Store"
+    >
+      <GooglePlay size={20} style={{ color: '#0A1A2F' }} />
+    </a>
+  </div>
         </div>
 
         {/* Bottom Section */}
