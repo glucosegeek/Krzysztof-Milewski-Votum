@@ -142,35 +142,30 @@ const Footer: React.FC<FooterProps> = ({ registerFooterSection }) => {
               </a>
             </div>
              <h3 className="text-xl font-bold mb-4 mt-8" style={{ color: '#F5F5F5' }}> {/* Added mt-8 for spacing */}
-    Pobierz naszą aplikację na swój telefon
-  </h3>
-  <div className="flex space-x-4">
-    <a
-      href="https://apps.apple.com/pl/app/moja-sprawa/id6736989155?l=pl"
-      target="_blank"
-      rel="noopener noreferrer"
-      className="w-10 h-10 rounded-lg flex items-center justify-center transition-all hover:scale-110 border-2"
-      style={{ backgroundColor: '#F5F5F5', borderColor: '#D4AF37' }}
-      aria-label="Pobierz z Apple App Store"
-    >
-     <svg viewBox="0 0 24 24" fill="currentColor" className="w-5 h-5" style={{ color: '#0A1A2F' }}>
-  <path d="M12 1.5c-2.4 0-4.8 1.4-6.2 3.8-1.4 2.4-1.4 5.2 0 7.6 1.4 2.4 3.8 3.8 6.2 3.8s4.8-1.4 6.2-3.8c1.4-2.4 1.4-5.2 0-7.6C16.8 2.9 14.4 1.5 12 1.5z"/>
-</svg>
-
-    </a>
-    <a
-      href="https://play.google.com/store/apps/details?id=pl.votum_sa.mojasprawa&pli=1"
-      target="_blank"
-      rel="noopener noreferrer"
-      className="w-10 h-10 rounded-lg flex items-center justify-center transition-all hover:scale-110 border-2"
-      style={{ backgroundColor: '#F5F5F5', borderColor: '#D4AF37' }}
-      aria-label="Pobierz z Google Play Store"
-    >
-      <svg viewBox="0 0 24 24" fill="currentColor" className="w-5 h-5" style={{ color: '#0A1A2F' }}>
-        <path d="M3 0L21 12L3 24V0Z" />
-      </svg>
-    </a>
-  </div>
+  Pobierz naszą aplikację na swój telefon
+</h3>
+<div className="flex space-x-4">
+  <a
+    href="https://apps.apple.com/pl/app/moja-sprawa/id6736989155?l=pl"
+    target="_blank"
+    rel="noopener noreferrer"
+    className="w-10 h-10 rounded-lg flex items-center justify-center transition-all hover:scale-110 border-2"
+    style={{ backgroundColor: '#F5F5F5', borderColor: '#D4AF37' }}
+    aria-label="Pobierz z Apple App Store"
+  >
+    <img src="/app-store.png" alt="Apple App Store" className="w-full h-full object-contain" />
+  </a>
+  <a
+    href="https://play.google.com/store/apps/details?id=pl.votum_sa.mojasprawa&pli=1"
+    target="_blank"
+    rel="noopener noreferrer"
+    className="w-10 h-10 rounded-lg flex items-center justify-center transition-all hover:scale-110 border-2"
+    style={{ backgroundColor: '#F5F5F5', borderColor: '#D4AF37' }}
+    aria-label="Pobierz z Google Play Store"
+  >
+    <img src="/google-play.png" alt="Google Play Store" className="w-full h-full object-contain" />
+  </a>
+</div>
           </div>
           
         </div>
