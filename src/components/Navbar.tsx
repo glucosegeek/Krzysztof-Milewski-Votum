@@ -52,10 +52,10 @@ const Navbar: React.FC = () => {
 
             {/* Usługi Dropdown */}
             <div
-  className="relative"
-  onMouseEnter={() => setIsServicesOpen(true)}
-  onMouseLeave={() => setIsServicesOpen(false)}
->
+              className="relative"
+              onMouseEnter={() => setIsServicesOpen(true)}
+              onMouseLeave={() => setIsServicesOpen(false)}
+            >
   <button
     className="flex items-center space-x-1 px-3 py-2 rounded-md text-sm font-medium transition-colors hover:bg-opacity-10 hover:bg-white"
     style={{ color: '#F5F5F5' }}
