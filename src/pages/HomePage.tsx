@@ -32,6 +32,11 @@ const HomePage: React.FC = () => {
 
 const [openStep, setOpenStep] = useState<number | null>(null);
 
+const toggleConciergeItem = (id: number) => {
+  setOpenConciergeItem(openConciergeItem === id ? null : id);
+};
+
+  
   const howItWorksSteps = [
     {
       id: 1,
