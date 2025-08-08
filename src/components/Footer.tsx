@@ -163,7 +163,7 @@ const Footer: React.FC<FooterProps> = ({ registerFooterSection }) => {
       style={{ backgroundColor: '#F5F5F5', borderColor: '#D4AF37' }}
       aria-label="Pobierz z Google Play Store"
     >
-      <GooglePlay size={20} style={{ color: '#0A1A2F' }} />
+      <Play size={20} style={{ color: '#0A1A2F' }} />
     </a>
   </div>
           </div>
