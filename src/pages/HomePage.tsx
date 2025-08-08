@@ -327,7 +327,6 @@ Nie ryzykujesz nic – możesz tylko zyskać.</li>
           )}
         </div>
       </button>
-
       {openConciergeItem === item.id && (
         <div className="px-6 pb-6">
           <div className="pt-4 border-t" style={{ borderColor: 'rgba(212, 175, 55, 0.3)' }}>
