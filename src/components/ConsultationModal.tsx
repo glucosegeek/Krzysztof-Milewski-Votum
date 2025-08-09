@@ -16,17 +16,8 @@ const ConsultationModal: React.FC = () => {
   useEffect(() => {
     if (isModalOpen) {
       document.body.style.overflow = 'hidden'; // Prevent scrolling background
-      if (modalIntent === 'direct_consultation') {
-        // If data was passed from HomePage, trigger Calendly redirection after a short delay
-        setTimeout(() => {
-          window.open('https://calendly.com/krzysztof-milewski-dsa/30-minutowe-spotkanie', '_blank');
-          closeModal();
-        }, 2000); // Show message for 2 seconds
-      } else if (modalIntent === 'form_submission') {
-        // Just show the success message, no redirect
-      }
       // Focus the first input when modal opens for accessibility
-      if (modalIntent !== 'direct_consultation' && modalIntent !== 'form_submission') {
+      if (modalIntent !== 'form_submission') {
         const firstInput = modalRef.current?.querySelector('input, textarea') as HTMLElement;
         if (firstInput) {
           firstInput.focus();
@@ -92,9 +83,15 @@ const ConsultationModal: React.FC = () => {
     if (validate()) {
       console.log('Form Data:', { name, email, phone, message });
       
-      // Simulate sending data (in a real app, you'd send to a backend/Supabase Edge Function here)
-      // Trigger the same flow as when data is passed from HomePage
-      openModal({ name, email, phone, message, privacyConsent }, 'form_submission');
+      // Check the intent that opened this modal
+      if (modalIntent === 'direct_consultation') {
+        // For direct consultation, redirect to Calendly after form submission
+        window.open('https://calendly.com/krzysztof-milewski-dsa/30-minutowe-spotkanie', '_blank');
+        closeModal();
+      } else {
+        // For other cases, show success message
+        openModal({ name, email, phone, message, privacyConsent }, 'form_submission');
+      }
     }
   };
 
@@ -125,16 +122,7 @@ const ConsultationModal: React.FC = () => {
           <X size={24} />
         </button>
 
-        {modalIntent === 'direct_consultation' ? (
-          <div className="text-center py-12">
-            <h2 className="text-3xl font-bold mb-4" style={{ color: '#F5F5F5' }}>
-              Przekierowanie do Calendly...
-            </h2>
-            <p className="text-lg" style={{ color: '#F5F5F5' }}>
-              Za chwilę zostaniesz przekierowany do strony rezerwacji terminu konsultacji.
-            </p>
-          </div>
-        ) : modalIntent === 'form_submission' ? (
+        {modalIntent === 'form_submission' ? (
           <div className="text-center py-12">
             <h2 className="text-3xl font-bold mb-4" style={{ color: '#F5F5F5' }}>
               Wiadomość została wysłana!
@@ -308,11 +296,13 @@ const ConsultationModal: React.FC = () => {
                 className="w-full font-bold py-4 px-8 rounded-lg text-lg transition-all hover:-translate-y-1 duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl border-4 active:scale-95 active:shadow-inner"
                 style={{ backgroundColor: '#F5F5F5', borderColor: '#D4AF37', color: '#0A1A2F' }}
               >
-                Umów bezpłatną konsultację
+                {modalIntent === 'direct_consultation' ? 'Umów bezpłatną konsultację' : 'Wyślij wiadomość'}
               </button>
-              <p className="text-center text-sm mt-4" style={{ color: '#F5F5F5' }}>
-                Kliknięcie przycisku przekieruje Cię do strony rezerwacji terminu w Calendly.
-              </p>
+              {modalIntent === 'direct_consultation' && (
+                <p className="text-center text-sm mt-4" style={{ color: '#F5F5F5' }}>
+                  Kliknięcie przycisku przekieruje Cię do strony rezerwacji terminu w Calendly.
+                </p>
+              )}
             </form>
           </>
         )}
