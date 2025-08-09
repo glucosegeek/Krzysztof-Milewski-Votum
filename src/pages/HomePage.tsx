@@ -101,13 +101,40 @@ const conciergeItems = [
 
   const [formData, setFormData] = useState({
     name: '',
-    email: '',
-    phone: '+48 ',
-    message: ''
+  email: '',
+  phone: '+48 ',
+  message: '',
+  loanType: '', // 'currency' or 'skd'
+  agreementDate: '',
+  homeBank: '',
+  loanTypeDetail: '', // 'indexed', 'denominated', 'unknown'
+  loanCurrency: '',
+  loanValuePln: '',
+  numberOfInstallments: '',
+  loanStatus: '', // 'active' or 'repaid'
+  repaymentDate: '',
+  repaymentValuePln: '',
   });
   
   const [privacyConsent, setPrivacyConsent] = useState(false);
-  const [errors, setErrors] = useState<{ name?: string; email?: string; phone?: string; message?: string; privacyConsent?: string }>({});
+ const [errors, setErrors] = useState<{
+  name?: string;
+  email?: string;
+  phone?: string;
+  message?: string;
+  privacyConsent?: string;
+  loanType?: string;
+  agreementDate?: string;
+  homeBank?: string;
+  loanTypeDetail?: string;
+  loanCurrency?: string;
+  loanValuePln?: string;
+  numberOfInstallments?: string;
+  loanStatus?: string;
+  repaymentDate?: string;
+  repaymentValuePln?: string;
+}>({});
+
 
   const validate = () => {
     const newErrors: { name?: string; email?: string; phone?: string; message?: string; privacyConsent?: string } = {};
