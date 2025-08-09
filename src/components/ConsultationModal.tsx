@@ -131,6 +131,32 @@ const ConsultationModal: React.FC = () => {
             <p className="text-lg" style={{ color: '#F5F5F5' }}>
               Dziękujemy za kontakt. Zostaniesz przekierowany do Calendly, aby umówić termin konsultacji.
             </p>
+            {/* Display submitted data */}
+            <div className="mt-8 text-left space-y-2" style={{ color: '#F5F5F5' }}>
+              <p><strong>Imię i nazwisko:</strong> {submittedData.name}</p>
+              <p><strong>Email:</strong> {submittedData.email}</p>
+              <p><strong>Telefon:</strong> {submittedData.phone}</p>
+              {submittedData.message && <p><strong>Wiadomość:</strong> {submittedData.message}</p>}
+              <p><strong>Rodzaj sprawy:</strong> {submittedData.loanType === 'currency' ? 'Kredyt walutowy' : submittedData.loanType === 'skd' ? 'SKD' : 'N/A'}</p>
+
+              {submittedData.loanType === 'currency' && (
+                <>
+                  <p><strong>Data zawarcia umowy:</strong> {submittedData.agreementDate}</p>
+                  <p><strong>Bank:</strong> {submittedData.homeBank}</p>
+                  <p><strong>Typ kredytu:</strong> {submittedData.loanTypeDetail === 'indexed' ? 'Indeksowany' : submittedData.loanTypeDetail === 'denominated' ? 'Denominowany' : 'Nie wiem'}</p>
+                  <p><strong>Waluta kredytu:</strong> {submittedData.loanCurrency}</p>
+                  <p><strong>Wartość kredytu w PLN:</strong> {submittedData.loanValuePln}</p>
+                  <p><strong>Liczba rat:</strong> {submittedData.numberOfInstallments}</p>
+                  <p><strong>Status kredytu:</strong> {submittedData.loanStatus === 'active' ? 'Aktywny' : 'Spłacony'}</p>
+                  {submittedData.loanStatus === 'repaid' && (
+                    <>
+                      <p><strong>Data spłaty:</strong> {submittedData.repaymentDate}</p>
+                      <p><strong>Wartość spłaty w PLN:</strong> {submittedData.repaymentValuePln}</p>
+                    </>
+                  )}
+                </>
+              )}
+            </div>
           </div>
         ) : (
           <>

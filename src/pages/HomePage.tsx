@@ -111,33 +111,43 @@ const conciergeItems = [
   loanCurrency: '',
   loanValuePln: '',
   numberOfInstallments: '',
-  loanStatus: '', // 'active' or 'repaid'
-  repaymentDate: '',
-  repaymentValuePln: '',
+    email: '',
+    phone: '+48 ',
+    message: '',
+    loanType: '', // 'currency' or 'skd'
+    agreementDate: '',
+    homeBank: '',
+    loanTypeDetail: '', // 'indexed', 'denominated', 'unknown'
+    loanCurrency: '',
+    loanValuePln: '',
+    numberOfInstallments: '',
+    loanStatus: '', // 'active' or 'repaid'
+    repaymentDate: '',
+    repaymentValuePln: '',
   });
   
   const [privacyConsent, setPrivacyConsent] = useState(false);
- const [errors, setErrors] = useState<{
-  name?: string;
-  email?: string;
-  phone?: string;
-  message?: string;
-  privacyConsent?: string;
-  loanType?: string;
-  agreementDate?: string;
-  homeBank?: string;
-  loanTypeDetail?: string;
-  loanCurrency?: string;
-  loanValuePln?: string;
-  numberOfInstallments?: string;
-  loanStatus?: string;
-  repaymentDate?: string;
-  repaymentValuePln?: string;
-}>({});
+  const [errors, setErrors] = useState<{
+    name?: string;
+    email?: string;
+    phone?: string;
+    message?: string;
+    privacyConsent?: string;
+    loanType?: string;
+    agreementDate?: string;
+    homeBank?: string;
+    loanTypeDetail?: string;
+    loanCurrency?: string;
+    loanValuePln?: string;
+    numberOfInstallments?: string;
+    loanStatus?: string;
+    repaymentDate?: string;
+    repaymentValuePln?: string;
+  }>({});
 
 
   const validate = () => {
-    const newErrors: { name?: string; email?: string; phone?: string; message?: string; privacyConsent?: string } = {};
+    const newErrors: typeof errors = {};
 
     if (!formData.name.trim()) {
       newErrors.name = 'Imię i nazwisko jest obowiązkowe.';
@@ -163,33 +173,50 @@ const conciergeItems = [
       newErrors.privacyConsent = 'Zgoda na przetwarzanie danych jest obowiązkowa.';
     }
 
+    // New validations for loan details
+    if (!formData.loanType) {
+      newErrors.loanType = 'Wybór rodzaju sprawy jest obowiązkowy.';
+    } else if (formData.loanType === 'currency') {
+      if (!formData.agreementDate) newErrors.agreementDate = 'Data zawarcia umowy jest obowiązkowa.';
+      if (!formData.homeBank.trim()) newErrors.homeBank = 'Nazwa banku jest obowiązkowa.';
+      if (!formData.loanTypeDetail) newErrors.loanTypeDetail = 'Typ kredytu jest obowiązkowy.';
+      if (!formData.loanCurrency.trim()) newErrors.loanCurrency = 'Waluta kredytu jest obowiązkowa.';
+      if (!formData.loanValuePln) newErrors.loanValuePln = 'Wartość kredytu w PLN jest obowiązkowa.';
+      if (!formData.numberOfInstallments) newErrors.numberOfInstallments = 'Liczba rat jest obowiązkowa.';
+      if (!formData.loanStatus) newErrors.loanStatus = 'Status kredytu jest obowiązkowy.';
+
+      if (formData.loanStatus === 'repaid') {
+        if (!formData.repaymentDate) newErrors.repaymentDate = 'Data spłaty kredytu jest obowiązkowa.';
+        if (!formData.repaymentValuePln) newErrors.repaymentValuePln = 'Wartość spłaty w PLN jest obowiązkowa.';
+      }
+    }
+
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
   };
   
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-  const { name, value } = e.target;
+    const { name, value } = e.target;
 
-  if (name === 'phone') {
-    const prefix = '+48 ';
-    let newValue = value;
+    if (name === 'phone') {
+      const prefix = '+48 ';
+      let newValue = value;
 
-    if (!newValue.startsWith(prefix) || newValue.length < prefix.length) {
-      newValue = prefix;
+      if (!newValue.startsWith(prefix) || newValue.length < prefix.length) {
+        newValue = prefix;
+      }
+
+      setFormData({
+        ...formData,
+        [name]: newValue
+      });
+    } else {
+      setFormData({
+        ...formData,
+        [name]: value
+      });
     }
-
-    setFormData({
-      ...formData,
-      [name]: newValue
-    });
-  } else {
-    setFormData({
-      ...formData,
-      [name]: value
-    });
-  }
-};
+  };
 
 
   const handleSubmit = (e: React.FormEvent) => {
@@ -493,7 +520,7 @@ Nie ryzykujesz nic – możesz tylko zyskać.</li>
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 max-w-4xl mx-auto">
             <div>
               <form onSubmit={handleSubmit} className="space-y-6">
-                // Loan Type Selection
+                {/* Loan Type Selection */}
 <div>
   <label className="block text-sm font-medium mb-2" style={{ color: '#F5F5F5' }}>
     Rodzaj sprawy <span style={{ color: '#D4AF37' }}>*</span>
@@ -781,13 +808,121 @@ Nie ryzykujesz nic – możesz tylko zyskać.</li>
   </>
 )}
 
+                <div>
+                  <label htmlFor="name" className="block text-sm font-medium mb-2" style={{ color: '#F5F5F5' }}>
+                    Imię i nazwisko <span style={{ color: '#D4AF37' }}>*</span>
+                  </label>
+                  <input
+                    type="text"
+                    id="name"
+                    name="name"
+                    value={formData.name}
+                    onChange={handleInputChange}
+                    className="w-full px-4 py-3 rounded-lg focus:outline-none focus:ring-2"
+                    style={{
+                      backgroundColor: 'rgba(245, 245, 245, 0.1)',
+                      border: '1px solid rgba(245, 245, 245, 0.2)',
+                      color: '#F5F5F5',
+                      '--tw-ring-color': '#D4AF37',
+                    }}
+                    placeholder="Twoje imię i nazwisko"
+                    required
+                  />
+                  {errors.name && <p className="text-red-400 text-sm mt-1">{errors.name}</p>}
+                </div>
+
+                <div>
+                  <label htmlFor="email" className="block text-sm font-medium mb-2" style={{ color: '#F5F5F5' }}>
+                    Email <span style={{ color: '#D4AF37' }}>*</span>
+                  </label>
+                  <input
+                    type="email"
+                    id="email"
+                    name="email"
+                    value={formData.email}
+                    onChange={handleInputChange}
+                    className="w-full px-4 py-3 rounded-lg focus:outline-none focus:ring-2"
+                    style={{
+                      backgroundColor: 'rgba(245, 245, 245, 0.1)',
+                      border: '1px solid rgba(245, 245, 245, 0.2)',
+                      color: '#F5F5F5',
+                      '--tw-ring-color': '#D4AF37',
+                    }}
+                    placeholder="Twój adres email"
+                    required
+                  />
+                  {errors.email && <p className="text-red-400 text-sm mt-1">{errors.email}</p>}
+                </div>
+
+                <div>
+                  <label htmlFor="phone" className="block text-sm font-medium mb-2" style={{ color: '#F5F5F5' }}>
+                    Numer telefonu <span style={{ color: '#D4AF37' }}>*</span>
+                  </label>
+                  <input
+                    type="tel"
+                    id="phone"
+                    name="phone"
+                    value={formData.phone}
+                    onChange={handleInputChange}
+                    className="w-full px-4 py-3 rounded-lg focus:outline-none focus:ring-2"
+                    style={{
+                      backgroundColor: 'rgba(245, 245, 245, 0.1)',
+                      border: '1px solid rgba(245, 245, 245, 0.2)',
+                      color: '#F5F5F5',
+                      '--tw-ring-color': '#D4AF37',
+                    }}
+                    placeholder="Twój numer telefonu"
+                    required
+                  />
+                  {errors.phone && <p className="text-red-400 text-sm mt-1">{errors.phone}</p>}
+                </div>
+
+                <div>
+                  <label htmlFor="message" className="block text-sm font-medium mb-2" style={{ color: '#F5F5F5' }}>
+                    Wiadomość (opcjonalnie)
+                  </label>
+                  <textarea
+                    id="message"
+                    name="message"
+                    value={formData.message}
+                    onChange={handleInputChange}
+                    rows={3}
+                    className="w-full px-4 py-3 rounded-lg focus:outline-none focus:ring-2"
+                    style={{
+                      backgroundColor: 'rgba(245, 245, 245, 0.1)',
+                      border: '1px solid rgba(245, 245, 245, 0.2)',
+                      color: '#F5F5F5',
+                      '--tw-ring-color': '#D4AF37',
+                    }}
+                    placeholder="Krótko opisz swoją sprawę (opcjonalnie)"
+                  ></textarea>
+                </div>
+
+                <div className="mb-6">
+                  <label className="flex items-start text-sm font-medium w-full" style={{ color: '#F5F5F5' }}>
+                    <input
+                      type="checkbox"
+                      id="privacy-consent"
+                      name="privacyConsent"
+                      checked={privacyConsent}
+                      onChange={(e) => setPrivacyConsent(e.target.checked)}
+                      className="mr-2 mt-1 flex-shrink-0"
+                      style={{ accentColor: '#D4AF37' }}
+                      required
+                    />
+                    <span className="leading-relaxed flex-1">
+                      Wyrażam zgodę na przetwarzanie moich danych osobowych poprzez Krzysztof Milewski zgodnie z Rozporządzeniem Parlamentu Europejskiego I Rady (UE) 2016/679 z dnia 27 kwietnia 2016r. w sprawie ochrony osób fizycznych w związku z przetwarzaniem danych osobowych i w sprawie swobodnego przepływu takich danych oraz uchylenia dyrektywy 95/46/WE (ogólne rozporządzenie o ochronie danych) oraz zapoznałem/am się z <Link to="/privacy-policy" className="text-yellow-300 underline">informacjami dotyczącymi przetwarzania danych osobowych</Link>. <span style={{ color: '#D4AF37' }}>*</span>
+                    </span>
+                  </label>
+                  {errors.privacyConsent && <p className="text-red-400 text-sm mt-1">{errors.privacyConsent}</p>}
+                </div>
                 
                 <button
                   type="submit"
                   className="w-full font-bold py-4 px-8 rounded-lg text-lg transition-all hover:-translate-y-1 duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl border-4 active:scale-95 active:shadow-inner"
                   style={{ backgroundColor: '#F5F5F5', borderColor: '#D4AF37', color: '#0A1A2F' }}
                 >
-                  Bezpłatna konsultację
+                  Bezpłatna konsultacja
                 </button>
               </form>
             </div>

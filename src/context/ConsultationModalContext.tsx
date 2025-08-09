@@ -2,7 +2,23 @@ import React, { createContext, useContext, useState, ReactNode } from 'react';
 
 interface ConsultationModalContextType {
   isModalOpen: boolean;
-  openModal: (data?: { name: string; email: string; phone: string; message: string; privacyConsent: boolean }) => void;
+  openModal: (data?: {
+    name: string;
+    email: string;
+    phone: string;
+    message: string;
+    privacyConsent: boolean;
+    loanType?: string;
+    agreementDate?: string;
+    homeBank?: string;
+    loanTypeDetail?: string;
+    loanCurrency?: string;
+    loanValuePln?: string;
+    numberOfInstallments?: string;
+    loanStatus?: string;
+    repaymentDate?: string;
+    repaymentValuePln?: string;
+  }) => void;
   closeModal: () => void;
   submittedData: any | null;
 }
