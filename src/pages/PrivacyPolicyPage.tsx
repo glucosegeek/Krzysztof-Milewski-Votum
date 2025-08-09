@@ -460,13 +460,13 @@ const PrivacyPolicyPage: React.FC = () => {
               </div> */}
 
               {/* Kontakt */}
-              
+              {/* 
             </div>
           </div>
         </div>
-      </section>
-    </div>
-  );
+      </section> 
+    </div>/
+  ); 
 };
 
 export default PrivacyPolicyPage;
