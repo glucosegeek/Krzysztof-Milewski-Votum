@@ -280,7 +280,6 @@ const PrivacyPolicyPage: React.FC = () => {
   <ul className="list-disc pl-6 mb-4 space-y-2">
     <li>uczestnictwo tych podmiotów w tzw. Data Privacy Framework, a więc programie ustanowionym decyzją wykonawczą Komisji Europejskiej jako zbiór zasad gwarantujących odpowiednią ochronę Twojej prywatności - w przypadku podmiotów ze Stanów Zjednoczonych Ameryki</li>
   </ul>
-</div>
 
           </div>
         </div>
