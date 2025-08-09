@@ -283,15 +283,32 @@ const PrivacyPolicyPage: React.FC = () => {
 
           </div>
         </div>
+
+        <div className="text-center p-12 rounded-2xl shadow-xl border-4" style={{ backgroundColor: '#0A1A2F', borderColor: '#D4AF37' }}>
+                <h2 className="text-3xl font-bold mb-6" style={{ color: '#F5F5F5' }}>
+                  Masz pytania dotyczące ochrony danych?
+                </h2>
+                <p className="text-xl mb-8 max-w-2xl mx-auto leading-relaxed" style={{ color: '#F5F5F5' }}>
+                  Jeśli masz pytania dotyczące przetwarzania Twoich danych osobowych 
+                  lub chcesz skorzystać ze swoich praw, skontaktuj się z nami.
+                </p>
+               <button
+                 onClick={openModal}
+                  className="inline-block font-bold py-4 px-8 rounded-lg text-lg transition-all hover:-translate-y-2 duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl border-4"
+                  style={{ backgroundColor: '#F5F5F5', borderColor: '#D4AF37', color: '#0A1A2F' }}
+                >
+                  Skontaktuj się z nami
+               </button>
+              </div>
       </section>
 
       {/* Main Content */}
-      <section className="py-20" style={{ backgroundColor: '#F5F5F5' }}>
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="max-w-4xl mx-auto">
+      {/* <section className="py-20" style={{ backgroundColor: '#F5F5F5' }}>
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8"> */}
+          {/* <div className="max-w-4xl mx-auto">
             <div className="space-y-12">
               
-              {/* Administrator */}
+               // Administrator
               <div>
                 <h2 className="text-3xl font-bold mb-6" style={{ color: '#0A1A2F' }}>
                   1. Administrator danych osobowych
@@ -309,7 +326,7 @@ const PrivacyPolicyPage: React.FC = () => {
                 </div>
               </div>
 
-              {/* Cel przetwarzania */}
+               // Cel przetwarzania
               <div>
                 <h2 className="text-3xl font-bold mb-6" style={{ color: '#0A1A2F' }}>
                   2. Cel przetwarzania danych osobowych
@@ -337,7 +354,7 @@ const PrivacyPolicyPage: React.FC = () => {
                 </ul>
               </div>
 
-              {/* Podstawa prawna */}
+              // Podstawa prawna
               <div>
                 <h2 className="text-3xl font-bold mb-6" style={{ color: '#0A1A2F' }}>
                   3. Podstawa prawna przetwarzania
@@ -361,7 +378,7 @@ const PrivacyPolicyPage: React.FC = () => {
                 </div>
               </div>
 
-              {/* Okres przechowywania */}
+              // Okres przechowywania
               <div>
                 <h2 className="text-3xl font-bold mb-6" style={{ color: '#0A1A2F' }}>
                   4. Okres przechowywania danych
@@ -385,7 +402,7 @@ const PrivacyPolicyPage: React.FC = () => {
                 </ul>
               </div>
 
-              {/* Prawa osoby */}
+              // Prawa osoby
               <div>
                 <h2 className="text-3xl font-bold mb-6" style={{ color: '#0A1A2F' }}>
                   5. Twoje prawa
@@ -413,7 +430,7 @@ const PrivacyPolicyPage: React.FC = () => {
                 </div>
               </div>
 
-              {/* Bezpieczeństwo */}
+              // Bezpieczeństwo
               <div>
                 <h2 className="text-3xl font-bold mb-6" style={{ color: '#0A1A2F' }}>
                   6. Bezpieczeństwo danych
@@ -440,25 +457,10 @@ const PrivacyPolicyPage: React.FC = () => {
                     <span>Monitoring bezpieczeństwa systemów</span>
                   </li>
                 </ul>
-              </div>
+              </div> */}
 
               {/* Kontakt */}
-              <div className="text-center p-12 rounded-2xl shadow-xl border-4" style={{ backgroundColor: '#0A1A2F', borderColor: '#D4AF37' }}>
-                <h2 className="text-3xl font-bold mb-6" style={{ color: '#F5F5F5' }}>
-                  Masz pytania dotyczące ochrony danych?
-                </h2>
-                <p className="text-xl mb-8 max-w-2xl mx-auto leading-relaxed" style={{ color: '#F5F5F5' }}>
-                  Jeśli masz pytania dotyczące przetwarzania Twoich danych osobowych 
-                  lub chcesz skorzystać ze swoich praw, skontaktuj się z nami.
-                </p>
-               <button
-                 onClick={openModal}
-                  className="inline-block font-bold py-4 px-8 rounded-lg text-lg transition-all hover:-translate-y-2 duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl border-4"
-                  style={{ backgroundColor: '#F5F5F5', borderColor: '#D4AF37', color: '#0A1A2F' }}
-                >
-                  Skontaktuj się z nami
-               </button>
-              </div>
+              
             </div>
           </div>
         </div>
