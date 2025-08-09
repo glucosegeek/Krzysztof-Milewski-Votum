@@ -814,7 +814,7 @@ Nie ryzykujesz nic – możesz tylko zyskać.</li>
     {/* Active or repaid loan */}
     <div>
       <label className="block text-sm font-medium mb-2" style={{ color: '#F5F5F5' }}>
-        Status kredytu <span style={{ color: '#D4AF37' }}>*</span>
+        Status kredytu <span style={{ color: '#D4AF37' }}></span>
       </label>
       <div className="flex space-x-4">
         <label className="inline-flex items-center">
