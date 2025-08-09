@@ -166,8 +166,8 @@ const PrivacyPolicyPage: React.FC = () => {
     Przetwarzając Twoje dane osobowe stosujemy środki organizacyjne i techniczne zgodne z właściwymi
     przepisami prawa, w tym stosujemy szyfrowanie połączenia za pomocą certyﬁkatu SSL/TLS.
   </p>
-{/* Cookie Table */}
- <h2 className="text-2xl font-bold mb-4">PLIKI COOKIES</h2>
+
+   <h2 className="text-2xl font-bold mb-4">PLIKI COOKIES</h2>
   <p className="text-lg mb-4">
     Nasz Serwis, jak większość witryn internetowych, korzysta z tzw. plików cookies (ciasteczek). Pliki
     te: są zapisywane w pamięci Twojego urządzenia (komputera, telefonu, itd.); nie powodują zmian w
@@ -189,9 +189,10 @@ const PrivacyPolicyPage: React.FC = () => {
     <li>Microsoft Edge</li>
   </ul>
 
-  <p className="text-lg mb-4">Poniżej znajdziesz informacje na temat funkcji przetwarzanych przez nas plików cookie oraz ich okresie ważności.</p>
+  <p className="text-lg mb-4">Poniżej znajdziesz informacje na temat funkcji przetwarzanych przez nas plików cookie oraz ich okresie ważności.</p> 
 
-  <div className="overflow-x-auto mb-8">
+  {/* Cookie Table */}
+   <div className="overflow-x-auto mb-8">
     <table className="min-w-full border border-gray-300" style={{ borderColor: '#D4AF37' }}>
       <thead>
         <tr>
