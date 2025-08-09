@@ -493,116 +493,294 @@ Nie ryzykujesz nic – możesz tylko zyskać.</li>
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 max-w-4xl mx-auto">
             <div>
               <form onSubmit={handleSubmit} className="space-y-6">
-                <div className="grid md:grid-cols-2 gap-6">
-                  <div>
-                    <label htmlFor="name" className="block text-sm font-medium mb-2" style={{ color: '#F5F5F5' }}>
-                      Imię i nazwisko <span style={{ color: '#D4AF37' }}>*</span>
-                    </label>
-                    <input
-                      type="text"
-                      id="name"
-                      name="name"
-                      value={formData.name}
-                      onChange={handleInputChange}
-                      className="w-full px-4 py-3 rounded-lg focus:outline-none focus:ring-2"
-                      style={{
-                        backgroundColor: 'rgba(245, 245, 245, 0.1)',
-                        border: '1px solid rgba(245, 245, 245, 0.2)',
-                        color: '#F5F5F5',
-                        '--tw-ring-color': '#D4AF37',
-                      }}
-                      placeholder="Twoje imię i nazwisko"
-                      required
-                    />
-                    {errors.name && <p className="text-red-400 text-sm mt-1">{errors.name}</p>}
-                  </div>
+                // Loan Type Selection
+<div>
+  <label className="block text-sm font-medium mb-2" style={{ color: '#F5F5F5' }}>
+    Rodzaj sprawy <span style={{ color: '#D4AF37' }}>*</span>
+  </label>
+  <div className="flex space-x-4">
+    <label className="inline-flex items-center">
+      <input
+        type="radio"
+        name="loanType"
+        value="currency"
+        checked={formData.loanType === 'currency'}
+        onChange={handleInputChange}
+        className="form-radio"
+        style={{ accentColor: '#D4AF37' }}
+      />
+      <span className="ml-2 text-sm" style={{ color: '#F5F5F5' }}>Kredyt walutowy</span>
+    </label>
+    <label className="inline-flex items-center">
+      <input
+        type="radio"
+        name="loanType"
+        value="skd"
+        checked={formData.loanType === 'skd'}
+        onChange={handleInputChange}
+        className="form-radio"
+        style={{ accentColor: '#D4AF37' }}
+      />
+      <span className="ml-2 text-sm" style={{ color: '#F5F5F5' }}>SKD</span>
+    </label>
+  </div>
+  {errors.loanType && <p className="text-red-400 text-sm mt-1">{errors.loanType}</p>}
+</div>
 
-                  <div>
-                    <label htmlFor="email" className="block text-sm font-medium mb-2" style={{ color: '#F5F5F5' }}>
-                      Email <span style={{ color: '#D4AF37' }}>*</span>
-                    </label>
-                    <input
-                      type="email"
-                      id="email"
-                      name="email"
-                      value={formData.email}
-                      onChange={handleInputChange}
-                      className="w-full px-4 py-3 rounded-lg focus:outline-none focus:ring-2"
-                      style={{
-                        backgroundColor: 'rgba(245, 245, 245, 0.1)',
-                        border: '1px solid rgba(245, 245, 245, 0.2)',
-                        color: '#F5F5F5',
-                        '--tw-ring-color': '#D4AF37',
-                      }}
-                      placeholder="Twój adres email"
-                      required
-                    />
-                    {errors.email && <p className="text-red-400 text-sm mt-1">{errors.email}</p>}
-                  </div>
-                </div>
+{formData.loanType === 'currency' && (
+  <>
+    {/* Date of conclusion of the agreement */}
+    <div>
+      <label htmlFor="agreementDate" className="block text-sm font-medium mb-2" style={{ color: '#F5F5F5' }}>
+        Data zawarcia umowy <span style={{ color: '#D4AF37' }}>*</span>
+      </label>
+      <input
+        type="date"
+        id="agreementDate"
+        name="agreementDate"
+        value={formData.agreementDate}
+        onChange={handleInputChange}
+        className="w-full px-4 py-3 rounded-lg focus:outline-none focus:ring-2"
+        style={{
+          backgroundColor: 'rgba(245, 245, 245, 0.1)',
+          border: '1px solid rgba(245, 245, 245, 0.2)',
+          color: '#F5F5F5',
+          '--tw-ring-color': '#D4AF37',
+        }}
+        required
+      />
+      {errors.agreementDate && <p className="text-red-400 text-sm mt-1">{errors.agreementDate}</p>}
+    </div>
 
-                <div>
-                  <label htmlFor="phone" className="block text-sm font-medium mb-2" style={{ color: '#F5F5F5' }}>
-                    Numer telefonu <span style={{ color: '#D4AF37' }}>*</span>
-                  </label>
-                  <input
-                    type="tel"
-                    id="phone"
-                    name="phone"
-                    value={formData.phone}
-                    onChange={handleInputChange}
-                    className="w-full px-4 py-3 rounded-lg focus:outline-none focus:ring-2"
-                    style={{
-                      backgroundColor: 'rgba(245, 245, 245, 0.1)',
-                      border: '1px solid rgba(245, 245, 245, 0.2)',
-                      color: '#F5F5F5',
-                      '--tw-ring-color': '#D4AF37',
-                    }}
-                    placeholder="Twój numer telefonu"
-                    required
-                  />
-                  {errors.phone && <p className="text-red-400 text-sm mt-1">{errors.phone}</p>}
-                </div>
+    {/* Home bank with which the agreement was concluded */}
+    <div>
+      <label htmlFor="homeBank" className="block text-sm font-medium mb-2" style={{ color: '#F5F5F5' }}>
+        Bank, z którym zawarto umowę <span style={{ color: '#D4AF37' }}>*</span>
+      </label>
+      <input
+        type="text"
+        id="homeBank"
+        name="homeBank"
+        value={formData.homeBank}
+        onChange={handleInputChange}
+        className="w-full px-4 py-3 rounded-lg focus:outline-none focus:ring-2"
+        style={{
+          backgroundColor: 'rgba(245, 245, 245, 0.1)',
+          border: '1px solid rgba(245, 245, 245, 0.2)',
+          color: '#F5F5F5',
+          '--tw-ring-color': '#D4AF37',
+        }}
+        placeholder="Nazwa banku"
+        required
+      />
+      {errors.homeBank && <p className="text-red-400 text-sm mt-1">{errors.homeBank}</p>}
+    </div>
 
-                <div>
-                  <label htmlFor="message" className="block text-sm font-medium mb-2" style={{ color: '#F5F5F5' }}>
-                    Wiadomość (opcjonalnie)
-                  </label>
-                  <textarea
-                    id="message"
-                    name="message"
-                    value={formData.message}
-                    onChange={handleInputChange}
-                    rows={4}
-                    className="w-full px-4 py-3 rounded-lg focus:outline-none focus:ring-2"
-                    style={{
-                      backgroundColor: 'rgba(245, 245, 245, 0.1)',
-                      border: '1px solid rgba(245, 245, 245, 0.2)',
-                      color: '#F5F5F5',
-                      '--tw-ring-color': '#D4AF37',
-                    }}
-                    placeholder="Krótko opisz swoją sprawę (opcjonalnie)"
-                  ></textarea>
-                </div>
+    {/* Type of loan */}
+    <div>
+      <label className="block text-sm font-medium mb-2" style={{ color: '#F5F5F5' }}>
+        Typ kredytu <span style={{ color: '#D4AF37' }}>*</span>
+      </label>
+      <div className="flex flex-wrap gap-4">
+        <label className="inline-flex items-center">
+          <input
+            type="radio"
+            name="loanTypeDetail"
+            value="indexed"
+            checked={formData.loanTypeDetail === 'indexed'}
+            onChange={handleInputChange}
+            className="form-radio"
+            style={{ accentColor: '#D4AF37' }}
+          />
+          <span className="ml-2 text-sm" style={{ color: '#F5F5F5' }}>Indeksowany</span>
+        </label>
+        <label className="inline-flex items-center">
+          <input
+            type="radio"
+            name="loanTypeDetail"
+            value="denominated"
+            checked={formData.loanTypeDetail === 'denominated'}
+            onChange={handleInputChange}
+            className="form-radio"
+            style={{ accentColor: '#D4AF37' }}
+          />
+          <span className="ml-2 text-sm" style={{ color: '#F5F5F5' }}>Denominowany</span>
+        </label>
+        <label className="inline-flex items-center">
+          <input
+            type="radio"
+            name="loanTypeDetail"
+            value="unknown"
+            checked={formData.loanTypeDetail === 'unknown'}
+            onChange={handleInputChange}
+            className="form-radio"
+            style={{ accentColor: '#D4AF37' }}
+          />
+          <span className="ml-2 text-sm" style={{ color: '#F5F5F5' }}>Nie wiem</span>
+        </label>
+      </div>
+      {errors.loanTypeDetail && <p className="text-red-400 text-sm mt-1">{errors.loanTypeDetail}</p>}
+    </div>
 
-                <div className="mb-6">
-                  <label className="flex items-start text-sm font-medium w-full" style={{ color: '#F5F5F5' }}>
-                    <input
-                      type="checkbox"
-                      id="privacy-consent"
-                      name="privacyConsent"
-                      checked={privacyConsent}
-                      onChange={(e) => setPrivacyConsent(e.target.checked)}
-                      className="mr-2 mt-1 flex-shrink-0"
-                      style={{ accentColor: '#D4AF37' }}
-                      required
-                    />
-                    <span className="leading-relaxed flex-1">
-                      Wyrażam zgodę na przetwarzanie moich danych osobowych poprzez Krzysztof Milewski zgodnie z Rozporządzeniem Parlamentu Europejskiego I Rady (UE) 2016/679 z dnia 27 kwietnia 2016r. w sprawie ochrony osób fizycznych w związku z przetwarzaniem danych osobowych i w sprawie swobodnego przepływu takich danych oraz uchylenia dyrektywy 95/46/WE (ogólne rozporządzenie o ochronie danych) oraz zapoznałem/am się z <Link to="/privacy-policy" className="text-yellow-300 underline">informacjami dotyczącymi przetwarzania danych osobowych</Link>. <span style={{ color: '#D4AF37' }}>*</span>
-                    </span>
-                  </label>
-                  {errors.privacyConsent && <p className="text-red-400 text-sm mt-1">{errors.privacyConsent}</p>}
-                </div>
+    {/* Loan currency */}
+    <div>
+      <label htmlFor="loanCurrency" className="block text-sm font-medium mb-2" style={{ color: '#F5F5F5' }}>
+        Waluta kredytu <span style={{ color: '#D4AF37' }}>*</span>
+      </label>
+      <input
+        type="text"
+        id="loanCurrency"
+        name="loanCurrency"
+        value={formData.loanCurrency}
+        onChange={handleInputChange}
+        className="w-full px-4 py-3 rounded-lg focus:outline-none focus:ring-2"
+        style={{
+          backgroundColor: 'rgba(245, 245, 245, 0.1)',
+          border: '1px solid rgba(245, 245, 245, 0.2)',
+          color: '#F5F5F5',
+          '--tw-ring-color': '#D4AF37',
+        }}
+        placeholder="np. CHF, EUR, USD"
+        required
+      />
+      {errors.loanCurrency && <p className="text-red-400 text-sm mt-1">{errors.loanCurrency}</p>}
+    </div>
+
+    {/* Value in PLN */}
+    <div>
+      <label htmlFor="loanValuePln" className="block text-sm font-medium mb-2" style={{ color: '#F5F5F5' }}>
+        Wartość kredytu w PLN (w momencie zawarcia umowy) <span style={{ color: '#D4AF37' }}>*</span>
+      </label>
+      <input
+        type="number"
+        id="loanValuePln"
+        name="loanValuePln"
+        value={formData.loanValuePln}
+        onChange={handleInputChange}
+        className="w-full px-4 py-3 rounded-lg focus:outline-none focus:ring-2"
+        style={{
+          backgroundColor: 'rgba(245, 245, 245, 0.1)',
+          border: '1px solid rgba(245, 245, 245, 0.2)',
+          color: '#F5F5F5',
+          '--tw-ring-color': '#D4AF37',
+        }}
+        placeholder="Wartość w PLN"
+        required
+      />
+      {errors.loanValuePln && <p className="text-red-400 text-sm mt-1">{errors.loanValuePln}</p>}
+    </div>
+
+    {/* Number of installments in months */}
+    <div>
+      <label htmlFor="numberOfInstallments" className="block text-sm font-medium mb-2" style={{ color: '#F5F5F5' }}>
+        Liczba rat w miesiącach (zgodnie z umową) <span style={{ color: '#D4AF37' }}>*</span>
+      </label>
+      <input
+        type="number"
+        id="numberOfInstallments"
+        name="numberOfInstallments"
+        value={formData.numberOfInstallments}
+        onChange={handleInputChange}
+        className="w-full px-4 py-3 rounded-lg focus:outline-none focus:ring-2"
+        style={{
+          backgroundColor: 'rgba(245, 245, 245, 0.1)',
+          border: '1px solid rgba(245, 245, 245, 0.2)',
+          color: '#F5F5F5',
+          '--tw-ring-color': '#D4AF37',
+        }}
+        placeholder="Liczba miesięcy"
+        required
+      />
+      {errors.numberOfInstallments && <p className="text-red-400 text-sm mt-1">{errors.numberOfInstallments}</p>}
+    </div>
+
+    {/* Active or repaid loan */}
+    <div>
+      <label className="block text-sm font-medium mb-2" style={{ color: '#F5F5F5' }}>
+        Status kredytu <span style={{ color: '#D4AF37' }}>*</span>
+      </label>
+      <div className="flex space-x-4">
+        <label className="inline-flex items-center">
+          <input
+            type="radio"
+            name="loanStatus"
+            value="active"
+            checked={formData.loanStatus === 'active'}
+            onChange={handleInputChange}
+            className="form-radio"
+            style={{ accentColor: '#D4AF37' }}
+          />
+          <span className="ml-2 text-sm" style={{ color: '#F5F5F5' }}>Aktywny</span>
+        </label>
+        <label className="inline-flex items-center">
+          <input
+            type="radio"
+            name="loanStatus"
+            value="repaid"
+            checked={formData.loanStatus === 'repaid'}
+            onChange={handleInputChange}
+            className="form-radio"
+            style={{ accentColor: '#D4AF37' }}
+          />
+          <span className="ml-2 text-sm" style={{ color: '#F5F5F5' }}>Spłacony</span>
+        </label>
+      </div>
+      {errors.loanStatus && <p className="text-red-400 text-sm mt-1">{errors.loanStatus}</p>}
+    </div>
+
+    {formData.loanStatus === 'repaid' && (
+      <>
+        {/* If repaid, enter the date of repayment */}
+        <div>
+          <label htmlFor="repaymentDate" className="block text-sm font-medium mb-2" style={{ color: '#F5F5F5' }}>
+            Data spłaty kredytu <span style={{ color: '#D4AF37' }}>*</span>
+          </label>
+          <input
+            type="date"
+            id="repaymentDate"
+            name="repaymentDate"
+            value={formData.repaymentDate}
+            onChange={handleInputChange}
+            className="w-full px-4 py-3 rounded-lg focus:outline-none focus:ring-2"
+            style={{
+              backgroundColor: 'rgba(245, 245, 245, 0.1)',
+              border: '1px solid rgba(245, 245, 245, 0.2)',
+              color: '#F5F5F5',
+              '--tw-ring-color': '#D4AF37',
+            }}
+            required
+          />
+          {errors.repaymentDate && <p className="text-red-400 text-sm mt-1">{errors.repaymentDate}</p>}
+        </div>
+
+        {/* and the value of the payment in PLN. */}
+        <div>
+          <label htmlFor="repaymentValuePln" className="block text-sm font-medium mb-2" style={{ color: '#F5F5F5' }}>
+            Wartość spłaty w PLN <span style={{ color: '#D4AF37' }}>*</span>
+          </label>
+          <input
+            type="number"
+            id="repaymentValuePln"
+            name="repaymentValuePln"
+            value={formData.repaymentValuePln}
+            onChange={handleInputChange}
+            className="w-full px-4 py-3 rounded-lg focus:outline-none focus:ring-2"
+            style={{
+              backgroundColor: 'rgba(245, 245, 245, 0.1)',
+              border: '1px solid rgba(245, 245, 245, 0.2)',
+              color: '#F5F5F5',
+              '--tw-ring-color': '#D4AF37',
+            }}
+            placeholder="Wartość spłaty w PLN"
+            required
+          />
+          {errors.repaymentValuePln && <p className="text-red-400 text-sm mt-1">{errors.repaymentValuePln}</p>}
+        </div>
+      </>
+    )}
+  </>
+)}
+
                 
                 <button
                   type="submit"
