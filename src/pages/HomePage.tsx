@@ -696,7 +696,7 @@ Nie ryzykujesz nic – możesz tylko zyskać.</li>
     {/* Type of loan */}
     <div>
       <label className="block text-sm font-medium mb-2" style={{ color: '#F5F5F5' }}>
-        Typ kredytu <span style={{ color: '#D4AF37' }}>*</span>
+        Typ kredytu <span style={{ color: '#D4AF37' }}></span>
       </label>
       <div className="flex flex-wrap gap-4">
         <label className="inline-flex items-center">
