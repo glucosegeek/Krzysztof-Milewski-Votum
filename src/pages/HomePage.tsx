@@ -538,7 +538,7 @@ Nie ryzykujesz nic – możesz tylko zyskać.</li>
                       '--tw-ring-color': '#D4AF37',
                     }}
                     placeholder="Twoje imię i nazwisko"
-                    {/* required */}
+                    
                   />
                   {errors.name && <p className="text-red-400 text-sm mt-1">{errors.name}</p>}
                 </div>
