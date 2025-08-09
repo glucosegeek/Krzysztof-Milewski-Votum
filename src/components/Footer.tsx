@@ -154,7 +154,7 @@ const Footer: React.FC<FooterProps> = ({ registerFooterSection }) => {
     style={{ backgroundColor: '#F5F5F5', borderColor: '#D4AF37' }}
     aria-label="Pobierz z Apple App Store"
   >
-    <img src="/app-store.png" alt="Apple App Store" className="w-5 h-5 object-contain" /> {/* Changed class */}
+    <img src="/app-store.png" alt="Apple App Store" className="w-5 h-5 object-contain" /> 
   </a>
   <a
     href="https://play.google.com/store/apps/details?id=pl.votum_sa.mojasprawa&pli=1"
@@ -164,7 +164,7 @@ const Footer: React.FC<FooterProps> = ({ registerFooterSection }) => {
     style={{ backgroundColor: '#F5F5F5', borderColor: '#D4AF37' }}
     aria-label="Pobierz z Google Play Store"
   >
-    <img src="/google-play.png" alt="Google Play Store" className="w-5 h-5 object-contain" /> {/* Changed class */}
+    <img src="/google-play.png" alt="Google Play Store" className="w-5 h-5 object-contain" />
   </a>
 </div>
 
