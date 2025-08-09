@@ -285,23 +285,22 @@ const PrivacyPolicyPage: React.FC = () => {
           </div>
         </div>
 
-        
-        <div className="text-center p-12 rounded-2xl shadow-xl border-4" style={{ backgroundColor: '#0A1A2F', borderColor: '#D4AF37' }}>
-                <h2 className="text-3xl font-bold mb-6 text-center" style={{ color: '#F5F5F5' }}>
-                  Masz pytania dotyczące ochrony danych?
-                </h2>
-                <p className="text-xl mb-8 max-w-2xl mx-auto leading-relaxed" style={{ color: '#F5F5F5' }}>
-                  Jeśli masz pytania dotyczące przetwarzania Twoich danych osobowych 
-                  lub chcesz skorzystać ze swoich praw, skontaktuj się z nami.
-                </p>
-               <button
-                 onClick={openModal}
-                  className="inline-block font-bold py-4 px-8 rounded-lg text-lg transition-all hover:-translate-y-2 duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl border-4"
-                  style={{ backgroundColor: '#F5F5F5', borderColor: '#D4AF37', color: '#0A1A2F' }}
-                >
-                  Skontaktuj się z nami
-               </button>
-              </div>
+        <div className="max-w-4xl mx-auto text-center p-12 rounded-2xl shadow-xl border-4" style={{ backgroundColor: '#0A1A2F', borderColor: '#D4AF37' }}>
+      <h2 className="text-3xl font-bold mb-6 text-center" style={{ color: '#F5F5F5' }}>
+        Masz pytania dotyczące ochrony danych?
+      </h2>
+      <p className="text-xl mb-8 max-w-2xl mx-auto leading-relaxed" style={{ color: '#F5F5F5' }}>
+        Jeśli masz pytania dotyczące przetwarzania Twoich danych osobowych
+        lub chcesz skorzystać ze swoich praw, skontaktuj się z nami.
+      </p>
+      <button
+        onClick={openModal}
+        className="inline-block font-bold py-4 px-8 rounded-lg text-lg transition-all hover:-translate-y-2 duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl border-4"
+        style={{ backgroundColor: '#F5F5F5', borderColor: '#D4AF37', color: '#0A1A2F' }}
+      >
+        Skontaktuj się z nami
+      </button>
+    </div>
       </section>
     </div>
   ); 
