@@ -144,7 +144,7 @@ const Footer: React.FC<FooterProps> = ({ registerFooterSection }) => {
              <h3 className="text-xl font-bold mb-4 mt-8" style={{ color: '#F5F5F5' }}> {/* Added mt-8 for spacing */}
   Pobierz naszą aplikację na swój telefon.
 </h3>
-            <p style={{ color: '#D4AF37' }}>Wpisz ten numer, żebym mógł mieć Twoją sprawę zawsze pod opieką!</p>
+            <p style={{ color: '#D4AF37' }}>Wpisz ten numer K005533, żebym mógł mieć Twoją sprawę zawsze pod opieką! </p>
 <div className="flex space-x-4">
   <a
     href="https://apps.apple.com/pl/app/moja-sprawa/id6736989155?l=pl"
