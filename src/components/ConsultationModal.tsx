@@ -251,7 +251,7 @@ const ConsultationModal: React.FC = () => {
 
               <div>
                 <label htmlFor="modal-message" className="block text-sm font-medium mb-2" style={{ color: '#F5F5F5' }}>
-                  Wiadomość
+                  Wiadomość <span style={{ color: '#D4AF37' }}>*</span>
                 </label>
                 <textarea
                   id="modal-message"
