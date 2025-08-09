@@ -591,7 +591,7 @@ Nie ryzykujesz nic – możesz tylko zyskać.</li>
 
                 <div>
                   <label htmlFor="message" className="block text-sm font-medium mb-2" style={{ color: '#F5F5F5' }}>
-                    Wiadomość (opcjonalnie)
+                    Wiadomość
                   </label>
                   <textarea
                     id="message"
@@ -606,7 +606,7 @@ Nie ryzykujesz nic – możesz tylko zyskać.</li>
                       color: '#F5F5F5',
                       '--tw-ring-color': '#D4AF37',
                     }}
-                    placeholder="Krótko opisz swoją sprawę (opcjonalnie)"
+                    placeholder="Krótko opisz swoją sprawę"
                     required
                   ></textarea>
                 </div>
