@@ -520,6 +520,96 @@ Nie ryzykujesz nic – możesz tylko zyskać.</li>
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 max-w-4xl mx-auto">
             <div>
               <form onSubmit={handleSubmit} className="space-y-6">
+<div>
+                  <label htmlFor="name" className="block text-sm font-medium mb-2" style={{ color: '#F5F5F5' }}>
+                    Imię i nazwisko <span style={{ color: '#D4AF37' }}>*</span>
+                  </label>
+                  <input
+                    type="text"
+                    id="name"
+                    name="name"
+                    value={formData.name}
+                    onChange={handleInputChange}
+                    className="w-full px-4 py-3 rounded-lg focus:outline-none focus:ring-2"
+                    style={{
+                      backgroundColor: 'rgba(245, 245, 245, 0.1)',
+                      border: '1px solid rgba(245, 245, 245, 0.2)',
+                      color: '#F5F5F5',
+                      '--tw-ring-color': '#D4AF37',
+                    }}
+                    placeholder="Twoje imię i nazwisko"
+                    required
+                  />
+                  {errors.name && <p className="text-red-400 text-sm mt-1">{errors.name}</p>}
+                </div>
+
+                <div>
+                  <label htmlFor="email" className="block text-sm font-medium mb-2" style={{ color: '#F5F5F5' }}>
+                    Email <span style={{ color: '#D4AF37' }}>*</span>
+                  </label>
+                  <input
+                    type="email"
+                    id="email"
+                    name="email"
+                    value={formData.email}
+                    onChange={handleInputChange}
+                    className="w-full px-4 py-3 rounded-lg focus:outline-none focus:ring-2"
+                    style={{
+                      backgroundColor: 'rgba(245, 245, 245, 0.1)',
+                      border: '1px solid rgba(245, 245, 245, 0.2)',
+                      color: '#F5F5F5',
+                      '--tw-ring-color': '#D4AF37',
+                    }}
+                    placeholder="Twój adres email"
+                    required
+                  />
+                  {errors.email && <p className="text-red-400 text-sm mt-1">{errors.email}</p>}
+                </div>
+
+                <div>
+                  <label htmlFor="phone" className="block text-sm font-medium mb-2" style={{ color: '#F5F5F5' }}>
+                    Numer telefonu <span style={{ color: '#D4AF37' }}>*</span>
+                  </label>
+                  <input
+                    type="tel"
+                    id="phone"
+                    name="phone"
+                    value={formData.phone}
+                    onChange={handleInputChange}
+                    className="w-full px-4 py-3 rounded-lg focus:outline-none focus:ring-2"
+                    style={{
+                      backgroundColor: 'rgba(245, 245, 245, 0.1)',
+                      border: '1px solid rgba(245, 245, 245, 0.2)',
+                      color: '#F5F5F5',
+                      '--tw-ring-color': '#D4AF37',
+                    }}
+                    placeholder="Twój numer telefonu"
+                    required
+                  />
+                  {errors.phone && <p className="text-red-400 text-sm mt-1">{errors.phone}</p>}
+                </div>
+
+                <div>
+                  <label htmlFor="message" className="block text-sm font-medium mb-2" style={{ color: '#F5F5F5' }}>
+                    Wiadomość (opcjonalnie)
+                  </label>
+                  <textarea
+                    id="message"
+                    name="message"
+                    value={formData.message}
+                    onChange={handleInputChange}
+                    rows={3}
+                    className="w-full px-4 py-3 rounded-lg focus:outline-none focus:ring-2"
+                    style={{
+                      backgroundColor: 'rgba(245, 245, 245, 0.1)',
+                      border: '1px solid rgba(245, 245, 245, 0.2)',
+                      color: '#F5F5F5',
+                      '--tw-ring-color': '#D4AF37',
+                    }}
+                    placeholder="Krótko opisz swoją sprawę (opcjonalnie)"
+                  ></textarea>
+                </div>
+                
                 {/* Loan Type Selection */}
 <div>
   <label className="block text-sm font-medium mb-2" style={{ color: '#F5F5F5' }}>
@@ -807,96 +897,6 @@ Nie ryzykujesz nic – możesz tylko zyskać.</li>
     )}
   </>
 )}
-
-                <div>
-                  <label htmlFor="name" className="block text-sm font-medium mb-2" style={{ color: '#F5F5F5' }}>
-                    Imię i nazwisko <span style={{ color: '#D4AF37' }}>*</span>
-                  </label>
-                  <input
-                    type="text"
-                    id="name"
-                    name="name"
-                    value={formData.name}
-                    onChange={handleInputChange}
-                    className="w-full px-4 py-3 rounded-lg focus:outline-none focus:ring-2"
-                    style={{
-                      backgroundColor: 'rgba(245, 245, 245, 0.1)',
-                      border: '1px solid rgba(245, 245, 245, 0.2)',
-                      color: '#F5F5F5',
-                      '--tw-ring-color': '#D4AF37',
-                    }}
-                    placeholder="Twoje imię i nazwisko"
-                    required
-                  />
-                  {errors.name && <p className="text-red-400 text-sm mt-1">{errors.name}</p>}
-                </div>
-
-                <div>
-                  <label htmlFor="email" className="block text-sm font-medium mb-2" style={{ color: '#F5F5F5' }}>
-                    Email <span style={{ color: '#D4AF37' }}>*</span>
-                  </label>
-                  <input
-                    type="email"
-                    id="email"
-                    name="email"
-                    value={formData.email}
-                    onChange={handleInputChange}
-                    className="w-full px-4 py-3 rounded-lg focus:outline-none focus:ring-2"
-                    style={{
-                      backgroundColor: 'rgba(245, 245, 245, 0.1)',
-                      border: '1px solid rgba(245, 245, 245, 0.2)',
-                      color: '#F5F5F5',
-                      '--tw-ring-color': '#D4AF37',
-                    }}
-                    placeholder="Twój adres email"
-                    required
-                  />
-                  {errors.email && <p className="text-red-400 text-sm mt-1">{errors.email}</p>}
-                </div>
-
-                <div>
-                  <label htmlFor="phone" className="block text-sm font-medium mb-2" style={{ color: '#F5F5F5' }}>
-                    Numer telefonu <span style={{ color: '#D4AF37' }}>*</span>
-                  </label>
-                  <input
-                    type="tel"
-                    id="phone"
-                    name="phone"
-                    value={formData.phone}
-                    onChange={handleInputChange}
-                    className="w-full px-4 py-3 rounded-lg focus:outline-none focus:ring-2"
-                    style={{
-                      backgroundColor: 'rgba(245, 245, 245, 0.1)',
-                      border: '1px solid rgba(245, 245, 245, 0.2)',
-                      color: '#F5F5F5',
-                      '--tw-ring-color': '#D4AF37',
-                    }}
-                    placeholder="Twój numer telefonu"
-                    required
-                  />
-                  {errors.phone && <p className="text-red-400 text-sm mt-1">{errors.phone}</p>}
-                </div>
-
-                <div>
-                  <label htmlFor="message" className="block text-sm font-medium mb-2" style={{ color: '#F5F5F5' }}>
-                    Wiadomość (opcjonalnie)
-                  </label>
-                  <textarea
-                    id="message"
-                    name="message"
-                    value={formData.message}
-                    onChange={handleInputChange}
-                    rows={3}
-                    className="w-full px-4 py-3 rounded-lg focus:outline-none focus:ring-2"
-                    style={{
-                      backgroundColor: 'rgba(245, 245, 245, 0.1)',
-                      border: '1px solid rgba(245, 245, 245, 0.2)',
-                      color: '#F5F5F5',
-                      '--tw-ring-color': '#D4AF37',
-                    }}
-                    placeholder="Krótko opisz swoją sprawę (opcjonalnie)"
-                  ></textarea>
-                </div>
 
                 <div className="mb-6">
                   <label className="flex items-start text-sm font-medium w-full" style={{ color: '#F5F5F5' }}>
