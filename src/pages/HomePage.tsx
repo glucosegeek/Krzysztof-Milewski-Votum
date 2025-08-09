@@ -243,7 +243,7 @@ Nie ryzykujesz nic – możesz tylko zyskać.</li>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
             <h2 className="text-4xl font-bold mb-4" style={{ color: '#F5F5F5' }}>
-              Dlaczego warto działać z Votum Consumer Care
+              Dlaczego warto działać ze mną działać?
             </h2>
             <p className="text-xl max-w-3xl mx-auto" style={{ color: '#F5F5F5' }}>
               Jestem Przedstawicielem Votum Consumer Care, które zapewnia kompleksowe wsparcie prawne opracowane specjalnie z myślą o toksycznych kredytach walutowych oraz w ramach SKD  ( Sankcja Kredytu Darmowego).
