@@ -168,29 +168,29 @@ const conciergeItems = [
   };
   
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    const { name, value } = e.target;
-    
-    if (name === 'phone') {
-      const prefix = '+48 ';
-      let newValue = value;
+    const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+  const { name, value } = e.target;
 
-      // If the new value doesn't start with the prefix, or is shorter than the prefix,
-      // reset it to the prefix.
-      if (!newValue.startsWith(prefix) || newValue.length < prefix.length) {
-        newValue = prefix;
-      }
-      
-      setFormData({
-        ...formData,
-        [name]: newValue
-      });
-    } else {
-      setFormData({
-        ...formData,
-        [name]: value
-      });
+  if (name === 'phone') {
+    const prefix = '+48 ';
+    let newValue = value;
+
+    if (!newValue.startsWith(prefix) || newValue.length < prefix.length) {
+      newValue = prefix;
     }
-  };
+
+    setFormData({
+      ...formData,
+      [name]: newValue
+    });
+  } else {
+    setFormData({
+      ...formData,
+      [name]: value
+    });
+  }
+};
+
 
   const handleSubmit = (e: React.FormEvent) => {
   e.preventDefault();
