@@ -561,7 +561,7 @@ Nie ryzykujesz nic – możesz tylko zyskać.</li>
                       '--tw-ring-color': '#D4AF37',
                     }}
                     placeholder="Twój adres email"
-                    {/* required */}
+                    
                   />
                   {errors.email && <p className="text-red-400 text-sm mt-1">{errors.email}</p>}
                 </div>
@@ -584,7 +584,7 @@ Nie ryzykujesz nic – możesz tylko zyskać.</li>
                       '--tw-ring-color': '#D4AF37',
                     }}
                     placeholder="Twój numer telefonu"
-                    {/* required */}
+                    
                   />
                   {errors.phone && <p className="text-red-400 text-sm mt-1">{errors.phone}</p>}
                 </div>
@@ -664,7 +664,7 @@ Nie ryzykujesz nic – możesz tylko zyskać.</li>
           color: '#F5F5F5',
           '--tw-ring-color': '#D4AF37',
         }}
-        {/* required */}
+        
       />
       {errors.agreementDate && <p className="text-red-400 text-sm mt-1">{errors.agreementDate}</p>}
     </div>
@@ -688,7 +688,7 @@ Nie ryzykujesz nic – możesz tylko zyskać.</li>
           '--tw-ring-color': '#D4AF37',
         }}
         placeholder="Nazwa banku"
-        {/* required */}
+        
       />
       {errors.homeBank && <p className="text-red-400 text-sm mt-1">{errors.homeBank}</p>}
     </div>
@@ -758,7 +758,7 @@ Nie ryzykujesz nic – możesz tylko zyskać.</li>
           '--tw-ring-color': '#D4AF37',
         }}
         placeholder="np. CHF, EUR, USD"
-        {/* required */}
+        
       />
       {errors.loanCurrency && <p className="text-red-400 text-sm mt-1">{errors.loanCurrency}</p>}
     </div>
@@ -782,7 +782,7 @@ Nie ryzykujesz nic – możesz tylko zyskać.</li>
           '--tw-ring-color': '#D4AF37',
         }}
         placeholder="Wartość w PLN"
-        {/* required */}
+        
       />
       {errors.loanValuePln && <p className="text-red-400 text-sm mt-1">{errors.loanValuePln}</p>}
     </div>
@@ -806,7 +806,7 @@ Nie ryzykujesz nic – możesz tylko zyskać.</li>
           '--tw-ring-color': '#D4AF37',
         }}
         placeholder="Liczba miesięcy"
-        {/* required */}
+        
       />
       {errors.numberOfInstallments && <p className="text-red-400 text-sm mt-1">{errors.numberOfInstallments}</p>}
     </div>
@@ -865,7 +865,7 @@ Nie ryzykujesz nic – możesz tylko zyskać.</li>
               color: '#F5F5F5',
               '--tw-ring-color': '#D4AF37',
             }}
-            {/* required */}
+            
           />
           {errors.repaymentDate && <p className="text-red-400 text-sm mt-1">{errors.repaymentDate}</p>}
         </div>
@@ -889,7 +889,7 @@ Nie ryzykujesz nic – możesz tylko zyskać.</li>
               '--tw-ring-color': '#D4AF37',
             }}
             placeholder="Wartość spłaty w PLN"
-            {/* required */}
+            
           />
           {errors.repaymentValuePln && <p className="text-red-400 text-sm mt-1">{errors.repaymentValuePln}</p>}
         </div>
@@ -908,7 +908,7 @@ Nie ryzykujesz nic – możesz tylko zyskać.</li>
                       onChange={(e) => setPrivacyConsent(e.target.checked)}
                       className="mr-2 mt-1 flex-shrink-0"
                       style={{ accentColor: '#D4AF37' }}
-                      {/* required */}
+                      
                     />
                     <span className="leading-relaxed flex-1">
                       Wyrażam zgodę na przetwarzanie moich danych osobowych przez właściciela strony internetowej uwolnieniekredytowe.pl w celach kontaktowych, marketingowych oraz związanych z nawiązaniem współpracy, zgodnie z <Link to="/privacy-policy" className="text-yellow-300 underline">polityką prywatności. </Link><span style={{ color: '#D4AF37' }}></span>Zostałem/am poinformowany/a o przysługujących mi prawach, w tym o możliwości wycofania zgody w dowolnym momencie.*
