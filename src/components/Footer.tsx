@@ -142,7 +142,7 @@ const Footer: React.FC<FooterProps> = ({ registerFooterSection }) => {
               </a>
             </div>
              <h3 className="text-xl font-bold mb-4 mt-8" style={{ color: '#F5F5F5' }}> {/* Added mt-8 for spacing */}
-  Pobierz naszą aplikację na swój telefon
+  Pobierz naszą aplikację na swój telefon i wpisz ten numer: K005533
 </h3>
 <div className="flex space-x-4">
   <a
