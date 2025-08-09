@@ -203,9 +203,9 @@ const PrivacyPolicyPage: React.FC = () => {
       </thead>
       <tbody>
         <tr>
-          <td className="py-2 px-4 border-b border-gray-300" style={{ color: '#0A1A2F', borderColor: '#D4AF37' }}>"_ga"</td>
-          <td className="py-2 px-4 border-b border-gray-300" style={{ color: '#0A1A2F', borderColor: '#D4AF37' }}>czas trwania sesji</td>
-          <td className="py-2 px-4 border-b border-gray-300" style={{ color: '#0A1A2F', borderColor: '#D4AF37' }}>sledzenie ruchu w celach statystycznych</td>
+          <td className="py-2 px-4 border-b border-gray-300" style={{ color: '#F5F5F5', borderColor: '#D4AF37' }}>"_ga"</td>
+          <td className="py-2 px-4 border-b border-gray-300" style={{ color: '#F5F5F5', borderColor: '#D4AF37' }}>czas trwania sesji</td>
+          <td className="py-2 px-4 border-b border-gray-300" style={{ color: '#F5F5F5', borderColor: '#D4AF37' }}>sledzenie ruchu w celach statystycznych</td>
         </tr>
       </tbody>
     </table>
