@@ -266,7 +266,7 @@ const ConsultationModal: React.FC = () => {
                     color: '#F5F5F5',
                     '--tw-ring-color': '#D4AF37',
                   }}
-                  placeholder="Krótko opisz swoją sprawę (opcjonalnie)"
+                  placeholder="Krótko opisz swoją sprawę"
                   required
                 ></textarea>
               </div>
