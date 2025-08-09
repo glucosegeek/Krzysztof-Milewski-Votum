@@ -174,22 +174,22 @@ const conciergeItems = [
     }
 
     // New validations for loan details
-    if (!formData.loanType) {
-      newErrors.loanType = 'Wybór rodzaju sprawy jest obowiązkowy.';
-    } else if (formData.loanType === 'currency') {
-      if (!formData.agreementDate) newErrors.agreementDate = 'Data zawarcia umowy jest obowiązkowa.';
-      if (!formData.homeBank.trim()) newErrors.homeBank = 'Nazwa banku jest obowiązkowa.';
-      if (!formData.loanTypeDetail) newErrors.loanTypeDetail = 'Typ kredytu jest obowiązkowy.';
-      if (!formData.loanCurrency.trim()) newErrors.loanCurrency = 'Waluta kredytu jest obowiązkowa.';
-      if (!formData.loanValuePln) newErrors.loanValuePln = 'Wartość kredytu w PLN jest obowiązkowa.';
-      if (!formData.numberOfInstallments) newErrors.numberOfInstallments = 'Liczba rat jest obowiązkowa.';
-      if (!formData.loanStatus) newErrors.loanStatus = 'Status kredytu jest obowiązkowy.';
+    // if (!formData.loanType) {
+    //   newErrors.loanType = 'Wybór rodzaju sprawy jest obowiązkowy.';
+    // } else if (formData.loanType === 'currency') {
+    //   if (!formData.agreementDate) newErrors.agreementDate = 'Data zawarcia umowy jest obowiązkowa.';
+    //   if (!formData.homeBank.trim()) newErrors.homeBank = 'Nazwa banku jest obowiązkowa.';
+    //   if (!formData.loanTypeDetail) newErrors.loanTypeDetail = 'Typ kredytu jest obowiązkowy.';
+    //   if (!formData.loanCurrency.trim()) newErrors.loanCurrency = 'Waluta kredytu jest obowiązkowa.';
+    //   if (!formData.loanValuePln) newErrors.loanValuePln = 'Wartość kredytu w PLN jest obowiązkowa.';
+    //   if (!formData.numberOfInstallments) newErrors.numberOfInstallments = 'Liczba rat jest obowiązkowa.';
+    //   if (!formData.loanStatus) newErrors.loanStatus = 'Status kredytu jest obowiązkowy.';
 
-      if (formData.loanStatus === 'repaid') {
-        if (!formData.repaymentDate) newErrors.repaymentDate = 'Data spłaty kredytu jest obowiązkowa.';
-        if (!formData.repaymentValuePln) newErrors.repaymentValuePln = 'Wartość spłaty w PLN jest obowiązkowa.';
-      }
-    }
+    //   if (formData.loanStatus === 'repaid') {
+    //     if (!formData.repaymentDate) newErrors.repaymentDate = 'Data spłaty kredytu jest obowiązkowa.';
+    //     if (!formData.repaymentValuePln) newErrors.repaymentValuePln = 'Wartość spłaty w PLN jest obowiązkowa.';
+    //   }
+    // }
 
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
@@ -649,7 +649,7 @@ Nie ryzykujesz nic – możesz tylko zyskać.</li>
     {/* Date of conclusion of the agreement */}
     <div>
       <label htmlFor="agreementDate" className="block text-sm font-medium mb-2" style={{ color: '#F5F5F5' }}>
-        Data zawarcia umowy <span style={{ color: '#D4AF37' }}>*</span>
+        Data zawarcia umowy <span style={{ color: '#D4AF37' }}></span>
       </label>
       <input
         type="date"
@@ -672,7 +672,7 @@ Nie ryzykujesz nic – możesz tylko zyskać.</li>
     {/* Home bank with which the agreement was concluded */}
     <div>
       <label htmlFor="homeBank" className="block text-sm font-medium mb-2" style={{ color: '#F5F5F5' }}>
-        Bank, z którym zawarto umowę <span style={{ color: '#D4AF37' }}>*</span>
+        Bank, z którym zawarto umowę <span style={{ color: '#D4AF37' }}></span>
       </label>
       <input
         type="text"
@@ -742,7 +742,7 @@ Nie ryzykujesz nic – możesz tylko zyskać.</li>
     {/* Loan currency */}
     <div>
       <label htmlFor="loanCurrency" className="block text-sm font-medium mb-2" style={{ color: '#F5F5F5' }}>
-        Waluta kredytu <span style={{ color: '#D4AF37' }}>*</span>
+        Waluta kredytu <span style={{ color: '#D4AF37' }}></span>
       </label>
       <input
         type="text"
@@ -766,7 +766,7 @@ Nie ryzykujesz nic – możesz tylko zyskać.</li>
     {/* Value in PLN */}
     <div>
       <label htmlFor="loanValuePln" className="block text-sm font-medium mb-2" style={{ color: '#F5F5F5' }}>
-        Wartość kredytu w PLN (w momencie zawarcia umowy) <span style={{ color: '#D4AF37' }}>*</span>
+        Wartość kredytu w PLN (w momencie zawarcia umowy) <span style={{ color: '#D4AF37' }}></span>
       </label>
       <input
         type="number"
@@ -790,7 +790,7 @@ Nie ryzykujesz nic – możesz tylko zyskać.</li>
     {/* Number of installments in months */}
     <div>
       <label htmlFor="numberOfInstallments" className="block text-sm font-medium mb-2" style={{ color: '#F5F5F5' }}>
-        Liczba rat w miesiącach (zgodnie z umową) <span style={{ color: '#D4AF37' }}>*</span>
+        Liczba rat w miesiącach (zgodnie z umową) <span style={{ color: '#D4AF37' }}></span>
       </label>
       <input
         type="number"
@@ -850,7 +850,7 @@ Nie ryzykujesz nic – możesz tylko zyskać.</li>
         {/* If repaid, enter the date of repayment */}
         <div>
           <label htmlFor="repaymentDate" className="block text-sm font-medium mb-2" style={{ color: '#F5F5F5' }}>
-            Data spłaty kredytu <span style={{ color: '#D4AF37' }}>*</span>
+            Data spłaty kredytu <span style={{ color: '#D4AF37' }}></span>
           </label>
           <input
             type="date"
@@ -873,7 +873,7 @@ Nie ryzykujesz nic – możesz tylko zyskać.</li>
         {/* and the value of the payment in PLN. */}
         <div>
           <label htmlFor="repaymentValuePln" className="block text-sm font-medium mb-2" style={{ color: '#F5F5F5' }}>
-            Wartość spłaty w PLN <span style={{ color: '#D4AF37' }}>*</span>
+            Wartość spłaty w PLN <span style={{ color: '#D4AF37' }}></span>
           </label>
           <input
             type="number"
