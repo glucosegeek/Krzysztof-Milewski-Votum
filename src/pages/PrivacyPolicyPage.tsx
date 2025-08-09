@@ -286,7 +286,7 @@ const PrivacyPolicyPage: React.FC = () => {
         </div>
 
         
-        <div className="text-center p-12 rounded-2xl shadow-xl border-4 text-3xl font-bold mb-6 text-center" style={{ backgroundColor: '#0A1A2F', borderColor: '#D4AF37' }}>
+        <div className="text-center p-12 rounded-2xl shadow-xl border-4" style={{ backgroundColor: '#0A1A2F', borderColor: '#D4AF37' }}>
                 <h2 className="text-3xl font-bold mb-6 text-center" style={{ color: '#F5F5F5' }}>
                   Masz pytania dotyczące ochrony danych?
                 </h2>
