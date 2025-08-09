@@ -116,15 +116,6 @@ const Navbar: React.FC = () => {
             </Link>
 
             <Link
-                  to="/credit-form" // New link for the credit form
-                  className="px-3 py-2 rounded-md text-sm font-medium transition-colors hover:bg-opacity-10 hover:bg-white"
-                  style={{ color: '#F5F5F5' }}
-                  onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
-                >
-                  Formularz Kredytowy
-            </Link>
-
-            <Link
                   to="/#contact-section"
                   className="px-4 py-3 rounded-md text-sm font-medium transition-colors hover:bg-opacity-10 hover:bg-white"
                   style={{ color: '#F5F5F5' }}
@@ -249,18 +240,6 @@ const Navbar: React.FC = () => {
                 >
                   O mnie
               </Link>
-
-              <Link
-                  to="/credit-form" // New link for the credit form in mobile menu
-                  className="block px-3 py-2 rounded-md text-sm font-medium transition-colors hover:bg-opacity-10 hover:bg-white"
-                  style={{ color: '#F5F5F5' }}
-                  onClick={() => {
-                    closeMobileMenu();
-                    window.scrollTo({ top: 0, behavior: 'smooth' });
-                  }}
-                >
-                  Formularz Kredytowy
-            </Link>
 
             </div>
           </div>

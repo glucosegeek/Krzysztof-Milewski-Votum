@@ -43,8 +43,7 @@ useEffect(() => {
           <Route path="/news" element={<NewsPage />} />
           <Route path="/faq" element={<FAQPage />} />
           <Route path="/privacy-policy" element={<PrivacyPolicyPage />} />
-          <Route path="/about-me" element={<AboutMePage />} />
-          <Route path="/credit-form" element={<CreditFormPage />} /> {/* Add this new route */}
+           <Route path="/about-me" element={<AboutMePage />} />
         </Routes>
         <Footer registerFooterSection={registerFooterSection} />
         <StickyContactButton />
