@@ -253,14 +253,14 @@ const PrivacyPolicyPage: React.FC = () => {
           <td className="py-2 px-4 border-b border-gray-300" style={{ color: '#0A1A2F', borderColor: '#D4AF37' }}>tak – Stany Zjednoczone Ameryki **</td>
         </tr>
         <tr>
-          <td className="py-2 px-4 border-b border-gray-300" style={{ color: '#0A1A2F', borderColor: '#D4AF37' }}>nawiązanie z nami kontaktu (np. zadanie pytania)</td>
-          <td className="py-2 px-4 border-b border-gray-300" style={{ color: '#0A1A2F', borderColor: '#D4AF37' }}>dostawca standardowego oprogramowania biurowego (w tym skrzynki poczty elektronicznej)</td>
-          <td className="py-2 px-4 border-b border-gray-300" style={{ color: '#0A1A2F', borderColor: '#D4AF37' }}>tak – Stany Zjednoczone Ameryki **</td>
+          <td className="py-2 px-4 border-b border-gray-300" style={{ color: '#0A1A2F', borderColor: '#F5F5F5' }}>nawiązanie z nami kontaktu (np. zadanie pytania)</td>
+          <td className="py-2 px-4 border-b border-gray-300" style={{ color: '#0A1A2F', borderColor: '#F5F5F5' }}>dostawca standardowego oprogramowania biurowego (w tym skrzynki poczty elektronicznej)</td>
+          <td className="py-2 px-4 border-b border-gray-300" style={{ color: '#0A1A2F', borderColor: '#F5F5F5' }}>tak – Stany Zjednoczone Ameryki **</td>
         </tr>
         <tr>
-          <td className="py-2 px-4 border-b border-gray-300" style={{ color: '#0A1A2F', borderColor: '#D4AF37' }}></td>
-          <td className="py-2 px-4 border-b border-gray-300" style={{ color: '#0A1A2F', borderColor: '#D4AF37' }}>Grupa Kapitałowa Votum</td>
-          <td className="py-2 px-4 border-b border-gray-300" style={{ color: '#0A1A2F', borderColor: '#D4AF37' }}>nie ma miejsca</td>
+          <td className="py-2 px-4 border-b border-gray-300" style={{ color: '#0A1A2F', borderColor: '#F5F5F5' }}></td>
+          <td className="py-2 px-4 border-b border-gray-300" style={{ color: '#0A1A2F', borderColor: '#F5F5F5' }}>Grupa Kapitałowa Votum</td>
+          <td className="py-2 px-4 border-b border-gray-300" style={{ color: '#0A1A2F', borderColor: '#F5F5F5' }}>nie ma miejsca</td>
         </tr>
       </tbody>
     </table>
