@@ -11,7 +11,7 @@ const PrivacyPolicyPage: React.FC = () => {
       {/* Header */}
       <section className="py-20" style={{ backgroundColor: '#0A1A2F' }}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="max-w-4xl mx-auto" style={{ color: '#0A1A2F' }}>
+          <div className="max-w-4xl mx-auto" style={{ color: '#F5F5F5' }}>
   <h1 className="text-3xl font-bold mb-6">Polityka prywatności Serwisu uwolnieniekredytowe</h1>
   <p className="text-lg mb-4">uwolnieniekredytowe.pl („Serwis”)</p>
 
