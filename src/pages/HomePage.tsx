@@ -607,6 +607,7 @@ Nie ryzykujesz nic – możesz tylko zyskać.</li>
                       '--tw-ring-color': '#D4AF37',
                     }}
                     placeholder="Krótko opisz swoją sprawę (opcjonalnie)"
+                    require
                   ></textarea>
                 </div>
                 
