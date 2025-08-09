@@ -591,7 +591,7 @@ Nie ryzykujesz nic – możesz tylko zyskać.</li>
 
                 <div>
                   <label htmlFor="message" className="block text-sm font-medium mb-2" style={{ color: '#F5F5F5' }}>
-                    Wiadomość
+                    Wiadomość<span style={{ color: '#D4AF37' }}>*</span>
                   </label>
                   <textarea
                     id="message"
