@@ -5,41 +5,12 @@ import { Link } from 'react-router-dom';
 
 const ConsultationModal: React.FC = () => {
   const { isModalOpen, modalIntent, closeModal, submittedData } = useConsultationModal();
-  const [formData, setFormData] = useState({
-    name: '',
-    email: '',
-    phone: '+48 ',
-    message: '',
-    loanType: '', // 'currency' or 'skd'
-    agreementDate: '',
-    homeBank: '',
-    loanTypeDetail: '', // 'indexed', 'denominated', 'unknown'
-    loanCurrency: '',
-    loanValuePln: '',
-    numberOfInstallments: '',
-    loanStatus: '', // 'active' or 'repaid'
-    repaymentDate: '',
-    repaymentValuePln: '',
-  });
-  
+  const [name, setName] = useState('');
+  const [email, setEmail] = useState('');
+  const [phone, setPhone] = useState('+48 '); // Default area code
+  const [message, setMessage] = useState('');
   const [privacyConsent, setPrivacyConsent] = useState(false);
-  const [errors, setErrors] = useState<{
-    name?: string;
-    email?: string;
-    phone?: string;
-    message?: string;
-    privacyConsent?: string;
-    loanType?: string;
-    agreementDate?: string;
-    homeBank?: string;
-    loanTypeDetail?: string;
-    loanCurrency?: string;
-    loanValuePln?: string;
-    numberOfInstallments?: string;
-    loanStatus?: string;
-    repaymentDate?: string;
-    repaymentValuePln?: string;
-  }>({});
+  const [errors, setErrors] = useState<{ name?: string; email?: string; phone?: string; privacyConsent?: string }>({});
   const modalRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -55,22 +26,10 @@ const ConsultationModal: React.FC = () => {
     } else {
       document.body.style.overflow = ''; // Restore scrolling
       // Clear form and errors when modal closes
-      setFormData({
-        name: '',
-        email: '',
-        phone: '+48 ',
-        message: '',
-        loanType: '',
-        agreementDate: '',
-        homeBank: '',
-        loanTypeDetail: '',
-        loanCurrency: '',
-        loanValuePln: '',
-        numberOfInstallments: '',
-        loanStatus: '',
-        repaymentDate: '',
-        repaymentValuePln: '',
-      });
+      setName('');
+      setEmail('');
+      setPhone('+48 '); // Reset phone to default
+      setMessage('');
       setPrivacyConsent(false); // Reset privacy consent
       setErrors({});
     }
@@ -88,63 +47,41 @@ const ConsultationModal: React.FC = () => {
   }, [isModalOpen, closeModal, modalIntent]);
 
   const validate = () => {
-    const newErrors: typeof errors = {};
-
-    if (!formData.name.trim()) {
+    const newErrors: { name?: string; email?: string; phone?: string; privacyConsent?: string } = {};
+    if (!name.trim()) {
       newErrors.name = 'Imię i nazwisko jest obowiązkowe.';
     }
-
-    if (!formData.email.trim()) {
+    if (!email.trim()) {
       newErrors.email = 'Email jest obowiązkowy.';
-    } else if (!/\S+@\S+\.\S+/.test(formData.email)) {
+    } else if (!/\S+@\S+\.\S+/.test(email)) {
       newErrors.email = 'Nieprawidłowy format email.';
     }
 
-    // Basic phone number validation regex (adjust as needed for specific formats)
+    // Updated regex for Polish phone numbers:
+    // Allows for +48 prefix (optional), followed by 9 digits,
+    // with optional spaces or hyphens between groups of 3 digits.
     const phoneRegex = /^(?:\+48)?(?:[ -]?\d{3}){3}$/;
-    const cleanedPhone = formData.phone.replace(/[\s-]/g, '');
     
-    if (!cleanedPhone.trim() || cleanedPhone.trim() === '+48') {
+    // Clean the phone number for validation by removing spaces and hyphens
+    const cleanedPhone = phone.replace(/[\s-]/g, '');
+
+    if (!cleanedPhone.trim() || cleanedPhone.trim() === '+48') { // Check for empty or just "+48"
       newErrors.phone = 'Numer telefonu jest obowiązkowy.';
-    } else if (!phoneRegex.test(cleanedPhone)) {
+    } else if (!phoneRegex.test(cleanedPhone)) { // Validate the cleaned number
       newErrors.phone = 'Nieprawidłowy format numeru telefonu.';
     }
 
     if (!privacyConsent) {
       newErrors.privacyConsent = 'Zgoda na przetwarzanie danych jest obowiązkowa.';
     }
-
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
-  };
-
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    const { name, value } = e.target;
-
-    if (name === 'phone') {
-      const prefix = '+48 ';
-      let newValue = value;
-
-      if (!newValue.startsWith(prefix) || newValue.length < prefix.length) {
-        newValue = prefix;
-      }
-
-      setFormData({
-        ...formData,
-        [name]: newValue
-      });
-    } else {
-      setFormData({
-        ...formData,
-        [name]: value
-      });
-    }
   };
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (validate()) {
-      console.log('Form Data:', formData);
+      console.log('Form Data:', { name, email, phone, message });
       
       // Check the intent that opened this modal
       if (modalIntent === 'direct_consultation') {
@@ -153,7 +90,7 @@ const ConsultationModal: React.FC = () => {
         closeModal();
       } else {
         // For other cases, show success message
-        openModal({ ...formData, privacyConsent }, 'form_submission');
+        openModal({ name, email, phone, message, privacyConsent }, 'form_submission');
       }
     }
   };
@@ -235,8 +172,8 @@ const ConsultationModal: React.FC = () => {
                   type="text"
                   id="modal-name"
                   name="name"
-                  value={formData.name}
-                  onChange={handleInputChange}
+                  value={name}
+                  onChange={(e) => setName(e.target.value)}
                   className="w-full px-4 py-3 rounded-lg focus:outline-none focus:ring-2"
                   style={{
                     backgroundColor: 'rgba(245, 245, 245, 0.1)',
@@ -260,8 +197,8 @@ const ConsultationModal: React.FC = () => {
                   type="email"
                   id="modal-email"
                   name="email"
-                  value={formData.email}
-                  onChange={handleInputChange}
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
                   className="w-full px-4 py-3 rounded-lg focus:outline-none focus:ring-2"
                   style={{
                     backgroundColor: 'rgba(245, 245, 245, 0.1)',
@@ -285,8 +222,18 @@ const ConsultationModal: React.FC = () => {
                   type="tel"
                   id="modal-phone"
                   name="phone"
-                  value={formData.phone}
-                  onChange={handleInputChange}
+                  value={phone}
+                  onChange={(e) => {
+                    const prefix = '+48 ';
+                    let newValue = e.target.value;
+
+                    // If the new value doesn't start with the prefix, or is shorter than the prefix,
+                    // reset it to the prefix.
+                    if (!newValue.startsWith(prefix) || newValue.length < prefix.length) {
+                      newValue = prefix;
+                    }
+                    setPhone(newValue);
+                  }}
                   className="w-full px-4 py-3 rounded-lg focus:outline-none focus:ring-2"
                   style={{
                     backgroundColor: 'rgba(245, 245, 245, 0.1)',
@@ -304,13 +251,13 @@ const ConsultationModal: React.FC = () => {
 
               <div>
                 <label htmlFor="modal-message" className="block text-sm font-medium mb-2" style={{ color: '#F5F5F5' }}>
-                  Wiadomość <span style={{ color: '#D4AF37' }}>*</span>
+                  Wiadomość (opcjonalnie)
                 </label>
                 <textarea
                   id="modal-message"
                   name="message"
-                  value={formData.message}
-                  onChange={handleInputChange}
+                  value={message}
+                  onChange={(e) => setMessage(e.target.value)}
                   rows={3}
                   className="w-full px-4 py-3 rounded-lg focus:outline-none focus:ring-2"
                   style={{
@@ -320,297 +267,8 @@ const ConsultationModal: React.FC = () => {
                     '--tw-ring-color': '#D4AF37',
                   }}
                   placeholder="Krótko opisz swoją sprawę (opcjonalnie)"
-                  required
                 ></textarea>
               </div>
-                
-                {/* Loan Type Selection */}
-<div>
-  <label className="block text-sm font-medium mb-2" style={{ color: '#F5F5F5' }}>
-    Rodzaj sprawy <span style={{ color: '#D4AF37' }}></span>
-  </label>
-  <div className="flex space-x-4">
-    <label className="inline-flex items-center">
-      <input
-        type="radio"
-        name="loanType"
-        value="currency"
-        checked={formData.loanType === 'currency'}
-        onChange={handleInputChange}
-        className="form-radio"
-        style={{ accentColor: '#D4AF37' }}
-      />
-      <span className="ml-2 text-sm" style={{ color: '#F5F5F5' }}>Kredyt walutowy</span>
-    </label>
-    <label className="inline-flex items-center">
-      <input
-        type="radio"
-        name="loanType"
-        value="skd"
-        checked={formData.loanType === 'skd'}
-        onChange={handleInputChange}
-        className="form-radio"
-        style={{ accentColor: '#D4AF37' }}
-      />
-      <span className="ml-2 text-sm" style={{ color: '#F5F5F5' }}>SKD</span>
-    </label>
-  </div>
-  {errors.loanType && <p className="text-red-400 text-sm mt-1">{errors.loanType}</p>}
-</div>
-
-{formData.loanType === 'currency' && (
-  <>
-    {/* Date of conclusion of the agreement */}
-    <div>
-      <label htmlFor="agreementDate" className="block text-sm font-medium mb-2" style={{ color: '#F5F5F5' }}>
-        Data zawarcia umowy <span style={{ color: '#D4AF37' }}></span>
-      </label>
-      <input
-        type="date"
-        id="agreementDate"
-        name="agreementDate"
-        value={formData.agreementDate}
-        onChange={handleInputChange}
-        className="w-full px-4 py-3 rounded-lg focus:outline-none focus:ring-2"
-        style={{
-          backgroundColor: 'rgba(245, 245, 245, 0.1)',
-          border: '1px solid rgba(245, 245, 245, 0.2)',
-          color: '#F5F5F5',
-          '--tw-ring-color': '#D4AF37',
-        }}
-        
-      />
-      {errors.agreementDate && <p className="text-red-400 text-sm mt-1">{errors.agreementDate}</p>}
-    </div>
-
-    {/* Home bank with which the agreement was concluded */}
-    <div>
-      <label htmlFor="homeBank" className="block text-sm font-medium mb-2" style={{ color: '#F5F5F5' }}>
-        Bank, z którym zawarto umowę <span style={{ color: '#D4AF37' }}></span>
-      </label>
-      <input
-        type="text"
-        id="homeBank"
-        name="homeBank"
-        value={formData.homeBank}
-        onChange={handleInputChange}
-        className="w-full px-4 py-3 rounded-lg focus:outline-none focus:ring-2"
-        style={{
-          backgroundColor: 'rgba(245, 245, 245, 0.1)',
-          border: '1px solid rgba(245, 245, 245, 0.2)',
-          color: '#F5F5F5',
-          '--tw-ring-color': '#D4AF37',
-        }}
-        placeholder="Nazwa banku"
-        
-      />
-      {errors.homeBank && <p className="text-red-400 text-sm mt-1">{errors.homeBank}</p>}
-    </div>
-
-    {/* Type of loan */}
-    <div>
-      <label className="block text-sm font-medium mb-2" style={{ color: '#F5F5F5' }}>
-        Typ kredytu <span style={{ color: '#D4AF37' }}></span>
-      </label>
-      <div className="flex flex-wrap gap-4">
-        <label className="inline-flex items-center">
-          <input
-            type="radio"
-            name="loanTypeDetail"
-            value="indexed"
-            checked={formData.loanTypeDetail === 'indexed'}
-            onChange={handleInputChange}
-            className="form-radio"
-            style={{ accentColor: '#D4AF37' }}
-          />
-          <span className="ml-2 text-sm" style={{ color: '#F5F5F5' }}>Indeksowany</span>
-        </label>
-        <label className="inline-flex items-center">
-          <input
-            type="radio"
-            name="loanTypeDetail"
-            value="denominated"
-            checked={formData.loanTypeDetail === 'denominated'}
-            onChange={handleInputChange}
-            className="form-radio"
-            style={{ accentColor: '#D4AF37' }}
-          />
-          <span className="ml-2 text-sm" style={{ color: '#F5F5F5' }}>Denominowany</span>
-        </label>
-        <label className="inline-flex items-center">
-          <input
-            type="radio"
-            name="loanTypeDetail"
-            value="unknown"
-            checked={formData.loanTypeDetail === 'unknown'}
-            onChange={handleInputChange}
-            className="form-radio"
-            style={{ accentColor: '#D4AF37' }}
-          />
-          <span className="ml-2 text-sm" style={{ color: '#F5F5F5' }}>Nie wiem</span>
-        </label>
-      </div>
-      {errors.loanTypeDetail && <p className="text-red-400 text-sm mt-1">{errors.loanTypeDetail}</p>}
-    </div>
-
-    {/* Loan currency */}
-    <div>
-      <label htmlFor="loanCurrency" className="block text-sm font-medium mb-2" style={{ color: '#F5F5F5' }}>
-        Waluta kredytu <span style={{ color: '#D4AF37' }}></span>
-      </label>
-      <input
-        type="text"
-        id="loanCurrency"
-        name="loanCurrency"
-        value={formData.loanCurrency}
-        onChange={handleInputChange}
-        className="w-full px-4 py-3 rounded-lg focus:outline-none focus:ring-2"
-        style={{
-          backgroundColor: 'rgba(245, 245, 245, 0.1)',
-          border: '1px solid rgba(245, 245, 245, 0.2)',
-          color: '#F5F5F5',
-          '--tw-ring-color': '#D4AF37',
-        }}
-        placeholder="np. CHF, EUR, USD"
-        
-      />
-      {errors.loanCurrency && <p className="text-red-400 text-sm mt-1">{errors.loanCurrency}</p>}
-    </div>
-
-    {/* Value in PLN */}
-    <div>
-      <label htmlFor="loanValuePln" className="block text-sm font-medium mb-2" style={{ color: '#F5F5F5' }}>
-        Wartość kredytu w PLN (w momencie zawarcia umowy) <span style={{ color: '#D4AF37' }}></span>
-      </label>
-      <input
-        type="number"
-        id="loanValuePln"
-        name="loanValuePln"
-        value={formData.loanValuePln}
-        onChange={handleInputChange}
-        className="w-full px-4 py-3 rounded-lg focus:outline-none focus:ring-2"
-        style={{
-          backgroundColor: 'rgba(245, 245, 245, 0.1)',
-          border: '1px solid rgba(245, 245, 245, 0.2)',
-          color: '#F5F5F5',
-          '--tw-ring-color': '#D4AF37',
-        }}
-        placeholder="Wartość w PLN"
-        
-      />
-      {errors.loanValuePln && <p className="text-red-400 text-sm mt-1">{errors.loanValuePln}</p>}
-    </div>
-
-    {/* Number of installments in months */}
-    <div>
-      <label htmlFor="numberOfInstallments" className="block text-sm font-medium mb-2" style={{ color: '#F5F5F5' }}>
-        Liczba rat w miesiącach (zgodnie z umową) <span style={{ color: '#D4AF37' }}></span>
-      </label>
-      <input
-        type="number"
-        id="numberOfInstallments"
-        name="numberOfInstallments"
-        value={formData.numberOfInstallments}
-        onChange={handleInputChange}
-        className="w-full px-4 py-3 rounded-lg focus:outline-none focus:ring-2"
-        style={{
-          backgroundColor: 'rgba(245, 245, 245, 0.1)',
-          border: '1px solid rgba(245, 245, 245, 0.2)',
-          color: '#F5F5F5',
-          '--tw-ring-color': '#D4AF37',
-        }}
-        placeholder="Liczba miesięcy"
-        
-      />
-      {errors.numberOfInstallments && <p className="text-red-400 text-sm mt-1">{errors.numberOfInstallments}</p>}
-    </div>
-
-    {/* Active or repaid loan */}
-    <div>
-      <label className="block text-sm font-medium mb-2" style={{ color: '#F5F5F5' }}>
-        Status kredytu <span style={{ color: '#D4AF37' }}></span>
-      </label>
-      <div className="flex space-x-4">
-        <label className="inline-flex items-center">
-          <input
-            type="radio"
-            name="loanStatus"
-            value="active"
-            checked={formData.loanStatus === 'active'}
-            onChange={handleInputChange}
-            className="form-radio"
-            style={{ accentColor: '#D4AF37' }}
-          />
-          <span className="ml-2 text-sm" style={{ color: '#F5F5F5' }}>Aktywny</span>
-        </label>
-        <label className="inline-flex items-center">
-          <input
-            type="radio"
-            name="loanStatus"
-            value="repaid"
-            checked={formData.loanStatus === 'repaid'}
-            onChange={handleInputChange}
-            className="form-radio"
-            style={{ accentColor: '#D4AF37' }}
-          />
-          <span className="ml-2 text-sm" style={{ color: '#F5F5F5' }}>Spłacony</span>
-        </label>
-      </div>
-      {errors.loanStatus && <p className="text-red-400 text-sm mt-1">{errors.loanStatus}</p>}
-    </div>
-
-    {formData.loanStatus === 'repaid' && (
-      <>
-        {/* If repaid, enter the date of repayment */}
-        <div>
-          <label htmlFor="repaymentDate" className="block text-sm font-medium mb-2" style={{ color: '#F5F5F5' }}>
-            Data spłaty kredytu <span style={{ color: '#D4AF37' }}></span>
-          </label>
-          <input
-            type="date"
-            id="repaymentDate"
-            name="repaymentDate"
-            value={formData.repaymentDate}
-            onChange={handleInputChange}
-            className="w-full px-4 py-3 rounded-lg focus:outline-none focus:ring-2"
-            style={{
-              backgroundColor: 'rgba(245, 245, 245, 0.1)',
-              border: '1px solid rgba(245, 245, 245, 0.2)',
-              color: '#F5F5F5',
-              '--tw-ring-color': '#D4AF37',
-            }}
-            
-          />
-          {errors.repaymentDate && <p className="text-red-400 text-sm mt-1">{errors.repaymentDate}</p>}
-        </div>
-
-        {/* and the value of the payment in PLN. */}
-        <div>
-          <label htmlFor="repaymentValuePln" className="block text-sm font-medium mb-2" style={{ color: '#F5F5F5' }}>
-            Wartość spłaty w PLN <span style={{ color: '#D4AF37' }}></span>
-          </label>
-          <input
-            type="number"
-            id="repaymentValuePln"
-            name="repaymentValuePln"
-            value={formData.repaymentValuePln}
-            onChange={handleInputChange}
-            className="w-full px-4 py-3 rounded-lg focus:outline-none focus:ring-2"
-            style={{
-              backgroundColor: 'rgba(245, 245, 245, 0.1)',
-              border: '1px solid rgba(245, 245, 245, 0.2)',
-              color: '#F5F5F5',
-              '--tw-ring-color': '#D4AF37',
-            }}
-            placeholder="Wartość spłaty w PLN"
-            
-          />
-          {errors.repaymentValuePln && <p className="text-red-400 text-sm mt-1">{errors.repaymentValuePln}</p>}
-        </div>
-      </>
-    )}
-  </>
-)}
 
               <div className="mb-6">
                 <label className="flex items-start text-sm font-medium w-full" style={{ color: '#F5F5F5' }}>
@@ -627,7 +285,7 @@ const ConsultationModal: React.FC = () => {
                     aria-describedby={errors.privacyConsent ? "privacy-consent-error" : undefined}
                   />
                   <span className="leading-relaxed flex-1">
-                    Wyrażam zgodę na przetwarzanie moich danych osobowych przez właściciela strony internetowej uwolnieniekredytowe.pl w celach kontaktowych, marketingowych oraz związanych z nawiązaniem współpracy, zgodnie z <Link to="/privacy-policy" className="text-yellow-300 underline">polityką prywatności.</Link> <span style={{ color: '#D4AF37' }}>*</span>Zostałem/am poinformowany/a o przysługujących mi prawach, w tym o możliwości wycofania zgody w dowolnym momencie.
+                    Wyrażam zgodę na przetwarzanie moich danych osobowych poprzez Krzysztof Milewski zgodnie z Rozporządzeniem Parlamentu Europejskiego I Rady (UE) 2016/679 z dnia 27 kwietnia 2016r. w sprawie ochrony osób fizycznych w związku z przetwarzaniem danych osobowych i w sprawie swobodnego przepływu takich danych oraz uchylenia dyrektywy 95/46/WE (ogólne rozporządzenie o ochronie danych) oraz zapoznałem/am się z <Link to="/privacy-policy" className="text-yellow-300 underline">informacjami dotyczącymi przetwarzania danych osobowych</Link>. <span style={{ color: '#D4AF37' }}>*</span>
                   </span>
                 </label>
                 {errors.privacyConsent && <p id="privacy-consent-error" className="text-red-500 text-sm mt-1">{errors.privacyConsent}</p>}

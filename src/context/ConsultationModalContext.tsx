@@ -21,23 +21,7 @@ interface ConsultationModalContextType {
     repaymentValuePln?: string;
   }, intent?: string) => void;
   closeModal: () => void;
-  submittedData: {
-    name: string;
-    email: string;
-    phone: string;
-    message: string;
-    privacyConsent: boolean;
-    loanType?: string;
-    agreementDate?: string;
-    homeBank?: string;
-    loanTypeDetail?: string;
-    loanCurrency?: string;
-    loanValuePln?: string;
-    numberOfInstallments?: string;
-    loanStatus?: string;
-    repaymentDate?: string;
-    repaymentValuePln?: string;
-  } | null;
+  submittedData: any | null;
 }
 
 const ConsultationModalContext = createContext<ConsultationModalContextType | undefined>(undefined);
