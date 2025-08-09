@@ -238,29 +238,29 @@ const PrivacyPolicyPage: React.FC = () => {
       </thead>
       <tbody>
         <tr>
-          <td className="py-2 px-4 border-b border-gray-300" style={{ color: '#0A1A2F', borderColor: '#D4AF37' }}>każde działanie w związku z Serwisem</td>
-          <td className="py-2 px-4 border-b border-gray-300" style={{ color: '#0A1A2F', borderColor: '#D4AF37' }}>podmiot zapewniający nam wsparcie techniczne/IT</td>
-          <td className="py-2 px-4 border-b border-gray-300" style={{ color: '#0A1A2F', borderColor: '#D4AF37' }}>tak – Stany Zjednoczone Ameryki **</td>
+          <td className="py-2 px-4 border-b border-gray-300" style={{ color: '#F5F5F5', borderColor: '#D4AF37' }}>każde działanie w związku z Serwisem</td>
+          <td className="py-2 px-4 border-b border-gray-300" style={{ color: '#F5F5F5', borderColor: '#D4AF37' }}>podmiot zapewniający nam wsparcie techniczne/IT</td>
+          <td className="py-2 px-4 border-b border-gray-300" style={{ color: '#F5F5F5', borderColor: '#D4AF37' }}>tak – Stany Zjednoczone Ameryki **</td>
         </tr>
         <tr>
-          <td className="py-2 px-4 border-b border-gray-300" style={{ color: '#0A1A2F', borderColor: '#D4AF37' }}>skorzystanie z płatnych usług dostępnych w Serwisie</td>
-          <td className="py-2 px-4 border-b border-gray-300" style={{ color: '#0A1A2F', borderColor: '#D4AF37' }}>dostawca oprogramowania do prowadzenia sprzedaży</td>
-          <td className="py-2 px-4 border-b border-gray-300" style={{ color: '#0A1A2F', borderColor: '#D4AF37' }}>tak – Stany Zjednoczone Ameryki **</td>
+          <td className="py-2 px-4 border-b border-gray-300" style={{ color: '#F5F5F5', borderColor: '#D4AF37' }}>skorzystanie z płatnych usług dostępnych w Serwisie</td>
+          <td className="py-2 px-4 border-b border-gray-300" style={{ color: '#F5F5F5', borderColor: '#D4AF37' }}>dostawca oprogramowania do prowadzenia sprzedaży</td>
+          <td className="py-2 px-4 border-b border-gray-300" style={{ color: '#F5F5F5', borderColor: '#D4AF37' }}>tak – Stany Zjednoczone Ameryki **</td>
         </tr>
         <tr>
-          <td className="py-2 px-4 border-b border-gray-300" style={{ color: '#0A1A2F', borderColor: '#D4AF37' }}></td>
-          <td className="py-2 px-4 border-b border-gray-300" style={{ color: '#0A1A2F', borderColor: '#D4AF37' }}>dostawca standardowego oprogramowania biurowego (w tym skrzynki poczty elektronicznej)</td>
-          <td className="py-2 px-4 border-b border-gray-300" style={{ color: '#0A1A2F', borderColor: '#D4AF37' }}>tak – Stany Zjednoczone Ameryki **</td>
+          <td className="py-2 px-4 border-b border-gray-300" style={{ color: '#F5F5F5', borderColor: '#D4AF37' }}></td>
+          <td className="py-2 px-4 border-b border-gray-300" style={{ color: '#F5F5F5', borderColor: '#D4AF37' }}>dostawca standardowego oprogramowania biurowego (w tym skrzynki poczty elektronicznej)</td>
+          <td className="py-2 px-4 border-b border-gray-300" style={{ color: '#F5F5F5', borderColor: '#D4AF37' }}>tak – Stany Zjednoczone Ameryki **</td>
         </tr>
         <tr>
-          <td className="py-2 px-4 border-b border-gray-300" style={{ color: '#0A1A2F', borderColor: '#D4AF37' }}>nawiązanie z nami kontaktu (np. zadanie pytania)</td>
-          <td className="py-2 px-4 border-b border-gray-300" style={{ color: '#0A1A2F', borderColor: '#D4AF37' }}>dostawca standardowego oprogramowania biurowego (w tym skrzynki poczty elektronicznej)</td>
-          <td className="py-2 px-4 border-b border-gray-300" style={{ color: '#0A1A2F', borderColor: '#D4AF37' }}>tak – Stany Zjednoczone Ameryki **</td>
+          <td className="py-2 px-4 border-b border-gray-300" style={{ color: '#F5F5F5', borderColor: '#D4AF37' }}>nawiązanie z nami kontaktu (np. zadanie pytania)</td>
+          <td className="py-2 px-4 border-b border-gray-300" style={{ color: '#F5F5F5', borderColor: '#D4AF37' }}>dostawca standardowego oprogramowania biurowego (w tym skrzynki poczty elektronicznej)</td>
+          <td className="py-2 px-4 border-b border-gray-300" style={{ color: '#F5F5F5', borderColor: '#D4AF37' }}>tak – Stany Zjednoczone Ameryki **</td>
         </tr>
         <tr>
-          <td className="py-2 px-4 border-b border-gray-300" style={{ color: '#0A1A2F', borderColor: '#D4AF37' }}></td>
-          <td className="py-2 px-4 border-b border-gray-300" style={{ color: '#0A1A2F', borderColor: '#D4AF37' }}>Grupa Kapitałowa Votum</td>
-          <td className="py-2 px-4 border-b border-gray-300" style={{ color: '#0A1A2F', borderColor: '#D4AF37' }}>nie ma miejsca</td>
+          <td className="py-2 px-4 border-b border-gray-300" style={{ color: '#F5F5F5', borderColor: '#D4AF37' }}></td>
+          <td className="py-2 px-4 border-b border-gray-300" style={{ color: '#F5F5F5', borderColor: '#D4AF37' }}>Grupa Kapitałowa Votum</td>
+          <td className="py-2 px-4 border-b border-gray-300" style={{ color: '#F5F5F5', borderColor: '#D4AF37' }}>nie ma miejsca</td>
         </tr>
       </tbody>
     </table>
