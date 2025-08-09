@@ -179,7 +179,7 @@ const Footer: React.FC<FooterProps> = ({ registerFooterSection }) => {
               <p className="text-sm mb-2" style={{ color: '#F5F5F5' }}>
                 <strong>Zastrzeżenie prawne:</strong> Treści zawarte na tej stronie mają charakter wyłącznie informacyjny i nie stanowią porady prawnej.
 Każda sprawa jest indywidualna, a wcześniejsze wyniki nie stanowią gwarancji podobnych rezultatów w przyszłości.
-Konsultacja ma charakter informacyjny i nie tworzy relacji prawnik–klient. Jej celem jest przedstawienie możliwych działań w sprawach dotyczących nieuczciwych umów kredytowych.
+Konsultacja ma charakter informacyjny i nie tworzy relacji expert–klient. Jej celem jest przedstawienie możliwych działań w sprawach dotyczących nieuczciwych umów kredytowych.
               </p>
               <p className="text-sm" style={{ color: '#F5F5F5' }}>
                 © {new Date().getFullYear()} Wszelkie prawa zastrzeżone.
