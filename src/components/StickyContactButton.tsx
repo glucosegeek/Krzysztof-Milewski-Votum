@@ -7,7 +7,7 @@ const StickyContactButton: React.FC = () => {
   const { openModal } = useConsultationModal();
 
   const handleClick = () => {
-    openModal();
+    openModal(null, 'direct_consultation');
   };
 
   return (

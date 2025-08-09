@@ -222,8 +222,7 @@ const conciergeItems = [
   const handleSubmit = (e: React.FormEvent) => {
   e.preventDefault();
   if (validate()) {
-    // console.log('Form submitted:', formData); // Remove this line
-    openModal(formData); // Pass the form data to the modal context
+    openModal(formData, 'form_submission'); // Pass the form data to the modal context with form submission intent
   }
 };
 
@@ -251,7 +250,7 @@ const conciergeItems = [
             <button 
               className="font-bold py-4 px-8 rounded-lg text-lg transition-all hover:-translate-y-2 duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl border-4"
               style={{ backgroundColor: '#F5F5F5', borderColor: '#D4AF37' }}
-              onClick={() => openModal(null)}
+              onClick={() => openModal(null, 'direct_consultation')}
             >
               Bezpłatna konsultacja
             </button>

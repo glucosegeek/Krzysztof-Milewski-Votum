@@ -4,7 +4,7 @@ import { useConsultationModal } from '../context/ConsultationModalContext';
 import { Link } from 'react-router-dom';
 
 const ConsultationModal: React.FC = () => {
-  const { isModalOpen, closeModal, submittedData } = useConsultationModal();
+  const { isModalOpen, modalIntent, closeModal, submittedData } = useConsultationModal();
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [phone, setPhone] = useState('+48 '); // Default area code
@@ -16,15 +16,17 @@ const ConsultationModal: React.FC = () => {
   useEffect(() => {
     if (isModalOpen) {
       document.body.style.overflow = 'hidden'; // Prevent scrolling background
-      if (submittedData) {
+      if (modalIntent === 'direct_consultation') {
         // If data was passed from HomePage, trigger Calendly redirection after a short delay
         setTimeout(() => {
           window.open('https://calendly.com/krzysztof-milewski-dsa/30-minutowe-spotkanie', '_blank');
           closeModal();
         }, 2000); // Show message for 2 seconds
+      } else if (modalIntent === 'form_submission') {
+        // Just show the success message, no redirect
       }
       // Focus the first input when modal opens for accessibility
-      if (!submittedData) {
+      if (modalIntent !== 'direct_consultation' && modalIntent !== 'form_submission') {
         const firstInput = modalRef.current?.querySelector('input, textarea') as HTMLElement;
         if (firstInput) {
           firstInput.focus();
@@ -51,7 +53,7 @@ const ConsultationModal: React.FC = () => {
     return () => {
       document.removeEventListener('keydown', handleEscape);
     };
-  }, [isModalOpen, closeModal, submittedData]);
+  }, [isModalOpen, closeModal, modalIntent]);
 
   const validate = () => {
     const newErrors: { name?: string; email?: string; phone?: string; privacyConsent?: string } = {};
@@ -92,7 +94,7 @@ const ConsultationModal: React.FC = () => {
       
       // Simulate sending data (in a real app, you'd send to a backend/Supabase Edge Function here)
       // Trigger the same flow as when data is passed from HomePage
-      openModal({ name, email, phone, message, privacyConsent });
+      openModal({ name, email, phone, message, privacyConsent }, 'form_submission');
     }
   };
 
@@ -123,16 +125,25 @@ const ConsultationModal: React.FC = () => {
           <X size={24} />
         </button>
 
-        {submittedData ? (
+        {modalIntent === 'direct_consultation' ? (
+          <div className="text-center py-12">
+            <h2 className="text-3xl font-bold mb-4" style={{ color: '#F5F5F5' }}>
+              Przekierowanie do Calendly...
+            </h2>
+            <p className="text-lg" style={{ color: '#F5F5F5' }}>
+              Za chwilę zostaniesz przekierowany do strony rezerwacji terminu konsultacji.
+            </p>
+          </div>
+        ) : modalIntent === 'form_submission' ? (
           <div className="text-center py-12">
             <h2 className="text-3xl font-bold mb-4" style={{ color: '#F5F5F5' }}>
               Wiadomość została wysłana!
             </h2>
             <p className="text-lg" style={{ color: '#F5F5F5' }}>
-              Dziękujemy za kontakt. Zostaniesz przekierowany do Calendly, aby umówić termin konsultacji.
+              Dziękujemy za kontakt. Skontaktujemy się z Tobą w najbliższym czasie.
             </p>
             {/* Display submitted data */}
-            <div className="mt-8 text-left space-y-2" style={{ color: '#F5F5F5' }}>
+            {submittedData && <div className="mt-8 text-left space-y-2" style={{ color: '#F5F5F5' }}>
               <p><strong>Imię i nazwisko:</strong> {submittedData.name}</p>
               <p><strong>Email:</strong> {submittedData.email}</p>
               <p><strong>Telefon:</strong> {submittedData.phone}</p>
@@ -156,7 +167,7 @@ const ConsultationModal: React.FC = () => {
                   )}
                 </>
               )}
-            </div>
+            </div>}
           </div>
         ) : (
           <>
