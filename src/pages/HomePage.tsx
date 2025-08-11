@@ -220,17 +220,17 @@ const conciergeItems = [
   };
 
 
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
+  // const handleSubmit = async (e: React.FormEvent) => {
+  //   e.preventDefault();
     
-    if (!validate()) {
-      return;
-    }
+  //   if (!validate()) {
+  //     return;
+  //   }
 
-    setIsSubmitting(true);
+  //   setIsSubmitting(true);
 
-    try {
-      // Prepare webhook payload with all form data and metadata
+  //   try {
+  //     // Prepare webhook payload with all form data and metadata
   //     const webhookPayload = {
   //       // Form data
   //       name: formData.name,
@@ -291,7 +291,7 @@ const conciergeItems = [
 
 const handleSubmit = async (formData) => {
   try {
-    const response = await fetch('https://n8n.srv948633.hstgr.cloud/webhook/email-workflow', {
+    const response = await fetch('YOUR_WEBHOOK_URL_HERE', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -313,7 +313,7 @@ const handleSubmit = async (formData) => {
     alert('Failed to send message');
   }
 };
-      
+  
   return (
     <div className="min-h-screen pt-16" style={{ backgroundColor: '#0A1A2F' }}>
       {/* Hero Section */}
