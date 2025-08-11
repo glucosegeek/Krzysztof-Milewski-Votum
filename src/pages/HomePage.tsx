@@ -230,9 +230,6 @@ const conciergeItems = [
     mode: 'cors',
   });
   console.log(await webhookResponse.text());
-} catch (error) {
-  console.error('Error sending to webhook:', error);
-      
       if (webhookResponse.ok) {
         console.log('Webhook data sent successfully');
       } else {
