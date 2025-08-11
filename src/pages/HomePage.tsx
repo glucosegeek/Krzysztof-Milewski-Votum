@@ -218,256 +218,29 @@ const conciergeItems = [
     }
   };
 
-
-//   const handleSubmit = async (e: React.FormEvent) => {
-//   e.preventDefault();
-//   if (validate()) {
-//     try {
-//       const webhookResponse = await fetch('https://n8n.srv948633.hstgr.cloud/webhook/bolt-form', {
-//     method: 'POST',
-//     headers: { 'Content-Type': 'application/json' },
-//     body: JSON.stringify(formData),
-//     mode: 'cors',
-//   });
-//   console.log(await webhookResponse.text());
-//       if (webhookResponse.ok) {
-//         console.log('Webhook data sent successfully');
-//       } else {
-//         console.error('Webhook submission failed:', webhookResponse.status, webhookResponse.statusText);
-//       }
-//     } catch (error) {
-//       console.error('Error sending data to webhook:', error);
-//     }
-    
-//     // Always show success message to user regardless of webhook status
-//     openModal(formData, 'form_submission');
-//   }
-// };
-
-  // SOLUTION 1: Simple test to check if webhook is accessible
-const testWebhookAccess = async () => {
-  try {
-    console.log('🧪 Testing webhook accessibility...');
-    console.log('🌍 Current URL:', window.location.href);
-    console.log('🌍 Current origin:', window.location.origin);
-    
-    // Try direct GET request first (simpler)
-    const response = await fetch('https://n8n.srv948633.hstgr.cloud/webhook/bolt-form', {
-      method: 'GET',
-      mode: 'no-cors' // This bypasses CORS but limits response access
-    });
-    
-    console.log('✅ GET request completed (no-cors mode)');
-    return true;
-    
-  } catch (error) {
-    console.error('❌ Even no-cors failed:', error);
-    return false;
-  }
-};
-
-// SOLUTION 2: Alternative approach using a proxy or different method
-const handleSubmitWithProxy = async (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
   e.preventDefault();
-  
   if (validate()) {
     try {
-      console.log('🔄 Trying alternative submission methods...');
-      
-      const webhookData = {
-        ...formData,
-        timestamp: new Date().toISOString(),
-        source: 'bolt.new',
-        origin: window.location.origin
-      };
-
-      // Method 1: Try with 'no-cors' mode (fire and forget)
-      try {
-        await fetch('https://n8n.srv948633.hstgr.cloud/webhook/bolt-form', {
-          method: 'POST',
-          headers: { 
-            'Content-Type': 'application/json'
-          },
-          body: JSON.stringify(webhookData),
-          mode: 'no-cors' // This will send the data but we can't read the response
-        });
-        
-        console.log('✅ Data sent via no-cors mode');
-        
-        // Show success to user (we can't verify server response with no-cors)
-        openModal({
-          ...formData,
-          webhookStatus: 'sent',
-          note: 'Data sent (no response verification due to CORS)'
-        }, 'form_submission');
-        
-        return;
-        
-      } catch (noCorsError) {
-        console.error('❌ no-cors also failed:', noCorsError);
+      const webhookResponse = await fetch('https://n8n.srv948633.hstgr.cloud/webhook/bolt-form', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(formData),
+    mode: 'cors',
+  });
+  console.log(await webhookResponse.text());
+      if (webhookResponse.ok) {
+        console.log('Webhook data sent successfully');
+      } else {
+        console.error('Webhook submission failed:', webhookResponse.status, webhookResponse.statusText);
       }
-
-      // Method 2: Try creating a form and submitting it (old school way)
-      const form = document.createElement('form');
-      form.method = 'POST';
-      form.action = 'https://n8n.srv948633.hstgr.cloud/webhook/bolt-form';
-      form.target = '_blank'; // Open in new tab so user can see result
-      
-      // Add form fields
-      Object.entries(webhookData).forEach(([key, value]) => {
-        const input = document.createElement('input');
-        input.type = 'hidden';
-        input.name = key;
-        input.value = typeof value === 'object' ? JSON.stringify(value) : String(value);
-        form.appendChild(input);
-      });
-      
-      document.body.appendChild(form);
-      form.submit();
-      document.body.removeChild(form);
-      
-      console.log('✅ Data sent via form submission');
-      openModal({
-        ...formData,
-        webhookStatus: 'sent_form',
-        note: 'Data sent via form submission (check new tab for response)'
-      }, 'form_submission');
-      
     } catch (error) {
-      console.error('❌ All methods failed:', error);
-      
-      // Still show success to user (graceful degradation)
-      openModal({
-        ...formData,
-        webhookStatus: 'error',
-        webhookError: 'Unable to send due to browser security restrictions'
-      }, 'form_submission');
+      console.error('Error sending data to webhook:', error);
     }
+    
+    // Always show success message to user regardless of webhook status
+    openModal(formData, 'form_submission');
   }
-};
-
-// SOLUTION 3: Create a simple image-based tracking (works around CORS)
-const handleSubmitWithTracking = async (e: React.FormEvent) => {
-  e.preventDefault();
-  
-  if (validate()) {
-    try {
-      // Encode data in URL parameters (GET request via image)
-      const params = new URLSearchParams({
-        name: formData.name || '',
-        email: formData.email || '',
-        message: formData.message || '',
-        timestamp: new Date().toISOString(),
-        source: 'bolt.new'
-      });
-      
-      // Create tracking pixel (this bypasses CORS)
-      const img = new Image();
-      img.onload = () => {
-        console.log('✅ Data sent via tracking pixel');
-        openModal({
-          ...formData,
-          webhookStatus: 'sent_tracking',
-          note: 'Data sent successfully'
-        }, 'form_submission');
-      };
-      
-      img.onerror = () => {
-        console.log('📡 Tracking pixel "failed" but data was likely sent');
-        openModal({
-          ...formData,
-          webhookStatus: 'sent_tracking',
-          note: 'Data sent (tracking method)'
-        }, 'form_submission');
-      };
-      
-      // Send as GET request (n8n webhook needs to accept GET for this method)
-      img.src = `https://n8n.srv948633.hstgr.cloud/webhook/bolt-form?${params.toString()}`;
-      
-    } catch (error) {
-      console.error('❌ Tracking method failed:', error);
-      openModal({
-        ...formData,
-        webhookStatus: 'error',
-        webhookError: error.message
-      }, 'form_submission');
-    }
-  }
-};
-
-// SOLUTION 4: Use JSONP-style callback (if n8n supports it)
-const handleSubmitWithJSONP = async (e: React.FormEvent) => {
-  e.preventDefault();
-  
-  if (validate()) {
-    try {
-      // Create a unique callback name
-      const callbackName = `webhook_callback_${Date.now()}`;
-      
-      // Create the callback function
-      (window as any)[callbackName] = (response: any) => {
-        console.log('✅ JSONP response received:', response);
-        openModal({
-          ...formData,
-          webhookStatus: 'success',
-          webhookResponse: response
-        }, 'form_submission');
-        
-        // Clean up
-        delete (window as any)[callbackName];
-        document.head.removeChild(script);
-      };
-      
-      // Prepare data as URL parameters
-      const params = new URLSearchParams({
-        name: formData.name || '',
-        email: formData.email || '',
-        message: formData.message || '',
-        callback: callbackName,
-        timestamp: new Date().toISOString()
-      });
-      
-      // Create script tag for JSONP
-      const script = document.createElement('script');
-      script.src = `https://n8n.srv948633.hstgr.cloud/webhook/bolt-form?${params.toString()}`;
-      
-      // Add error handling
-      script.onerror = () => {
-        console.error('❌ JSONP failed');
-        delete (window as any)[callbackName];
-        document.head.removeChild(script);
-        
-        openModal({
-          ...formData,
-          webhookStatus: 'error',
-          webhookError: 'JSONP method failed'
-        }, 'form_submission');
-      };
-      
-      document.head.appendChild(script);
-      
-    } catch (error) {
-      console.error('❌ JSONP method failed:', error);
-      openModal({
-        ...formData,
-        webhookStatus: 'error',
-        webhookError: error.message
-      }, 'form_submission');
-    }
-  }
-};
-
-// Test all methods
-const testAllMethods = async () => {
-  console.log('🧪 Testing all webhook methods...');
-  
-  await testWebhookAccess();
-  
-  // You can test each method individually
-  console.log('Available methods:');
-  console.log('1. handleSubmitWithProxy - Uses no-cors mode');
-  console.log('2. handleSubmitWithTracking - Uses image tracking');
-  console.log('3. handleSubmitWithJSONP - Uses JSONP callback');
 };
   
   return (
