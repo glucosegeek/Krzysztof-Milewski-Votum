@@ -249,59 +249,50 @@ const conciergeItems = [
   
   if (validate()) {
     try {
-      // Add timestamp and any additional data
+      // Add debugging info
+      console.log('🌍 Current origin:', window.location.origin);
+      console.log('📋 Form data:', formData);
+      
       const webhookData = {
         ...formData,
         timestamp: new Date().toISOString(),
         source: 'bolt.new',
-        // Add any other fields you want to track
-        user_agent: navigator.userAgent,
-        page_url: window.location.href
+        origin: window.location.origin,
+        user_agent: navigator.userAgent
       };
 
-      console.log('Sending data to webhook:', webhookData);
+      console.log('📤 Sending to webhook:', webhookData);
 
-      const webhookResponse = await fetch('https://n8n.srv948633.hstgr.cloud/webhook/bolt-form', {
+      // Try the fetch with enhanced options
+      const webhookResponse = await fetch('https://n8n.srv948633.hstgr.cloud/webhook/1b1b1be3-a112-4fb4-81fd-661aeacd0ed4', {
         method: 'POST',
         headers: { 
           'Content-Type': 'application/json',
-          'Accept': 'application/json'
+          'Accept': 'application/json',
+          // Add origin header explicitly
+          'Origin': window.location.origin
         },
         body: JSON.stringify(webhookData),
         mode: 'cors',
+        credentials: 'omit', // Don't send cookies
+        cache: 'no-cache'
       });
 
-      // Parse response as JSON first
+      console.log('📨 Response status:', webhookResponse.status);
+      console.log('📨 Response headers:', Object.fromEntries(webhookResponse.headers.entries()));
+
       const responseData = await webhookResponse.json();
-      console.log('Webhook response:', responseData);
+      console.log('📨 Response data:', responseData);
 
       if (webhookResponse.ok) {
-        console.log('✅ Webhook data sent successfully');
-        
-        // Check if n8n returned success status
-        if (responseData.status === 'success') {
-          console.log('✅ n8n processed data successfully:', responseData.message);
-          console.log('📝 Received data:', {
-            name: responseData.received_name,
-            email: responseData.received_email,
-            webhook_id: responseData.webhook_id
-          });
-        } else {
-          console.warn('⚠️ n8n returned non-success status:', responseData);
-        }
-        
-        // Show success modal with webhook confirmation
+        console.log('✅ Webhook successful!');
         openModal({
           ...formData,
           webhookStatus: 'success',
           webhookId: responseData.webhook_id || 'unknown'
         }, 'form_submission');
-        
       } else {
-        console.error('❌ Webhook submission failed:', webhookResponse.status, webhookResponse.statusText);
-        console.error('Error details:', responseData);
-        
-        // Show modal with error info but still let user know form was "submitted"
+        console.error('❌ Webhook failed:', webhookResponse.status);
         openModal({
           ...formData,
           webhookStatus: 'error',
@@ -310,123 +301,68 @@ const conciergeItems = [
       }
       
     } catch (error) {
-      console.error('❌ Error sending data to webhook:', error);
-      
-      // Network error or parsing error
-      openModal({
-        ...formData,
-        webhookStatus: 'network_error',
-        webhookError: error instanceof Error ? error.message : 'Network error'
-      }, 'form_submission');
-    }
-  }
-};
-
-// Alternative version with better user feedback
-const handleSubmitWithFeedback = async (e: React.FormEvent) => {
-  e.preventDefault();
-  
-  if (validate()) {
-    // Show loading state
-    setIsSubmitting(true); // You'll need to add this state
-    
-    try {
-      const webhookData = {
-        ...formData,
-        timestamp: new Date().toISOString(),
-        source: 'bolt.new'
-      };
-
-      const webhookResponse = await fetch('https://n8n.srv948633.hstgr.cloud/webhook/bolt-form', {
-        method: 'POST',
-        headers: { 
-          'Content-Type': 'application/json',
-          'Accept': 'application/json'
-        },
-        body: JSON.stringify(webhookData),
-        mode: 'cors',
+      console.error('❌ Fetch error details:', {
+        name: error.name,
+        message: error.message,
+        stack: error.stack
       });
-
-      const responseData = await webhookResponse.json();
-
-      if (webhookResponse.ok && responseData.status === 'success') {
-        // Perfect success
-        console.log('✅ Form submitted and processed successfully!');
+      
+      // Check if it's a CORS error
+      if (error.message.includes('Failed to fetch') || error.name === 'TypeError') {
+        console.error('🚫 This is likely a CORS error. Check n8n webhook CORS settings.');
+        
+        // Show user-friendly error
         openModal({
           ...formData,
-          submissionSuccess: true,
-          webhookId: responseData.webhook_id
+          webhookStatus: 'cors_error',
+          webhookError: 'Connection blocked by security policy. Please check webhook configuration.'
         }, 'form_submission');
-        
-        // Optionally reset form
-        // setFormData({ name: '', email: '', message: '' });
-        
       } else {
-        // Webhook failed but don't break user experience
-        console.warn('⚠️ Form submitted but webhook processing failed');
         openModal({
           ...formData,
-          submissionSuccess: true, // Still show success to user
-          webhookWarning: true
+          webhookStatus: 'network_error',
+          webhookError: error.message
         }, 'form_submission');
       }
-      
-    } catch (error) {
-      console.error('❌ Submission error:', error);
-      
-      // Even on error, show success to user (graceful degradation)
-      openModal({
-        ...formData,
-        submissionSuccess: true,
-        webhookWarning: true
-      }, 'form_submission');
-    } finally {
-      setIsSubmitting(false);
     }
   }
 };
 
-// Test function to verify webhook is working
-const testWebhook = async () => {
+// Alternative: Test function to check CORS
+const testCORS = async () => {
   try {
-    const testData = {
-      name: 'Test User',
-      email: 'test@example.com',
-      message: 'This is a test message',
-      timestamp: new Date().toISOString(),
-      source: 'bolt.new-test'
-    };
-
-    console.log('🧪 Testing webhook...');
+    console.log('🧪 Testing CORS...');
+    console.log('🌍 Current origin:', window.location.origin);
     
-    const response = await fetch('https://n8n.srv948633.hstgr.cloud/webhook/bolt-form', {
-      method: 'POST',
-      headers: { 
-        'Content-Type': 'application/json',
-        'Accept': 'application/json'
-      },
-      body: JSON.stringify(testData),
-      mode: 'cors',
+    // Try a simple OPTIONS request first
+    const optionsResponse = await fetch('https://n8n.srv948633.hstgr.cloud/webhook/1b1b1be3-a112-4fb4-81fd-661aeacd0ed4', {
+      method: 'OPTIONS',
+      headers: {
+        'Origin': window.location.origin,
+        'Access-Control-Request-Method': 'POST',
+        'Access-Control-Request-Headers': 'Content-Type'
+      }
     });
-
-    const result = await response.json();
     
-    if (response.ok) {
-      console.log('✅ Webhook test successful:', result);
+    console.log('OPTIONS response:', optionsResponse.status);
+    console.log('CORS headers:', Object.fromEntries(optionsResponse.headers.entries()));
+    
+    if (optionsResponse.ok) {
+      console.log('✅ CORS preflight successful');
       return true;
     } else {
-      console.error('❌ Webhook test failed:', result);
+      console.error('❌ CORS preflight failed');
       return false;
     }
     
   } catch (error) {
-    console.error('❌ Webhook test error:', error);
+    console.error('❌ CORS test failed:', error);
     return false;
   }
 };
 
-// Call this in useEffect or on component mount to test
-// testWebhook();
+// Add this button temporarily to test CORS
+// <button onClick={testCORS}>Test CORS</button>
   
   return (
     <div className="min-h-screen pt-16" style={{ backgroundColor: '#0A1A2F' }}>
