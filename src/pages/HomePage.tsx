@@ -294,7 +294,7 @@ const handleSubmit = async (formData) => {
   
   try {
     // Replace with your actual webhook URL
-    const webhookUrl = 'https://your-n8n-host.com/webhook/email-workflow';
+    const webhookUrl = 'https://n8n.srv948633.hstgr.cloud/webhook/email-workflow';
     console.log('Sending to URL:', webhookUrl);
     
     const payload = {
