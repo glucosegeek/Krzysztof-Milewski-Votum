@@ -244,7 +244,7 @@ const conciergeItems = [
 //   }
 // };
 
- // SOLUTION 1: Simple test to check if webhook is accessible
+  // SOLUTION 1: Simple test to check if webhook is accessible
 const testWebhookAccess = async () => {
   try {
     console.log('🧪 Testing webhook accessibility...');
@@ -252,7 +252,7 @@ const testWebhookAccess = async () => {
     console.log('🌍 Current origin:', window.location.origin);
     
     // Try direct GET request first (simpler)
-    const response = await fetch('https://n8n.srv948633.hstgr.cloud/webhook/bolt-form', {
+    const response = await fetch('https://n8n.srv948633.hstgr.cloud/webhook/1b1b1be3-a112-4fb4-81fd-661aeacd0ed4', {
       method: 'GET',
       mode: 'no-cors' // This bypasses CORS but limits response access
     });
@@ -283,7 +283,7 @@ const handleSubmitWithProxy = async (e: React.FormEvent) => {
 
       // Method 1: Try with 'no-cors' mode (fire and forget)
       try {
-        await fetch('https://n8n.srv948633.hstgr.cloud/webhook/bolt-form', {
+        await fetch('https://n8n.srv948633.hstgr.cloud/webhook/1b1b1be3-a112-4fb4-81fd-661aeacd0ed4', {
           method: 'POST',
           headers: { 
             'Content-Type': 'application/json'
@@ -310,7 +310,7 @@ const handleSubmitWithProxy = async (e: React.FormEvent) => {
       // Method 2: Try creating a form and submitting it (old school way)
       const form = document.createElement('form');
       form.method = 'POST';
-      form.action = 'https://n8n.srv948633.hstgr.cloud/webhook/bolt-form';
+      form.action = 'https://n8n.srv948633.hstgr.cloud/webhook/1b1b1be3-a112-4fb4-81fd-661aeacd0ed4';
       form.target = '_blank'; // Open in new tab so user can see result
       
       // Add form fields
@@ -382,7 +382,7 @@ const handleSubmitWithTracking = async (e: React.FormEvent) => {
       };
       
       // Send as GET request (n8n webhook needs to accept GET for this method)
-      img.src = `https://n8n.srv948633.hstgr.cloud/webhook/bolt-form?${params.toString()}`;
+      img.src = `https://n8n.srv948633.hstgr.cloud/webhook/1b1b1be3-a112-4fb4-81fd-661aeacd0ed4?${params.toString()}`;
       
     } catch (error) {
       console.error('❌ Tracking method failed:', error);
@@ -429,7 +429,7 @@ const handleSubmitWithJSONP = async (e: React.FormEvent) => {
       
       // Create script tag for JSONP
       const script = document.createElement('script');
-      script.src = `https://n8n.srv948633.hstgr.cloud/webhook/bolt-form?${params.toString()}`;
+      script.src = `https://n8n.srv948633.hstgr.cloud/webhook/1b1b1be3-a112-4fb4-81fd-661aeacd0ed4?${params.toString()}`;
       
       // Add error handling
       script.onerror = () => {
