@@ -261,7 +261,7 @@ const conciergeItems = [
 
       console.log('Sending data to webhook:', webhookData);
 
-      const webhookResponse = await fetch('https://n8n.srv948633.hstgr.cloud/webhook/1b1b1be3-a112-4fb4-81fd-661aeacd0ed4', {
+      const webhookResponse = await fetch('https://n8n.srv948633.hstgr.cloud/webhook/bolt-form', {
         method: 'POST',
         headers: { 
           'Content-Type': 'application/json',
@@ -337,7 +337,7 @@ const handleSubmitWithFeedback = async (e: React.FormEvent) => {
         source: 'bolt.new'
       };
 
-      const webhookResponse = await fetch('https://n8n.srv948633.hstgr.cloud/webhook/1b1b1be3-a112-4fb4-81fd-661aeacd0ed4', {
+      const webhookResponse = await fetch('https://n8n.srv948633.hstgr.cloud/webhook/bolt-form', {
         method: 'POST',
         headers: { 
           'Content-Type': 'application/json',
@@ -399,7 +399,7 @@ const testWebhook = async () => {
 
     console.log('🧪 Testing webhook...');
     
-    const response = await fetch('https://n8n.srv948633.hstgr.cloud/webhook/1b1b1be3-a112-4fb4-81fd-661aeacd0ed4', {
+    const response = await fetch('https://n8n.srv948633.hstgr.cloud/webhook/bolt-form', {
       method: 'POST',
       headers: { 
         'Content-Type': 'application/json',
