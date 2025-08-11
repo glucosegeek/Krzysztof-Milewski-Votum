@@ -291,7 +291,7 @@ const conciergeItems = [
 
 const handleSubmit = async (formData) => {
   // Replace with your EXACT webhook URL from n8n
-  const webhookUrl = 'https://n8n.srv948633.hstgr.cloud/webhook/email-workflow';
+  const webhookUrl = 'https://n8n.srv948633.hstgr.cloud/webhook/webhook/email-workflow';
   
   console.log('Form data:', formData);
   console.log('Webhook URL:', webhookUrl);
