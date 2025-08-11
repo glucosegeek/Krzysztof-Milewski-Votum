@@ -222,15 +222,18 @@ const conciergeItems = [
   const handleSubmit = async (e: React.FormEvent) => {
   e.preventDefault();
   if (validate()) {
-    try {
-      // Send form data to webhook
-      const webhookResponse = await fetch('https://n8n.srv948633.hstgr.cloud/webhook/1b1b1be3-a112-4fb4-81fd-661aeacd0ed4', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(formData),
-      });
+   try {
+  const webhookResponse = await fetch('https://n8n.srv948633.hstgr.cloud/webhook/1b1b1be3-a112-4fb4-81fd-661aeacd0ed4', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(formData),
+    mode: 'cors',
+  });
+  console.log(await webhookResponse.text());
+} catch (error) {
+  console.error('Error sending to webhook:', error);
+}
+
       
       if (webhookResponse.ok) {
         console.log('Webhook data sent successfully');
