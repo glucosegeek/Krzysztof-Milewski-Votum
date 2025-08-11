@@ -219,10 +219,30 @@ const conciergeItems = [
   };
 
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
   e.preventDefault();
   if (validate()) {
-    openModal(formData, 'form_submission'); // Pass the form data to the modal context with form submission intent
+    try {
+      // Send form data to webhook
+      const webhookResponse = await fetch('https://n8n.srv948633.hstgr.cloud/webhook/1b1b1be3-a112-4fb4-81fd-661aeacd0ed4', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData),
+      });
+      
+      if (webhookResponse.ok) {
+        console.log('Webhook data sent successfully');
+      } else {
+        console.error('Webhook submission failed:', webhookResponse.status, webhookResponse.statusText);
+      }
+    } catch (error) {
+      console.error('Error sending data to webhook:', error);
+    }
+    
+    // Always show success message to user regardless of webhook status
+    openModal(formData, 'form_submission');
   }
 };
 
