@@ -219,31 +219,215 @@ const conciergeItems = [
   };
 
 
+//   const handleSubmit = async (e: React.FormEvent) => {
+//   e.preventDefault();
+//   if (validate()) {
+//     try {
+//       const webhookResponse = await fetch('https://n8n.srv948633.hstgr.cloud/webhook/1b1b1be3-a112-4fb4-81fd-661aeacd0ed4', {
+//     method: 'POST',
+//     headers: { 'Content-Type': 'application/json' },
+//     body: JSON.stringify(formData),
+//     mode: 'cors',
+//   });
+//   console.log(await webhookResponse.text());
+//       if (webhookResponse.ok) {
+//         console.log('Webhook data sent successfully');
+//       } else {
+//         console.error('Webhook submission failed:', webhookResponse.status, webhookResponse.statusText);
+//       }
+//     } catch (error) {
+//       console.error('Error sending data to webhook:', error);
+//     }
+    
+//     // Always show success message to user regardless of webhook status
+//     openModal(formData, 'form_submission');
+//   }
+// };
+
   const handleSubmit = async (e: React.FormEvent) => {
   e.preventDefault();
+  
   if (validate()) {
     try {
+      // Add timestamp and any additional data
+      const webhookData = {
+        ...formData,
+        timestamp: new Date().toISOString(),
+        source: 'bolt.new',
+        // Add any other fields you want to track
+        user_agent: navigator.userAgent,
+        page_url: window.location.href
+      };
+
+      console.log('Sending data to webhook:', webhookData);
+
       const webhookResponse = await fetch('https://n8n.srv948633.hstgr.cloud/webhook/1b1b1be3-a112-4fb4-81fd-661aeacd0ed4', {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify(formData),
-    mode: 'cors',
-  });
-  console.log(await webhookResponse.text());
+        method: 'POST',
+        headers: { 
+          'Content-Type': 'application/json',
+          'Accept': 'application/json'
+        },
+        body: JSON.stringify(webhookData),
+        mode: 'cors',
+      });
+
+      // Parse response as JSON first
+      const responseData = await webhookResponse.json();
+      console.log('Webhook response:', responseData);
+
       if (webhookResponse.ok) {
-        console.log('Webhook data sent successfully');
+        console.log('✅ Webhook data sent successfully');
+        
+        // Check if n8n returned success status
+        if (responseData.status === 'success') {
+          console.log('✅ n8n processed data successfully:', responseData.message);
+          console.log('📝 Received data:', {
+            name: responseData.received_name,
+            email: responseData.received_email,
+            webhook_id: responseData.webhook_id
+          });
+        } else {
+          console.warn('⚠️ n8n returned non-success status:', responseData);
+        }
+        
+        // Show success modal with webhook confirmation
+        openModal({
+          ...formData,
+          webhookStatus: 'success',
+          webhookId: responseData.webhook_id || 'unknown'
+        }, 'form_submission');
+        
       } else {
-        console.error('Webhook submission failed:', webhookResponse.status, webhookResponse.statusText);
+        console.error('❌ Webhook submission failed:', webhookResponse.status, webhookResponse.statusText);
+        console.error('Error details:', responseData);
+        
+        // Show modal with error info but still let user know form was "submitted"
+        openModal({
+          ...formData,
+          webhookStatus: 'error',
+          webhookError: responseData.message || 'Unknown error'
+        }, 'form_submission');
       }
+      
     } catch (error) {
-      console.error('Error sending data to webhook:', error);
+      console.error('❌ Error sending data to webhook:', error);
+      
+      // Network error or parsing error
+      openModal({
+        ...formData,
+        webhookStatus: 'network_error',
+        webhookError: error instanceof Error ? error.message : 'Network error'
+      }, 'form_submission');
     }
-    
-    // Always show success message to user regardless of webhook status
-    openModal(formData, 'form_submission');
   }
 };
 
+// Alternative version with better user feedback
+const handleSubmitWithFeedback = async (e: React.FormEvent) => {
+  e.preventDefault();
+  
+  if (validate()) {
+    // Show loading state
+    setIsSubmitting(true); // You'll need to add this state
+    
+    try {
+      const webhookData = {
+        ...formData,
+        timestamp: new Date().toISOString(),
+        source: 'bolt.new'
+      };
+
+      const webhookResponse = await fetch('https://n8n.srv948633.hstgr.cloud/webhook/1b1b1be3-a112-4fb4-81fd-661aeacd0ed4', {
+        method: 'POST',
+        headers: { 
+          'Content-Type': 'application/json',
+          'Accept': 'application/json'
+        },
+        body: JSON.stringify(webhookData),
+        mode: 'cors',
+      });
+
+      const responseData = await webhookResponse.json();
+
+      if (webhookResponse.ok && responseData.status === 'success') {
+        // Perfect success
+        console.log('✅ Form submitted and processed successfully!');
+        openModal({
+          ...formData,
+          submissionSuccess: true,
+          webhookId: responseData.webhook_id
+        }, 'form_submission');
+        
+        // Optionally reset form
+        // setFormData({ name: '', email: '', message: '' });
+        
+      } else {
+        // Webhook failed but don't break user experience
+        console.warn('⚠️ Form submitted but webhook processing failed');
+        openModal({
+          ...formData,
+          submissionSuccess: true, // Still show success to user
+          webhookWarning: true
+        }, 'form_submission');
+      }
+      
+    } catch (error) {
+      console.error('❌ Submission error:', error);
+      
+      // Even on error, show success to user (graceful degradation)
+      openModal({
+        ...formData,
+        submissionSuccess: true,
+        webhookWarning: true
+      }, 'form_submission');
+    } finally {
+      setIsSubmitting(false);
+    }
+  }
+};
+
+// Test function to verify webhook is working
+const testWebhook = async () => {
+  try {
+    const testData = {
+      name: 'Test User',
+      email: 'test@example.com',
+      message: 'This is a test message',
+      timestamp: new Date().toISOString(),
+      source: 'bolt.new-test'
+    };
+
+    console.log('🧪 Testing webhook...');
+    
+    const response = await fetch('https://n8n.srv948633.hstgr.cloud/webhook/1b1b1be3-a112-4fb4-81fd-661aeacd0ed4', {
+      method: 'POST',
+      headers: { 
+        'Content-Type': 'application/json',
+        'Accept': 'application/json'
+      },
+      body: JSON.stringify(testData),
+      mode: 'cors',
+    });
+
+    const result = await response.json();
+    
+    if (response.ok) {
+      console.log('✅ Webhook test successful:', result);
+      return true;
+    } else {
+      console.error('❌ Webhook test failed:', result);
+      return false;
+    }
+    
+  } catch (error) {
+    console.error('❌ Webhook test error:', error);
+    return false;
+  }
+};
+
+// Call this in useEffect or on component mount to test
+// testWebhook();
+  
   return (
     <div className="min-h-screen pt-16" style={{ backgroundColor: '#0A1A2F' }}>
       {/* Hero Section */}
