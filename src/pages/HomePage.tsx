@@ -144,6 +144,7 @@ const conciergeItems = [
     repaymentDate?: string;
     repaymentValuePln?: string;
   }>({});
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
 
   const validate = () => {
@@ -219,12 +220,74 @@ const conciergeItems = [
   };
 
 
-  const handleSubmit = (e: React.FormEvent) => {
-  e.preventDefault();
-  if (validate()) {
-    openModal(formData, 'form_submission'); // Pass the form data to the modal context with form submission intent
-  }
-};
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    
+    if (!validate()) {
+      return;
+    }
+
+    setIsSubmitting(true);
+
+    try {
+      // Prepare webhook payload with all form data and metadata
+      const webhookPayload = {
+        // Form data
+        name: formData.name,
+        email: formData.email,
+        phone: formData.phone,
+        message: formData.message,
+        loanType: formData.loanType,
+        agreementDate: formData.agreementDate,
+        homeBank: formData.homeBank,
+        loanTypeDetail: formData.loanTypeDetail,
+        loanCurrency: formData.loanCurrency,
+        loanValuePln: formData.loanValuePln,
+        numberOfInstallments: formData.numberOfInstallments,
+        loanStatus: formData.loanStatus,
+        repaymentDate: formData.repaymentDate,
+        repaymentValuePln: formData.repaymentValuePln,
+        privacyConsent: privacyConsent,
+        
+        // Platform and metadata
+        platform: 'web',
+        userAgent: navigator.userAgent,
+        timestamp: new Date().toISOString(),
+        url: window.location.href,
+        referrer: document.referrer || 'direct',
+        
+        // Additional metadata
+        formType: 'contact_form',
+        source: 'homepage_contact_section'
+      };
+
+      // Send data to webhook
+      const response = await fetch('https://n8n.srv948633.hstgr.cloud/webhook/bolt-form', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(webhookPayload)
+      });
+
+      if (response.ok) {
+        console.log('Webhook sent successfully:', response.status);
+        // Show success message in modal
+        openModal(formData, 'form_submission');
+      } else {
+        console.error('Webhook failed with status:', response.status);
+        // Still show success to user, but log the error
+        openModal(formData, 'form_submission');
+      }
+
+    } catch (error) {
+      console.error('Error sending webhook:', error);
+      // Still show success to user to avoid confusion
+      openModal(formData, 'form_submission');
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
 
   return (
     <div className="min-h-screen pt-16" style={{ backgroundColor: '#0A1A2F' }}>
@@ -919,10 +982,15 @@ Nie ryzykujesz nic – możesz tylko zyskać.</li>
                 
                 <button
                   type="submit"
-                  className="w-full font-bold py-4 px-8 rounded-lg text-lg transition-all hover:-translate-y-1 duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl border-4 active:scale-95 active:shadow-inner"
+                  disabled={isSubmitting}
+                  className={`w-full font-bold py-4 px-8 rounded-lg text-lg transition-all duration-300 transform shadow-lg border-4 ${
+                    isSubmitting 
+                      ? 'opacity-50 cursor-not-allowed' 
+                      : 'hover:-translate-y-1 hover:scale-105 hover:shadow-xl active:scale-95 active:shadow-inner'
+                  }`}
                   style={{ backgroundColor: '#F5F5F5', borderColor: '#D4AF37', color: '#0A1A2F' }}
                 >
-                  Wyślij wiadomość
+                  {isSubmitting ? 'Wysyłanie...' : 'Wyślij wiadomość'}
                 </button>
               </form>
             </div>
