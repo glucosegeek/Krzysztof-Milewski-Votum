@@ -341,7 +341,7 @@ const handleSubmit = async (e) => {
     
   } catch (error) {
     console.error('Detailed error:', error);
-    alert('Error: ' + error.message);
+    console.log('Error: ' + error.message);
   }
 };
   
