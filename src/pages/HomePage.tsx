@@ -289,59 +289,74 @@ const conciergeItems = [
   //   }
   // };
 
-const handleSubmit = async (e) => {
-  e.preventDefault(); // Prevent form default submission
-  
-  // Get form data - adjust these selectors to match your actual form
-  const formData = {
-    name: document.getElementById('name')?.value || document.querySelector('[name="name"]')?.value,
-    email: document.getElementById('email')?.value || document.querySelector('[name="email"]')?.value,
-    message: document.getElementById('message')?.value || document.querySelector('[name="message"]')?.value
-  };
-  
+const handleSubmit = async (formData) => {
   const webhookUrl = 'https://n8n.srv948633.hstgr.cloud/webhook/email-workflow';
   
-  console.log('Form data collected:', formData);
+  console.log('Form data:', formData);
   console.log('Webhook URL:', webhookUrl);
   
-  // Validate form data
-  if (!formData.name || !formData.email || !formData.message) {
-    alert('Please fill in all required fields');
-    return;
-  }
-  
   try {
-    console.log('Sending payload:', formData);
+    const payload = {
+      name: formData.name,
+      email: formData.email,
+      message: formData.message
+    };
+    
+    console.log('Sending payload:', payload);
     
     const response = await fetch(webhookUrl, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify(formData)
+      body: JSON.stringify(payload)
     });
     
     console.log('Response status:', response.status);
-    console.log('Response headers:', [...response.headers.entries()]);
+    console.log('Response ok:', response.ok);
     
     if (!response.ok) {
-      const errorText = await response.text();
-      console.error('Error response:', errorText);
-      throw new Error(`HTTP ${response.status}: ${errorText}`);
+      throw new Error(`HTTP ${response.status}: ${response.statusText}`);
     }
     
-    const result = await response.json();
-    console.log('Success result:', result);
+    // Check if response has content before parsing JSON
+    const contentType = response.headers.get('content-type');
+    console.log('Content-Type:', contentType);
+    
+    let result;
+    if (contentType && contentType.includes('application/json')) {
+      // Only try to parse JSON if content-type is JSON
+      const responseText = await response.text();
+      console.log('Raw response:', responseText);
+      
+      if (responseText.trim()) {
+        try {
+          result = JSON.parse(responseText);
+        } catch (jsonError) {
+          console.error('JSON parse error:', jsonError);
+          console.error('Response text:', responseText);
+          result = { success: true, message: 'Form submitted (response not JSON)' };
+        }
+      } else {
+        console.log('Empty response received');
+        result = { success: true, message: 'Form submitted (empty response)' };
+      }
+    } else {
+      // Handle non-JSON responses
+      const responseText = await response.text();
+      console.log('Non-JSON response:', responseText);
+      result = { success: true, message: 'Form submitted successfully' };
+    }
+    
+    console.log('Parsed result:', result);
     alert('Message sent successfully!');
     
-    // Clear form after successful submission
-    document.getElementById('name').value = '';
-    document.getElementById('email').value = '';
-    document.getElementById('message').value = '';
+    return result;
     
   } catch (error) {
     console.error('Detailed error:', error);
-    console.log('Error: ' + error.message);
+    alert('Error: ' + error.message);
+    throw error;
   }
 };
   
