@@ -218,31 +218,14 @@ const conciergeItems = [
     }
   };
 
-  const handleSubmit = async (e: React.FormEvent) => {
+
+  const handleSubmit = (e: React.FormEvent) => {
   e.preventDefault();
   if (validate()) {
-    try {
-      const webhookResponse = await fetch('https://n8n.srv948633.hstgr.cloud/webhook-test/bolt-form', {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify(formData),
-    mode: 'cors',
-  });
-  console.log(await webhookResponse.text());
-      if (webhookResponse.ok) {
-        console.log('Webhook data sent successfully');
-      } else {
-        console.error('Webhook submission failed:', webhookResponse.status, webhookResponse.statusText);
-      }
-    } catch (error) {
-      console.error('Error sending data to webhook:', error);
-    }
-    
-    // Always show success message to user regardless of webhook status
-    openModal(formData, 'form_submission');
+    openModal(formData, 'form_submission'); // Pass the form data to the modal context with form submission intent
   }
 };
-  
+
   return (
     <div className="min-h-screen pt-16" style={{ backgroundColor: '#0A1A2F' }}>
       {/* Hero Section */}
