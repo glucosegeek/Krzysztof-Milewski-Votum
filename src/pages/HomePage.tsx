@@ -290,63 +290,46 @@ const conciergeItems = [
   // };
 
 const handleSubmit = async (formData) => {
-  console.log('Starting form submission...', formData);
+  // Replace with your EXACT webhook URL from n8n
+  const webhookUrl = 'YOUR_EXACT_WEBHOOK_URL_FROM_N8N';
+  
+  console.log('Form data:', formData);
+  console.log('Webhook URL:', webhookUrl);
+  console.log('About to send request...');
   
   try {
-    // Replace with your actual webhook URL
-    const webhookUrl = 'https://n8n.srv948633.hstgr.cloud/webhook/email-workflow';
-    console.log('Sending to URL:', webhookUrl);
-    
     const payload = {
       name: formData.name,
       email: formData.email,
       message: formData.message
     };
-    console.log('Payload:', payload);
-
+    
+    console.log('Sending payload:', payload);
+    
     const response = await fetch(webhookUrl, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
-        'Accept': 'application/json',
       },
-      mode: 'cors', // Important for CORS
       body: JSON.stringify(payload)
     });
-
+    
     console.log('Response status:', response.status);
-    console.log('Response headers:', response.headers);
-
-    // Check if response is ok
+    console.log('Response ok:', response.ok);
+    
     if (!response.ok) {
       const errorText = await response.text();
       console.error('Error response:', errorText);
       throw new Error(`HTTP ${response.status}: ${errorText}`);
     }
-
-    // Try to parse JSON response
+    
     const result = await response.json();
     console.log('Success result:', result);
-    
     alert('Message sent successfully!');
-    return result;
     
   } catch (error) {
     console.error('Detailed error:', error);
-    
-    // More specific error messages
-    if (error.name === 'TypeError' && error.message.includes('Failed to fetch')) {
-      console.error('Network/CORS error - check webhook URL and CORS settings');
-      alert('Network error: Please check your connection and try again.');
-    } else if (error.message.includes('CORS')) {
-      console.error('CORS error - webhook needs proper CORS headers');
-      alert('CORS error: Please contact support.');
-    } else {
-      console.error('Other error:', error.message);
-      alert('Error: ' + error.message);
-    }
-    
-    throw error;
+    alert('Error: ' + error.message);
   }
 };
   
