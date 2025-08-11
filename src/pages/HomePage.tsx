@@ -289,33 +289,40 @@ const conciergeItems = [
   //   }
   // };
 
-const handleSubmit = async (formData) => {
-  // Replace with your EXACT webhook URL from n8n
+const handleSubmit = async (e) => {
+  e.preventDefault(); // Prevent form default submission
+  
+  // Get form data - adjust these selectors to match your actual form
+  const formData = {
+    name: document.getElementById('name')?.value || document.querySelector('[name="name"]')?.value,
+    email: document.getElementById('email')?.value || document.querySelector('[name="email"]')?.value,
+    message: document.getElementById('message')?.value || document.querySelector('[name="message"]')?.value
+  };
+  
   const webhookUrl = 'https://n8n.srv948633.hstgr.cloud/webhook/email-workflow';
   
-  console.log('Form data:', formData);
+  console.log('Form data collected:', formData);
   console.log('Webhook URL:', webhookUrl);
-  console.log('About to send request...');
+  
+  // Validate form data
+  if (!formData.name || !formData.email || !formData.message) {
+    alert('Please fill in all required fields');
+    return;
+  }
   
   try {
-    const payload = {
-      name: formData.name,
-      email: formData.email,
-      message: formData.message
-    };
-    
-    console.log('Sending payload:', payload);
+    console.log('Sending payload:', formData);
     
     const response = await fetch(webhookUrl, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify(payload)
+      body: JSON.stringify(formData)
     });
     
     console.log('Response status:', response.status);
-    console.log('Response ok:', response.ok);
+    console.log('Response headers:', [...response.headers.entries()]);
     
     if (!response.ok) {
       const errorText = await response.text();
@@ -326,6 +333,11 @@ const handleSubmit = async (formData) => {
     const result = await response.json();
     console.log('Success result:', result);
     alert('Message sent successfully!');
+    
+    // Clear form after successful submission
+    document.getElementById('name').value = '';
+    document.getElementById('email').value = '';
+    document.getElementById('message').value = '';
     
   } catch (error) {
     console.error('Detailed error:', error);
