@@ -108,6 +108,7 @@ const conciergeItems = [
   loanType: '', // 'currency' or 'skd'
   agreementDate: '',
   homeBank: '',
+  originalBank: '',
   loanTypeDetail: '', // 'indexed', 'denominated', 'unknown'
   loanCurrency: '',
   loanValuePln: '',
@@ -118,6 +119,7 @@ const conciergeItems = [
     loanType: '', // 'currency' or 'skd'
     agreementDate: '',
     homeBank: '',
+    originalBank: '',
     loanTypeDetail: '', // 'indexed', 'denominated', 'unknown'
     loanCurrency: '',
     loanValuePln: '',
@@ -138,6 +140,7 @@ const conciergeItems = [
     loanType?: string;
     agreementDate?: string;
     homeBank?: string;
+    originalBank?: string;
     loanTypeDetail?: string;
     loanCurrency?: string;
     loanValuePln?: string;
@@ -229,6 +232,7 @@ const conciergeItems = [
       loanType: formData.loanType,
       agreementDate: formData.agreementDate,
       homeBank: formData.homeBank,
+      originalBank: formData.originalBank,
       loanTypeDetail: formData.loanTypeDetail,
       loanCurrency: formData.loanCurrency,
       loanValuePln: formData.loanValuePln,
@@ -766,6 +770,30 @@ Nie ryzykujesz nic – możesz tylko zyskać.</li>
         
       />
       {errors.homeBank && <p className="text-red-400 text-sm mt-1">{errors.homeBank}</p>}
+    </div>
+
+    {/* Original bank */}
+    <div>
+      <label htmlFor="originalBank" className="block text-sm font-medium mb-2" style={{ color: '#F5F5F5' }}>
+        Bank pierwotny (bank aktualny) <span style={{ color: '#D4AF37' }}></span>
+      </label>
+      <input
+        type="text"
+        id="originalBank"
+        name="originalBank"
+        value={formData.originalBank}
+        onChange={handleInputChange}
+        className="w-full px-4 py-3 rounded-lg focus:outline-none focus:ring-2"
+        style={{
+          backgroundColor: 'rgba(245, 245, 245, 0.1)',
+          border: '1px solid rgba(245, 245, 245, 0.2)',
+          color: '#F5F5F5',
+          '--tw-ring-color': '#D4AF37',
+        }}
+        placeholder="Nazwa banku aktualnego"
+        
+      />
+      {errors.originalBank && <p className="text-red-400 text-sm mt-1">{errors.originalBank}</p>}
     </div>
 
     {/* Type of loan */}
