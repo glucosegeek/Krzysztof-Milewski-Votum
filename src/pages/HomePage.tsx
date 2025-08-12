@@ -228,7 +228,7 @@ const handleSubmit = async (e) => {
   // Since we know the webhook works, just show success
   // (bolt.new blocks the actual request)
   setTimeout(() => {
-    alert('Message sent successfully! (Webhook is working)');
+    consol.log('Message sent successfully! (Webhook is working)');
     form.reset();
   }, 1000);
   
