@@ -213,35 +213,36 @@ const conciergeItems = [
   // }
 const handleSubmit = async (e) => {
   e.preventDefault();
-  
+
   const form = e.target;
   const formData = new FormData(form);
-  
+
   const data = {
     name: formData.get('name') || '',
     email: formData.get('email') || '',
     message: formData.get('message') || ''
   };
-  
+
   console.log('Form data:', data);
-  
-  // Since we know the webhook works, just show success
-  // (bolt.new blocks the actual request)
-  setTimeout(() => {
-    alert('Message sent successfully! (Webhook is working)');
-    form.reset();
-  }, 1000);
-  
-  // Try to send anyway (might work sometimes)
+
   try {
-    fetch('https://n8n.srv948633.hstgr.cloud/webhook-test/153565ea-877e-4946-8d32-88596b5fd1d4', {
+    const response = await fetch('https://n8n.srv948633.hstgr.cloud/webhook-test/153565ea-877e-4946-8d32-88596b5fd1d4', {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(data),
-      mode: 'no-cors'
+      headers: { 
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(data)
     });
+
+    if (response.ok) {
+      alert('Message sent successfully!');
+      form.reset();
+    } else {
+      alert('Error sending message. Please try again.');
+    }
   } catch (error) {
-    console.log('Bolt.new blocked the request, but webhook works fine');
+    console.error('Request failed:', error);
+    alert('Request blocked or failed. Check console for details.');
   }
 };
   
