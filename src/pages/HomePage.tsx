@@ -100,7 +100,8 @@ const conciergeItems = [
   };
 
   const [formData, setFormData] = useState({
-    name: '',
+    firstName: '',
+    lastName: '',
   email: '',
   phone: '+48 ',
   message: '',
@@ -125,7 +126,8 @@ const conciergeItems = [
     repaymentDate: '',
     repaymentValuePln: '',
   });
-  
+
+
   const [privacyConsent, setPrivacyConsent] = useState(false);
   const [errors, setErrors] = useState<{
     name?: string;
@@ -147,8 +149,11 @@ const conciergeItems = [
   const [isSubmitting, setIsSubmitting] = useState(false);
 
 
-  const validate = () => {
-    const newErrors: typeof errors = {};
+  const validate = (data: typeof formData, consent: boolean) => {
+    const newErrors: {
+      firstName?: string; lastName?: string; email?: string; phone?: string; message?: string; privacyConsent?: string;
+      loanType?: string; agreementDate?: string; homeBank?: string; loanTypeDetail?: string; loanCurrency?: string; loanValuePln?: string; numberOfInstallments?: string; loanStatus?: string; repaymentDate?: string; repaymentValuePln?: string;
+    } = {};
 
     if (!formData.name.trim()) {
       newErrors.name = 'Imię i nazwisko jest obowiązkowe.';
@@ -170,7 +175,7 @@ const conciergeItems = [
       newErrors.phone = 'Nieprawidłowy format numeru telefonu.';
     }
 
-    if (!privacyConsent) {
+    if (!consent) {
       newErrors.privacyConsent = 'Zgoda na przetwarzanie danych jest obowiązkowa.';
     }
 
@@ -202,31 +207,49 @@ const conciergeItems = [
   };
 
 
-  // const handleSubmit = async (e: React.FormEvent) => {
-  //   e.preventDefault();
-    
-  //   if (!validate()) {
-  //     return;
-  //   }
-
-  //   setIsSubmitting(true);
-  // }
-const handleSubmit = async (e) => {
+  const handleSubmit = async (e: React.FormEvent) => {
   e.preventDefault();
 
-  const form = e.target;
-  const formData = new FormData(form);
+  if (!validate(formData, privacyConsent)) {
+    return;
+  }
 
-  const data = {
-    name: formData.get('name') || '',
-    email: formData.get('email') || '',
-    message: formData.get('message') || ''
-  };
-
-  console.log('Form data:', data);
+  setIsSubmitting(true);
 
   try {
-    const response = await fetch('https://n8n.srv948633.hstgr.cloud/webhook-test/153565ea-877e-4946-8d32-88596b5fd1d4', {
+    // Prepare webhook payload with all form data and metadata
+    const webhookPayload = {
+      // Form data
+      name: `${formData.firstName} ${formData.lastName}`, // Combine for 'name' field
+      firstName: formData.firstName,
+      lastName: formData.lastName,
+      email: formData.email,
+      phone: formData.phone,
+      message: formData.message,
+      loanType: formData.loanType,
+      agreementDate: formData.agreementDate,
+      homeBank: formData.homeBank,
+      loanTypeDetail: formData.loanTypeDetail,
+      loanCurrency: formData.loanCurrency,
+      loanValuePln: formData.loanValuePln,
+      numberOfInstallments: formData.numberOfInstallments,
+      loanStatus: formData.loanStatus,
+      repaymentDate: formData.repaymentDate,
+      repaymentValuePln: formData.repaymentValuePln,
+      privacyConsent: privacyConsent,
+
+      // Platform and metadata
+      platform: 'web',
+      userAgent: navigator.userAgent,
+      timestamp: new Date().toISOString(),
+      url: window.location.href,
+      referrer: document.referrer || 'direct',
+
+      // Additional metadata
+      formType: 'contact_form',
+      source: 'homepage_contact_section'
+    };
+    const response = await fetch('https://n8n.srv948633.hstgr.cloud/webhook/email-workflow', {
       method: 'POST',
       headers: { 
         'Content-Type': 'application/json'
@@ -235,14 +258,18 @@ const handleSubmit = async (e) => {
     });
 
     if (response.ok) {
-      alert('Message sent successfully!');
-      form.reset();
+      console.log('Webhook sent successfully:', response.status);
     } else {
-      alert('Error sending message. Please try again.');
+      console.error('Webhook failed with status:', response.status);
     }
-  } catch (error) {
-    console.error('Request failed:', error);
-    alert('Request blocked or failed. Check console for details.');
+    // Always show success modal for good UX, even if webhook fails
+    openModal(formData, 'form_submission');
+  } catch (e) {
+    console.error('Error sending webhook:', e);
+    // Still open modal for user feedback
+    openModal(formData, 'form_submission');
+  } finally {
+    setIsSubmitting(false);
   }
 };
   
@@ -539,29 +566,56 @@ Nie ryzykujesz nic – możesz tylko zyskać.</li>
           
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 max-w-4xl mx-auto">
             <div>
-              <form onSubmit={handleSubmit} className="space-y-6">
-<div>
-                  <label htmlFor="name" className="block text-sm font-medium mb-2" style={{ color: '#F5F5F5' }}>
-                    Imię i nazwisko <span style={{ color: '#D4AF37' }}>*</span>
-                  </label>
-                  <input
-                    type="text"
-                    id="name"
-                    name="name"
-                    value={formData.name}
-                    onChange={handleInputChange}
-                    className="w-full px-4 py-3 rounded-lg focus:outline-none focus:ring-2"
-                    style={{
-                      backgroundColor: 'rgba(245, 245, 245, 0.1)',
-                      border: '1px solid rgba(245, 245, 245, 0.2)',
-                      color: '#F5F5F5',
-                      '--tw-ring-color': '#D4AF37',
-                    }}
-                    placeholder="Twoje imię i nazwisko"
-                    
-                  />
-                  {errors.name && <p className="text-red-400 text-sm mt-1">{errors.name}</p>}
+              <form onSubmit={handleSubmit} className="space-y-6"> {/* Changed to space-y-6 for consistent spacing */}
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  <div>
+                    <label htmlFor="firstName" className="block text-sm font-medium mb-2" style={{ color: '#F5F5F5' }}>
+                      Imię <span style={{ color: '#D4AF37' }}>*</span>
+                    </label>
+                    <input
+                      type="text"
+                      id="firstName"
+                      name="firstName"
+                      value={formData.firstName}
+                      onChange={handleInputChange}
+                      className="w-full px-4 py-3 rounded-lg focus:outline-none focus:ring-2"
+                      style={{
+                        backgroundColor: 'rgba(245, 245, 245, 0.1)',
+                        border: '1px solid rgba(245, 245, 245, 0.2)',
+                        color: '#F5F5F5',
+                        '--tw-ring-color': '#D4AF37',
+                      }}
+                      placeholder="Twoje imię"
+                      required
+                    />
+                    {errors.firstName && <p className="text-red-400 text-sm mt-1">{errors.firstName}</p>}
+                  </div>
+                  <div>
+                    <label htmlFor="lastName" className="block text-sm font-medium mb-2" style={{ color: '#F5F5F5' }}>
+                      Nazwisko <span style={{ color: '#D4AF37' }}>*</span>
+                    </label>
+                    <input
+                      type="text"
+                      id="lastName"
+                      name="lastName"
+                      value={formData.lastName}
+                      onChange={handleInputChange}
+                      className="w-full px-4 py-3 rounded-lg focus:outline-none focus:ring-2"
+                      style={{
+                        backgroundColor: 'rgba(245, 245, 245, 0.1)',
+                        border: '1px solid rgba(245, 245, 245, 0.2)',
+                        color: '#F5F5F5',
+                        '--tw-ring-color': '#D4AF37',
+                      }}
+                      placeholder="Twoje nazwisko"
+                      required
+                    />
+                    {errors.lastName && <p className="text-red-400 text-sm mt-1">{errors.lastName}</p>}
+                  </div>
                 </div>
+
+
+
 
                 <div>
                   <label htmlFor="email" className="block text-sm font-medium mb-2" style={{ color: '#F5F5F5' }}>
