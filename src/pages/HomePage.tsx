@@ -243,43 +243,33 @@ const conciergeItems = [
         source: 'homepage_contact_section'
       };
 
-  //     // Send data to webhook
-  //     const response = await fetch('https://n8n.srv948633.hstgr.cloud/webhook/email-workflow', {
-  //       method: 'POST',
-  //       headers: {
-  //         'Content-Type': 'application/json',
-  //       },
-  //       body: JSON.stringify(webhookPayload)
-  //     });
+       // Send data to webhook
+       const response = await fetch('https://n8n.srv948633.hstgr.cloud/webhook/email-workflow', {
+         method: 'POST',
+         headers: {
+           'Content-Type': 'application/json',
+         },
+         body: JSON.stringify(webhookPayload)
+       });
 
-  //     if (response.ok) {
-  //       console.log('Webhook sent successfully:', response.status);
-  //       // Show success message in modal
-  //       openModal(formData, 'form_submission');
-  //     } else {
-  //       console.error('Webhook failed with status:', response.status);
-  //       // Still show success to user, but log the error
-  //       openModal(formData, 'form_submission');
-  //     }
+       if (response.ok) {
+         console.log('Webhook sent successfully:', response.status);
+         // Show success message in modal
+         openModal(formData, 'form_submission');
+       } else {
+         console.error('Webhook failed with status:', response.status);
+         // Still show success to user, but log the error
+         openModal(formData, 'form_submission');
+       }
 
-  //   } catch (error) {
-  //     console.error('Error sending webhook:', error);
-  //     // Still show success to user to avoid confusion
-  //     openModal(formData, 'form_submission');
-  //   } finally {
-  //     setIsSubmitting(false);
-  //   }
-  // };
-      fetch("https://n8n.srv948633.hstgr.cloud/webhook/email-workflow", {
-  method: "POST",
-  headers: { "Content-Type": "application/json" },
-  body: JSON.stringify({
-    name: formData.name,
-    email: formData.email,
-    phone: formData.phone,
-    message: formData.message
-  })
-});
+     } catch (error) {
+       console.error('Error sending webhook:', error);
+       // Still show success to user to avoid confusion
+       openModal(formData, 'form_submission');
+     } finally {
+       setIsSubmitting(false);
+     }
+   };
 
   
   
