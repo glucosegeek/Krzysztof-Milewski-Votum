@@ -158,8 +158,12 @@ const conciergeItems = [
       loanType?: string; agreementDate?: string; homeBank?: string; loanTypeDetail?: string; loanCurrency?: string; loanValuePln?: string; numberOfInstallments?: string; loanStatus?: string; repaymentDate?: string; repaymentValuePln?: string;
     } = {};
 
-    if (!formData.name.trim()) {
-      newErrors.name = 'Imię i nazwisko jest obowiązkowe.';
+    if (!formData.firstName.trim()) {
+      newErrors.firstName = 'Imię jest obowiązkowe.';
+    }
+
+    if (!formData.lastName.trim()) {
+      newErrors.lastName = 'Nazwisko jest obowiązkowe.';
     }
 
     if (!formData.email.trim()) {
