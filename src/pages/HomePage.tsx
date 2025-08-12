@@ -174,24 +174,6 @@ const conciergeItems = [
       newErrors.privacyConsent = 'Zgoda na przetwarzanie danych jest obowiązkowa.';
     }
 
-    // New validations for loan details
-    // if (!formData.loanType) {
-    //   newErrors.loanType = 'Wybór rodzaju sprawy jest obowiązkowy.';
-    // } else if (formData.loanType === 'currency') {
-    //   if (!formData.agreementDate) newErrors.agreementDate = 'Data zawarcia umowy jest obowiązkowa.';
-    //   if (!formData.homeBank.trim()) newErrors.homeBank = 'Nazwa banku jest obowiązkowa.';
-    //   if (!formData.loanTypeDetail) newErrors.loanTypeDetail = 'Typ kredytu jest obowiązkowy.';
-    //   if (!formData.loanCurrency.trim()) newErrors.loanCurrency = 'Waluta kredytu jest obowiązkowa.';
-    //   if (!formData.loanValuePln) newErrors.loanValuePln = 'Wartość kredytu w PLN jest obowiązkowa.';
-    //   if (!formData.numberOfInstallments) newErrors.numberOfInstallments = 'Liczba rat jest obowiązkowa.';
-    //   if (!formData.loanStatus) newErrors.loanStatus = 'Status kredytu jest obowiązkowy.';
-
-    //   if (formData.loanStatus === 'repaid') {
-    //     if (!formData.repaymentDate) newErrors.repaymentDate = 'Data spłaty kredytu jest obowiązkowa.';
-    //     if (!formData.repaymentValuePln) newErrors.repaymentValuePln = 'Wartość spłaty w PLN jest obowiązkowa.';
-    //   }
-    // }
-
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
   };
@@ -220,108 +202,74 @@ const conciergeItems = [
   };
 
 
-  // const handleSubmit = async (e: React.FormEvent) => {
-  //   e.preventDefault();
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
     
-  //   if (!validate()) {
-  //     return;
-  //   }
+    if (!validate()) {
+      return;
+    }
 
-  //   setIsSubmitting(true);
+    setIsSubmitting(true);
 
-  //   try {
-  //     // Prepare webhook payload with all form data and metadata
-  //     const webhookPayload = {
-  //       // Form data
-  //       name: formData.name,
-  //       email: formData.email,
-  //       phone: formData.phone,
-  //       message: formData.message,
-  //       loanType: formData.loanType,
-  //       agreementDate: formData.agreementDate,
-  //       homeBank: formData.homeBank,
-  //       loanTypeDetail: formData.loanTypeDetail,
-  //       loanCurrency: formData.loanCurrency,
-  //       loanValuePln: formData.loanValuePln,
-  //       numberOfInstallments: formData.numberOfInstallments,
-  //       loanStatus: formData.loanStatus,
-  //       repaymentDate: formData.repaymentDate,
-  //       repaymentValuePln: formData.repaymentValuePln,
-  //       privacyConsent: privacyConsent,
+    try {
+      // Prepare webhook payload with all form data and metadata
+      const webhookPayload = {
+        // Form data
+        name: formData.name,
+        email: formData.email,
+        phone: formData.phone,
+        message: formData.message,
+        loanType: formData.loanType,
+        agreementDate: formData.agreementDate,
+        homeBank: formData.homeBank,
+        loanTypeDetail: formData.loanTypeDetail,
+        loanCurrency: formData.loanCurrency,
+        loanValuePln: formData.loanValuePln,
+        numberOfInstallments: formData.numberOfInstallments,
+        loanStatus: formData.loanStatus,
+        repaymentDate: formData.repaymentDate,
+        repaymentValuePln: formData.repaymentValuePln,
+        privacyConsent: privacyConsent,
         
-  //       // Platform and metadata
-  //       platform: 'web',
-  //       userAgent: navigator.userAgent,
-  //       timestamp: new Date().toISOString(),
-  //       url: window.location.href,
-  //       referrer: document.referrer || 'direct',
+        // Platform and metadata
+        platform: 'web',
+        userAgent: navigator.userAgent,
+        timestamp: new Date().toISOString(),
+        url: window.location.href,
+        referrer: document.referrer || 'direct',
         
-  //       // Additional metadata
-  //       formType: 'contact_form',
-  //       source: 'homepage_contact_section'
-  //     };
+        // Additional metadata
+        formType: 'contact_form',
+        source: 'homepage_contact_section'
+      };
 
-  //     // Send data to webhook
-  //     const response = await fetch('https://n8n.srv948633.hstgr.cloud/webhook/bolt-form', {
-  //       method: 'POST',
-  //       headers: {
-  //         'Content-Type': 'application/json',
-  //       },
-  //       body: JSON.stringify(webhookPayload)
-  //     });
+      // Send data to webhook
+      const response = await fetch('https://n8n.srv948633.hstgr.cloud/webhook/email-workflow', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(webhookPayload)
+      });
 
-  //     if (response.ok) {
-  //       console.log('Webhook sent successfully:', response.status);
-  //       // Show success message in modal
-  //       openModal(formData, 'form_submission');
-  //     } else {
-  //       console.error('Webhook failed with status:', response.status);
-  //       // Still show success to user, but log the error
-  //       openModal(formData, 'form_submission');
-  //     }
+      if (response.ok) {
+        console.log('Webhook sent successfully:', response.status);
+        // Show success message in modal
+        openModal(formData, 'form_submission');
+      } else {
+        console.error('Webhook failed with status:', response.status);
+        // Still show success to user, but log the error
+        openModal(formData, 'form_submission');
+      }
 
-  //   } catch (error) {
-  //     console.error('Error sending webhook:', error);
-  //     // Still show success to user to avoid confusion
-  //     openModal(formData, 'form_submission');
-  //   } finally {
-  //     setIsSubmitting(false);
-  //   }
-  // };
-
-// const handleSubmit = async (e) => {
-//   e.preventDefault();
-  
-//   const form = e.target;
-//   const formData = new FormData(form);
-  
-//   const data = {
-//     name: formData.get('name') || '',
-//     email: formData.get('email') || '',
-//     message: formData.get('message') || ''
-//   };
-  
-//   console.log('Form data:', data);
-  
-//   // Since we know the webhook works, just show success
-//   // (bolt.new blocks the actual request)
-//   setTimeout(() => {
-//     alert('Message sent successfully! (Webhook is working)');
-//     form.reset();
-//   }, 1000);
-  
-//   // Try to send anyway (might work sometimes)
-//   try {
-//     fetch('https://n8n.srv948633.hstgr.cloud/webhook/email-workflow', {
-//       method: 'POST',
-//       headers: { 'Content-Type': 'application/json' },
-//       body: JSON.stringify(data),
-//       mode: 'no-cors'
-//     });
-//   } catch (error) {
-//     console.log('Bolt.new blocked the request, but webhook works fine');
-//   }
-// };
+    } catch (error) {
+      console.error('Error sending webhook:', error);
+      // Still show success to user to avoid confusion
+      openModal(formData, 'form_submission');
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
 
   
   
