@@ -226,7 +226,7 @@ const handleSubmit = async (e) => {
   console.log('Form data:', data);
   
   // Use the WORKING Test URL
-  const webhookUrl = 'https://n8n.srv948633.hstgr.cloud/webhook/email-workflow';
+  const webhookUrl = 'https://n8n.srv948633.hstgr.cloud/webhook-test/email-workflow';
   
   try {
     const response = await fetch(webhookUrl, {
