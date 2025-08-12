@@ -221,7 +221,7 @@ const conciergeItems = [
     message: formData.message
   })
 });
-
+  }
 
   
   
@@ -978,5 +978,5 @@ Nie ryzykujesz nic – możesz tylko zyskać.</li>
     </div>
   );
 };
-}
+
 export default HomePage;
