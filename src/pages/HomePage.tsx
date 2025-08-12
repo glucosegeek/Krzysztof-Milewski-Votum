@@ -892,5 +892,5 @@ Nie ryzykujesz nic – możesz tylko zyskać.</li>
   );
 };
 
-
+export default HomePage;
 ```
