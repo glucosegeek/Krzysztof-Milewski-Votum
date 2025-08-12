@@ -137,7 +137,6 @@ const ConsultationModal: React.FC = () => {
             </p>
             {/* Display submitted data */}
             {submittedData && <div className="mt-8 text-left space-y-2" style={{ color: '#F5F5F5' }}>
-              <p><strong>Imię i nazwisko:</strong> {submittedData.name}</p>
               <p><strong>Imię:</strong> {submittedData.firstName}</p>
               <p><strong>Nazwisko:</strong> {submittedData.lastName}</p>
               <p><strong>Email:</strong> {submittedData.email}</p>
