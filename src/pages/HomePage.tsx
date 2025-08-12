@@ -289,39 +289,41 @@ const conciergeItems = [
   //   }
   // };
 
-const handleSubmit = async (e) => {
-  e.preventDefault();
+// const handleSubmit = async (e) => {
+//   e.preventDefault();
   
-  const form = e.target;
-  const formData = new FormData(form);
+//   const form = e.target;
+//   const formData = new FormData(form);
   
-  const data = {
-    name: formData.get('name') || '',
-    email: formData.get('email') || '',
-    message: formData.get('message') || ''
-  };
+//   const data = {
+//     name: formData.get('name') || '',
+//     email: formData.get('email') || '',
+//     message: formData.get('message') || ''
+//   };
   
-  console.log('Form data:', data);
+//   console.log('Form data:', data);
   
-  // Since we know the webhook works, just show success
-  // (bolt.new blocks the actual request)
-  setTimeout(() => {
-    alert('Message sent successfully! (Webhook is working)');
-    form.reset();
-  }, 1000);
+//   // Since we know the webhook works, just show success
+//   // (bolt.new blocks the actual request)
+//   setTimeout(() => {
+//     alert('Message sent successfully! (Webhook is working)');
+//     form.reset();
+//   }, 1000);
   
-  // Try to send anyway (might work sometimes)
-  try {
-    fetch('https://n8n.srv948633.hstgr.cloud/webhook/email-workflow', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(data),
-      mode: 'no-cors'
-    });
-  } catch (error) {
-    console.log('Bolt.new blocked the request, but webhook works fine');
-  }
-};
+//   // Try to send anyway (might work sometimes)
+//   try {
+//     fetch('https://n8n.srv948633.hstgr.cloud/webhook/email-workflow', {
+//       method: 'POST',
+//       headers: { 'Content-Type': 'application/json' },
+//       body: JSON.stringify(data),
+//       mode: 'no-cors'
+//     });
+//   } catch (error) {
+//     console.log('Bolt.new blocked the request, but webhook works fine');
+//   }
+// };
+
+  
   
   return (
     <div className="min-h-screen pt-16" style={{ backgroundColor: '#0A1A2F' }}>
