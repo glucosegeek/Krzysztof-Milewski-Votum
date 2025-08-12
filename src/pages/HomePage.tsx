@@ -291,6 +291,7 @@ const conciergeItems = [
 
 const handleSubmit = async (e) => {
   e.preventDefault();
+  
   const form = e.target;
   const formData = new FormData(form);
   
@@ -307,23 +308,33 @@ const handleSubmit = async (e) => {
     return;
   }
   
-  // Your existing webhook code here...
   const webhookUrl = 'https://n8n.srv948633.hstgr.cloud/webhook/email-workflow';
   
   try {
+    console.log('Sending request...');
+    
     const response = await fetch(webhookUrl, {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      mode: 'cors',
       body: JSON.stringify(data)
     });
     
+    console.log('Response received:', response.status);
+    
     if (response.ok) {
+      console.log('Success!');
       alert('Message sent successfully!');
       form.reset();
+    } else {
+      throw new Error(`HTTP ${response.status}`);
     }
+    
   } catch (error) {
     console.error('Error:', error);
-    alert('Error: ' + error.message);
+    alert('Failed to send message: ' + error.message);
   }
 };
   
