@@ -263,7 +263,7 @@ const conciergeItems = [
       };
 
       // Send data to webhook
-      const response = await fetch('https://n8n.srv948633.hstgr.cloud/webhook-test/email-workflow', {
+      const response = await fetch('https://n8n.srv948633.hstgr.cloud/webhook/email-workflow', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
