@@ -146,8 +146,8 @@ const conciergeItems = [
       loanType?: string; agreementDate?: string; homeBank?: string; loanTypeDetail?: string; loanCurrency?: string; loanValuePln?: string; numberOfInstallments?: string; loanStatus?: string; repaymentDate?: string; repaymentValuePln?: string;
     } = {};
 
-    if (!formData.name.trim()) {
-      newErrors.name = 'Imię i nazwisko jest obowiązkowe.';
+    if (!formData.firstName.trim()) {
+      newErrors.firstName = 'Imię i nazwisko jest obowiązkowe.';
     }
 
     if (!formData.email.trim()) {
@@ -246,7 +246,7 @@ const conciergeItems = [
       headers: { 
         'Content-Type': 'application/json'
       },
-      body: JSON.stringify(data)
+      body: JSON.stringify(webhookPayload)
     });
 
     if (response.ok) {
@@ -330,6 +330,7 @@ Nie ryzykujesz nic – możesz tylko zyskać.</li>
           </div>
         </div>
       </section>
+    </div>
   );
 };
 
