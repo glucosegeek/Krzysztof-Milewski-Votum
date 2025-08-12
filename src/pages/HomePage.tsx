@@ -145,6 +145,8 @@ const conciergeItems = [
     repaymentValuePln?: string;
   }>({});
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitStatus, setSubmitStatus] = useState<'idle' | 'success' | 'error'>('idle');
+  const [submitMessage, setSubmitMessage] = useState('');
 
 
   const validate = () => {
@@ -196,6 +198,98 @@ const conciergeItems = [
     return Object.keys(newErrors).length === 0;
   };
   
+  const resetForm = () => {
+    setFormData({
+      name: '',
+      email: '',
+      phone: '+48 ',
+      message: '',
+      loanType: '',
+      agreementDate: '',
+      homeBank: '',
+      loanTypeDetail: '',
+      loanCurrency: '',
+      loanValuePln: '',
+      numberOfInstallments: '',
+      loanStatus: '',
+      repaymentDate: '',
+      repaymentValuePln: '',
+    });
+    setPrivacyConsent(false);
+    setErrors({});
+  };
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    
+    if (!validate()) {
+      return;
+    }
+
+    setIsSubmitting(true);
+    setSubmitStatus('idle');
+    setSubmitMessage('');
+
+    try {
+      // Prepare webhook payload with all form data and metadata
+      const webhookPayload = {
+        // Form data
+        name: formData.name,
+        email: formData.email,
+        phone: formData.phone,
+        message: formData.message,
+        loanType: formData.loanType,
+        agreementDate: formData.agreementDate,
+        homeBank: formData.homeBank,
+        loanTypeDetail: formData.loanTypeDetail,
+        loanCurrency: formData.loanCurrency,
+        loanValuePln: formData.loanValuePln,
+        numberOfInstallments: formData.numberOfInstallments,
+        loanStatus: formData.loanStatus,
+        repaymentDate: formData.repaymentDate,
+        repaymentValuePln: formData.repaymentValuePln,
+        privacyConsent: privacyConsent,
+        
+        // Platform and metadata
+        platform: 'web',
+        userAgent: navigator.userAgent,
+        timestamp: new Date().toISOString(),
+        url: window.location.href,
+        referrer: document.referrer || 'direct',
+        
+        // Additional metadata
+        formType: 'contact_form',
+        source: 'homepage_contact_section'
+      };
+
+      // Send data to webhook
+      const response = await fetch('https://n8n.srv948633.hstgr.cloud/webhook/email-workflow', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(webhookPayload)
+      });
+
+      if (response.ok) {
+        console.log('Webhook sent successfully:', response.status);
+        setSubmitStatus('success');
+        setSubmitMessage('Wiadomość została wysłana pomyślnie! Skontaktujemy się z Tobą wkrótce.');
+        resetForm();
+      } else {
+        console.error('Webhook failed with status:', response.status);
+        setSubmitStatus('error');
+        setSubmitMessage('Wystąpił błąd podczas wysyłania wiadomości. Spróbuj ponownie lub skontaktuj się z nami bezpośrednio.');
+      }
+
+    } catch (error) {
+      console.error('Error sending webhook:', error);
+      setSubmitStatus('error');
+      setSubmitMessage('Wystąpił błąd połączenia. Sprawdź połączenie internetowe i spróbuj ponownie.');
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
 
@@ -618,6 +712,21 @@ Nie ryzykujesz nic – możesz tylko zyskać.</li>
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 max-w-4xl mx-auto">
             <div>
               <form onSubmit={handleSubmit} className="space-y-6">
+                {/* Success/Error Message */}
+                {submitStatus !== 'idle' && (
+                  <div className={`p-4 rounded-lg border-2 ${
+                    submitStatus === 'success' 
+                      ? 'border-green-500 bg-green-500 bg-opacity-10' 
+                      : 'border-red-500 bg-red-500 bg-opacity-10'
+                  }`}>
+                    <p className={`text-sm font-medium ${
+                      submitStatus === 'success' ? 'text-green-400' : 'text-red-400'
+                    }`}>
+                      {submitMessage}
+                    </p>
+                  </div>
+                )}
+
 <div>
                   <label htmlFor="name" className="block text-sm font-medium mb-2" style={{ color: '#F5F5F5' }}>
                     Imię i nazwisko <span style={{ color: '#D4AF37' }}>*</span>
