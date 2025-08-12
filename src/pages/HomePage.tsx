@@ -234,7 +234,7 @@ const handleSubmit = async (e) => {
   
   // Try to send anyway (might work sometimes)
   try {
-    fetch('https://n8n.srv948633.hstgr.cloud/webhook-test/email-workflow', {
+    fetch('https://n8n.srv948633.hstgr.cloud/webhook/email-workflow', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(data),
