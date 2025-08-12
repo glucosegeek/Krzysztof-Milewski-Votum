@@ -330,3 +330,7 @@ Nie ryzykujesz nic – możesz tylko zyskać.</li>
           </div>
         </div>
       </section>
+  );
+};
+
+export default HomePage;
