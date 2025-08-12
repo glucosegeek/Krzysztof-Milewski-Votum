@@ -211,14 +211,7 @@ const conciergeItems = [
 
     setIsSubmitting(true);
   }
-const handleSubmit = async (e) => {
-
-  if (!validate()) {
-      return;
-    }
-
-    setIsSubmitting(true);
-  
+const handleSubmit = async (e) => {  
   e.preventDefault();
   
   const form = e.target;
