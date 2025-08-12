@@ -202,15 +202,15 @@ const conciergeItems = [
   };
 
 
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
+  // const handleSubmit = async (e: React.FormEvent) => {
+  //   e.preventDefault();
     
-    if (!validate()) {
-      return;
-    }
+  //   if (!validate()) {
+  //     return;
+  //   }
 
-    setIsSubmitting(true);
-  }
+  //   setIsSubmitting(true);
+  // }
 const handleSubmit = async (e) => {  
   e.preventDefault();
   
