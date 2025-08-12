@@ -211,65 +211,17 @@ const conciergeItems = [
 
     setIsSubmitting(true);
 
-    try {
-      // Prepare webhook payload with all form data and metadata
-      const webhookPayload = {
-        // Form data
-        name: formData.name,
-        email: formData.email,
-        phone: formData.phone,
-        message: formData.message,
-        loanType: formData.loanType,
-        agreementDate: formData.agreementDate,
-        homeBank: formData.homeBank,
-        loanTypeDetail: formData.loanTypeDetail,
-        loanCurrency: formData.loanCurrency,
-        loanValuePln: formData.loanValuePln,
-        numberOfInstallments: formData.numberOfInstallments,
-        loanStatus: formData.loanStatus,
-        repaymentDate: formData.repaymentDate,
-        repaymentValuePln: formData.repaymentValuePln,
-        privacyConsent: privacyConsent,
-        
-        // Platform and metadata
-        platform: 'web',
-        userAgent: navigator.userAgent,
-        timestamp: new Date().toISOString(),
-        url: window.location.href,
-        referrer: document.referrer || 'direct',
-        
-        // Additional metadata
-        formType: 'contact_form',
-        source: 'homepage_contact_section'
-      };
+    fetch("https://<your-n8n-domain>/webhook/bolt-form", {
+  method: "POST",
+  headers: { "Content-Type": "application/json" },
+  body: JSON.stringify({
+    name: formData.name,
+    email: formData.email,
+    phone: formData.phone,
+    message: formData.message
+  })
+});
 
-       // Send data to webhook
-       const response = await fetch('https://n8n.srv948633.hstgr.cloud/webhook/email-workflow', {
-         method: 'POST',
-         headers: {
-           'Content-Type': 'application/json',
-         },
-         body: JSON.stringify(webhookPayload)
-       });
-
-       if (response.ok) {
-         console.log('Webhook sent successfully:', response.status);
-         // Show success message in modal
-         openModal(formData, 'form_submission');
-       } else {
-         console.error('Webhook failed with status:', response.status);
-         // Still show success to user, but log the error
-         openModal(formData, 'form_submission');
-       }
-
-     } catch (error) {
-       console.error('Error sending webhook:', error);
-       // Still show success to user to avoid confusion
-       openModal(formData, 'form_submission');
-     } finally {
-       setIsSubmitting(false);
-     }
-   };
 
   
   
