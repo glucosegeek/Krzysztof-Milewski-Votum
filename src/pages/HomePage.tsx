@@ -102,23 +102,13 @@ const conciergeItems = [
   const [formData, setFormData] = useState({
     firstName: '',
     lastName: '',
-  email: '',
-  phone: '+48 ',
-  message: '',
-  loanType: '', // 'currency' or 'skd'
-  agreementDate: '',
-  homeBank: '',
-  originalBank: '',
-  loanTypeDetail: '', // 'indexed', 'denominated', 'unknown'
-  loanCurrency: '',
-  loanValuePln: '',
-  numberOfInstallments: '',
     email: '',
     phone: '+48 ',
     message: '',
     loanType: '', // 'currency' or 'skd'
     agreementDate: '',
     homeBank: '',
+    originalBank: '',
     loanTypeDetail: '', // 'indexed', 'denominated', 'unknown'
     loanCurrency: '',
     loanValuePln: '',
