@@ -5,12 +5,13 @@ import { Link } from 'react-router-dom';
 
 const ConsultationModal: React.FC = () => {
   const { isModalOpen, modalIntent, closeModal, submittedData } = useConsultationModal();
-  const [name, setName] = useState('');
+  const [firstName, setFirstName] = useState('');
+  const [lastName, setLastName] = useState('');
   const [email, setEmail] = useState('');
   const [phone, setPhone] = useState('+48 '); // Default area code
   const [message, setMessage] = useState('');
   const [privacyConsent, setPrivacyConsent] = useState(false);
-  const [errors, setErrors] = useState<{ name?: string; email?: string; phone?: string; privacyConsent?: string }>({});
+  const [errors, setErrors] = useState<{ firstName?: string; lastName?: string; email?: string; phone?: string; privacyConsent?: string }>({});
   const modalRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -26,7 +27,8 @@ const ConsultationModal: React.FC = () => {
     } else {
       document.body.style.overflow = ''; // Restore scrolling
       // Clear form and errors when modal closes
-      setName('');
+      setFirstName('');
+      setLastName('');
       setEmail('');
       setPhone('+48 '); // Reset phone to default
       setMessage('');
@@ -47,9 +49,12 @@ const ConsultationModal: React.FC = () => {
   }, [isModalOpen, closeModal, modalIntent]);
 
   const validate = () => {
-    const newErrors: { name?: string; email?: string; phone?: string; privacyConsent?: string } = {};
-    if (!name.trim()) {
-      newErrors.name = 'Imię i nazwisko jest obowiązkowe.';
+    const newErrors: { firstName?: string; lastName?: string; email?: string; phone?: string; privacyConsent?: string } = {};
+    if (!firstName.trim()) {
+      newErrors.firstName = 'Imię jest obowiązkowe.';
+    }
+    if (!lastName.trim()) {
+      newErrors.lastName = 'Nazwisko jest obowiązkowe.';
     }
     if (!email.trim()) {
       newErrors.email = 'Email jest obowiązkowy.';
@@ -81,7 +86,7 @@ const ConsultationModal: React.FC = () => {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (validate()) {
-      console.log('Form Data:', { name, email, phone, message });
+      console.log('Form Data:', { firstName, lastName, email, phone, message });
       
       // Check the intent that opened this modal
       if (modalIntent === 'direct_consultation') {
@@ -90,7 +95,7 @@ const ConsultationModal: React.FC = () => {
         closeModal();
       } else {
         // For other cases, show success message
-        openModal({ name, email, phone, message, privacyConsent }, 'form_submission');
+        openModal({ name: `${firstName} ${lastName}`, firstName, lastName, email, phone, message, privacyConsent }, 'form_submission');
       }
     }
   };
@@ -133,6 +138,8 @@ const ConsultationModal: React.FC = () => {
             {/* Display submitted data */}
             {submittedData && <div className="mt-8 text-left space-y-2" style={{ color: '#F5F5F5' }}>
               <p><strong>Imię i nazwisko:</strong> {submittedData.name}</p>
+              <p><strong>Imię:</strong> {submittedData.firstName}</p>
+              <p><strong>Nazwisko:</strong> {submittedData.lastName}</p>
               <p><strong>Email:</strong> {submittedData.email}</p>
               <p><strong>Telefon:</strong> {submittedData.phone}</p>
               {submittedData.message && <p><strong>Wiadomość:</strong> {submittedData.message}</p>}
@@ -164,29 +171,55 @@ const ConsultationModal: React.FC = () => {
             </h2>
 
             <form onSubmit={handleSubmit} className="space-y-5">
-              <div>
-                <label htmlFor="modal-name" className="block text-sm font-medium mb-2" style={{ color: '#F5F5F5' }}>
-                  Imię i nazwisko <span style={{ color: '#D4AF37' }}>*</span>
-                </label>
-                <input
-                  type="text"
-                  id="modal-name"
-                  name="name"
-                  value={name}
-                  onChange={(e) => setName(e.target.value)}
-                  className="w-full px-4 py-3 rounded-lg focus:outline-none focus:ring-2"
-                  style={{
-                    backgroundColor: 'rgba(245, 245, 245, 0.1)',
-                    border: '1px solid rgba(245, 245, 245, 0.2)',
-                    color: '#F5F5F5',
-                    '--tw-ring-color': '#D4AF37',
-                  }}
-                  placeholder="Twoje imię i nazwisko"
-                  required
-                  aria-invalid={errors.name ? "true" : "false"}
-                  aria-describedby={errors.name ? "name-error" : undefined}
-                />
-                {errors.name && <p id="name-error" className="text-red-500 text-sm mt-1">{errors.name}</p>}
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div>
+                  <label htmlFor="modal-firstName" className="block text-sm font-medium mb-2" style={{ color: '#F5F5F5' }}>
+                    Imię <span style={{ color: '#D4AF37' }}>*</span>
+                  </label>
+                  <input
+                    type="text"
+                    id="modal-firstName"
+                    name="firstName"
+                    value={firstName}
+                    onChange={(e) => setFirstName(e.target.value)}
+                    className="w-full px-4 py-3 rounded-lg focus:outline-none focus:ring-2"
+                    style={{
+                      backgroundColor: 'rgba(245, 245, 245, 0.1)',
+                      border: '1px solid rgba(245, 245, 245, 0.2)',
+                      color: '#F5F5F5',
+                      '--tw-ring-color': '#D4AF37',
+                    }}
+                    placeholder="Twoje imię"
+                    required
+                    aria-invalid={errors.firstName ? "true" : "false"}
+                    aria-describedby={errors.firstName ? "firstName-error" : undefined}
+                  />
+                  {errors.firstName && <p id="firstName-error" className="text-red-500 text-sm mt-1">{errors.firstName}</p>}
+                </div>
+                <div>
+                  <label htmlFor="modal-lastName" className="block text-sm font-medium mb-2" style={{ color: '#F5F5F5' }}>
+                    Nazwisko <span style={{ color: '#D4AF37' }}>*</span>
+                  </label>
+                  <input
+                    type="text"
+                    id="modal-lastName"
+                    name="lastName"
+                    value={lastName}
+                    onChange={(e) => setLastName(e.target.value)}
+                    className="w-full px-4 py-3 rounded-lg focus:outline-none focus:ring-2"
+                    style={{
+                      backgroundColor: 'rgba(245, 245, 245, 0.1)',
+                      border: '1px solid rgba(245, 245, 245, 0.2)',
+                      color: '#F5F5F5',
+                      '--tw-ring-color': '#D4AF37',
+                    }}
+                    placeholder="Twoje nazwisko"
+                    required
+                    aria-invalid={errors.lastName ? "true" : "false"}
+                    aria-describedby={errors.lastName ? "lastName-error" : undefined}
+                  />
+                  {errors.lastName && <p id="lastName-error" className="text-red-500 text-sm mt-1">{errors.lastName}</p>}
+                </div>
               </div>
 
               <div>
