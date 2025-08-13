@@ -107,7 +107,7 @@ const Footer: React.FC<FooterProps> = ({ registerFooterSection }) => {
                 className="w-14 h-14 rounded-lg flex items-center justify-center transition-all hover:scale-110 border-2"
                 style={{ backgroundColor: '#F5F5F5', borderColor: '#D4AF37' }}
               >
-                <Facebook size={20} style={{ color: '#0A1A2F' }} />
+                <Facebook size={30} style={{ color: '#0A1A2F' }} />
               </a>
               <a
                 href="https://www.instagram.com/pan_od_toksycznych_kredytow/"
@@ -116,7 +116,7 @@ const Footer: React.FC<FooterProps> = ({ registerFooterSection }) => {
                 className="w-14 h-14 rounded-lg flex items-center justify-center transition-all hover:scale-110 border-2"
                 style={{ backgroundColor: '#F5F5F5', borderColor: '#D4AF37' }}
               >
-                <Instagram size={20} style={{ color: '#0A1A2F' }} />
+                <Instagram size={30} style={{ color: '#0A1A2F' }} />
               </a>
               <a
                 href="https://www.tiktok.com/@krzysztofmilewski59?is_from_webapp=1&sender_device=pc"
@@ -138,7 +138,7 @@ const Footer: React.FC<FooterProps> = ({ registerFooterSection }) => {
                 className="w-14 h-14 rounded-lg flex items-center justify-center transition-all hover:scale-110 border-2"
                 style={{ backgroundColor: '#F5F5F5', borderColor: '#D4AF37' }}
               >
-                <Linkedin size={20} style={{ color: '#0A1A2F' }} />
+                <Linkedin size={30} style={{ color: '#0A1A2F' }} />
               </a>
             </div>
              <h3 className="text-xl font-bold mb-4 mt-8" style={{ color: '#F5F5F5' }}> {/* Added mt-8 for spacing */}
