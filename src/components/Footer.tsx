@@ -146,39 +146,39 @@ const Footer: React.FC<FooterProps> = ({ registerFooterSection }) => {
         </div>
 
         {/* App Store Links */}
-        <div className="mt-8">
+        <div className="mt-12 pt-8">
           <h3 className="text-xl font-bold py-6" style={{ color: '#F5F5F5' }}>
             Pobierz aplikację
           </h3>
-          <p className="text-l mb-4 leading-relaxed" style={{ color: '#D4AF37' }}>
+          <p className="text-l mb-8 leading-relaxed" style={{ color: '#D4AF37' }}>
             Wpisz ten numer K005533, żebym mógł mieć Twoją sprawę zawsze pod opieką!
           </p>
-          <div className="flex space-x-6">
+          <div className="flex justify-center md:justify-start space-x-12 mb-8">
             <a
               href="https://apps.apple.com/pl/app/moja-sprawa/id6736989155?l=pl"
               target="_blank"
               rel="noopener noreferrer"
-              className="transition-all hover:scale-110"
+              className="flex flex-col items-center transition-all hover:scale-110"
               aria-label="Pobierz z Apple App Store"
             >
-              <img src="/app-store.png" alt="Pobierz z App Store" className="h-8 w-8" />
-              <p>Pobierz aplikacje na App Store</p>
+              <img src="/app-store.png" alt="Pobierz z App Store" className="h-16 w-16 mb-2" />
+              <p className="text-sm text-center" style={{ color: '#F5F5F5' }}>App Store</p>
             </a>
             <a
               href="https://play.google.com/store/apps/details?id=pl.votum_sa.mojasprawa&pli=1"
               target="_blank"
               rel="noopener noreferrer"
-              className="transition-all hover:scale-110"
+              className="flex flex-col items-center transition-all hover:scale-110"
               aria-label="Pobierz z Google Play Store"
             >
-              <img src="/google-play.png" alt="Pobierz z Google Play" className="h-8 w-8" />
-              <p>Pobierz aplikacje na Google Play</p>
+              <img src="/google-play.png" alt="Pobierz z Google Play" className="h-16 w-16 mb-2" />
+              <p className="text-sm text-center" style={{ color: '#F5F5F5' }}>Google Play</p>
             </a>
           </div>
         </div>
       </div>
         {/* Bottom Section */}
-        <div className="mx-8" style={{ borderTop: '1px solid rgba(212, 175, 55, 0.3)' }}>
+        <div className="pt-8 mt-8" style={{ borderTop: '1px solid rgba(212, 175, 55, 0.3)' }}>
           <div className="flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0">
             <div className="text-center md:text-left">
               <p className="text-sm mb-2" style={{ color: '#F5F5F5' }}>
