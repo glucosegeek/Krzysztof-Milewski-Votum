@@ -158,7 +158,7 @@ const Footer: React.FC<FooterProps> = ({ registerFooterSection }) => {
               href="https://apps.apple.com/pl/app/moja-sprawa/id6736989155?l=pl"
               target="_blank"
               rel="noopener noreferrer"
-              className="flex flex-col items-center transition-all hover:scale-110 border-2" style={{ backgroundColor: '#F5F5F5', borderColor: '#D4AF37' }}
+              className="flex flex-col items-center transition-all hover:scale-110"
               aria-label="Pobierz z Apple App Store"
             >
               <img src="/app-store.png" alt="Pobierz z App Store" className="h-8 w-8 mb-2" />
