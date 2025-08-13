@@ -171,7 +171,7 @@ const Footer: React.FC<FooterProps> = ({ registerFooterSection }) => {
       </a>
     </div>
     <p className="text-xs text-center" style={{ color: '#F5F5F5' }}>
-      Skanuj dla Apple App Store
+      Apple Store
     </p>
   </div>
 
@@ -200,7 +200,7 @@ const Footer: React.FC<FooterProps> = ({ registerFooterSection }) => {
       </a>
     </div>
     <p className="text-xs text-center" style={{ color: '#F5F5F5' }}>
-      Skanuj dla Google Play Store
+      Google Play
     </p>
   </div>
 </div>
