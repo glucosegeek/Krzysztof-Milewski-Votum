@@ -21,10 +21,23 @@ import {
   ChevronUp
 } from 'lucide-react';
 
+interface Testimonial {
+  id: string;
+  name: string;
+  description: string;
+  stars: number;
+  city: string;
+}
+
 const HomePage: React.FC = () => {
   const heroSectionRef = useRef<HTMLElement>(null);
   const { registerHeroSection } = useStickyButtonVisibility();
   const { isModalOpen, closeModal, submittedData, openModal } = useConsultationModal();
+
+  // Testimonials state
+  const [testimonials, setTestimonials] = useState<Testimonial[]>([]);
+  const [loadingTestimonials, setLoadingTestimonials] = useState(true);
+  const [errorTestimonials, setErrorTestimonials] = useState<string | null>(null);
 
   useEffect(() => {
     registerHeroSection(heroSectionRef.current);
@@ -190,6 +203,106 @@ const conciergeItems = [
     return Object.keys(newErrors).length === 0;
   };
   
+  const parseGoogleSheetsTestimonials = (jsonData: any): Testimonial[] => {
+    try {
+      const table = jsonData.table;
+      if (!table || !table.rows || !table.cols) {
+        console.error('Invalid Google Sheets JSON structure for testimonials');
+        return [];
+      }
+
+      const headers = table.cols.map((col: any) => col.label || col.id || '');
+      
+      const nameIndex = headers.findIndex((h: string) => h.toLowerCase().includes('name'));
+      const descriptionIndex = headers.findIndex((h: string) => h.toLowerCase().includes('description'));
+      const starsIndex = headers.findIndex((h: string) => h.toLowerCase().includes('stars'));
+      const cityIndex = headers.findIndex((h: string) => h.toLowerCase().includes('city'));
+
+      if (nameIndex === -1 || descriptionIndex === -1 || starsIndex === -1 || cityIndex === -1) {
+        console.error('Required columns not found in Google Sheets for testimonials');
+        return [];
+      }
+
+      const testimonials: Testimonial[] = [];
+      
+      table.rows.forEach((row: any, index: number) => {
+        if (index === 0 && row.c && row.c[nameIndex] && 
+            row.c[nameIndex].v && 
+            row.c[nameIndex].v.toString().toLowerCase().includes('name')) {
+          return;
+        }
+
+        if (!row.c) return;
+
+        const name = row.c[nameIndex]?.v?.toString() || '';
+        const description = row.c[descriptionIndex]?.v?.toString() || '';
+        const stars = parseInt(row.c[starsIndex]?.v?.toString() || '5', 10);
+        const city = row.c[cityIndex]?.v?.toString() || '';
+
+        if (name && description && city) {
+          testimonials.push({
+            id: `testimonial-${index}`,
+            name,
+            description,
+            stars: Math.min(Math.max(stars, 1), 5), // Ensure stars are between 1-5
+            city
+          });
+        }
+      });
+
+      return testimonials;
+    } catch (error) {
+      console.error('Error parsing Google Sheets JSON for testimonials:', error);
+      return [];
+    }
+  };
+
+  useEffect(() => {
+    const fetchTestimonials = async () => {
+      try {
+        setLoadingTestimonials(true);
+        setErrorTestimonials(null);
+
+        const response = await fetch(
+          'https://docs.google.com/spreadsheets/d/1lzN_O5z6z4Ed-Lvo0TK9PqU4bQ3sJqUD7poNnuhi6RY/gviz/tq?gid=0&tqx=out:json',
+          {
+            method: 'GET',
+            headers: {
+              'Accept': 'application/json',
+            },
+          }
+        );
+
+        if (!response.ok) {
+          throw new Error(`HTTP error! status: ${response.status}`);
+        }
+
+        const responseText = await response.text();
+        
+        const jsonStart = responseText.indexOf('{');
+        const jsonEnd = responseText.lastIndexOf('}');
+        let jsonString = '';
+        if (jsonStart !== -1 && jsonEnd !== -1 && jsonEnd > jsonStart) {
+          jsonString = responseText.substring(jsonStart, jsonEnd + 1);
+        } else {
+          console.error('Could not find valid JSON in responseText for testimonials:', responseText);
+          throw new Error('Invalid JSON response from Google Sheets.');
+        }
+        const jsonData = JSON.parse(jsonString);
+        
+        const parsedTestimonials = parseGoogleSheetsTestimonials(jsonData);
+        setTestimonials(parsedTestimonials);
+      } catch (e: any) {
+        console.error('Error fetching testimonials:', e);
+        setErrorTestimonials(e.message || 'Wystąpił błąd podczas ładowania opinii klientów');
+      } finally {
+        setLoadingTestimonials(false);
+      }
+    };
+
+    fetchTestimonials();
+  }, []);
+
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
 
@@ -579,33 +692,59 @@ Nie ryzykujesz nic – możesz tylko zyskać.</li>
             </p>
           </div>
           
-          <div className="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
-            <div className="p-10 rounded-2xl shadow-xl border-4" style={{ backgroundColor: '#F5F5F5', borderColor: '#D4AF37' }}>
-              <div className="flex mb-4">
-                {[...Array(4)].map((_, i) => (
-                  <Star key={i} size={20} style={{ color: '#D4AF37' }} className="fill-current" />
-                ))}
-              </div>
-              <p className="mb-6 text-lg leading-relaxed" style={{ color: '#0A1A2F' }}>
-                „Dzięki fachowej pomocy odzyskałem ponad 45 000 euro z tytułu nieuczciwych opłat związanych z moim kredytem w CHF. Cały proces przebiegał w sposób przejrzysty i profesjonalny".
+          {loadingTestimonials && (
+            <div className="text-center">
+              <div className="inline-block animate-spin rounded-full h-8 w-8 border-b-2" style={{ borderColor: '#D4AF37' }}></div>
+              <p className="text-xl mt-4" style={{ color: '#F5F5F5' }}>
+                Ładowanie opinii klientów...
               </p>
-              <div className="font-semibold" style={{ color: '#0A1A2F' }}>Maria K.</div>
-              <div style={{ color: '#0A1A2F' }}>Warszawa</div>
             </div>
-            
-            <div className="p-10 rounded-2xl shadow-xl border-4" style={{ backgroundColor: '#F5F5F5', borderColor: '#D4AF37' }}>
-              <div className="flex mb-4">
-                {[...Array(5)].map((_, i) => (
-                  <Star key={i} size={20} style={{ color: '#D4AF37' }} className="fill-current" />
-                ))}
-              </div>
-              <p className="mb-6 text-lg leading-relaxed" style={{ color: '#0A1A2F' }}>
-                „Wyjątkowa obsługa i rezultaty. Współpraca z Votum S.A. miała decydujące znaczenie w mojej sprawie dotyczącej sporu o kredyt CHF. Gorąco polecam".
+          )}
+          
+          {errorTestimonials && (
+            <div className="text-center p-8 rounded-2xl shadow-xl border-4" style={{ backgroundColor: '#0A1A2F', borderColor: '#D4AF37' }}>
+              <p className="text-xl text-red-400 mb-4">
+                Błąd podczas ładowania opinii klientów
               </p>
-              <div className="font-semibold" style={{ color: '#0A1A2F' }}>Tomasz R.</div>
-              <div style={{ color: '#0A1A2F' }}>Krakow</div>
+              <p className="text-sm" style={{ color: '#F5F5F5' }}>
+                {errorTestimonials}
+              </p>
+              <button
+                onClick={() => window.location.reload()}
+                className="mt-4 px-6 py-2 rounded-lg border-2 transition-colors hover:bg-opacity-10 hover:bg-white"
+                style={{ borderColor: '#D4AF37', color: '#D4AF37' }}
+              >
+                Spróbuj ponownie
+              </button>
             </div>
-          </div>
+          )}
+          
+          {!loadingTestimonials && !errorTestimonials && testimonials.length === 0 && (
+            <div className="text-center p-8 rounded-2xl shadow-xl border-4" style={{ backgroundColor: '#0A1A2F', borderColor: '#D4AF37' }}>
+              <p className="text-xl" style={{ color: '#F5F5F5' }}>
+                Brak dostępnych opinii klientów.
+              </p>
+            </div>
+          )}
+          
+          {!loadingTestimonials && !errorTestimonials && testimonials.length > 0 && (
+            <div className="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+              {testimonials.map((testimonial) => (
+                <div key={testimonial.id} className="p-10 rounded-2xl shadow-xl border-4" style={{ backgroundColor: '#F5F5F5', borderColor: '#D4AF37' }}>
+                  <div className="flex mb-4">
+                    {[...Array(testimonial.stars)].map((_, i) => (
+                      <Star key={i} size={20} style={{ color: '#D4AF37' }} className="fill-current" />
+                    ))}
+                  </div>
+                  <p className="mb-6 text-lg leading-relaxed" style={{ color: '#0A1A2F' }}>
+                    {testimonial.description}
+                  </p>
+                  <div className="font-semibold" style={{ color: '#0A1A2F' }}>{testimonial.name}</div>
+                  <div style={{ color: '#0A1A2F' }}>{testimonial.city}</div>
+                </div>
+              ))}
+            </div>
+          )}
         </div>
       </section>
 
