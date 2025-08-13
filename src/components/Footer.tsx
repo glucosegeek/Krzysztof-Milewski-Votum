@@ -78,6 +78,7 @@ const Footer: React.FC<FooterProps> = ({ registerFooterSection }) => {
             </div>
           </div>
 
+          {/* Contact */}
         <div>
             <h3 className="text-xl font-bold mb-4" style={{ color: '#F5F5F5' }}>
               Kontakt
