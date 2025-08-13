@@ -365,7 +365,7 @@ Nie ryzykujesz nic – możesz tylko zyskać.</li>
                   href="https://apps.apple.com/pl/app/moja-sprawa/id6736989155?l=pl"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="w-36 h-36 rounded-2xl shadow-xl border-4 flex items-center justify-center transition-all hover:scale-105"
+                  className="w-46 h-46 rounded-2xl shadow-xl border-4 flex items-center justify-center transition-all hover:scale-105"
                   style={{ backgroundColor: '#F5F5F5', borderColor: '#D4AF37' }}
                   aria-label="Skanuj QR kod dla Apple App Store"
                 >
@@ -382,7 +382,7 @@ Nie ryzykujesz nic – możesz tylko zyskać.</li>
                   href="https://play.google.com/store/apps/details?id=pl.votum_sa.mojasprawa&pli=1"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="w-36 h-36 rounded-2xl shadow-xl border-4 flex items-center justify-center transition-all hover:scale-105"
+                  className="w-46 h-46 rounded-2xl shadow-xl border-4 flex items-center justify-center transition-all hover:scale-105"
                   style={{ backgroundColor: '#F5F5F5', borderColor: '#D4AF37' }}
                   aria-label="Skanuj QR kod dla Google Play Store"
                 >
