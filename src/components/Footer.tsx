@@ -144,6 +144,33 @@ const Footer: React.FC<FooterProps> = ({ registerFooterSection }) => {
             </a>
           </div>
         </div>
+
+        {/* App Store Links */}
+        <div>
+          <h3 className="text-xl font-bold mb-4" style={{ color: '#F5F5F5' }}>
+            Pobierz aplikację
+          </h3>
+          <div className="flex space-x-4">
+            <a
+              href="https://apps.apple.com/pl/app/moja-sprawa/id6736989155?l=pl"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="transition-all hover:scale-110"
+              aria-label="Pobierz z Apple App Store"
+            >
+              <img src="/app-store.png" alt="Pobierz z App Store" className="h-12 w-auto" />
+            </a>
+            <a
+              href="https://play.google.com/store/apps/details?id=pl.votum_sa.mojasprawa&pli=1"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="transition-all hover:scale-110"
+              aria-label="Pobierz z Google Play Store"
+            >
+              <img src="/google-play.png" alt="Pobierz z Google Play" className="h-12 w-auto" />
+            </a>
+          </div>
+        </div>
       </div>
         {/* Bottom Section */}
         <div className="pt-8" style={{ borderTop: '1px solid rgba(212, 175, 55, 0.3)' }}>
