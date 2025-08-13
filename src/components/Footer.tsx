@@ -182,17 +182,17 @@ const Footer: React.FC<FooterProps> = ({ registerFooterSection }) => {
         href="https://play.google.com/store/apps/details?id=pl.votum_sa.mojasprawa&pli=1"
         target="_blank"
         rel="noopener noreferrer"
-        className="w-16 h-16 rounded-lg flex items-center justify-center transition-all hover:scale-110 border-2"
+        className="w-10 h-10 rounded-lg flex items-center justify-center transition-all hover:scale-110 border-2"
         style={{ backgroundColor: '#F5F5F5', borderColor: '#D4AF37' }}
         aria-label="Pobierz z Google Play Store"
       >
-        <img src="/google-play.png" alt="Google Play Store" className="w-12 h-12 object-contain" />
+        <img src="/google-play.png" alt="Google Play Store" className="w-10 h-10 object-contain" />
       </a>
       <a
         href="https://play.google.com/store/apps/details?id=pl.votum_sa.mojasprawa&pli=1"
         target="_blank"
         rel="noopener noreferrer"
-        className="w-16 h-16 rounded-lg flex items-center justify-center transition-all hover:scale-110 border-2"
+        className="w-10 h-10 rounded-lg flex items-center justify-center transition-all hover:scale-110 border-2"
         style={{ backgroundColor: '#F5F5F5', borderColor: '#D4AF37' }}
         aria-label="Skanuj QR kod dla Google Play Store"
       >
