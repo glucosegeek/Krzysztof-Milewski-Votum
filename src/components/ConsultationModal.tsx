@@ -414,9 +414,6 @@ const ConsultationModal: React.FC = () => {
                 ></textarea>
               </div>
 
-              <div className="mb-6">
-                <label className="flex items-start text-sm font-medium w-full" style={{ color: '#F5F5F5' }}>
-                  <input
               {modalIntent === 'direct_consultation' && (
                 <>
                   {/* Loan Type Selection */}
@@ -713,6 +710,10 @@ const ConsultationModal: React.FC = () => {
                   )}
                 </>
               )}
+
+              <div className="mb-6">
+                <label className="flex items-start text-sm font-medium w-full" style={{ color: '#F5F5F5' }}>
+                  <input
                     type="checkbox"
                     id="privacy-consent"
                     name="privacyConsent"
