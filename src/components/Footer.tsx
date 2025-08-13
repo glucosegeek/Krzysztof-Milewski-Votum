@@ -124,7 +124,7 @@ const Footer: React.FC<FooterProps> = ({ registerFooterSection }) => {
               href="https://www.tiktok.com/@krzysztofmilewski59?is_from_webapp=1&sender_device=pc"
               target="_blank"
               rel="noopener noreferrer"
-              className="w-10 h-10 rounded-lg flex items-center justify-center transition-all hover:scale-110 border-2"
+              className="w-5 h-5 rounded-lg flex items-center justify-center transition-all hover:scale-110 border-2"
               style={{ backgroundColor: '#F5F5F5', borderColor: '#D4AF37' }}
             >
               <div className="w-10 h-10 rounded-sm" style={{ backgroundColor: '#0A1A2F' }}>
