@@ -162,6 +162,7 @@ const Footer: React.FC<FooterProps> = ({ registerFooterSection }) => {
               aria-label="Pobierz z Apple App Store"
             >
               <img src="/app-store.png" alt="Pobierz z App Store" className="h-8 w-8" />
+              <p>Pobierz aplikacje na App Store</p>
             </a>
             <a
               href="https://play.google.com/store/apps/details?id=pl.votum_sa.mojasprawa&pli=1"
@@ -171,6 +172,7 @@ const Footer: React.FC<FooterProps> = ({ registerFooterSection }) => {
               aria-label="Pobierz z Google Play Store"
             >
               <img src="/google-play.png" alt="Pobierz z Google Play" className="h-8 w-8" />
+              <p>Pobierz aplikacje na Google Play</p>
             </a>
           </div>
         </div>
