@@ -145,27 +145,64 @@ const Footer: React.FC<FooterProps> = ({ registerFooterSection }) => {
   Pobierz naszą aplikację na swój telefon.
 </h3>
             <p className="my-4" style={{ color: '#D4AF37' }}>Wpisz ten numer K005533, żebym mógł mieć Twoją sprawę zawsze pod opieką! </p>
-<div className="flex space-x-4">
-  <a
-    href="https://apps.apple.com/pl/app/moja-sprawa/id6736989155?l=pl"
-    target="_blank"
-    rel="noopener noreferrer"
-    className="w-10 h-10 rounded-lg flex items-center justify-center transition-all hover:scale-110 border-2"
-    style={{ backgroundColor: '#F5F5F5', borderColor: '#D4AF37' }}
-    aria-label="Pobierz z Apple App Store"
-  >
-    <img src="/app-store.png" alt="Apple App Store" className="w-5 h-5 object-contain" /> 
-  </a>
-  <a
-    href="https://play.google.com/store/apps/details?id=pl.votum_sa.mojasprawa&pli=1"
-    target="_blank"
-    rel="noopener noreferrer"
-    className="w-10 h-10 rounded-lg flex items-center justify-center transition-all hover:scale-110 border-2"
-    style={{ backgroundColor: '#F5F5F5', borderColor: '#D4AF37' }}
-    aria-label="Pobierz z Google Play Store"
-  >
-    <img src="/google-play.png" alt="Google Play Store" className="w-5 h-5 object-contain" />
-  </a>
+<div className="flex flex-wrap gap-8 justify-center md:justify-start">
+  {/* Apple App Store */}
+  <div className="flex flex-col items-center">
+    <div className="flex items-center space-x-4 mb-2">
+      <a
+        href="https://apps.apple.com/pl/app/moja-sprawa/id6736989155?l=pl"
+        target="_blank"
+        rel="noopener noreferrer"
+        className="w-12 h-12 rounded-lg flex items-center justify-center transition-all hover:scale-110 border-2"
+        style={{ backgroundColor: '#F5F5F5', borderColor: '#D4AF37' }}
+        aria-label="Pobierz z Apple App Store"
+      >
+        <img src="/app-store.png" alt="Apple App Store" className="w-6 h-6 object-contain" /> 
+      </a>
+      <a
+        href="https://apps.apple.com/pl/app/moja-sprawa/id6736989155?l=pl"
+        target="_blank"
+        rel="noopener noreferrer"
+        className="w-16 h-16 rounded-lg flex items-center justify-center transition-all hover:scale-110 border-2"
+        style={{ backgroundColor: '#F5F5F5', borderColor: '#D4AF37' }}
+        aria-label="Skanuj QR kod dla Apple App Store"
+      >
+        <img src="/qr-apple-store.png" alt="QR kod Apple App Store" className="w-full h-full object-contain p-1" />
+      </a>
+    </div>
+    <p className="text-xs text-center" style={{ color: '#F5F5F5' }}>
+      Skanuj dla Apple App Store
+    </p>
+  </div>
+
+  {/* Google Play Store */}
+  <div className="flex flex-col items-center">
+    <div className="flex items-center space-x-4 mb-2">
+      <a
+        href="https://play.google.com/store/apps/details?id=pl.votum_sa.mojasprawa&pli=1"
+        target="_blank"
+        rel="noopener noreferrer"
+        className="w-12 h-12 rounded-lg flex items-center justify-center transition-all hover:scale-110 border-2"
+        style={{ backgroundColor: '#F5F5F5', borderColor: '#D4AF37' }}
+        aria-label="Pobierz z Google Play Store"
+      >
+        <img src="/google-play.png" alt="Google Play Store" className="w-6 h-6 object-contain" />
+      </a>
+      <a
+        href="https://play.google.com/store/apps/details?id=pl.votum_sa.mojasprawa&pli=1"
+        target="_blank"
+        rel="noopener noreferrer"
+        className="w-16 h-16 rounded-lg flex items-center justify-center transition-all hover:scale-110 border-2"
+        style={{ backgroundColor: '#F5F5F5', borderColor: '#D4AF37' }}
+        aria-label="Skanuj QR kod dla Google Play Store"
+      >
+        <img src="/qr-google-play.png" alt="QR kod Google Play Store" className="w-full h-full object-contain p-1" />
+      </a>
+    </div>
+    <p className="text-xs text-center" style={{ color: '#F5F5F5' }}>
+      Skanuj dla Google Play Store
+    </p>
+  </div>
 </div>
 
           </div>
