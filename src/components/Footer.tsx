@@ -146,11 +146,14 @@ const Footer: React.FC<FooterProps> = ({ registerFooterSection }) => {
         </div>
 
         {/* App Store Links */}
-        <div>
+        <div className="mt-8">
           <h3 className="text-xl font-bold py-6" style={{ color: '#F5F5F5' }}>
             Pobierz aplikację
           </h3>
-          <div className="flex space-x-4">
+          <p className="text-sm mb-4 leading-relaxed" style={{ color: '#F5F5F5' }}>
+            Wpisz ten numer K005533, żebym mógł mieć Twoją sprawę zawsze pod opieką!
+          </p>
+          <div className="flex space-x-6">
             <a
               href="https://apps.apple.com/pl/app/moja-sprawa/id6736989155?l=pl"
               target="_blank"
@@ -158,7 +161,7 @@ const Footer: React.FC<FooterProps> = ({ registerFooterSection }) => {
               className="transition-all hover:scale-110"
               aria-label="Pobierz z Apple App Store"
             >
-              <img src="/app-store.png" alt="Pobierz z App Store" className="h-10 w-10" />
+              <img src="/app-store.png" alt="Pobierz z App Store" className="h-12 w-12" />
             </a>
             <a
               href="https://play.google.com/store/apps/details?id=pl.votum_sa.mojasprawa&pli=1"
@@ -167,7 +170,7 @@ const Footer: React.FC<FooterProps> = ({ registerFooterSection }) => {
               className="transition-all hover:scale-110"
               aria-label="Pobierz z Google Play Store"
             >
-              <img src="/google-play.png" alt="Pobierz z Google Play" className="h-10 w-10" />
+              <img src="/google-play.png" alt="Pobierz z Google Play" className="h-12 w-12" />
             </a>
           </div>
         </div>
