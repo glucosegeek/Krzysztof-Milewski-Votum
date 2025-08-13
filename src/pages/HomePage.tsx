@@ -347,6 +347,56 @@ Nie ryzykujesz nic – możesz tylko zyskać.</li>
         </div>
       </section>
 
+      {/* QR Codes Section */}
+      <section className="py-20" style={{ backgroundColor: '#0A1A2F' }}>
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center">
+            <h2 className="text-4xl font-bold mb-4" style={{ color: '#F5F5F5' }}>
+              Pobierz naszą aplikację na swój telefon.
+            </h2>
+            <p className="text-xl mb-8" style={{ color: '#D4AF37' }}>
+              Wpisz ten numer K005533, żebym mógł mieć Twoją sprawę zawsze pod opieką!
+            </p>
+            
+            <div className="flex flex-wrap justify-center gap-12 mt-8">
+              {/* Apple App Store QR Code */}
+              <div className="flex flex-col items-center">
+                <a
+                  href="https://apps.apple.com/pl/app/moja-sprawa/id6736989155?l=pl"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="w-32 h-32 rounded-2xl shadow-xl border-4 flex items-center justify-center transition-all hover:scale-105"
+                  style={{ backgroundColor: '#F5F5F5', borderColor: '#D4AF37' }}
+                  aria-label="Skanuj QR kod dla Apple App Store"
+                >
+                  <img src="/qr-apple-store.png" alt="QR kod Apple App Store" className="w-full h-full object-contain p-2" />
+                </a>
+                <p className="text-lg mt-4 font-semibold" style={{ color: '#F5F5F5' }}>
+                  App Store
+                </p>
+              </div>
+
+              {/* Google Play Store QR Code */}
+              <div className="flex flex-col items-center">
+                <a
+                  href="https://play.google.com/store/apps/details?id=pl.votum_sa.mojasprawa&pli=1"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="w-32 h-32 rounded-2xl shadow-xl border-4 flex items-center justify-center transition-all hover:scale-105"
+                  style={{ backgroundColor: '#F5F5F5', borderColor: '#D4AF37' }}
+                  aria-label="Skanuj QR kod dla Google Play Store"
+                >
+                  <img src="/qr-google-play.png" alt="QR kod Google Play Store" className="w-full h-full object-contain p-2" />
+                </a>
+                <p className="text-lg mt-4 font-semibold" style={{ color: '#F5F5F5' }}>
+                  Google Play
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* What I Do */}
       <section className="py-20" style={{ backgroundColor: '#0A1A2F' }}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
