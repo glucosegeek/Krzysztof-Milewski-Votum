@@ -582,7 +582,7 @@ Nie ryzykujesz nic – możesz tylko zyskać.</li>
           <div className="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
             <div className="p-10 rounded-2xl shadow-xl border-4" style={{ backgroundColor: '#F5F5F5', borderColor: '#D4AF37' }}>
               <div className="flex mb-4">
-                {[...Array(5)].map((_, i) => (
+                {[...Array(4)].map((_, i) => (
                   <Star key={i} size={20} style={{ color: '#D4AF37' }} className="fill-current" />
                 ))}
               </div>
