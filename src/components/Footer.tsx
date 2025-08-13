@@ -161,7 +161,7 @@ const Footer: React.FC<FooterProps> = ({ registerFooterSection }) => {
               className="transition-all hover:scale-110"
               aria-label="Pobierz z Apple App Store"
             >
-              <img src="/app-store.png" alt="Pobierz z App Store" className="h-12 w-12" />
+              <img src="/app-store.png" alt="Pobierz z App Store" className="h-8 w-8" />
             </a>
             <a
               href="https://play.google.com/store/apps/details?id=pl.votum_sa.mojasprawa&pli=1"
@@ -170,7 +170,7 @@ const Footer: React.FC<FooterProps> = ({ registerFooterSection }) => {
               className="transition-all hover:scale-110"
               aria-label="Pobierz z Google Play Store"
             >
-              <img src="/google-play.png" alt="Pobierz z Google Play" className="h-12 w-12" />
+              <img src="/google-play.png" alt="Pobierz z Google Play" className="h-8 w-8" />
             </a>
           </div>
         </div>
