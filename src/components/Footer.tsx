@@ -147,7 +147,7 @@ const Footer: React.FC<FooterProps> = ({ registerFooterSection }) => {
 
         {/* App Store Links */}
         <div>
-          <h3 className="text-xl font-bold mb-4" style={{ color: '#F5F5F5' }}>
+          <h3 className="text-xl font-bold py-4" style={{ color: '#F5F5F5' }}>
             Pobierz aplikację
           </h3>
           <div className="flex space-x-4">
