@@ -150,7 +150,7 @@ const Footer: React.FC<FooterProps> = ({ registerFooterSection }) => {
           <h3 className="text-xl font-bold py-6" style={{ color: '#F5F5F5' }}>
             Pobierz aplikację
           </h3>
-          <p className="text-xl mb-4 leading-relaxed" style={{ color: '#D4AF37' }}>
+          <p className="text-l mb-4 leading-relaxed" style={{ color: '#D4AF37' }}>
             Wpisz ten numer K005533, żebym mógł mieć Twoją sprawę zawsze pod opieką!
           </p>
           <div className="flex space-x-6">
