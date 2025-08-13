@@ -16,7 +16,7 @@ const Footer: React.FC<FooterProps> = ({ registerFooterSection }) => {
   }, [registerFooterSection]);
 
   return (
-    <footer ref={footerRef} className="py-12 border-t" style={{ backgroundColor: '#0A1A2F', color: '#F5F5F5', borderColor: 'rgba(212, 175, 55, 0.2)' }}>
+    <footer ref={footerRef} className="mx-10 py-6 border-t" style={{ backgroundColor: '#0A1A2F', color: '#F5F5F5', borderColor: 'rgba(212, 175, 55, 0.2)' }}>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid md:grid-cols-3 gap-8 mb-8">
           {/* Company Info */}
