@@ -161,7 +161,7 @@ const Footer: React.FC<FooterProps> = ({ registerFooterSection }) => {
               className="flex flex-col items-center transition-all hover:scale-110"
               aria-label="Pobierz z Apple App Store"
             >
-              <img src="/app-store.png" alt="Pobierz z App Store" className="h-8 w-8 mb-2 rounded-lg flex items-center justify-center transition-all hover:scale-110 border-2" style={{ backgroundColor: '#F5F5F5', borderColor: '#D4AF37' }} />
+              <img src="/app-store.png" alt="Pobierz z App Store" className="h-8 w-8 mb-2 rounded-lg flex items-center justify-center transition-all hover:scale-110 border-5" style={{ backgroundColor: '#F5F5F5', borderColor: '#D4AF37' }} />
               <p className="text-sm text-center" style={{ color: '#F5F5F5' }}>App Store</p>
             </a>
             <a
