@@ -109,7 +109,7 @@ const Footer: React.FC<FooterProps> = ({ registerFooterSection }) => {
               className="w-14 h-14 rounded-lg flex items-center justify-center transition-all hover:scale-110 border-2"
               style={{ backgroundColor: '#F5F5F5', borderColor: '#D4AF37' }}
             >
-              <Facebook size={30} style={{ color: '#0A1A2F' }} />
+              <Facebook size={20} style={{ color: '#0A1A2F' }} />
             </a>
             <a
               href="https://www.instagram.com/pan_od_toksycznych_kredytow/"
@@ -118,7 +118,7 @@ const Footer: React.FC<FooterProps> = ({ registerFooterSection }) => {
               className="w-14 h-14 rounded-lg flex items-center justify-center transition-all hover:scale-110 border-2"
               style={{ backgroundColor: '#F5F5F5', borderColor: '#D4AF37' }}
             >
-              <Instagram size={30} style={{ color: '#0A1A2F' }} />
+              <Instagram size={20} style={{ color: '#0A1A2F' }} />
             </a>
             <a
               href="https://www.tiktok.com/@krzysztofmilewski59?is_from_webapp=1&sender_device=pc"
@@ -127,7 +127,7 @@ const Footer: React.FC<FooterProps> = ({ registerFooterSection }) => {
               className="w-14 h-14 rounded-lg flex items-center justify-center transition-all hover:scale-110 border-2"
               style={{ backgroundColor: '#F5F5F5', borderColor: '#D4AF37' }}
             >
-              <div className="w-10 h-10 rounded-sm" style={{ backgroundColor: '#0A1A2F' }}>
+              <div className="w-7 h-7 rounded-sm" style={{ backgroundColor: '#0A1A2F' }}>
                 <svg viewBox="0 0 24 24" fill="currentColor" className="w-full h-full">
                   <path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-5.2 1.74 2.89 2.89 0 0 1 2.31-4.64 2.93 2.93 0 0 1 .88.13V9.4a6.84 6.84 0 0 0-1-.05A6.33 6.33 0 0 0 5 20.1a6.34 6.34 0 0 0 10.86-4.43v-7a8.16 8.16 0 0 0 4.77 1.52v-3.4a4.85 4.85 0 0 1-1-.1z"/>
                 </svg>
@@ -140,7 +140,7 @@ const Footer: React.FC<FooterProps> = ({ registerFooterSection }) => {
               className="w-14 h-14 rounded-lg flex items-center justify-center transition-all hover:scale-110 border-2"
               style={{ backgroundColor: '#F5F5F5', borderColor: '#D4AF37' }}
             >
-              <Linkedin size={30} style={{ color: '#0A1A2F' }} />
+              <Linkedin size={20} style={{ color: '#0A1A2F' }} />
             </a>
           </div>
         </div>
@@ -158,7 +158,7 @@ const Footer: React.FC<FooterProps> = ({ registerFooterSection }) => {
               className="transition-all hover:scale-110"
               aria-label="Pobierz z Apple App Store"
             >
-              <img src="/app-store.png" alt="Pobierz z App Store" className="h-12 w-auto" />
+              <img src="/app-store.png" alt="Pobierz z App Store" className="h-12 w-12" />
             </a>
             <a
               href="https://play.google.com/store/apps/details?id=pl.votum_sa.mojasprawa&pli=1"
@@ -167,7 +167,7 @@ const Footer: React.FC<FooterProps> = ({ registerFooterSection }) => {
               className="transition-all hover:scale-110"
               aria-label="Pobierz z Google Play Store"
             >
-              <img src="/google-play.png" alt="Pobierz z Google Play" className="h-12 w-auto" />
+              <img src="/google-play.png" alt="Pobierz z Google Play" className="h-12 w-12" />
             </a>
           </div>
         </div>
