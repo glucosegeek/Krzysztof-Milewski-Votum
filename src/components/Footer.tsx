@@ -179,7 +179,7 @@ const Footer: React.FC<FooterProps> = ({ registerFooterSection }) => {
       </div>
         {/* Bottom Section */}
         <div className="py-6" style={{ borderTop: '1px solid rgba(212, 175, 55, 0.3)' }}>
-          <div className="flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0">
+          <div className="mx-6 flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0">
             <div className="text-center md:text-left">
               <p className="text-sm mb-2" style={{ color: '#F5F5F5' }}>
                 <strong>Zastrzeżenie prawne:</strong> Treści zawarte na tej stronie mają charakter wyłącznie informacyjny i nie stanowią porady prawnej.
