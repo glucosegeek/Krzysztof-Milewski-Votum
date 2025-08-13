@@ -160,7 +160,6 @@ Konsultacja ma charakter informacyjny i nie tworzy relacji expert–klient. Jej 
             </div>
           </div>
         </div>
-      </div>
     </footer>
   );
 };
