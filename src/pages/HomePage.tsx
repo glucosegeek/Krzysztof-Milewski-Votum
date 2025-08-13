@@ -762,19 +762,36 @@ Nie ryzykujesz nic – możesz tylko zyskać.</li>
           )}
           
           {!loadingTestimonials && !errorTestimonials && testimonials.length > 0 && (
-            <div className="grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8 max-w-7xl mx-auto">
+            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
               {testimonials.map((testimonial) => (
-                <div key={testimonial.id} className="p-10 rounded-2xl shadow-xl border-4" style={{ backgroundColor: '#F5F5F5', borderColor: '#D4AF37' }}>
+                <div 
+                  key={testimonial.id} 
+                  className="group p-8 rounded-2xl shadow-xl border-4 transition-all duration-300 hover:scale-105 hover:shadow-2xl relative overflow-hidden"
+                  style={{ backgroundColor: '#F5F5F5', borderColor: '#D4AF37' }}
+                >
+                  {/* Decorative quote mark */}
+                  <div className="absolute top-4 right-6 opacity-10 text-6xl font-serif" style={{ color: '#D4AF37' }}>
+                    "
+                  </div>
+                  
                   <div className="flex mb-4">
                     {[...Array(testimonial.stars)].map((_, i) => (
-                      <Star key={i} size={20} style={{ color: '#D4AF37' }} className="fill-current" />
+                      <Star key={i} size={24} style={{ color: '#D4AF37' }} className="fill-current drop-shadow-sm" />
                     ))}
                   </div>
-                  <p className="mb-6 text-lg leading-relaxed" style={{ color: '#0A1A2F' }}>
+                  
+                  <p className="mb-6 text-lg leading-relaxed italic relative z-10" style={{ color: '#0A1A2F' }}>
                     {testimonial.description}
                   </p>
-                  <div className="font-semibold" style={{ color: '#0A1A2F' }}>{testimonial.name}</div>
-                  <div style={{ color: '#0A1A2F' }}>{testimonial.city}</div>
+                  
+                  <div className="border-t pt-4" style={{ borderColor: 'rgba(10, 26, 47, 0.1)' }}>
+                    <div className="font-bold text-lg" style={{ color: '#0A1A2F' }}>
+                      {testimonial.name}
+                    </div>
+                    <div className="text-sm font-medium" style={{ color: '#D4AF37' }}>
+                      {testimonial.city}
+                    </div>
+                  </div>
                 </div>
               ))}
             </div>
