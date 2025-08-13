@@ -137,7 +137,7 @@ const Footer: React.FC<FooterProps> = ({ registerFooterSection }) => {
               href="https://linkedin.com"
               target="_blank"
               rel="noopener noreferrer"
-              className="w-8 h-8 rounded-lg flex items-center justify-center transition-all hover:scale-110 border-2"
+              className="w-10 h-10 rounded-lg flex items-center justify-center transition-all hover:scale-110 border-2"
               style={{ backgroundColor: '#F5F5F5', borderColor: '#D4AF37' }}
             >
               <Linkedin size={20} style={{ color: '#0A1A2F' }} />
