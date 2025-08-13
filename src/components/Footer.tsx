@@ -153,8 +153,7 @@ const Footer: React.FC<FooterProps> = ({ registerFooterSection }) => {
           <p className="text-l mb-8 leading-relaxed" style={{ color: '#D4AF37' }}>
             Wpisz ten numer K005533, żebym mógł mieć Twoją sprawę zawsze pod opieką!
           </p>
-          <div className="flex justify-center md:justify-start space-x-12 mb-8 rounded-lg transition-all hover:scale-110 border-2"
-            style={{ backgroundColor: '#F5F5F5', borderColor: '#D4AF37' }}>
+          <div className="flex justify-center md:justify-start space-x-12 mb-8">
             <a
               href="https://apps.apple.com/pl/app/moja-sprawa/id6736989155?l=pl"
               target="_blank"
