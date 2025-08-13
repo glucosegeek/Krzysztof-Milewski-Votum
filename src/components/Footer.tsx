@@ -161,7 +161,7 @@ const Footer: React.FC<FooterProps> = ({ registerFooterSection }) => {
               className="flex flex-col items-center transition-all hover:scale-110"
               aria-label="Pobierz z Apple App Store"
             >
-              <img src="/app-store.png" alt="Pobierz z App Store" className="h-16 w-16 mb-2" />
+              <img src="/app-store.png" alt="Pobierz z App Store" className="h-8 w-8 mb-2" />
               <p className="text-sm text-center" style={{ color: '#F5F5F5' }}>App Store</p>
             </a>
             <a
@@ -171,7 +171,7 @@ const Footer: React.FC<FooterProps> = ({ registerFooterSection }) => {
               className="flex flex-col items-center transition-all hover:scale-110"
               aria-label="Pobierz z Google Play Store"
             >
-              <img src="/google-play.png" alt="Pobierz z Google Play" className="h-16 w-16 mb-2" />
+              <img src="/google-play.png" alt="Pobierz z Google Play" className="h-8 w-8 mb-2" />
               <p className="text-sm text-center" style={{ color: '#F5F5F5' }}>Google Play</p>
             </a>
           </div>
