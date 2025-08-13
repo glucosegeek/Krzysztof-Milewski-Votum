@@ -762,7 +762,7 @@ Nie ryzykujesz nic – możesz tylko zyskać.</li>
           )}
           
           {!loadingTestimonials && !errorTestimonials && testimonials.length > 0 && (
-            <div className="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+            <div className="grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8 max-w-7xl mx-auto">
               {testimonials.map((testimonial) => (
                 <div key={testimonial.id} className="p-10 rounded-2xl shadow-xl border-4" style={{ backgroundColor: '#F5F5F5', borderColor: '#D4AF37' }}>
                   <div className="flex mb-4">
