@@ -5,6 +5,8 @@ interface ConsultationModalContextType {
   modalIntent: string | null;
   openModal: (data?: {
     name: string;
+    firstName: string;
+    lastName: string;
     email: string;
     phone: string;
     message: string;
@@ -12,6 +14,7 @@ interface ConsultationModalContextType {
     loanType?: string;
     agreementDate?: string;
     homeBank?: string;
+    originalBank?: string;
     loanTypeDetail?: string;
     loanCurrency?: string;
     loanValuePln?: string;

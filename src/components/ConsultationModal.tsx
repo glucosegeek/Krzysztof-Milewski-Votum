@@ -10,8 +10,37 @@ const ConsultationModal: React.FC = () => {
   const [email, setEmail] = useState('');
   const [phone, setPhone] = useState('+48 '); // Default area code
   const [message, setMessage] = useState('');
+  const [loanType, setLoanType] = useState('');
+  const [agreementDate, setAgreementDate] = useState('');
+  const [homeBank, setHomeBank] = useState('');
+  const [originalBank, setOriginalBank] = useState('');
+  const [loanTypeDetail, setLoanTypeDetail] = useState('');
+  const [loanCurrency, setLoanCurrency] = useState('');
+  const [loanValuePln, setLoanValuePln] = useState('');
+  const [numberOfInstallments, setNumberOfInstallments] = useState('');
+  const [loanStatus, setLoanStatus] = useState('');
+  const [repaymentDate, setRepaymentDate] = useState('');
+  const [repaymentValuePln, setRepaymentValuePln] = useState('');
   const [privacyConsent, setPrivacyConsent] = useState(false);
-  const [errors, setErrors] = useState<{ firstName?: string; lastName?: string; email?: string; phone?: string; privacyConsent?: string }>({});
+  const [errors, setErrors] = useState<{ 
+    firstName?: string; 
+    lastName?: string; 
+    email?: string; 
+    phone?: string; 
+    message?: string;
+    privacyConsent?: string;
+    loanType?: string;
+    agreementDate?: string;
+    homeBank?: string;
+    originalBank?: string;
+    loanTypeDetail?: string;
+    loanCurrency?: string;
+    loanValuePln?: string;
+    numberOfInstallments?: string;
+    loanStatus?: string;
+    repaymentDate?: string;
+    repaymentValuePln?: string;
+  }>({});
   const modalRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -32,6 +61,17 @@ const ConsultationModal: React.FC = () => {
       setEmail('');
       setPhone('+48 '); // Reset phone to default
       setMessage('');
+      setLoanType('');
+      setAgreementDate('');
+      setHomeBank('');
+      setOriginalBank('');
+      setLoanTypeDetail('');
+      setLoanCurrency('');
+      setLoanValuePln('');
+      setNumberOfInstallments('');
+      setLoanStatus('');
+      setRepaymentDate('');
+      setRepaymentValuePln('');
       setPrivacyConsent(false); // Reset privacy consent
       setErrors({});
     }
@@ -49,7 +89,26 @@ const ConsultationModal: React.FC = () => {
   }, [isModalOpen, closeModal, modalIntent]);
 
   const validate = () => {
-    const newErrors: { firstName?: string; lastName?: string; email?: string; phone?: string; privacyConsent?: string } = {};
+    const newErrors: { 
+      firstName?: string; 
+      lastName?: string; 
+      email?: string; 
+      phone?: string; 
+      message?: string;
+      privacyConsent?: string;
+      loanType?: string;
+      agreementDate?: string;
+      homeBank?: string;
+      originalBank?: string;
+      loanTypeDetail?: string;
+      loanCurrency?: string;
+      loanValuePln?: string;
+      numberOfInstallments?: string;
+      loanStatus?: string;
+      repaymentDate?: string;
+      repaymentValuePln?: string;
+    } = {};
+    
     if (!firstName.trim()) {
       newErrors.firstName = 'Imię jest obowiązkowe.';
     }
@@ -62,23 +121,23 @@ const ConsultationModal: React.FC = () => {
       newErrors.email = 'Nieprawidłowy format email.';
     }
 
-    // Updated regex for Polish phone numbers:
-    // Allows for +48 prefix (optional), followed by 9 digits,
-    // with optional spaces or hyphens between groups of 3 digits.
     const phoneRegex = /^(?:\+48)?(?:[ -]?\d{3}){3}$/;
-    
-    // Clean the phone number for validation by removing spaces and hyphens
     const cleanedPhone = phone.replace(/[\s-]/g, '');
 
-    if (!cleanedPhone.trim() || cleanedPhone.trim() === '+48') { // Check for empty or just "+48"
+    if (!cleanedPhone.trim() || cleanedPhone.trim() === '+48') {
       newErrors.phone = 'Numer telefonu jest obowiązkowy.';
-    } else if (!phoneRegex.test(cleanedPhone)) { // Validate the cleaned number
+    } else if (!phoneRegex.test(cleanedPhone)) {
       newErrors.phone = 'Nieprawidłowy format numeru telefonu.';
+    }
+
+    if (!message.trim()) {
+      newErrors.message = 'Wiadomość jest obowiązkowa.';
     }
 
     if (!privacyConsent) {
       newErrors.privacyConsent = 'Zgoda na przetwarzanie danych jest obowiązkowa.';
     }
+    
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
   };
@@ -90,9 +149,60 @@ const ConsultationModal: React.FC = () => {
       
       // Check the intent that opened this modal
       if (modalIntent === 'direct_consultation') {
-        // For direct consultation, redirect to Calendly after form submission
-        window.open('https://calendly.com/krzysztof-milewski-dsa/30-minutowe-spotkanie', '_blank');
-        closeModal();
+        // For direct consultation, send to webhook then redirect to Calendly
+        const webhookPayload = {
+          // Form data
+          name: `${firstName} ${lastName}`,
+          firstName: firstName,
+          lastName: lastName,
+          email: email,
+          phone: phone,
+          message: message,
+          loanType: loanType,
+          agreementDate: agreementDate,
+          homeBank: homeBank,
+          originalBank: originalBank,
+          loanTypeDetail: loanTypeDetail,
+          loanCurrency: loanCurrency,
+          loanValuePln: loanValuePln,
+          numberOfInstallments: numberOfInstallments,
+          loanStatus: loanStatus,
+          repaymentDate: repaymentDate,
+          repaymentValuePln: repaymentValuePln,
+          privacyConsent: privacyConsent,
+
+          // Platform and metadata
+          platform: 'web',
+          userAgent: navigator.userAgent,
+          timestamp: new Date().toISOString(),
+          url: window.location.href,
+          referrer: document.referrer || 'direct',
+
+          // Additional metadata
+          formType: 'consultation_modal',
+          source: 'consultation_button'
+        };
+
+        // Send to webhook
+        fetch('https://n8n.srv948633.hstgr.cloud/webhook/243235be-417h-4446-8h22-52186b5fd6d4', {
+          method: 'POST',
+          headers: { 
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify(webhookPayload)
+        }).then(response => {
+          if (response.ok) {
+            console.log('Consultation webhook sent successfully:', response.status);
+          } else {
+            console.error('Consultation webhook failed with status:', response.status);
+          }
+        }).catch(e => {
+          console.error('Error sending consultation webhook:', e);
+        }).finally(() => {
+          // Always redirect to Calendly and close modal for good UX
+          window.open('https://calendly.com/krzysztof-milewski-dsa/30-minutowe-spotkanie', '_blank');
+          closeModal();
+        });
       } else {
         // For other cases, show success message
         openModal({ name: `${firstName} ${lastName}`, firstName, lastName, email, phone, message, privacyConsent }, 'form_submission');
@@ -148,12 +258,13 @@ const ConsultationModal: React.FC = () => {
                 <>
                   <p><strong>Data zawarcia umowy:</strong> {submittedData.agreementDate}</p>
                   <p><strong>Bank:</strong> {submittedData.homeBank}</p>
+                  <p><strong>Bank aktualny:</strong> {submittedData.originalBank}</p>
                   <p><strong>Typ kredytu:</strong> {submittedData.loanTypeDetail === 'indexed' ? 'Indeksowany' : submittedData.loanTypeDetail === 'denominated' ? 'Denominowany' : 'Nie wiem'}</p>
                   <p><strong>Waluta kredytu:</strong> {submittedData.loanCurrency}</p>
                   <p><strong>Wartość kredytu w PLN:</strong> {submittedData.loanValuePln}</p>
                   <p><strong>Liczba rat:</strong> {submittedData.numberOfInstallments}</p>
                   <p><strong>Status kredytu:</strong> {submittedData.loanStatus === 'active' ? 'Aktywny' : 'Spłacony'}</p>
-                  {submittedData.loanStatus === 'repaid' && (
+                  {submittedData.loanStatus === 'repaid' && submittedData.repaymentDate && (
                     <>
                       <p><strong>Data spłaty:</strong> {submittedData.repaymentDate}</p>
                       <p><strong>Wartość spłaty w PLN:</strong> {submittedData.repaymentValuePln}</p>
@@ -306,6 +417,302 @@ const ConsultationModal: React.FC = () => {
               <div className="mb-6">
                 <label className="flex items-start text-sm font-medium w-full" style={{ color: '#F5F5F5' }}>
                   <input
+              {modalIntent === 'direct_consultation' && (
+                <>
+                  {/* Loan Type Selection */}
+                  <div>
+                    <label className="block text-sm font-medium mb-2" style={{ color: '#F5F5F5' }}>
+                      Rodzaj sprawy
+                    </label>
+                    <div className="flex space-x-4">
+                      <label className="inline-flex items-center">
+                        <input
+                          type="radio"
+                          name="loanType"
+                          value="currency"
+                          checked={loanType === 'currency'}
+                          onChange={(e) => setLoanType(e.target.value)}
+                          className="form-radio"
+                          style={{ accentColor: '#D4AF37' }}
+                        />
+                        <span className="ml-2 text-sm" style={{ color: '#F5F5F5' }}>Kredyt walutowy</span>
+                      </label>
+                      <label className="inline-flex items-center">
+                        <input
+                          type="radio"
+                          name="loanType"
+                          value="skd"
+                          checked={loanType === 'skd'}
+                          onChange={(e) => setLoanType(e.target.value)}
+                          className="form-radio"
+                          style={{ accentColor: '#D4AF37' }}
+                        />
+                        <span className="ml-2 text-sm" style={{ color: '#F5F5F5' }}>SKD</span>
+                      </label>
+                    </div>
+                  </div>
+
+                  {loanType === 'currency' && (
+                    <>
+                      {/* Date of conclusion of the agreement */}
+                      <div>
+                        <label htmlFor="modal-agreementDate" className="block text-sm font-medium mb-2" style={{ color: '#F5F5F5' }}>
+                          Data zawarcia umowy
+                        </label>
+                        <input
+                          type="date"
+                          id="modal-agreementDate"
+                          name="agreementDate"
+                          value={agreementDate}
+                          onChange={(e) => setAgreementDate(e.target.value)}
+                          className="w-full px-4 py-3 rounded-lg focus:outline-none focus:ring-2"
+                          style={{
+                            backgroundColor: 'rgba(245, 245, 245, 0.1)',
+                            border: '1px solid rgba(245, 245, 245, 0.2)',
+                            color: '#F5F5F5',
+                            '--tw-ring-color': '#D4AF37',
+                          }}
+                        />
+                      </div>
+
+                      {/* Home bank with which the agreement was concluded */}
+                      <div>
+                        <label htmlFor="modal-homeBank" className="block text-sm font-medium mb-2" style={{ color: '#F5F5F5' }}>
+                          Bank, z którym zawarto umowę
+                        </label>
+                        <input
+                          type="text"
+                          id="modal-homeBank"
+                          name="homeBank"
+                          value={homeBank}
+                          onChange={(e) => setHomeBank(e.target.value)}
+                          className="w-full px-4 py-3 rounded-lg focus:outline-none focus:ring-2"
+                          style={{
+                            backgroundColor: 'rgba(245, 245, 245, 0.1)',
+                            border: '1px solid rgba(245, 245, 245, 0.2)',
+                            color: '#F5F5F5',
+                            '--tw-ring-color': '#D4AF37',
+                          }}
+                          placeholder="Nazwa banku"
+                        />
+                      </div>
+
+                      {/* Original bank */}
+                      <div>
+                        <label htmlFor="modal-originalBank" className="block text-sm font-medium mb-2" style={{ color: '#F5F5F5' }}>
+                          Bank pierwotny (bank aktualny)
+                        </label>
+                        <input
+                          type="text"
+                          id="modal-originalBank"
+                          name="originalBank"
+                          value={originalBank}
+                          onChange={(e) => setOriginalBank(e.target.value)}
+                          className="w-full px-4 py-3 rounded-lg focus:outline-none focus:ring-2"
+                          style={{
+                            backgroundColor: 'rgba(245, 245, 245, 0.1)',
+                            border: '1px solid rgba(245, 245, 245, 0.2)',
+                            color: '#F5F5F5',
+                            '--tw-ring-color': '#D4AF37',
+                          }}
+                          placeholder="Nazwa banku aktualnego"
+                        />
+                      </div>
+
+                      {/* Type of loan */}
+                      <div>
+                        <label className="block text-sm font-medium mb-2" style={{ color: '#F5F5F5' }}>
+                          Typ kredytu
+                        </label>
+                        <div className="flex flex-wrap gap-4">
+                          <label className="inline-flex items-center">
+                            <input
+                              type="radio"
+                              name="loanTypeDetail"
+                              value="indexed"
+                              checked={loanTypeDetail === 'indexed'}
+                              onChange={(e) => setLoanTypeDetail(e.target.value)}
+                              className="form-radio"
+                              style={{ accentColor: '#D4AF37' }}
+                            />
+                            <span className="ml-2 text-sm" style={{ color: '#F5F5F5' }}>Indeksowany</span>
+                          </label>
+                          <label className="inline-flex items-center">
+                            <input
+                              type="radio"
+                              name="loanTypeDetail"
+                              value="denominated"
+                              checked={loanTypeDetail === 'denominated'}
+                              onChange={(e) => setLoanTypeDetail(e.target.value)}
+                              className="form-radio"
+                              style={{ accentColor: '#D4AF37' }}
+                            />
+                            <span className="ml-2 text-sm" style={{ color: '#F5F5F5' }}>Denominowany</span>
+                          </label>
+                          <label className="inline-flex items-center">
+                            <input
+                              type="radio"
+                              name="loanTypeDetail"
+                              value="unknown"
+                              checked={loanTypeDetail === 'unknown'}
+                              onChange={(e) => setLoanTypeDetail(e.target.value)}
+                              className="form-radio"
+                              style={{ accentColor: '#D4AF37' }}
+                            />
+                            <span className="ml-2 text-sm" style={{ color: '#F5F5F5' }}>Nie wiem</span>
+                          </label>
+                        </div>
+                      </div>
+
+                      {/* Loan currency */}
+                      <div>
+                        <label htmlFor="modal-loanCurrency" className="block text-sm font-medium mb-2" style={{ color: '#F5F5F5' }}>
+                          Waluta kredytu
+                        </label>
+                        <input
+                          type="text"
+                          id="modal-loanCurrency"
+                          name="loanCurrency"
+                          value={loanCurrency}
+                          onChange={(e) => setLoanCurrency(e.target.value)}
+                          className="w-full px-4 py-3 rounded-lg focus:outline-none focus:ring-2"
+                          style={{
+                            backgroundColor: 'rgba(245, 245, 245, 0.1)',
+                            border: '1px solid rgba(245, 245, 245, 0.2)',
+                            color: '#F5F5F5',
+                            '--tw-ring-color': '#D4AF37',
+                          }}
+                          placeholder="np. CHF, EUR, USD"
+                        />
+                      </div>
+
+                      {/* Value in PLN */}
+                      <div>
+                        <label htmlFor="modal-loanValuePln" className="block text-sm font-medium mb-2" style={{ color: '#F5F5F5' }}>
+                          Wartość kredytu w PLN (w momencie zawarcia umowy)
+                        </label>
+                        <input
+                          type="number"
+                          id="modal-loanValuePln"
+                          name="loanValuePln"
+                          value={loanValuePln}
+                          onChange={(e) => setLoanValuePln(e.target.value)}
+                          className="w-full px-4 py-3 rounded-lg focus:outline-none focus:ring-2"
+                          style={{
+                            backgroundColor: 'rgba(245, 245, 245, 0.1)',
+                            border: '1px solid rgba(245, 245, 245, 0.2)',
+                            color: '#F5F5F5',
+                            '--tw-ring-color': '#D4AF37',
+                          }}
+                          placeholder="Wartość w PLN"
+                        />
+                      </div>
+
+                      {/* Number of installments in months */}
+                      <div>
+                        <label htmlFor="modal-numberOfInstallments" className="block text-sm font-medium mb-2" style={{ color: '#F5F5F5' }}>
+                          Liczba rat w miesiącach (zgodnie z umową)
+                        </label>
+                        <input
+                          type="number"
+                          id="modal-numberOfInstallments"
+                          name="numberOfInstallments"
+                          value={numberOfInstallments}
+                          onChange={(e) => setNumberOfInstallments(e.target.value)}
+                          className="w-full px-4 py-3 rounded-lg focus:outline-none focus:ring-2"
+                          style={{
+                            backgroundColor: 'rgba(245, 245, 245, 0.1)',
+                            border: '1px solid rgba(245, 245, 245, 0.2)',
+                            color: '#F5F5F5',
+                            '--tw-ring-color': '#D4AF37',
+                          }}
+                          placeholder="Liczba miesięcy"
+                        />
+                      </div>
+
+                      {/* Active or repaid loan */}
+                      <div>
+                        <label className="block text-sm font-medium mb-2" style={{ color: '#F5F5F5' }}>
+                          Status kredytu
+                        </label>
+                        <div className="flex space-x-4">
+                          <label className="inline-flex items-center">
+                            <input
+                              type="radio"
+                              name="loanStatus"
+                              value="active"
+                              checked={loanStatus === 'active'}
+                              onChange={(e) => setLoanStatus(e.target.value)}
+                              className="form-radio"
+                              style={{ accentColor: '#D4AF37' }}
+                            />
+                            <span className="ml-2 text-sm" style={{ color: '#F5F5F5' }}>Aktywny</span>
+                          </label>
+                          <label className="inline-flex items-center">
+                            <input
+                              type="radio"
+                              name="loanStatus"
+                              value="repaid"
+                              checked={loanStatus === 'repaid'}
+                              onChange={(e) => setLoanStatus(e.target.value)}
+                              className="form-radio"
+                              style={{ accentColor: '#D4AF37' }}
+                            />
+                            <span className="ml-2 text-sm" style={{ color: '#F5F5F5' }}>Spłacony</span>
+                          </label>
+                        </div>
+                      </div>
+
+                      {loanStatus === 'repaid' && (
+                        <>
+                          {/* If repaid, enter the date of repayment */}
+                          <div>
+                            <label htmlFor="modal-repaymentDate" className="block text-sm font-medium mb-2" style={{ color: '#F5F5F5' }}>
+                              Data spłaty kredytu
+                            </label>
+                            <input
+                              type="date"
+                              id="modal-repaymentDate"
+                              name="repaymentDate"
+                              value={repaymentDate}
+                              onChange={(e) => setRepaymentDate(e.target.value)}
+                              className="w-full px-4 py-3 rounded-lg focus:outline-none focus:ring-2"
+                              style={{
+                                backgroundColor: 'rgba(245, 245, 245, 0.1)',
+                                border: '1px solid rgba(245, 245, 245, 0.2)',
+                                color: '#F5F5F5',
+                                '--tw-ring-color': '#D4AF37',
+                              }}
+                            />
+                          </div>
+
+                          {/* and the value of the payment in PLN. */}
+                          <div>
+                            <label htmlFor="modal-repaymentValuePln" className="block text-sm font-medium mb-2" style={{ color: '#F5F5F5' }}>
+                              Wartość spłaty w PLN
+                            </label>
+                            <input
+                              type="number"
+                              id="modal-repaymentValuePln"
+                              name="repaymentValuePln"
+                              value={repaymentValuePln}
+                              onChange={(e) => setRepaymentValuePln(e.target.value)}
+                              className="w-full px-4 py-3 rounded-lg focus:outline-none focus:ring-2"
+                              style={{
+                                backgroundColor: 'rgba(245, 245, 245, 0.1)',
+                                border: '1px solid rgba(245, 245, 245, 0.2)',
+                                color: '#F5F5F5',
+                                '--tw-ring-color': '#D4AF37',
+                              }}
+                              placeholder="Wartość spłaty w PLN"
+                            />
+                          </div>
+                        </>
+                      )}
+                    </>
+                  )}
+                </>
+              )}
                     type="checkbox"
                     id="privacy-consent"
                     name="privacyConsent"
