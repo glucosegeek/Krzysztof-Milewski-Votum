@@ -264,12 +264,9 @@ const conciergeItems = [
         setErrorTestimonials(null);
 
         const response = await fetch(
-          'https://docs.google.com/spreadsheets/d/1ig1rMVEejrY9-chyVlmuox9rPCqw3yn4KgNs-qJzIPs/gviz/tq?gid=0&tqx=out:json',
+          'https://docs.google.com/spreadsheets/d/e/2PACX-1vQ5Q_HYZobfot0I0UnxhEzerfrFxv4N5FocG4wy8z0p8GHZ2rgkns-oDFww-vzLx-3boxZJUqkTjJH-/pub?output=csv',
           {
             method: 'GET',
-            headers: {
-              'Accept': 'application/json',
-            },
           }
         );
 
@@ -277,20 +274,8 @@ const conciergeItems = [
           throw new Error(`HTTP error! status: ${response.status}`);
         }
 
-        const responseText = await response.text();
-        
-        const jsonStart = responseText.indexOf('{');
-        const jsonEnd = responseText.lastIndexOf('}');
-        let jsonString = '';
-        if (jsonStart !== -1 && jsonEnd !== -1 && jsonEnd > jsonStart) {
-          jsonString = responseText.substring(jsonStart, jsonEnd + 1);
-        } else {
-          console.error('Could not find valid JSON in responseText for testimonials:', responseText);
-          throw new Error('Invalid JSON response from Google Sheets.');
-        }
-        const jsonData = JSON.parse(jsonString);
-        
-        const parsedTestimonials = parseGoogleSheetsTestimonials(jsonData);
+        const csvText = await response.text();
+        const parsedTestimonials = parseCSVTestimonials(csvText);
         setTestimonials(parsedTestimonials);
       } catch (e: any) {
         console.error('Error fetching testimonials:', e);
@@ -303,6 +288,55 @@ const conciergeItems = [
     fetchTestimonials();
   }, []);
 
+  const parseCSVTestimonials = (csvText: string): Testimonial[] => {
+    const lines = csvText.trim().split('\n');
+    if (lines.length < 2) return [];
+    
+    // Get headers from first line
+    const headers = lines[0].split(',').map(h => h.trim().replace(/"/g, ''));
+    
+    // Find column indices
+    const nameIndex = headers.findIndex(h => h.toLowerCase() === 'name');
+    const descriptionIndex = headers.findIndex(h => h.toLowerCase() === 'description');
+    const starsIndex = headers.findIndex(h => h.toLowerCase() === 'stars');
+    const cityIndex = headers.findIndex(h => h.toLowerCase() === 'city');
+    
+    if (nameIndex === -1 || descriptionIndex === -1 || starsIndex === -1 || cityIndex === -1) {
+      console.error('Required columns not found in CSV headers:', headers);
+      return [];
+    }
+    
+    // Parse data rows
+    const testimonials: Testimonial[] = [];
+    for (let i = 1; i < lines.length; i++) {
+      const line = lines[i].trim();
+      if (!line) continue;
+      
+      // Simple CSV parsing (handles basic cases)
+      const values = line.split(',').map(v => v.trim().replace(/^"|"$/g, ''));
+      
+      if (values.length > Math.max(nameIndex, descriptionIndex, starsIndex, cityIndex)) {
+        const name = values[nameIndex];
+        const description = values[descriptionIndex];
+        const starsStr = values[starsIndex];
+        const city = values[cityIndex];
+        
+        if (name && description && starsStr && city) {
+          const stars = parseInt(starsStr);
+          if (!isNaN(stars) && stars >= 1 && stars <= 5) {
+            testimonials.push({
+              name,
+              description,
+              stars,
+              city
+            });
+          }
+        }
+      }
+    }
+    
+    return testimonials;
+  };
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
 
