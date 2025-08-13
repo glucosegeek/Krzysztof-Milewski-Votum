@@ -98,7 +98,7 @@ const Footer: React.FC<FooterProps> = ({ registerFooterSection }) => {
 
         {/* Social Media */}
         <div>
-          <h3 className="text-xl font-bold mb-8" style={{ color: '#F5F5F5' }}>
+          <h3 className="text-xl font-bold mb-4" style={{ color: '#F5F5F5' }}>
             Śledź nas
           </h3>
           <div className="flex space-x-4">
