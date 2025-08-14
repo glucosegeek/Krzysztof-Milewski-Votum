@@ -145,8 +145,23 @@ const ConsultationModal: React.FC = () => {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (validate()) {
-      firstName = ''
-      lastName = ''
+      setFirstName('');
+      setLastName('');
+      setEmail('');
+      setPhone('+48 '); // Reset phone to default
+      setMessage('');
+      setLoanType('');
+      setAgreementDate('');
+      setHomeBank('');
+      setOriginalBank('');
+      setLoanTypeDetail('');
+      setLoanCurrency('');
+      setLoanValuePln('');
+      setNumberOfInstallments('');
+      setLoanStatus('');
+      setRepaymentDate('');
+      setRepaymentValuePln('');
+      setPrivacyConsent(false); // Reset privacy consent
       console.log('Form Data:', { firstName, lastName, email, phone, message });
       
       // Check the intent that opened this modal
