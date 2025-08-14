@@ -414,37 +414,36 @@ const conciergeItems = [
 
     if (response.ok) {
       console.log('Webhook sent successfully:', response.status);
+      
+      // Show success modal and reset form only on successful webhook
+      openModal(null, 'form_submission');
+      
+      // Reset form data
+      setFormData({
+        firstName: '',
+        lastName: '',
+        email: '',
+        phone: '+48 ',
+        message: '',
+        loanType: '',
+        agreementDate: '',
+        homeBank: '',
+        originalBank: '',
+        loanTypeDetail: '',
+        loanCurrency: '',
+        loanValuePln: '',
+        numberOfInstallments: '',
+        loanStatus: '',
+        repaymentDate: '',
+        repaymentValuePln: '',
+      });
+      setPrivacyConsent(false);
+      setErrors({});
     } else {
       console.error('Webhook failed with status:', response.status);
     }
-    // Always show success modal for good UX, even if webhook fails
-    openModal(formData, 'form_submission');
-    
-    // Reset form data
-    setFormData({
-      firstName: '',
-      lastName: '',
-      email: '',
-      phone: '+48 ',
-      message: '',
-      loanType: '',
-      agreementDate: '',
-      homeBank: '',
-      originalBank: '',
-      loanTypeDetail: '',
-      loanCurrency: '',
-      loanValuePln: '',
-      numberOfInstallments: '',
-      loanStatus: '',
-      repaymentDate: '',
-      repaymentValuePln: '',
-    });
-    setPrivacyConsent(false);
-    setErrors({});
   } catch (e) {
     console.error('Error sending webhook:', e);
-    // Still open modal for user feedback
-    openModal(formData, 'form_submission');
   } finally {
     setIsSubmitting(false);
   }
