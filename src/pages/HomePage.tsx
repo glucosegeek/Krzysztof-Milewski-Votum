@@ -99,7 +99,7 @@ const conciergeItems = [
     {
       id: 5,
       title: "Wytoczenie powództwa",
-      description: "Jeśli bank nie uwzględni roszczeń na etapie reklamacyjnym, wówczas kancelaria przygotowywuje pozew i poprowadzi postępowanie sądowe w Twoim imieniu. Dzięki doświadczeniu prawników i starannie opracowanej strategii procesowej zwiększa się szansa na unieważnienie umowy lub odzyskanie nadpłaconych środków.",
+      description: "Jeśli bank nie uwzględni roszczeń na etapie reklamacyjnym, wówczas kancelaria przygotowywuje pozew i poprowadzi postępowanie sądowe w Twoim imieniu. Dzięki doświadczeniu prawników i starannie opracowanej strategii procesowej zwiększa się szansa na unieważnienie umowy i odzyskanie nadpłaconych środków.",
     },
     {
       id: 6,
