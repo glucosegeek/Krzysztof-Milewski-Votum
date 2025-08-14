@@ -663,7 +663,7 @@ Nie ryzykujesz nic – możesz tylko zyskać.</li>
   ))}
 </div>
         <p className="mt-8">
-            W modelu <strong>CONSIERGE</strong>, ja jestem Twoim opiekunem, a zespół doświadczonych prawników pracuje w tle, by zapewnić Ci optymalne rozwiązanie Twojej sprawy.
+            W modelu <strong>CONSIERGE</strong>, ja jestem Twoim opiekunem, a zespół doświadczonych prawników zajmują się Twoją sprawą, by zapewnić optymalne rozwiązanie.
         </p>
     </div>
 </div>
