@@ -365,7 +365,7 @@ const conciergeItems = [
   e.preventDefault();
 
   if (!validate(formData, privacyConsent)) {
-          setFirstName('');
+      setFirstName('');
       setLastName('');
       setEmail('');
       setPhone('+48 '); // Reset phone to default
