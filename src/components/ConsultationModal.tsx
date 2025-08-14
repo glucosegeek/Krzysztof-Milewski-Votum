@@ -145,6 +145,8 @@ const ConsultationModal: React.FC = () => {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (validate()) {
+      firstName = ''
+      lastName = ''
       console.log('Form Data:', { firstName, lastName, email, phone, message });
       
       // Check the intent that opened this modal
