@@ -365,6 +365,23 @@ const conciergeItems = [
   e.preventDefault();
 
   if (!validate(formData, privacyConsent)) {
+          setFirstName('');
+      setLastName('');
+      setEmail('');
+      setPhone('+48 '); // Reset phone to default
+      setMessage('');
+      setLoanType('');
+      setAgreementDate('');
+      setHomeBank('');
+      setOriginalBank('');
+      setLoanTypeDetail('');
+      setLoanCurrency('');
+      setLoanValuePln('');
+      setNumberOfInstallments('');
+      setLoanStatus('');
+      setRepaymentDate('');
+      setRepaymentValuePln('');
+      setPrivacyConsent(false); // Reset privacy consent
     return;
   }
 
