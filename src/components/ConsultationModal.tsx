@@ -222,7 +222,12 @@ const ConsultationModal: React.FC = () => {
         });
       } else {
         // For other cases, show success message
-        openModal({ name: `${firstName} ${lastName}`, firstName, lastName, email, phone, message, privacyConsent }, 'form_submission');
+        openModal(null, 'form_submission');
+        
+        // Auto-close modal after 5 seconds
+        setTimeout(() => {
+          closeModal();
+        }, 5000);
       }
     }
   };
