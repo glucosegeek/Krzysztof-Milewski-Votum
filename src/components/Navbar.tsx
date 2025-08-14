@@ -141,6 +141,18 @@ const Navbar: React.FC = () => {
         {isMobileMenuOpen && (
           <div className="md:hidden absolute top-full left-0 right-0 shadow-lg border-t-2" style={{ backgroundColor: '#0A1A2F', borderColor: '#D4AF37' }}>
             <div className="px-4 py-2 space-y-1">
+              <Link
+                to="/news"
+                className="block px-3 py-2 rounded-md text-sm font-medium transition-colors hover:bg-opacity-10 hover:bg-white"
+                style={{ color: '#F5F5F5' }}
+                onClick={() => {
+                  closeMobileMenu();
+                  window.scrollTo({ top: 0, behavior: 'smooth' });
+                }}
+              >
+                Aktualności
+              </Link>
+
               {/* Services Section */}
               <div>
                 <button
@@ -180,19 +192,18 @@ const Navbar: React.FC = () => {
                 )}
               </div>
 
-              {/* Other Links */}
               <Link
-                  to="/#contact-section"
-                  className="block px-3 py-2 rounded-md text-sm font-medium transition-colors hover:bg-opacity-10 hover:bg-white"
-                  style={{ color: '#F5F5F5' }}
-                  onClick={() => {
-                    closeMobileMenu();
-                    window.scrollTo({ top: 0, behavior: 'smooth' });
-                  }}
-                >
-                  Kontakt
-            </Link>
-              
+                to="/about-me"
+                className="block px-3 py-2 rounded-md text-sm font-medium transition-colors hover:bg-opacity-10 hover:bg-white"
+                style={{ color: '#F5F5F5' }}
+                onClick={() => {
+                  closeMobileMenu();
+                  window.scrollTo({ top: 0, behavior: 'smooth' });
+                }}
+              >
+                O mnie
+              </Link>
+
               <Link
                 to="/knowledge-base"
                 className="block px-3 py-2 rounded-md text-sm font-medium transition-colors hover:bg-opacity-10 hover:bg-white"
@@ -206,18 +217,6 @@ const Navbar: React.FC = () => {
               </Link>
 
               <Link
-                to="/news"
-                className="block px-3 py-2 rounded-md text-sm font-medium transition-colors hover:bg-opacity-10 hover:bg-white"
-                style={{ color: '#F5F5F5' }}
-                onClick={() => {
-                  closeMobileMenu();
-                  window.scrollTo({ top: 0, behavior: 'smooth' });
-                }}
-              >
-                Aktualności
-              </Link>
-              
-              <Link
                 to="/faq"
                 className="block px-3 py-2 rounded-md text-sm font-medium transition-colors hover:bg-opacity-10 hover:bg-white"
                 style={{ color: '#F5F5F5' }}
@@ -229,8 +228,8 @@ const Navbar: React.FC = () => {
                 FAQ
               </Link>
 
-             <Link
-                  to="/about-me"
+              <Link
+                  to="/#contact-section"
                   className="block px-3 py-2 rounded-md text-sm font-medium transition-colors hover:bg-opacity-10 hover:bg-white"
                   style={{ color: '#F5F5F5' }}
                   onClick={() => {
@@ -238,8 +237,8 @@ const Navbar: React.FC = () => {
                     window.scrollTo({ top: 0, behavior: 'smooth' });
                   }}
                 >
-                  O mnie
-              </Link>
+                  Kontakt
+            </Link>
 
             </div>
           </div>
