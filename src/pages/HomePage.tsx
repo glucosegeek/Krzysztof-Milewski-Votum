@@ -365,23 +365,6 @@ const conciergeItems = [
   e.preventDefault();
 
   if (!validate(formData, privacyConsent)) {
-      setFirstName('');
-      setLastName('');
-      setEmail('');
-      setPhone('+48 '); // Reset phone to default
-      setMessage('');
-      setLoanType('');
-      setAgreementDate('');
-      setHomeBank('');
-      setOriginalBank('');
-      setLoanTypeDetail('');
-      setLoanCurrency('');
-      setLoanValuePln('');
-      setNumberOfInstallments('');
-      setLoanStatus('');
-      setRepaymentDate('');
-      setRepaymentValuePln('');
-      setPrivacyConsent(false); // Reset privacy consent
     return;
   }
 
@@ -436,6 +419,28 @@ const conciergeItems = [
     }
     // Always show success modal for good UX, even if webhook fails
     openModal(formData, 'form_submission');
+    
+    // Reset form data
+    setFormData({
+      firstName: '',
+      lastName: '',
+      email: '',
+      phone: '+48 ',
+      message: '',
+      loanType: '',
+      agreementDate: '',
+      homeBank: '',
+      originalBank: '',
+      loanTypeDetail: '',
+      loanCurrency: '',
+      loanValuePln: '',
+      numberOfInstallments: '',
+      loanStatus: '',
+      repaymentDate: '',
+      repaymentValuePln: '',
+    });
+    setPrivacyConsent(false);
+    setErrors({});
   } catch (e) {
     console.error('Error sending webhook:', e);
     // Still open modal for user feedback
