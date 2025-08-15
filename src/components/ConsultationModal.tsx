@@ -2,6 +2,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import { X } from 'lucide-react';
 import { useConsultationModal } from '../context/ConsultationModalContext';
 import { Link } from 'react-router-dom';
+import DatePicker from 'react-datepicker';
 
 const ConsultationModal: React.FC = () => {
   const { isModalOpen, modalIntent, closeModal, submittedData } = useConsultationModal();
@@ -70,7 +71,7 @@ const ConsultationModal: React.FC = () => {
       setPhone('+48 '); // Reset phone to default
       setMessage('');
       setLoanType('');
-      setAgreementDate('');
+      setAgreementDate(null);
       setHomeBank('');
       setOriginalBank('');
       setLoanTypeDetail('');
@@ -78,7 +79,7 @@ const ConsultationModal: React.FC = () => {
       setLoanValuePln('');
       setNumberOfInstallments('');
       setLoanStatus('');
-      setRepaymentDate('');
+      setRepaymentDate(null);
       setRepaymentValuePln('');
       setPrivacyConsent(false); // Reset privacy consent
       setErrors({});
@@ -159,7 +160,7 @@ const ConsultationModal: React.FC = () => {
       setPhone('+48 '); // Reset phone to default
       setMessage('');
       setLoanType('');
-      setAgreementDate('');
+      setAgreementDate(null);
       setHomeBank('');
       setOriginalBank('');
       setLoanTypeDetail('');
@@ -167,7 +168,7 @@ const ConsultationModal: React.FC = () => {
       setLoanValuePln('');
       setNumberOfInstallments('');
       setLoanStatus('');
-      setRepaymentDate('');
+      setRepaymentDate(null);
       setRepaymentValuePln('');
       setPrivacyConsent(false); // Reset privacy consent
       console.log('Form Data:', { firstName, lastName, email, phone, message });
@@ -486,20 +487,26 @@ const ConsultationModal: React.FC = () => {
                         <label htmlFor="modal-agreementDate" className="block text-sm font-medium mb-2" style={{ color: '#F5F5F5' }}>
                           Data zawarcia umowy
                         </label>
-                        <input
-                          type="date"
+                        <DatePicker
                           id="modal-agreementDate"
-                          name="agreementDate"
-                          value={agreementDate}
-                          onChange={(e) => setAgreementDate(e.target.value)}
+                          selected={agreementDate}
+                          onChange={(date: Date | null) => setAgreementDate(date)}
+                          dateFormat="dd.MM.yyyy"
+                          minDate={new Date(2000, 0, 1)}
+                          maxDate={new Date()}
+                          showYearDropdown
+                          scrollableYearDropdown
+                          yearDropdownItemNumber={100}
+                          showMonthDropdown
                           className="w-full px-4 py-3 rounded-lg focus:outline-none focus:ring-2"
+                          wrapperClassName="w-full"
+                          placeholderText="DD.MM.YYYY"
                           style={{
                             backgroundColor: 'rgba(245, 245, 245, 0.1)',
                             border: '1px solid rgba(245, 245, 245, 0.2)',
                             color: '#F5F5F5',
                             '--tw-ring-color': '#D4AF37',
                           }}
-                          max={maxDateToday}
                         />
                       </div>
 
@@ -703,12 +710,12 @@ const ConsultationModal: React.FC = () => {
                               selected={repaymentDate}
                               onChange={(date: Date | null) => setRepaymentDate(date)}
                               dateFormat="dd.MM.yyyy"
-                             maxDate={new Date()}
-                             minDate={new Date(2000, 0, 1)}
+                              minDate={new Date(1950, 0, 1)}
+                              maxDate={new Date()}
                               showYearDropdown
                               scrollableYearDropdown
                               yearDropdownItemNumber={100}
-                             showMonthDropdown
+                              showMonthDropdown
                               className="w-full px-4 py-3 rounded-lg focus:outline-none focus:ring-2"
                               wrapperClassName="w-full"
                               placeholderText="DD.MM.YYYY"
