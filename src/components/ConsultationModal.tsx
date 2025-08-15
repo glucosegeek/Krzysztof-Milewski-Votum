@@ -71,7 +71,6 @@ const ConsultationModal: React.FC = () => {
       setMessage('');
       setLoanType('');
       setAgreementDate(null);
-      setHomeBank('');
       setOriginalBank('');
       setLoanTypeDetail('');
       setLoanCurrency('');
@@ -160,7 +159,6 @@ const ConsultationModal: React.FC = () => {
       setMessage('');
       setLoanType('');
       setAgreementDate(null);
-      setHomeBank('');
       setOriginalBank('');
       setLoanTypeDetail('');
       setLoanCurrency('');
