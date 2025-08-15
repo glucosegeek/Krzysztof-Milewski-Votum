@@ -704,7 +704,7 @@ const ConsultationModal: React.FC = () => {
                               onChange={(date: Date | null) => setRepaymentDate(date)}
                               dateFormat="dd.MM.yyyy"
                              maxDate={new Date()}
-                             minDate={new Date(1950, 0, 1)}
+                             minDate={new Date(2000, 1, 1)}
                               showYearDropdown
                               scrollableYearDropdown
                               yearDropdownItemNumber={100}
