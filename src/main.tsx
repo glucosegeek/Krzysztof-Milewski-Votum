@@ -5,6 +5,8 @@ import { StickyButtonVisibilityProvider } from './context/StickyButtonVisibility
 import App from './App.tsx';
 import './index.css';
 import 'react-datepicker/dist/react-datepicker.css';
+import 'date-fns/locale/pl';
+import { registerLocale } from 'react-datepicker';
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
