@@ -707,7 +707,7 @@ const ConsultationModal: React.FC = () => {
                              minDate={new Date(1, 1, 2000)}
                               showYearDropdown
                               scrollableYearDropdown
-                              yearDropdownItemNumber={5}
+                              yearDropdownItemNumber={100}
                              showMonthDropdown
                               className="w-full px-4 py-3 rounded-lg focus:outline-none focus:ring-2"
                               wrapperClassName="w-full"
