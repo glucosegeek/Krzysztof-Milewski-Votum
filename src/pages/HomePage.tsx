@@ -126,7 +126,7 @@ const conciergeItems = [
   phone: '+48 ',
   message: '',
   loanType: '', // 'currency' or 'skd'
-  agreementDate: null as Date | null,
+  agreementDate: '',
   homeBank: '',
   originalBank: '',
   loanTypeDetail: '', // 'indexed', 'denominated', 'unknown'
@@ -137,7 +137,7 @@ const conciergeItems = [
     phone: '+48 ',
     message: '',
     loanType: '', // 'currency' or 'skd'
-    agreementDate: null as Date | null,
+    agreementDate: '',
     homeBank: '',
     originalBank: '',
     loanTypeDetail: '', // 'indexed', 'denominated', 'unknown'
@@ -145,7 +145,7 @@ const conciergeItems = [
     loanValuePln: '',
     numberOfInstallments: '',
     loanStatus: '', // 'active' or 'repaid'
-    repaymentDate: null as Date | null,
+    repaymentDate: '',
     repaymentValuePln: '',
   });
 
@@ -1227,20 +1227,24 @@ Nie ryzykujesz nic – możesz tylko zyskać.</li>
           <label htmlFor="repaymentDate" className="block text-sm font-medium mb-2" style={{ color: '#F5F5F5' }}>
             Data spłaty kredytu <span style={{ color: '#D4AF37' }}></span>
           </label>
-          <input
-            type="date"
+          <DatePicker
             id="repaymentDate"
-            name="repaymentDate"
-            value={formData.repaymentDate}
-            onChange={handleInputChange}
+            selected={formData.repaymentDate}
+            onChange={handleRepaymentDateChange}
+            dateFormat="dd.MM.yyyy"
+            maxDate={new Date(2000, 0, 1)}
+            showYearDropdown
+            scrollableYearDropdown
+            yearDropdownItemNumber={100}
             className="w-full px-4 py-3 rounded-lg focus:outline-none focus:ring-2"
+            wrapperClassName="w-full"
+            placeholderText="DD.MM.YYYY"
             style={{
               backgroundColor: 'rgba(245, 245, 245, 0.1)',
               border: '1px solid rgba(245, 245, 245, 0.2)',
               color: '#F5F5F5',
               '--tw-ring-color': '#D4AF37',
             }}
-           max={maxDateToday}
           />
           {errors.repaymentDate && <p className="text-red-400 text-sm mt-1">{errors.repaymentDate}</p>}
         </div>
