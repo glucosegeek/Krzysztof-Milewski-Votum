@@ -5,11 +5,8 @@ import { StickyButtonVisibilityProvider } from './context/StickyButtonVisibility
 import App from './App.tsx';
 import './index.css';
 import 'react-datepicker/dist/react-datepicker.css';
-import { pl } from 'date-fns/locale';
+import 'date-fns/locale/pl';
 import { registerLocale } from 'react-datepicker';
-
-// Register Polish locale for react-datepicker
-registerLocale('pl', pl);
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>

@@ -501,7 +501,6 @@ const ConsultationModal: React.FC = () => {
                           className="w-full px-4 py-3 rounded-lg focus:outline-none focus:ring-2"
                           wrapperClassName="w-full"
                           placeholderText="DD.MM.YYYY"
-                          locale="pl"
                           style={{
                             backgroundColor: 'rgba(245, 245, 245, 0.1)',
                             border: '1px solid rgba(245, 245, 245, 0.2)',
@@ -720,7 +719,6 @@ const ConsultationModal: React.FC = () => {
                               className="w-full px-4 py-3 rounded-lg focus:outline-none focus:ring-2"
                               wrapperClassName="w-full"
                               placeholderText="DD.MM.YYYY"
-                              locale="pl"
                               style={{
                                 backgroundColor: 'rgba(245, 245, 245, 0.1)',
                                 border: '1px solid rgba(245, 245, 245, 0.2)',
