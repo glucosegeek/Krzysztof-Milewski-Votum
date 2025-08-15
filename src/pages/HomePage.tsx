@@ -126,7 +126,7 @@ const conciergeItems = [
   phone: '+48 ',
   message: '',
   loanType: '', // 'currency' or 'skd'
-  agreementDate: '',
+  agreementDate: null as Date | null,
   homeBank: '',
   originalBank: '',
   loanTypeDetail: '', // 'indexed', 'denominated', 'unknown'
@@ -137,7 +137,7 @@ const conciergeItems = [
     phone: '+48 ',
     message: '',
     loanType: '', // 'currency' or 'skd'
-    agreementDate: '',
+    agreementDate: null as Date | null,
     homeBank: '',
     originalBank: '',
     loanTypeDetail: '', // 'indexed', 'denominated', 'unknown'
@@ -145,7 +145,7 @@ const conciergeItems = [
     loanValuePln: '',
     numberOfInstallments: '',
     loanStatus: '', // 'active' or 'repaid'
-    repaymentDate: '',
+    repaymentDate: null as Date | null,
     repaymentValuePln: '',
   });
 

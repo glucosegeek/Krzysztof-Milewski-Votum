@@ -19,7 +19,7 @@ const ConsultationModal: React.FC = () => {
   const [phone, setPhone] = useState('+48 '); // Default area code
   const [message, setMessage] = useState('');
   const [loanType, setLoanType] = useState('');
-  const [agreementDate, setAgreementDate] = useState('');
+  const [agreementDate, setAgreementDate] = useState<Date | null>(null);
   const [homeBank, setHomeBank] = useState('');
   const [originalBank, setOriginalBank] = useState('');
   const [loanTypeDetail, setLoanTypeDetail] = useState('');
@@ -27,7 +27,7 @@ const ConsultationModal: React.FC = () => {
   const [loanValuePln, setLoanValuePln] = useState('');
   const [numberOfInstallments, setNumberOfInstallments] = useState('');
   const [loanStatus, setLoanStatus] = useState('');
-  const [repaymentDate, setRepaymentDate] = useState('');
+  const [repaymentDate, setRepaymentDate] = useState<Date | null>(null);
   const [repaymentValuePln, setRepaymentValuePln] = useState('');
   const [privacyConsent, setPrivacyConsent] = useState(false);
   const [errors, setErrors] = useState<{ 
@@ -184,7 +184,7 @@ const ConsultationModal: React.FC = () => {
           phone: phone,
           message: message,
           loanType: loanType,
-          agreementDate: agreementDate ? agreementDate.toISOString().split('T')[0] : '',
+          agreementDate: agreementDate,
           homeBank: homeBank,
           originalBank: originalBank,
           loanTypeDetail: loanTypeDetail,
@@ -192,7 +192,7 @@ const ConsultationModal: React.FC = () => {
           loanValuePln: loanValuePln,
           numberOfInstallments: numberOfInstallments,
           loanStatus: loanStatus,
-          repaymentDate: repaymentDate ? repaymentDate.toISOString().split('T')[0] : '',
+          repaymentDate: repaymentDate,
           repaymentValuePln: repaymentValuePln,
           privacyConsent: privacyConsent,
 
@@ -698,13 +698,18 @@ const ConsultationModal: React.FC = () => {
                             <label htmlFor="modal-repaymentDate" className="block text-sm font-medium mb-2" style={{ color: '#F5F5F5' }}>
                               Data spłaty kredytu
                             </label>
-                            <input
-                              type="date"
+                            <DatePicker
                               id="modal-repaymentDate"
-                              name="repaymentDate"
-                              value={repaymentDate}
-                              onChange={(e) => setRepaymentDate(e.target.value)}
+                              selected={repaymentDate}
+                              onChange={(date: Date | null) => setRepaymentDate(date)}
+                              dateFormat="dd.MM.yyyy"
+                              maxDate={new Date(2000, 0, 1)}
+                              showYearDropdown
+                              scrollableYearDropdown
+                              yearDropdownItemNumber={100}
                               className="w-full px-4 py-3 rounded-lg focus:outline-none focus:ring-2"
+                              wrapperClassName="w-full"
+                              placeholderText="DD.MM.YYYY"
                               style={{
                                 backgroundColor: 'rgba(245, 245, 245, 0.1)',
                                 border: '1px solid rgba(245, 245, 245, 0.2)',
