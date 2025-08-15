@@ -19,7 +19,7 @@ const ConsultationModal: React.FC = () => {
   const [phone, setPhone] = useState('+48 '); // Default area code
   const [message, setMessage] = useState('');
   const [loanType, setLoanType] = useState('');
-  const [agreementDate, setAgreementDate] = useState<Date | null>(null);
+  const [agreementDate, setAgreementDate] = useState('');
   const [homeBank, setHomeBank] = useState('');
   const [originalBank, setOriginalBank] = useState('');
   const [loanTypeDetail, setLoanTypeDetail] = useState('');
@@ -27,7 +27,7 @@ const ConsultationModal: React.FC = () => {
   const [loanValuePln, setLoanValuePln] = useState('');
   const [numberOfInstallments, setNumberOfInstallments] = useState('');
   const [loanStatus, setLoanStatus] = useState('');
-  const [repaymentDate, setRepaymentDate] = useState<Date | null>(null);
+  const [repaymentDate, setRepaymentDate] = useState('');
   const [repaymentValuePln, setRepaymentValuePln] = useState('');
   const [privacyConsent, setPrivacyConsent] = useState(false);
   const [errors, setErrors] = useState<{ 
@@ -184,7 +184,7 @@ const ConsultationModal: React.FC = () => {
           phone: phone,
           message: message,
           loanType: loanType,
-          agreementDate: agreementDate,
+          agreementDate: agreementDate ? agreementDate.toISOString().split('T')[0] : '',
           homeBank: homeBank,
           originalBank: originalBank,
           loanTypeDetail: loanTypeDetail,
@@ -192,7 +192,7 @@ const ConsultationModal: React.FC = () => {
           loanValuePln: loanValuePln,
           numberOfInstallments: numberOfInstallments,
           loanStatus: loanStatus,
-          repaymentDate: repaymentDate,
+          repaymentDate: repaymentDate ? repaymentDate.toISOString().split('T')[0] : '',
           repaymentValuePln: repaymentValuePln,
           privacyConsent: privacyConsent,
 
