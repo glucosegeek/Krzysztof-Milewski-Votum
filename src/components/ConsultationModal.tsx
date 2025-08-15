@@ -19,7 +19,7 @@ const ConsultationModal: React.FC = () => {
   const [phone, setPhone] = useState('+48 '); // Default area code
   const [message, setMessage] = useState('');
   const [loanType, setLoanType] = useState('');
-  const [agreementDate, setAgreementDate] = useState('');
+  const [agreementDate, setAgreementDate] = useState<Date | null>(null);
   const [homeBank, setHomeBank] = useState('');
   const [originalBank, setOriginalBank] = useState('');
   const [loanTypeDetail, setLoanTypeDetail] = useState('');
@@ -27,7 +27,7 @@ const ConsultationModal: React.FC = () => {
   const [loanValuePln, setLoanValuePln] = useState('');
   const [numberOfInstallments, setNumberOfInstallments] = useState('');
   const [loanStatus, setLoanStatus] = useState('');
-  const [repaymentDate, setRepaymentDate] = useState('');
+  const [repaymentDate, setRepaymentDate] = useState<Date | null>(null);
   const [repaymentValuePln, setRepaymentValuePln] = useState('');
   const [privacyConsent, setPrivacyConsent] = useState(false);
   const [errors, setErrors] = useState<{ 

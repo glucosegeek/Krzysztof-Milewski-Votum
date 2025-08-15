@@ -4,6 +4,7 @@ import { BrowserRouter } from 'react-router-dom';
 import { StickyButtonVisibilityProvider } from './context/StickyButtonVisibilityContext';
 import App from './App.tsx';
 import './index.css';
+import 'react-datepicker/dist/react-datepicker.css';
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
