@@ -287,7 +287,6 @@ const ConsultationModal: React.FC = () => {
               {submittedData.loanType === 'currency' && (
                 <>
                   <p><strong>Data zawarcia umowy:</strong> {submittedData.agreementDate}</p>
-                  <p><strong>Bank:</strong> {submittedData.homeBank}</p>
                   <p><strong>Bank aktualny:</strong> {submittedData.originalBank}</p>
                   <p><strong>Typ kredytu:</strong> {submittedData.loanTypeDetail === 'indexed' ? 'Indeksowany' : submittedData.loanTypeDetail === 'denominated' ? 'Denominowany' : 'Nie wiem'}</p>
                   <p><strong>Waluta kredytu:</strong> {submittedData.loanCurrency}</p>

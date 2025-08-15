@@ -127,7 +127,6 @@ const conciergeItems = [
     message: '',
     loanType: '', // 'currency' or 'skd'
     agreementDate: '',
-    homeBank: '',
     originalBank: '',
     loanTypeDetail: '', // 'indexed', 'denominated', 'unknown'
     loanCurrency: '',
