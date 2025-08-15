@@ -122,17 +122,6 @@ const conciergeItems = [
   const [formData, setFormData] = useState({
     firstName: '',
     lastName: '',
-  email: '',
-  phone: '+48 ',
-  message: '',
-  loanType: '', // 'currency' or 'skd'
-  agreementDate: '',
-  homeBank: '',
-  originalBank: '',
-  loanTypeDetail: '', // 'indexed', 'denominated', 'unknown'
-  loanCurrency: '',
-  loanValuePln: '',
-  numberOfInstallments: '',
     email: '',
     phone: '+48 ',
     message: '',
@@ -332,6 +321,7 @@ const conciergeItems = [
           const stars = parseInt(starsStr);
           if (!isNaN(stars) && stars >= 1 && stars <= 5) {
             testimonials.push({
+              id: `testimonial-${i}`,
               name,
               description,
               stars,
@@ -407,7 +397,6 @@ const conciergeItems = [
       url: window.location.href,
       referrer: document.referrer || 'direct',
 
-      // Additional metadata
       formType: 'contact_form',
       source: 'homepage_contact_section'
     };
@@ -911,7 +900,7 @@ Nie ryzykujesz nic – możesz tylko zyskać.</li>
                       '--tw-ring-color': '#D4AF37',
                     }}
                     placeholder="Twój adres email"
-                    
+                    required
                   />
                   {errors.email && <p className="text-red-400 text-sm mt-1">{errors.email}</p>}
                 </div>
@@ -934,7 +923,7 @@ Nie ryzykujesz nic – możesz tylko zyskać.</li>
                       '--tw-ring-color': '#D4AF37',
                     }}
                     placeholder="Twój numer telefonu"
-                    
+                    required
                   />
                   {errors.phone && <p className="text-red-400 text-sm mt-1">{errors.phone}</p>}
                 </div>
@@ -1039,7 +1028,6 @@ Nie ryzykujesz nic – możesz tylko zyskać.</li>
           '--tw-ring-color': '#D4AF37',
         }}
         placeholder="Nazwa banku"
-        
       />
       {errors.homeBank && <p className="text-red-400 text-sm mt-1">{errors.homeBank}</p>}
     </div>
@@ -1063,7 +1051,6 @@ Nie ryzykujesz nic – możesz tylko zyskać.</li>
           '--tw-ring-color': '#D4AF37',
         }}
         placeholder="Nazwa banku aktualnego"
-        
       />
       {errors.originalBank && <p className="text-red-400 text-sm mt-1">{errors.originalBank}</p>}
     </div>
@@ -1133,7 +1120,6 @@ Nie ryzykujesz nic – możesz tylko zyskać.</li>
           '--tw-ring-color': '#D4AF37',
         }}
         placeholder="np. CHF, EUR, USD"
-        
       />
       {errors.loanCurrency && <p className="text-red-400 text-sm mt-1">{errors.loanCurrency}</p>}
     </div>
@@ -1157,7 +1143,6 @@ Nie ryzykujesz nic – możesz tylko zyskać.</li>
           '--tw-ring-color': '#D4AF37',
         }}
         placeholder="Wartość w PLN"
-        
       />
       {errors.loanValuePln && <p className="text-red-400 text-sm mt-1">{errors.loanValuePln}</p>}
     </div>
@@ -1181,7 +1166,6 @@ Nie ryzykujesz nic – możesz tylko zyskać.</li>
           '--tw-ring-color': '#D4AF37',
         }}
         placeholder="Liczba miesięcy"
-        
       />
       {errors.numberOfInstallments && <p className="text-red-400 text-sm mt-1">{errors.numberOfInstallments}</p>}
     </div>
@@ -1227,24 +1211,20 @@ Nie ryzykujesz nic – możesz tylko zyskać.</li>
           <label htmlFor="repaymentDate" className="block text-sm font-medium mb-2" style={{ color: '#F5F5F5' }}>
             Data spłaty kredytu <span style={{ color: '#D4AF37' }}></span>
           </label>
-          <DatePicker
+          <input
+            type="date"
             id="repaymentDate"
-            selected={formData.repaymentDate}
-            onChange={handleRepaymentDateChange}
-            dateFormat="dd.MM.yyyy"
-            maxDate={new Date(2000, 0, 1)}
-            showYearDropdown
-            scrollableYearDropdown
-            yearDropdownItemNumber={100}
+            name="repaymentDate"
+            value={formData.repaymentDate}
+            onChange={handleInputChange}
             className="w-full px-4 py-3 rounded-lg focus:outline-none focus:ring-2"
-            wrapperClassName="w-full"
-            placeholderText="DD.MM.YYYY"
             style={{
               backgroundColor: 'rgba(245, 245, 245, 0.1)',
               border: '1px solid rgba(245, 245, 245, 0.2)',
               color: '#F5F5F5',
               '--tw-ring-color': '#D4AF37',
             }}
+           max={maxDateToday}
           />
           {errors.repaymentDate && <p className="text-red-400 text-sm mt-1">{errors.repaymentDate}</p>}
         </div>
@@ -1268,7 +1248,6 @@ Nie ryzykujesz nic – możesz tylko zyskać.</li>
               '--tw-ring-color': '#D4AF37',
             }}
             placeholder="Wartość spłaty w PLN"
-            
           />
           {errors.repaymentValuePln && <p className="text-red-400 text-sm mt-1">{errors.repaymentValuePln}</p>}
         </div>
@@ -1287,10 +1266,10 @@ Nie ryzykujesz nic – możesz tylko zyskać.</li>
                       onChange={(e) => setPrivacyConsent(e.target.checked)}
                       className="mr-2 mt-1 flex-shrink-0"
                       style={{ accentColor: '#D4AF37' }}
-                      
+                      required
                     />
                     <span className="leading-relaxed flex-1">
-                      Wyrażam zgodę na przetwarzanie moich danych osobowych przez właściciela strony internetowej uwolnieniekredytowe.pl w celach kontaktowych, marketingowych oraz związanych z nawiązaniem współpracy, zgodnie z <Link to="/privacy-policy" className="text-yellow-300 underline">polityką prywatności. </Link><span style={{ color: '#D4AF37' }}></span>Zostałem/am poinformowany/a o przysługujących mi prawach, w tym o możliwości wycofania zgody w dowolnym momencie.*
+                      Wyrażam zgodę na przetwarzanie moich danych osobowych przez właściciela strony internetowej uwolnieniekredytowe.pl w celach kontaktowych, marketingowych oraz związanych z nawiązaniem współpracy, zgodnie z <Link to="/privacy-policy" className="text-yellow-300 underline">polityką prywatności. </Link><span style={{ color: '#D4AF37' }}>*</span>Zostałem/am poinformowany/a o przysługujących mi prawach, w tym o możliwości wycofania zgody w dowolnym momencie.*
                     </span>
                   </label>
                   {errors.privacyConsent && <p className="text-red-400 text-sm mt-1">{errors.privacyConsent}</p>}
