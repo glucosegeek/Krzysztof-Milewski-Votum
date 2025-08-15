@@ -33,6 +33,13 @@ const HomePage: React.FC = () => {
   const heroSectionRef = useRef<HTMLElement>(null);
   const { registerHeroSection } = useStickyButtonVisibility();
   const { isModalOpen, closeModal, submittedData, openModal } = useConsultationModal();
+  
+  // Calculate today's date in YYYY-MM-DD format for max date constraint
+  const today = new Date();
+  const year = today.getFullYear();
+  const month = String(today.getMonth() + 1).padStart(2, '0');
+  const day = String(today.getDate()).padStart(2, '0');
+  const maxDateToday = `${year}-${month}-${day}`;
 
   // Testimonials state
   const [testimonials, setTestimonials] = useState<Testimonial[]>([]);
@@ -1008,7 +1015,7 @@ Nie ryzykujesz nic – możesz tylko zyskać.</li>
           color: '#F5F5F5',
           '--tw-ring-color': '#D4AF37',
         }}
-        
+        max={maxDateToday}
       />
       {errors.agreementDate && <p className="text-red-400 text-sm mt-1">{errors.agreementDate}</p>}
     </div>
@@ -1233,7 +1240,7 @@ Nie ryzykujesz nic – możesz tylko zyskać.</li>
               color: '#F5F5F5',
               '--tw-ring-color': '#D4AF37',
             }}
-            
+           max={maxDateToday}
           />
           {errors.repaymentDate && <p className="text-red-400 text-sm mt-1">{errors.repaymentDate}</p>}
         </div>

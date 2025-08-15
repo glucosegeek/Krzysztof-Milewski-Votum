@@ -5,6 +5,14 @@ import { Link } from 'react-router-dom';
 
 const ConsultationModal: React.FC = () => {
   const { isModalOpen, modalIntent, closeModal, submittedData } = useConsultationModal();
+  
+  // Calculate today's date in YYYY-MM-DD format for max date constraint
+  const today = new Date();
+  const year = today.getFullYear();
+  const month = String(today.getMonth() + 1).padStart(2, '0');
+  const day = String(today.getDate()).padStart(2, '0');
+  const maxDateToday = `${year}-${month}-${day}`;
+  
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
   const [email, setEmail] = useState('');
@@ -491,6 +499,7 @@ const ConsultationModal: React.FC = () => {
                             color: '#F5F5F5',
                             '--tw-ring-color': '#D4AF37',
                           }}
+                          max={maxDateToday}
                         />
                       </div>
 
