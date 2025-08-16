@@ -22,6 +22,7 @@ interface ConsultationModalContextType {
     loanStatus?: string;
     repaymentDate?: string;
     repaymentValuePln?: string;
+    bankTransitionChain?: string;
   }, intent?: string) => void;
   closeModal: () => void;
   submittedData: any | null;

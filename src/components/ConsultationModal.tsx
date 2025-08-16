@@ -4,6 +4,45 @@ import { useConsultationModal } from '../context/ConsultationModalContext';
 import { Link } from 'react-router-dom';
 import DatePicker from 'react-datepicker';
 
+interface BankTransition {
+  primaryBank: string;
+  transitionalBank: string | null;
+  currentBank: string;
+}
+
+const bankData: BankTransition[] = [
+  { primaryBank: 'Bank Millennium S.A.', transitionalBank: null, currentBank: 'Bank Millennium S.A.' },
+  { primaryBank: 'Euro Bank S.A.', transitionalBank: null, currentBank: 'Bank Millennium S.A.' },
+  { primaryBank: 'BIG Bank Gdański S.A.', transitionalBank: null, currentBank: 'Bank Millennium S.A.' },
+  { primaryBank: 'Nordea Bank Polska S.A. (NORDEA-HABITAT)', transitionalBank: null, currentBank: 'Powszechna Kasa Oszczędności Bank Polski S.A.' },
+  { primaryBank: 'LG Petrol Bank', transitionalBank: null, currentBank: 'Powszechna Kasa Oszczędności Bank Polski S.A.' },
+  { primaryBank: 'Powszechna Kasa Oszczędności Bank Polski S.A. (Własny Kąt, MIX Hipoteczny)', transitionalBank: null, currentBank: 'Powszechna Kasa Oszczędności Bank Polski S.A.' },
+  { primaryBank: 'BRE Bank S.A. (Multibank, mPlan)', transitionalBank: null, currentBank: 'mBank S.A.' },
+  { primaryBank: 'GE Money Bank S.A., GE Money Bank Mieszkaniowy S.A.', transitionalBank: null, currentBank: 'Bank BPH S.A.' },
+  { primaryBank: 'Bank BPH S.A.', transitionalBank: null, currentBank: 'Bank BPH S.A. lub Bank Polska Kasa Opieki S.A.' },
+  { primaryBank: 'Bank Handlowy w Warszawie S.A.', transitionalBank: null, currentBank: 'Bank Handlowy w Warszawie S.A.' },
+  { primaryBank: 'Bank Przemysłowo-Handlowy PBK S.A.', transitionalBank: null, currentBank: 'Bank BPH S.A. lub Bank Polska Kasa Opieki S.A.' },
+  { primaryBank: 'BPH Bank Hipoteczny S.A.', transitionalBank: null, currentBank: 'PEKAO Bank Hipoteczny S.A.' },
+  { primaryBank: 'HypoVereinsbank Bank Hipoteczny S.A.', transitionalBank: null, currentBank: 'PEKAO Bank Hipoteczny S.A.' },
+  { primaryBank: 'EFG Eurobank Ergasias S.A. EFG Polbank S.A.', transitionalBank: null, currentBank: 'Raiffeisen Bank International AG' },
+  { primaryBank: 'Raiffeisen Bank Polska S.A.', transitionalBank: null, currentBank: 'Raiffeisen Bank International AG' },
+  { primaryBank: 'Santander Consumer Bank S.A. (PTF S.A.)', transitionalBank: null, currentBank: 'Santander Consumer Bank S.A.' },
+  { primaryBank: 'BZ WBK S.A.', transitionalBank: null, currentBank: 'Santander Bank Polska S.A.' },
+  { primaryBank: 'Kredyt Bank S.A.', transitionalBank: 'BZ WBK S.A.', currentBank: 'Santander Bank Polska S.A.' },
+  { primaryBank: 'Bank Ochrony Środowiska S.A.', transitionalBank: null, currentBank: 'Bank Ochrony Środowiska S.A.' },
+  { primaryBank: 'DNB Nord S.A.', transitionalBank: null, currentBank: 'DNB Bank Polska S.A.' },
+  { primaryBank: 'Bank Gospodarstwa Krajowego S.A.', transitionalBank: null, currentBank: 'Bank Gospodarstwa Krajowego S.A.' },
+  { primaryBank: 'Bank Rozwoju Budownictwa Mieszkaniowego S.A.', transitionalBank: null, currentBank: 'Bank Gospodarstwa Krajowego S.A.' },
+  { primaryBank: 'Deutsche Bank PBC S.A.', transitionalBank: null, currentBank: 'Deutsche Bank Polska S.A.' },
+  { primaryBank: 'Bank Gospodarki Żywnościowej S.A.', transitionalBank: null, currentBank: 'BNP Paribas Bank Polska S.A.' },
+  { primaryBank: 'Dominet Bank', transitionalBank: 'BGŻ BNP Paribas', currentBank: 'BNP Paribas Bank Polska S.A.' },
+  { primaryBank: 'Fortis Bank S.A.', transitionalBank: null, currentBank: 'BNP Paribas Bank Polska S.A.' },
+  { primaryBank: 'LUKAS Bank S.A.', transitionalBank: null, currentBank: 'Credit Agricole Polska S.A.' },
+  { primaryBank: 'kredyty indeksowane Banku BPH S.A. (lata 2010–2011)', transitionalBank: null, currentBank: 'Bank BPH S.A.' },
+  { primaryBank: 'Mazowiecki Bank Regionalny', transitionalBank: null, currentBank: 'SGB Bank S.A.' },
+  { primaryBank: 'Alior Bank S.A.', transitionalBank: null, currentBank: 'Alior Bank S.A.' }
+];
+
 const ConsultationModal: React.FC = () => {
   const { isModalOpen, modalIntent, closeModal, submittedData } = useConsultationModal();
   
@@ -29,6 +68,7 @@ const ConsultationModal: React.FC = () => {
   const [loanStatus, setLoanStatus] = useState('');
   const [repaymentDate, setRepaymentDate] = useState<Date | null>(null);
   const [repaymentValuePln, setRepaymentValuePln] = useState('');
+  const [displayedBankTransition, setDisplayedBankTransition] = useState('');
   const [privacyConsent, setPrivacyConsent] = useState(false);
   const [errors, setErrors] = useState<{ 
     firstName?: string; 
@@ -79,6 +119,7 @@ const ConsultationModal: React.FC = () => {
       setRepaymentDate(null);
       setRepaymentValuePln('');
       setPrivacyConsent(false); // Reset privacy consent
+      setDisplayedBankTransition('');
       setErrors({});
     }
 
@@ -166,6 +207,7 @@ const ConsultationModal: React.FC = () => {
       setRepaymentDate(null);
       setRepaymentValuePln('');
       setPrivacyConsent(false); // Reset privacy consent
+      setDisplayedBankTransition('');
       console.log('Form Data:', { firstName, lastName, email, phone, message });
       
       // Check the intent that opened this modal
@@ -189,6 +231,7 @@ const ConsultationModal: React.FC = () => {
           loanStatus: loanStatus,
           repaymentDate: repaymentDate,
           repaymentValuePln: repaymentValuePln,
+          bankTransitionChain: displayedBankTransition,
           privacyConsent: privacyConsent,
 
           // Platform and metadata
@@ -225,13 +268,54 @@ const ConsultationModal: React.FC = () => {
         });
       } else {
         // For other cases, show success message
-        openModal(null, 'form_submission');
+        openModal({
+          firstName,
+          lastName,
+          email,
+          phone,
+          message,
+          loanType,
+          agreementDate: agreementDate ? agreementDate.toLocaleDateString('pl-PL') : '',
+          originalBank,
+          loanTypeDetail,
+          loanCurrency,
+          loanValuePln,
+          numberOfInstallments,
+          loanStatus,
+          repaymentDate: repaymentDate ? repaymentDate.toLocaleDateString('pl-PL') : '',
+          repaymentValuePln,
+          bankTransitionChain: displayedBankTransition,
+          privacyConsent
+        }, 'form_submission');
         
         // Auto-close modal after 5 seconds
         setTimeout(() => {
           closeModal();
         }, 5000);
       }
+    }
+  };
+
+  const handleBankSelection = (selectedBank: string) => {
+    setOriginalBank(selectedBank);
+    
+    if (selectedBank) {
+      const bankTransition = bankData.find(bank => bank.primaryBank === selectedBank);
+      if (bankTransition) {
+        let transitionChain = `${bankTransition.primaryBank} (Bank pierwotny)`;
+        
+        if (bankTransition.transitionalBank) {
+          transitionChain += ` -> ${bankTransition.transitionalBank} (Bank przejściowy)`;
+        } else {
+          transitionChain += ` -> x (Bank przejściowy)`;
+        }
+        
+        transitionChain += ` -> ${bankTransition.currentBank} (Bank aktualny)`;
+        
+        setDisplayedBankTransition(transitionChain);
+      }
+    } else {
+      setDisplayedBankTransition('');
     }
   };
 
@@ -282,7 +366,7 @@ const ConsultationModal: React.FC = () => {
               {submittedData.loanType === 'currency' && (
                 <>
                   <p><strong>Data zawarcia umowy:</strong> {submittedData.agreementDate}</p>
-                  <p><strong>Bank aktualny:</strong> {submittedData.originalBank}</p>
+                  {submittedData.bankTransitionChain && <p><strong>Łańcuch banków:</strong> {submittedData.bankTransitionChain}</p>}
                   <p><strong>Typ kredytu:</strong> {submittedData.loanTypeDetail === 'indexed' ? 'Indeksowany' : submittedData.loanTypeDetail === 'denominated' ? 'Denominowany' : 'Nie wiem'}</p>
                   <p><strong>Waluta kredytu:</strong> {submittedData.loanCurrency}</p>
                   <p><strong>Wartość kredytu w PLN:</strong> {submittedData.loanValuePln}</p>
@@ -507,14 +591,13 @@ const ConsultationModal: React.FC = () => {
                       {/* Original bank */}
                       <div>
                         <label htmlFor="modal-originalBank" className="block text-sm font-medium mb-2" style={{ color: '#F5F5F5' }}>
-                          Bank pierwotny (bank aktualny)
+                          Bank pierwotny
                         </label>
-                        <input
-                          type="text"
+                        <select
                           id="modal-originalBank"
                           name="originalBank"
                           value={originalBank}
-                          onChange={(e) => setOriginalBank(e.target.value)}
+                          onChange={(e) => handleBankSelection(e.target.value)}
                           className="w-full px-4 py-3 rounded-lg focus:outline-none focus:ring-2"
                           style={{
                             backgroundColor: 'rgba(245, 245, 245, 0.1)',
@@ -522,8 +605,31 @@ const ConsultationModal: React.FC = () => {
                             color: '#F5F5F5',
                             '--tw-ring-color': '#D4AF37',
                           }}
-                          placeholder="Nazwa banku aktualnego"
-                        />
+                        >
+                          <option value="" style={{ backgroundColor: '#0A1A2F', color: '#F5F5F5' }}>
+                            Wybierz bank
+                          </option>
+                          {bankData.map((bank, index) => (
+                            <option 
+                              key={index} 
+                              value={bank.primaryBank}
+                              style={{ backgroundColor: '#0A1A2F', color: '#F5F5F5' }}
+                            >
+                              {bank.primaryBank}
+                            </option>
+                          ))}
+                        </select>
+                        
+                        {displayedBankTransition && (
+                          <div className="mt-3 p-3 rounded-lg border-2" style={{ backgroundColor: 'rgba(212, 175, 55, 0.1)', borderColor: '#D4AF37' }}>
+                            <p className="text-sm font-medium mb-1" style={{ color: '#D4AF37' }}>
+                              Łańcuch przejęć banku:
+                            </p>
+                            <p className="text-sm leading-relaxed" style={{ color: '#F5F5F5' }}>
+                              {displayedBankTransition}
+                            </p>
+                          </div>
+                        )}
                       </div>
 
                       {/* Type of loan */}
