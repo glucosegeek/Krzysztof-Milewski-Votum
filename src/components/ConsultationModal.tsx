@@ -71,6 +71,7 @@ const ConsultationModal: React.FC = () => {
       setMessage('');
       setLoanType('');
       setAgreementDate(null);
+      setHomeBank('');
       setOriginalBank('');
       setLoanTypeDetail('');
       setLoanCurrency('');
@@ -159,6 +160,7 @@ const ConsultationModal: React.FC = () => {
       setMessage('');
       setLoanType('');
       setAgreementDate(null);
+      setHomeBank('');
       setOriginalBank('');
       setLoanTypeDetail('');
       setLoanCurrency('');
@@ -446,7 +448,7 @@ const ConsultationModal: React.FC = () => {
                   {/* Loan Type Selection */}
                   <div>
                     <label className="block text-sm font-medium mb-2" style={{ color: '#F5F5F5' }}>
-                      Rodzaj sprawy <span style={{ color: '#D4AF37' }}>*</span>
+                      Rodzaj sprawy
                     </label>
                     <div className="flex space-x-4">
                       <label className="inline-flex items-center">
@@ -458,7 +460,6 @@ const ConsultationModal: React.FC = () => {
                           onChange={(e) => setLoanType(e.target.value)}
                           className="form-radio"
                           style={{ accentColor: '#D4AF37' }}
-                          required
                         />
                         <span className="ml-2 text-sm" style={{ color: '#F5F5F5' }}>Kredyt walutowy</span>
                       </label>
