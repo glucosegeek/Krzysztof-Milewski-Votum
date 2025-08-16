@@ -62,7 +62,7 @@ const ConsultationModal: React.FC = () => {
   const [agreementDate, setAgreementDate] = useState<Date | null>(null);
   const [originalBank, setOriginalBank] = useState('');
   const [loanTypeDetail, setLoanTypeDetail] = useState('');
-  const [loanCurrency, setLoanCurrency] = useState('');
+  const [loanCurrency, setLoanCurrency] = useState('PLN');
   const [loanValuePln, setLoanValuePln] = useState('');
   const [numberOfInstallments, setNumberOfInstallments] = useState('');
   const [loanStatus, setLoanStatus] = useState('');
@@ -112,7 +112,7 @@ const ConsultationModal: React.FC = () => {
       setAgreementDate(null);
       setOriginalBank('');
       setLoanTypeDetail('');
-      setLoanCurrency('');
+      setLoanCurrency('PLN');
       setLoanValuePln('');
       setNumberOfInstallments('');
       setLoanStatus('');
@@ -200,7 +200,7 @@ const ConsultationModal: React.FC = () => {
       setAgreementDate(null);
       setOriginalBank('');
       setLoanTypeDetail('');
-      setLoanCurrency('');
+      setLoanCurrency('PLN');
       setLoanValuePln('');
       setNumberOfInstallments('');
       setLoanStatus('');
