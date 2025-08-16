@@ -863,11 +863,12 @@ const ConsultationModal: React.FC = () => {
                               Wartość spłaty w PLN
                             </label>
                             <input
-                              type="number"
+                              type="text"
+                              inputMode="decimal"
                               id="modal-repaymentValuePln"
                               name="repaymentValuePln"
                               value={repaymentValuePln}
-                              onChange={(e) => setRepaymentValuePln(e.target.value)}
+                              onChange={handleRepaymentValueChange}
                               className="w-full px-4 py-3 rounded-lg focus:outline-none focus:ring-2"
                               style={{
                                 backgroundColor: 'rgba(245, 245, 245, 0.1)',
@@ -876,7 +877,10 @@ const ConsultationModal: React.FC = () => {
                                 '--tw-ring-color': '#D4AF37',
                               }}
                               placeholder="Wartość spłaty w PLN"
+                              aria-invalid={errors.repaymentValuePln ? "true" : "false"}
+                              aria-describedby={errors.repaymentValuePln ? "repaymentValuePln-error" : undefined}
                             />
+                            {errors.repaymentValuePln && <p id="repaymentValuePln-error" className="text-red-500 text-sm mt-1">{errors.repaymentValuePln}</p>}
                           </div>
                         </>
                       )}
