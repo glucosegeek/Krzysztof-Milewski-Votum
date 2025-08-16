@@ -681,8 +681,7 @@ const ConsultationModal: React.FC = () => {
                         <label htmlFor="modal-loanCurrency" className="block text-sm font-medium mb-2" style={{ color: '#F5F5F5' }}>
                           Waluta kredytu
                         </label>
-                        <input
-                          type="text"
+                        <select
                           id="modal-loanCurrency"
                           name="loanCurrency"
                           value={loanCurrency}
@@ -694,8 +693,20 @@ const ConsultationModal: React.FC = () => {
                             color: '#F5F5F5',
                             '--tw-ring-color': '#D4AF37',
                           }}
-                          placeholder="np. CHF, EUR, USD"
-                        />
+                        >
+                          <option value="PLN" style={{ backgroundColor: '#0A1A2F', color: '#F5F5F5' }}>
+                            PLN
+                          </option>
+                          <option value="CHF" style={{ backgroundColor: '#0A1A2F', color: '#F5F5F5' }}>
+                            CHF
+                          </option>
+                          <option value="EUR" style={{ backgroundColor: '#0A1A2F', color: '#F5F5F5' }}>
+                            EUR
+                          </option>
+                          <option value="USD" style={{ backgroundColor: '#0A1A2F', color: '#F5F5F5' }}>
+                            USD
+                          </option>
+                        </select>
                       </div>
 
                       {/* Value in PLN */}
