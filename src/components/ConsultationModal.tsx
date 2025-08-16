@@ -306,8 +306,6 @@ const ConsultationModal: React.FC = () => {
         
         if (bankTransition.transitionalBank) {
           transitionChain += ` -> ${bankTransition.transitionalBank} (Bank przejściowy)`;
-        } else {
-          transitionChain += ` -> x (Bank przejściowy)`;
         }
         
         transitionChain += ` -> ${bankTransition.currentBank} (Bank aktualny)`;
