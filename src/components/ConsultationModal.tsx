@@ -21,6 +21,7 @@ const ConsultationModal: React.FC = () => {
   const [message, setMessage] = useState('');
   const [loanType, setLoanType] = useState('');
   const [agreementDate, setAgreementDate] = useState<Date | null>(null);
+  const [homeBank, setHomeBank] = useState('');
   const [originalBank, setOriginalBank] = useState('');
   const [loanTypeDetail, setLoanTypeDetail] = useState('');
   const [loanCurrency, setLoanCurrency] = useState('');
@@ -287,6 +288,7 @@ const ConsultationModal: React.FC = () => {
               {submittedData.loanType === 'currency' && (
                 <>
                   <p><strong>Data zawarcia umowy:</strong> {submittedData.agreementDate}</p>
+                  <p><strong>Bank:</strong> {submittedData.homeBank}</p>
                   <p><strong>Bank aktualny:</strong> {submittedData.originalBank}</p>
                   <p><strong>Typ kredytu:</strong> {submittedData.loanTypeDetail === 'indexed' ? 'Indeksowany' : submittedData.loanTypeDetail === 'denominated' ? 'Denominowany' : 'Nie wiem'}</p>
                   <p><strong>Waluta kredytu:</strong> {submittedData.loanCurrency}</p>
@@ -506,6 +508,28 @@ const ConsultationModal: React.FC = () => {
                             color: '#F5F5F5',
                             '--tw-ring-color': '#D4AF37',
                           }}
+                        />
+                      </div>
+
+                      {/* Home bank with which the agreement was concluded */}
+                      <div>
+                        <label htmlFor="modal-homeBank" className="block text-sm font-medium mb-2" style={{ color: '#F5F5F5' }}>
+                          Bank, z którym zawarto umowę
+                        </label>
+                        <input
+                          type="text"
+                          id="modal-homeBank"
+                          name="homeBank"
+                          value={homeBank}
+                          onChange={(e) => setHomeBank(e.target.value)}
+                          className="w-full px-4 py-3 rounded-lg focus:outline-none focus:ring-2"
+                          style={{
+                            backgroundColor: 'rgba(245, 245, 245, 0.1)',
+                            border: '1px solid rgba(245, 245, 245, 0.2)',
+                            color: '#F5F5F5',
+                            '--tw-ring-color': '#D4AF37',
+                          }}
+                          placeholder="Nazwa banku"
                         />
                       </div>
 

@@ -379,6 +379,7 @@ const conciergeItems = [
       message: formData.message,
       loanType: formData.loanType,
       agreementDate: formData.agreementDate,
+      homeBank: formData.homeBank,
       originalBank: formData.originalBank,
       loanTypeDetail: formData.loanTypeDetail,
       loanCurrency: formData.loanCurrency,
