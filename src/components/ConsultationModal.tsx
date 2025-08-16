@@ -184,6 +184,46 @@ const ConsultationModal: React.FC = () => {
       newErrors.privacyConsent = 'Zgoda na przetwarzanie danych jest obowiązkowa.';
     }
     
+    // Validation for currency loan fields
+    if (loanType === 'currency') {
+      // Validate loan value in PLN
+      if (loanValuePln.trim()) {
+        const loanValue = parseFloat(loanValuePln);
+        if (isNaN(loanValue)) {
+          newErrors.loanValuePln = 'Wartość kredytu musi być liczbą.';
+        } else if (loanValue <= 0) {
+          newErrors.loanValuePln = 'Wartość kredytu musi być większa od 0.';
+        } else if (loanValue > 999999999) {
+          newErrors.loanValuePln = 'Wartość kredytu jest zbyt duża.';
+        }
+      }
+
+      // Validate number of installments
+      if (numberOfInstallments.trim()) {
+        const installments = parseInt(numberOfInstallments, 10);
+        if (isNaN(installments)) {
+          newErrors.numberOfInstallments = 'Liczba rat musi być liczbą całkowitą.';
+        } else if (installments <= 0) {
+          newErrors.numberOfInstallments = 'Liczba rat musi być większa od 0.';
+        } else if (installments > 600) {
+          newErrors.numberOfInstallments = 'Liczba rat nie może przekraczać 600 miesięcy.';
+        } else if (numberOfInstallments.includes('.') || numberOfInstallments.includes(',')) {
+          newErrors.numberOfInstallments = 'Liczba rat musi być liczbą całkowitą (bez części dziesiętnej).';
+        }
+      }
+
+      // Validate repayment value if loan is repaid
+      if (loanStatus === 'repaid' && repaymentValuePln.trim()) {
+        const repaymentValue = parseFloat(repaymentValuePln);
+        if (isNaN(repaymentValue)) {
+          newErrors.repaymentValuePln = 'Wartość spłaty musi być liczbą.';
+        } else if (repaymentValue <= 0) {
+          newErrors.repaymentValuePln = 'Wartość spłaty musi być większa od 0.';
+        } else if (repaymentValue > 999999999) {
+          newErrors.repaymentValuePln = 'Wartość spłaty jest zbyt duża.';
+        }
+      }
+    }
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
   };
