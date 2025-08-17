@@ -70,6 +70,12 @@ const ConsultationModal: React.FC = () => {
   const [repaymentValuePln, setRepaymentValuePln] = useState('');
   const [displayedBankTransition, setDisplayedBankTransition] = useState('');
   const [privacyConsent, setPrivacyConsent] = useState(false);
+  
+  // Real-time validation states
+  const [loanValueError, setLoanValueError] = useState('');
+  const [installmentsError, setInstallmentsError] = useState('');
+  const [repaymentValueError, setRepaymentValueError] = useState('');
+  
   const [errors, setErrors] = useState<{ 
     firstName?: string; 
     lastName?: string; 
@@ -120,6 +126,9 @@ const ConsultationModal: React.FC = () => {
       setRepaymentValuePln('');
       setPrivacyConsent(false); // Reset privacy consent
       setDisplayedBankTransition('');
+      setLoanValueError('');
+      setInstallmentsError('');
+      setRepaymentValueError('');
       setErrors({});
     }
 
