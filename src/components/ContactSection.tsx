@@ -431,32 +431,10 @@ const ContactSection: React.FC = () => {
                 </label>
                 <textarea
                   id="message"
-                  name="message"
+          {/* Right side - Contact Information */}
                   value={message}
-                  onChange={(e) => setMessage(e.target.value)}
-                  rows={4}
-                  style={{
-                    width: '100%',
-                    padding: '12px 16px',
-                    borderRadius: '8px',
-                    border: '1px solid rgba(245, 245, 245, 0.2)',
-                    backgroundColor: 'rgba(245, 245, 245, 0.1)',
-                    color: '#F5F5F5',
-                    fontSize: '16px',
-                    outline: 'none',
-                    transition: 'all 0.2s',
-                    resize: 'vertical',
-                    minHeight: '100px'
-                  }}
-                  placeholder="Krótko opisz swoją sprawę"
-                  required
-                  aria-invalid={errors.message ? "true" : "false"}
-                  aria-describedby={errors.message ? "message-error" : undefined}
-                  onFocus={(e) => e.target.style.borderColor = '#D4AF37'}
-                  onBlur={(e) => e.target.style.borderColor = 'rgba(245, 245, 245, 0.2)'}
-                />
-                {errors.message && <p id="message-error" style={{ color: '#ef4444', fontSize: '0.875rem', marginTop: '4px' }}>{errors.message}</p>}
-              </div>
+            <div className="space-y-8">
+              <h3 className="text-2xl font-bold mb-6" style={{ color: '#F5F5F5' }}>Skontaktuj się z nami</h3>
               
               {/* Loan Type Selection */}
               <div>
@@ -925,21 +903,6 @@ const ContactSection: React.FC = () => {
             <div className="flex items-center space-x-4">
               <div className="w-12 h-12 rounded-lg flex items-center justify-center shadow-md border-4" style={{ backgroundColor: '#F5F5F5', borderColor: '#D4AF37' }}>
                 <MessageCircle size={24} style={{ color: '#0A1A2F' }} />
-              </div>
-              <div>
-                <div className="font-semibold" style={{ color: '#F5F5F5' }}>WhatsApp</div>
-                <div style={{ color: '#F5F5F5' }}>Szybka konsultacja dostępna</div>
-              </div>
-            </div>
-            
-            <div className="pt-6">
-              <p className="text-sm leading-relaxed" style={{ color: '#F5F5F5' }}>
-                Wszystkie konsultacje są całkowicie poufne i bezpłatne. 
-                Na pytania odpowiadam natychmiast w dni robocze.
-              </p>
-            </div>
-          </div>
-        </div>
       </div>
     </section>
   );
