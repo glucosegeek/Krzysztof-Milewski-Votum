@@ -594,15 +594,25 @@ const ConsultationModal: React.FC = () => {
                         <input
                           type="radio"
                           name="loanType"
+                     min="0.01"
+                     step="0.01"
                           value="skd"
                           checked={loanType === 'skd'}
                           onChange={(e) => setLoanType(e.target.value)}
+                     min="1"
+                     step="1"
                           className="form-radio"
                           style={{ accentColor: '#D4AF37' }}
                         />
                         <span className="ml-2 text-sm" style={{ color: '#F5F5F5' }}>SKD</span>
-                      </label>
-                    </div>
+                     placeholder="Wartość w PLN (tylko wartości większe od 0)"
+                     aria-invalid={errors.loanValuePln ? "true" : "false"}
+                     aria-describedby={errors.loanValuePln ? "loanValuePln-error" : undefined}
+                     placeholder="Liczba miesięcy (tylko wartości większe od 0)"
+                     aria-invalid={errors.numberOfInstallments ? "true" : "false"}
+                     aria-describedby={errors.numberOfInstallments ? "numberOfInstallments-error" : undefined}
+                   {errors.loanValuePln && <p id="loanValuePln-error" className="text-red-500 text-sm mt-1">{errors.loanValuePln}</p>}
+                   {errors.numberOfInstallments && <p id="numberOfInstallments-error" className="text-red-500 text-sm mt-1">{errors.numberOfInstallments}</p>}
                   </div>
 
                   {loanType === 'currency' && (
