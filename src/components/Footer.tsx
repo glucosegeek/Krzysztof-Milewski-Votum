@@ -1,6 +1,6 @@
 import React, { useRef, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { Facebook, Instagram, Linkedin, Apple, Play } from 'lucide-react';
+import { Facebook, Instagram, Linkedin, Apple, Play, Youtube } from 'lucide-react';
 
 interface FooterProps {
   registerFooterSection: (element: HTMLElement | null) => void;
