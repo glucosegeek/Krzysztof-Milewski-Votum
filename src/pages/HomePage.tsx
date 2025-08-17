@@ -974,7 +974,7 @@ Nie ryzykujesz nic – możesz tylko zyskać.</li>
                     {errors.lastName && <p id="lastName-error" className="text-red-500 text-sm mt-1">{errors.lastName}</p>}
                   </div>
                 </div>
-              </p>
+              
                 <div>
                   <label htmlFor="email" className="block text-sm font-medium mb-2" style={{ color: '#F5F5F5' }}>
                     Email <span style={{ color: '#D4AF37' }}>*</span>
