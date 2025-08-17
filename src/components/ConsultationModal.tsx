@@ -44,7 +44,7 @@ const bankData: BankTransition[] = [
 ];
 
 const ConsultationModal: React.FC = () => {
-  const { isModalOpen, modalIntent, closeModal, submittedData } = useConsultationModal();
+  const { isModalOpen, modalIntent, closeModal, submittedData, openModal } = useConsultationModal();
   
   // Calculate today's date in YYYY-MM-DD format for max date constraint
   const today = new Date();
