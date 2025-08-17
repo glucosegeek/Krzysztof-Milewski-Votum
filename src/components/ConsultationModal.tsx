@@ -684,7 +684,7 @@ return (
     </div>
   </div>
 );
- // PART 4: Currency Loan Fields (continues from Part 3)
+  // PART 4: Currency Loan Fields (continues from Part 3)
 
                     <div>
                       <label htmlFor="modal-originalBank" className="block text-sm font-medium mb-2" style={{ color: '#F5F5F5' }}>
@@ -985,13 +985,10 @@ return (
               </p>
             )}
           </form>
-        </>
       )}
     </div>
   </div>
 );
-
-// COMPONENT ENDING
 };
 
 export default ConsultationModal;
