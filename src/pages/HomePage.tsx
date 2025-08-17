@@ -902,9 +902,6 @@ Nie ryzykujesz nic – możesz tylko zyskać.</li>
                   </div>
                 </div>
 
-
-
-
                 <div>
                   <label htmlFor="email" className="block text-sm font-medium mb-2" style={{ color: '#F5F5F5' }}>
                     Email <span style={{ color: '#D4AF37' }}>*</span>
