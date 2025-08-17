@@ -1476,7 +1476,7 @@ Nie ryzykujesz nic – możesz tylko zyskać.</li>
             </div>
           
     
-      </section>
+      {/* </section> */} 
 
       {/* Consierge Personal Asistent */}
       <section className="py-20" style={{ backgroundColor: '#F5F5F5' }}>
