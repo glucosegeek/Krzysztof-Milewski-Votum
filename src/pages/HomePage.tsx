@@ -703,9 +703,6 @@ Nie ryzykujesz nic – możesz tylko zyskać.</li>
                 <p className="text-lg mt-4 font-semibold transition-colors duration-300 hover:text-yellow-300" style={{ color: '#F5F5F5' }}>
                   Jasna, przejrzysta ścieżka od konsultacji do pomyślnego rozwiązania
                 </p>
-                <p className="text-sm mt-1 opacity-75" style={{ color: '#D4AF37' }}>
-                  Kliknij aby obejrzeć
-                </p>
             </div>
 
           <div className="space-y-4"> {/* This div replaces the old grid */}
