@@ -2340,11 +2340,7 @@ Nie ryzykujesz nic – możesz tylko zyskać.</li>
                 </div>
               </div>
           </div>
-        </div>
-  </form>
-      </section>
-
-    </div>
+        
   );
 };
 
