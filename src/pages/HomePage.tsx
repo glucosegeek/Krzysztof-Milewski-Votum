@@ -1435,7 +1435,7 @@ Nie ryzykujesz nic – możesz tylko zyskać.</li>
                 <p className="text-center text-sm mt-4" style={{ color: '#F5F5F5' }}>
                   Kliknięcie przycisku przekieruje Cię do strony rezerwacji terminu w Calendly.
                 </p>
-              </form>
+              {/* </form> */} 
             </div>
             
             {/* Right side content - you can add contact info, testimonials, etc. here */}
@@ -1474,7 +1474,7 @@ Nie ryzykujesz nic – możesz tylko zyskać.</li>
                 </div>
               </div>
             </div>
-          </div>
+          
         </div>
       </section>
 
