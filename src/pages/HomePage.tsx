@@ -524,38 +524,41 @@ Nie ryzykujesz nic – możesz tylko zyskać.</li>
             </p>
             
             <div className="flex flex-col items-center gap-8 mt-8">
-              {/* Apple App Store QR Code */}
-              <div className="flex flex-col items-center">
-                <a
-                  href="https://apps.apple.com/pl/app/moja-sprawa/id6736989155?l=pl"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="w-46 h-46 rounded-2xl shadow-xl border-4 flex items-center justify-center transition-all hover:scale-105"
-                  style={{ backgroundColor: '#F5F5F5', borderColor: '#D4AF37' }}
-                  aria-label="Skanuj QR kod dla Apple App Store"
-                >
-                  <img src="/qr-apple-store.png" alt="QR kod Apple App Store" className="w-full h-full object-contain p-2" />
-                </a>
-                <p className="text-lg mt-4 font-semibold" style={{ color: '#F5F5F5' }}>
-                  App Store
-                </p>
-              </div>
+              {/* QR Codes Row */}
+              <div className="flex flex-wrap justify-center gap-12">
+                {/* Apple App Store QR Code */}
+                <div className="flex flex-col items-center">
+                  <a
+                    href="https://apps.apple.com/pl/app/moja-sprawa/id6736989155?l=pl"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="w-46 h-46 rounded-2xl shadow-xl border-4 flex items-center justify-center transition-all hover:scale-105"
+                    style={{ backgroundColor: '#F5F5F5', borderColor: '#D4AF37' }}
+                    aria-label="Skanuj QR kod dla Apple App Store"
+                  >
+                    <img src="/qr-apple-store.png" alt="QR kod Apple App Store" className="w-full h-full object-contain p-2" />
+                  </a>
+                  <p className="text-lg mt-4 font-semibold" style={{ color: '#F5F5F5' }}>
+                    App Store
+                  </p>
+                </div>
 
-              {/* Google Play Store QR Code */}
-              <div className="flex flex-col items-center">
-                <a
-                  href="https://play.google.com/store/apps/details?id=pl.votum_sa.mojasprawa&pli=1"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="w-46 h-46 rounded-2xl shadow-xl border-4 flex items-center justify-center transition-all hover:scale-105"
-                  style={{ backgroundColor: '#F5F5F5', borderColor: '#D4AF37' }}
-                  aria-label="Skanuj QR kod dla Google Play Store"
-                >
-                  <img src="/qr-google-play.png" alt="QR kod Google Play Store" className="w-full h-full object-contain p-2" />
-                </a>
-                <p className="text-lg mt-4 font-semibold" style={{ color: '#F5F5F5' }}>
-                  Google Play
-                </p>
+                {/* Google Play Store QR Code */}
+                <div className="flex flex-col items-center">
+                  <a
+                    href="https://play.google.com/store/apps/details?id=pl.votum_sa.mojasprawa&pli=1"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="w-46 h-46 rounded-2xl shadow-xl border-4 flex items-center justify-center transition-all hover:scale-105"
+                    style={{ backgroundColor: '#F5F5F5', borderColor: '#D4AF37' }}
+                    aria-label="Skanuj QR kod dla Google Play Store"
+                  >
+                    <img src="/qr-google-play.png" alt="QR kod Google Play Store" className="w-full h-full object-contain p-2" />
+                  </a>
+                  <p className="text-lg mt-4 font-semibold" style={{ color: '#F5F5F5' }}>
+                    Google Play
+                  </p>
+                </div>
               </div>
 
             {/* YouTube Instructional Video */}
