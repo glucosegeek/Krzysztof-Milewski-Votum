@@ -557,6 +557,25 @@ Nie ryzykujesz nic – możesz tylko zyskać.</li>
                   Google Play
                 </p>
               </div>
+
+            {/* YouTube Instructional Video */}
+            <div className="flex flex-col items-center">
+              <a
+                href="https://www.youtube.com/watch?v=mNILMebMuAE"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="w-46 h-46 rounded-2xl shadow-xl border-4 flex items-center justify-center transition-all hover:scale-105"
+                style={{ backgroundColor: '#F5F5F5', borderColor: '#D4AF37' }}
+                aria-label="Obejrzyj film instruktażowy"
+              >
+                <div className="w-32 h-32 rounded-lg flex items-center justify-center border-2" style={{ backgroundColor: '#FF0000', borderColor: '#D4AF37' }}>
+                  <Youtube size={48} style={{ color: '#FFFFFF' }} />
+                </div>
+              </a>
+              <p className="text-lg mt-4 font-semibold" style={{ color: '#F5F5F5' }}>
+                Film instruktażowy
+              </p>
+            </div>
             </div>
           </div>
         </div>
