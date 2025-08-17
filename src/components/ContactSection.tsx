@@ -454,7 +454,7 @@ const ContactSection: React.FC = () => {
                   required
                   aria-invalid={errors.message ? "true" : "false"}
                   aria-describedby={errors.message ? "message-error" : undefined}
-                ></textarea>
+                />
                 {errors.message && <p id="message-error" className="text-red-500 text-sm mt-1">{errors.message}</p>}
               </div>
               
@@ -841,42 +841,43 @@ const ContactSection: React.FC = () => {
             <div className="sticky top-8">
               <div className="space-y-8">
                 <h3 className="text-2xl font-bold mb-6" style={{ color: '#F5F5F5' }}>Skontaktuj się z nami</h3>
-              
-              <div className="flex items-center space-x-4">
-                <div className="w-12 h-12 rounded-lg flex items-center justify-center shadow-md border-4" style={{ backgroundColor: '#F5F5F5', borderColor: '#D4AF37' }}>
-                  <Phone size={24} style={{ color: '#0A1A2F' }} />
+                
+                <div className="flex items-center space-x-4">
+                  <div className="w-12 h-12 rounded-lg flex items-center justify-center shadow-md border-4" style={{ backgroundColor: '#F5F5F5', borderColor: '#D4AF37' }}>
+                    <Phone size={24} style={{ color: '#0A1A2F' }} />
+                  </div>
+                  <div>
+                    <div className="font-semibold" style={{ color: '#F5F5F5' }}>Telefon</div>
+                    <div style={{ color: '#F5F5F5' }}>+48 601 227 876</div>
+                  </div>
                 </div>
-                <div>
-                  <div className="font-semibold" style={{ color: '#F5F5F5' }}>Telefon</div>
-                  <div style={{ color: '#F5F5F5' }}>+48 601 227 876</div>
+                
+                <div className="flex items-center space-x-4">
+                  <div className="w-12 h-12 rounded-lg flex items-center justify-center shadow-md border-4" style={{ backgroundColor: '#F5F5F5', borderColor: '#D4AF37' }}>
+                    <Mail size={24} style={{ color: '#0A1A2F' }} />
+                  </div>
+                  <div>
+                    <div className="font-semibold" style={{ color: '#F5F5F5' }}>Email</div>
+                    <div style={{ color: '#F5F5F5' }}>krzysztof.milewski@dsa.pl</div>
+                  </div>
                 </div>
-              </div>
-              
-              <div className="flex items-center space-x-4">
-                <div className="w-12 h-12 rounded-lg flex items-center justify-center shadow-md border-4" style={{ backgroundColor: '#F5F5F5', borderColor: '#D4AF37' }}>
-                  <Mail size={24} style={{ color: '#0A1A2F' }} />
+                
+                <div className="flex items-center space-x-4">
+                  <div className="w-12 h-12 rounded-lg flex items-center justify-center shadow-md border-4" style={{ backgroundColor: '#F5F5F5', borderColor: '#D4AF37' }}>
+                    <MessageCircle size={24} style={{ color: '#0A1A2F' }} />
+                  </div>
+                  <div>
+                    <div className="font-semibold" style={{ color: '#F5F5F5' }}>WhatsApp</div>
+                    <div style={{ color: '#F5F5F5' }}>Szybka konsultacja dostępna</div>
+                  </div>
                 </div>
-                <div>
-                  <div className="font-semibold" style={{ color: '#F5F5F5' }}>Email</div>
-                  <div style={{ color: '#F5F5F5' }}>krzysztof.milewski@dsa.pl</div>
+                
+                <div className="pt-6">
+                  <p className="text-sm leading-relaxed" style={{ color: '#F5F5F5' }}>
+                    Wszystkie konsultacje są całkowicie poufne i bezpłatne. 
+                    Na pytania odpowiadam natychmiast w dni robocze.
+                  </p>
                 </div>
-              </div>
-              
-              <div className="flex items-center space-x-4">
-                <div className="w-12 h-12 rounded-lg flex items-center justify-center shadow-md border-4" style={{ backgroundColor: '#F5F5F5', borderColor: '#D4AF37' }}>
-                  <MessageCircle size={24} style={{ color: '#0A1A2F' }} />
-                </div>
-                <div>
-                  <div className="font-semibold" style={{ color: '#F5F5F5' }}>WhatsApp</div>
-                  <div style={{ color: '#F5F5F5' }}>Szybka konsultacja dostępna</div>
-                </div>
-              </div>
-              
-              <div className="pt-6">
-                <p className="text-sm leading-relaxed" style={{ color: '#F5F5F5' }}>
-                  Wszystkie konsultacje są całkowicie poufne i bezpłatne. 
-                  Na pytania odpowiadam natychmiast w dni robocze.
-                </p>
               </div>
             </div>
           </div>
@@ -885,5 +886,5 @@ const ContactSection: React.FC = () => {
     </section>
   );
 };
-      
+
 export default ContactSection;
