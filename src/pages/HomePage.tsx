@@ -567,17 +567,8 @@ Nie ryzykujesz nic – możesz tylko zyskać.</li>
                 href="https://www.youtube.com/watch?v=mNILMebMuAE"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="w-46 h-46 rounded-2xl shadow-xl border-4 flex items-center justify-center transition-all hover:scale-105"
-                  className="w-46 h-46 rounded-2xl shadow-2xl border-4 flex items-center justify-center transition-all duration-300 hover:scale-110 hover:shadow-3xl hover:rotate-1 group relative overflow-hidden"
-                  style={{ 
-                    background: 'linear-gradient(135deg, #FF0000 0%, #CC0000 50%, #FF0000 100%)',
-                    borderColor: '#D4AF37',
-                    boxShadow: '0 10px 30px rgba(255, 0, 0, 0.3)'
-                  }}
               >
                 <div className="w-32 h-32 rounded-lg flex items-center justify-center border-2" style={{ backgroundColor: '#FF0000', borderColor: '#D4AF37' }}>
-                  {/* Animated background glow */}
-                  <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white to-transparent opacity-0 group-hover:opacity-20 transform -skew-x-12 -translate-x-full group-hover:translate-x-full transition-all duration-700"></div>
                   
                   {/* YouTube icon with pulse animation */}
                   <div className="relative z-10 transform group-hover:scale-110 transition-transform duration-300">
