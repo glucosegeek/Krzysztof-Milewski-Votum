@@ -44,7 +44,7 @@ const bankData: BankTransition[] = [
 ];
 
 const ConsultationModal: React.FC = () => {
-  const { isModalOpen, modalIntent, closeModal, submittedData } = useConsultationModal();
+  const { isModalOpen, modalIntent, closeModal, submittedData, openModal } = useConsultationModal();
   
   // Calculate today's date in YYYY-MM-DD format for max date constraint
   const today = new Date();
@@ -366,6 +366,27 @@ const ConsultationModal: React.FC = () => {
     }
   };
 
+  const handleRepaymentValueChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const value = e.target.value;
+    setRepaymentValuePln(value);
+    
+    // Real-time validation
+    if (value.trim()) {
+      const numValue = parseFloat(value);
+      if (isNaN(numValue)) {
+        setRepaymentValueError('Wartość spłaty musi być liczbą.');
+      } else if (numValue <= 0) {
+        setRepaymentValueError('Wartość spłaty musi być większa od 0.');
+      } else if (numValue > 999999999) {
+        setRepaymentValueError('Wartość spłaty jest zbyt duża.');
+      } else {
+        setRepaymentValueError('');
+      }
+    } else {
+      setRepaymentValueError('');
+    }
+  };
+
   if (!isModalOpen) return null;
 
   return (
@@ -594,25 +615,15 @@ const ConsultationModal: React.FC = () => {
                         <input
                           type="radio"
                           name="loanType"
-                     min="0.01"
-                     step="0.01"
                           value="skd"
                           checked={loanType === 'skd'}
                           onChange={(e) => setLoanType(e.target.value)}
-                     min="1"
-                     step="1"
                           className="form-radio"
                           style={{ accentColor: '#D4AF37' }}
                         />
                         <span className="ml-2 text-sm" style={{ color: '#F5F5F5' }}>SKD</span>
-                     placeholder="Wartość w PLN (tylko wartości większe od 0)"
-                     aria-invalid={errors.loanValuePln ? "true" : "false"}
-                     aria-describedby={errors.loanValuePln ? "loanValuePln-error" : undefined}
-                     placeholder="Liczba miesięcy (tylko wartości większe od 0)"
-                     aria-invalid={errors.numberOfInstallments ? "true" : "false"}
-                     aria-describedby={errors.numberOfInstallments ? "numberOfInstallments-error" : undefined}
-                   {errors.loanValuePln && <p id="loanValuePln-error" className="text-red-500 text-sm mt-1">{errors.loanValuePln}</p>}
-                   {errors.numberOfInstallments && <p id="numberOfInstallments-error" className="text-red-500 text-sm mt-1">{errors.numberOfInstallments}</p>}
+                      </label>
+                    </div>
                   </div>
 
                   {loanType === 'currency' && (
@@ -783,8 +794,13 @@ const ConsultationModal: React.FC = () => {
                             color: '#F5F5F5',
                             '--tw-ring-color': '#D4AF37',
                           }}
-                          placeholder="Wartość w PLN"
+                          min="0.01"
+                          step="0.01"
+                          placeholder="Wartość w PLN (tylko wartości większe od 0)"
+                          aria-invalid={errors.loanValuePln ? "true" : "false"}
+                          aria-describedby={errors.loanValuePln ? "loanValuePln-error" : undefined}
                         />
+                        {errors.loanValuePln && <p id="loanValuePln-error" className="text-red-500 text-sm mt-1">{errors.loanValuePln}</p>}
                       </div>
 
                       {/* Number of installments in months */}
@@ -805,8 +821,13 @@ const ConsultationModal: React.FC = () => {
                             color: '#F5F5F5',
                             '--tw-ring-color': '#D4AF37',
                           }}
-                          placeholder="Liczba miesięcy"
+                          min="1"
+                          step="1"
+                          placeholder="Liczba miesięcy (tylko wartości większe od 0)"
+                          aria-invalid={errors.numberOfInstallments ? "true" : "false"}
+                          aria-describedby={errors.numberOfInstallments ? "numberOfInstallments-error" : undefined}
                         />
+                        {errors.numberOfInstallments && <p id="numberOfInstallments-error" className="text-red-500 text-sm mt-1">{errors.numberOfInstallments}</p>}
                       </div>
 
                       {/* Active or repaid loan */}
