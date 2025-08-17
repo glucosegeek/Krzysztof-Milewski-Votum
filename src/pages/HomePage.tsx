@@ -842,7 +842,7 @@ Nie ryzykujesz nic – możesz tylko zyskać.</li>
 
       {/* Contact Section */}
       <ContactSection />
-          </div>
+      </div>
   );
 };
 
