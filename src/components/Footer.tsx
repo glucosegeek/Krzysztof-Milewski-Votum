@@ -1,6 +1,6 @@
 import React, { useRef, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { Facebook, Instagram, Linkedin, Apple, Play, Youtube } from 'lucide-react';
+import { Facebook, Instagram, Linkedin, Youtube } from 'lucide-react';
 
 interface FooterProps {
   registerFooterSection: (element: HTMLElement | null) => void;
@@ -153,7 +153,7 @@ const Footer: React.FC<FooterProps> = ({ registerFooterSection }) => {
           <p className="text-l mb-8 leading-relaxed" style={{ color: '#D4AF37' }}>
             Wpisz ten numer K005533, żebym mógł mieć Twoją sprawę zawsze pod opieką!
           </p>
-          <div className="flex justify-center md:justify-start space-x-12 mb-8">
+          <div className="flex justify-center md:justify-start space-x-8 mb-8">
             <a
               href="https://apps.apple.com/pl/app/moja-sprawa/id6736989155?l=pl"
               target="_blank"
@@ -173,6 +173,18 @@ const Footer: React.FC<FooterProps> = ({ registerFooterSection }) => {
             >
               <img src="/google-play.png" alt="Pobierz z Google Play" className="h-8 w-8 mb-2" />
               <p className="text-sm text-center" style={{ color: '#F5F5F5' }}>Google Play</p>
+            </a>
+            <a
+              href="https://www.youtube.com/watch?v=mNILMebMuAE"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex flex-col items-center transition-all hover:scale-110"
+              aria-label="Obejrzyj film instruktażowy"
+            >
+              <div className="w-8 h-8 rounded-lg flex items-center justify-center mb-2 border-2" style={{ backgroundColor: '#FF0000', borderColor: '#D4AF37' }}>
+                <Youtube size={20} style={{ color: '#FFFFFF' }} />
+              </div>
+              <p className="text-sm text-center" style={{ color: '#F5F5F5' }}>Film instruktażowy</p>
             </a>
           </div>
         </div>
