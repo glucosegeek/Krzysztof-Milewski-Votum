@@ -1339,7 +1339,6 @@ Nie ryzykujesz nic – możesz tylko zyskać.</li>
                       </div>
                       {errors.loanStatus && <p className="text-red-500 text-sm mt-1">{errors.loanStatus}</p>}
                     </div>
-            </div>
                     {loanStatus === 'repaid' && (
                       <>
                         {/* If repaid, enter the date of repayment */}
@@ -1371,7 +1370,6 @@ Nie ryzykujesz nic – możesz tylko zyskać.</li>
                           />
                           {errors.repaymentDate && <p className="text-red-500 text-sm mt-1">{errors.repaymentDate}</p>}
                         </div>
-          </div>
                         {/* and the value of the payment in PLN. */}
                         <div>
                           <label htmlFor="repaymentValuePln" className="block text-sm font-medium mb-2" style={{ color: '#F5F5F5' }}>
@@ -1426,7 +1424,7 @@ Nie ryzykujesz nic – możesz tylko zyskać.</li>
                   </label>
                   {errors.privacyConsent && <p id="privacy-consent-error" className="text-red-500 text-sm mt-1">{errors.privacyConsent}</p>}
                 </div>
-      </section>
+      {/* </section> */} 
                 <button
                   type="submit"
                   className="w-full font-bold py-4 px-8 rounded-lg text-lg transition-all hover:-translate-y-1 duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl border-4 active:scale-95 active:shadow-inner"
