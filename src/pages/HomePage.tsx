@@ -565,11 +565,28 @@ Nie ryzykujesz nic – możesz tylko zyskać.</li>
                 target="_blank"
                 rel="noopener noreferrer"
                 className="w-46 h-46 rounded-2xl shadow-xl border-4 flex items-center justify-center transition-all hover:scale-105"
-                style={{ backgroundColor: '#F5F5F5', borderColor: '#D4AF37' }}
-                aria-label="Obejrzyj film instruktażowy"
+                  className="w-46 h-46 rounded-2xl shadow-2xl border-4 flex items-center justify-center transition-all duration-300 hover:scale-110 hover:shadow-3xl hover:rotate-1 group relative overflow-hidden"
+                  style={{ 
+                    background: 'linear-gradient(135deg, #FF0000 0%, #CC0000 50%, #FF0000 100%)',
+                    borderColor: '#D4AF37',
+                    boxShadow: '0 10px 30px rgba(255, 0, 0, 0.3)'
+                  }}
               >
                 <div className="w-32 h-32 rounded-lg flex items-center justify-center border-2" style={{ backgroundColor: '#FF0000', borderColor: '#D4AF37' }}>
-                  <Youtube size={48} style={{ color: '#FFFFFF' }} />
+                  {/* Animated background glow */}
+                  <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white to-transparent opacity-0 group-hover:opacity-20 transform -skew-x-12 -translate-x-full group-hover:translate-x-full transition-all duration-700"></div>
+                  
+                  {/* YouTube icon with pulse animation */}
+                  <div className="relative z-10 transform group-hover:scale-110 transition-transform duration-300">
+                    <Youtube size={52} style={{ color: '#FFFFFF' }} className="drop-shadow-lg" />
+                  </div>
+                  
+                  {/* Play button overlay effect */}
+                  <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                    <div className="w-16 h-16 rounded-full bg-white bg-opacity-20 flex items-center justify-center">
+                      <div className="w-0 h-0 border-l-8 border-l-white border-t-4 border-t-transparent border-b-4 border-b-transparent ml-1"></div>
+                    </div>
+                  </div>
                 </div>
               </a>
               <p className="text-lg mt-4 font-semibold" style={{ color: '#F5F5F5' }}>
@@ -699,8 +716,11 @@ Nie ryzykujesz nic – możesz tylko zyskać.</li>
               <h2 className="text-4xl font-bold mb-4" style={{ color: '#0A1A2F' }}>
                 Jak to działa
               </h2>
-                <p className="text-xl max-w-3xl mx-auto" style={{ color: '#0A1A2F' }}>
+                <p className="text-lg mt-4 font-semibold transition-colors duration-300 hover:text-yellow-300" style={{ color: '#F5F5F5' }}>
                   Jasna, przejrzysta ścieżka od konsultacji do pomyślnego rozwiązania
+                </p>
+                <p className="text-sm mt-1 opacity-75" style={{ color: '#D4AF37' }}>
+                  Kliknij aby obejrzeć
                 </p>
             </div>
 
