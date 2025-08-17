@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { useStickyButtonVisibility } from '../context/StickyButtonVisibilityContext';
 import { useConsultationModal } from '../context/ConsultationModalContext';
+import ContactSection from '../components/ContactSection';
 import { Link } from 'react-router-dom';
 import { 
   Shield, 
@@ -838,6 +839,9 @@ Nie ryzykujesz nic – możesz tylko zyskać.</li>
           )}
         </div>
       </section>
+
+      {/* Contact Section */}
+      <ContactSection />
 
       {/* Contact */}
       <section id="contact-section" className="py-20" style={{ backgroundColor: '#0A1A2F', color: '#F5F5F5' }}>
