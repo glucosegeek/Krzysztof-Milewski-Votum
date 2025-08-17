@@ -72,9 +72,27 @@ const ConsultationModal: React.FC = () => {
   const [privacyConsent, setPrivacyConsent] = useState(false);
   
   // Real-time validation states
-  const [loanValueError, setLoanValueError] = useState('');
-  const [installmentsError, setInstallmentsError] = useState('');
-  const [repaymentValueError, setRepaymentValueError] = useState('');
+  const handleLoanValueChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const value = e.target.value;
+    setLoanValuePln(value);
+    
+    // Real-time validation for loan value
+    if (value.trim()) {
+      const numValue = parseFloat(value);
+      if (isNaN(numValue)) {
+        setLoanValueError('Wartość kredytu musi być liczbą.');
+      } else if (numValue <= 0) {
+        setLoanValueError('Wartość kredytu musi być większa od 0.');
+      } else if (numValue > 999999999) {
+        setLoanValueError('Wartość kredytu jest zbyt duża.');
+      } else {
+        setLoanValueError('');
+      }
+    } else {
+      setLoanValueError('');
+    }
+  };
+
   
   const [errors, setErrors] = useState<{ 
     firstName?: string; 
