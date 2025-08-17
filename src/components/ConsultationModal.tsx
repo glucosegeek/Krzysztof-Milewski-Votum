@@ -72,12 +72,10 @@ const ConsultationModal: React.FC = () => {
   const [privacyConsent, setPrivacyConsent] = useState(false);
   
   // Real-time validation states
-  const handleLoanValueChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const value = e.target.value;
-    setLoanValuePln(value);
-    
-    // Real-time validation for loan value
-    if (value.trim()) {
+  const [loanValueError, setLoanValueError] = useState('');
+  const [installmentsError, setInstallmentsError] = useState('');
+  const [repaymentValueError, setRepaymentValueError] = useState('');
+   if (value.trim()) {
       const numValue = parseFloat(value);
       if (isNaN(numValue)) {
         setLoanValueError('Wartość kredytu musi być liczbą.');
@@ -91,7 +89,6 @@ const ConsultationModal: React.FC = () => {
     } else {
       setLoanValueError('');
     }
-  };
 
   
   const [errors, setErrors] = useState<{ 
