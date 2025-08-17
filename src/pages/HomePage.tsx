@@ -1171,7 +1171,6 @@ Nie ryzykujesz nic – możesz tylko zyskać.</li>
                       )}
                       {errors.originalBank && <p className="text-red-500 text-sm mt-1">{errors.originalBank}</p>}
                     </div>
-              </div>
                     {/* Type of loan */}
                     <div>
                       <label className="block text-sm font-medium mb-2" style={{ color: '#F5F5F5' }}>
