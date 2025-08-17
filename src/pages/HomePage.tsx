@@ -700,7 +700,7 @@ Nie ryzykujesz nic – możesz tylko zyskać.</li>
               <h2 className="text-4xl font-bold mb-4" style={{ color: '#0A1A2F' }}>
                 Jak to działa
               </h2>
-                <p className="text-lg mt-4 font-semibold transition-colors duration-300 hover:text-yellow-300" style={{ color: '#F5F5F5' }}>
+                <p className="text-lg mt-4 font-semibold transition-colors duration-300 hover:text-yellow-300" style={{ color: '#0A1A2F' }}>
                   Jasna, przejrzysta ścieżka od konsultacji do pomyślnego rozwiązania
                 </p>
             </div>
