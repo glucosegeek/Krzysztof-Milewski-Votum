@@ -1,8 +1,7 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import DatePicker from 'react-datepicker';
 import { Phone, Mail, MessageCircle } from 'lucide-react';
-import { pl } from 'date-fns/locale';
+import DatePicker from 'react-datepicker';
 
 interface BankTransition {
   primaryBank: string;
@@ -40,17 +39,21 @@ const bankData: BankTransition[] = [
   { primaryBank: 'LUKAS Bank S.A.', transitionalBank: null, currentBank: 'Credit Agricole Polska S.A.' },
   { primaryBank: 'kredyty indeksowane Banku BPH S.A. (lata 2010–2011)', transitionalBank: null, currentBank: 'Bank BPH S.A.' },
   { primaryBank: 'Mazowiecki Bank Regionalny', transitionalBank: null, currentBank: 'SGB Bank S.A.' },
-  { primaryBank: 'Alior Bank S.A.', transitionalBank: null, currentBank: 'Alior Bank S.A.' },
-  { primaryBank: 'PKO Bank Polski S.A.', transitionalBank: null, currentBank: 'PKO Bank Polski S.A.' },
-  { primaryBank: 'Bank Polska Kasa Opieki S.A.', transitionalBank: null, currentBank: 'Bank Polska Kasa Opieki S.A.' },
-  { primaryBank: 'ING Bank Śląski S.A.', transitionalBank: null, currentBank: 'ING Bank Śląski S.A.' }
+  { primaryBank: 'Alior Bank S.A.', transitionalBank: null, currentBank: 'Alior Bank S.A.' }
 ];
 
 const ContactSection: React.FC = () => {
+  // Calculate today's date in YYYY-MM-DD format for max date constraint
+  const today = new Date();
+  const year = today.getFullYear();
+  const month = String(today.getMonth() + 1).padStart(2, '0');
+  const day = String(today.getDate()).padStart(2, '0');
+  const maxDateToday = `${year}-${month}-${day}`;
+
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
   const [email, setEmail] = useState('');
-  const [phone, setPhone] = useState('+48 ');
+  const [phone, setPhone] = useState('+48 '); // Default area code
   const [message, setMessage] = useState('');
   const [loanType, setLoanType] = useState('');
   const [agreementDate, setAgreementDate] = useState<Date | null>(null);
@@ -64,7 +67,11 @@ const ContactSection: React.FC = () => {
   const [repaymentValuePln, setRepaymentValuePln] = useState('');
   const [displayedBankTransition, setDisplayedBankTransition] = useState('');
   const [privacyConsent, setPrivacyConsent] = useState(false);
-  const [isSubmitting, setIsSubmitting] = useState(false);
+  
+  // Real-time validation states
+  const [loanValueError, setLoanValueError] = useState('');
+  const [installmentsError, setInstallmentsError] = useState('');
+  const [repaymentValueError, setRepaymentValueError] = useState('');
   
   const [errors, setErrors] = useState<{ 
     firstName?: string; 
@@ -74,8 +81,14 @@ const ContactSection: React.FC = () => {
     message?: string;
     privacyConsent?: string;
     loanType?: string;
+    agreementDate?: string;
+    originalBank?: string;
+    loanTypeDetail?: string;
+    loanCurrency?: string;
     loanValuePln?: string;
     numberOfInstallments?: string;
+    loanStatus?: string;
+    repaymentDate?: string;
     repaymentValuePln?: string;
   }>({});
 
@@ -88,8 +101,14 @@ const ContactSection: React.FC = () => {
       message?: string;
       privacyConsent?: string;
       loanType?: string;
+      agreementDate?: string;
+      originalBank?: string;
+      loanTypeDetail?: string;
+      loanCurrency?: string;
       loanValuePln?: string;
       numberOfInstallments?: string;
+      loanStatus?: string;
+      repaymentDate?: string;
       repaymentValuePln?: string;
     } = {};
     
@@ -118,16 +137,13 @@ const ContactSection: React.FC = () => {
       newErrors.message = 'Wiadomość jest obowiązkowa.';
     }
 
-    if (!loanType) {
-      newErrors.loanType = 'Wybór rodzaju sprawy jest obowiązkowy.';
-    }
-
     if (!privacyConsent) {
       newErrors.privacyConsent = 'Zgoda na przetwarzanie danych jest obowiązkowa.';
     }
     
     // Validation for currency loan fields
     if (loanType === 'currency') {
+      // Validate loan value in PLN
       if (loanValuePln.trim()) {
         const loanValue = parseFloat(loanValuePln);
         if (isNaN(loanValue)) {
@@ -139,6 +155,7 @@ const ContactSection: React.FC = () => {
         }
       }
 
+      // Validate number of installments
       if (numberOfInstallments.trim()) {
         const installments = parseInt(numberOfInstallments, 10);
         if (isNaN(installments)) {
@@ -152,6 +169,7 @@ const ContactSection: React.FC = () => {
         }
       }
 
+      // Validate repayment value if loan is repaid
       if (loanStatus === 'repaid' && repaymentValuePln.trim()) {
         const repaymentValue = parseFloat(repaymentValuePln);
         if (isNaN(repaymentValue)) {
@@ -163,42 +181,14 @@ const ContactSection: React.FC = () => {
         }
       }
     }
-    
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
   };
 
-  const resetForm = () => {
-    setFirstName('');
-    setLastName('');
-    setEmail('');
-    setPhone('+48 ');
-    setMessage('');
-    setLoanType('');
-    setAgreementDate(null);
-    setOriginalBank('');
-    setLoanTypeDetail('');
-    setLoanCurrency('CHF');
-    setLoanValuePln('');
-    setNumberOfInstallments('');
-    setLoanStatus('');
-    setRepaymentDate(null);
-    setRepaymentValuePln('');
-    setPrivacyConsent(false);
-    setDisplayedBankTransition('');
-    setErrors({});
-  };
-
-  const handleSubmit = async (e: React.FormEvent) => {
+  const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    
-    if (!validate()) {
-      return;
-    }
-
-    setIsSubmitting(true);
-
-    try {
+    if (validate()) {
+      // Prepare webhook payload (keeping original webhook intact)
       const webhookPayload = {
         // Form data
         name: `${firstName} ${lastName}`,
@@ -208,14 +198,14 @@ const ContactSection: React.FC = () => {
         phone: phone,
         message: message,
         loanType: loanType,
-        agreementDate: agreementDate ? agreementDate.toISOString() : null,
+        agreementDate: agreementDate,
         originalBank: originalBank,
         loanTypeDetail: loanTypeDetail,
         loanCurrency: loanCurrency,
         loanValuePln: loanValuePln,
         numberOfInstallments: numberOfInstallments,
         loanStatus: loanStatus,
-        repaymentDate: repaymentDate ? repaymentDate.toISOString() : null,
+        repaymentDate: repaymentDate,
         repaymentValuePln: repaymentValuePln,
         bankTransitionChain: displayedBankTransition,
         privacyConsent: privacyConsent,
@@ -232,25 +222,45 @@ const ContactSection: React.FC = () => {
         source: 'contact_form'
       };
 
-      const response = await fetch('https://n8n.srv948633.hstgr.cloud/webhook/243235be-417h-4446-8h22-52186b5fd6d4', {
+      // Send to webhook (keeping the existing webhook URL untouched)
+      fetch('https://n8n.srv948633.hstgr.cloud/webhook/243235be-417h-4446-8h22-52186b5fd6d4', {
         method: 'POST',
         headers: { 
           'Content-Type': 'application/json'
         },
         body: JSON.stringify(webhookPayload)
+      }).then(response => {
+        if (response.ok) {
+          console.log('Contact form webhook sent successfully:', response.status);
+        } else {
+          console.error('Contact form webhook failed with status:', response.status);
+        }
+      }).catch(e => {
+        console.error('Error sending contact form webhook:', e);
+      }).finally(() => {
+        // Reset form after submission
+        setFirstName('');
+        setLastName('');
+        setEmail('');
+        setPhone('+48 ');
+        setMessage('');
+        setLoanType('');
+        setAgreementDate(null);
+        setOriginalBank('');
+        setLoanTypeDetail('');
+        setLoanCurrency('CHF');
+        setLoanValuePln('');
+        setNumberOfInstallments('');
+        setLoanStatus('');
+        setRepaymentDate(null);
+        setRepaymentValuePln('');
+        setPrivacyConsent(false);
+        setDisplayedBankTransition('');
+        setLoanValueError('');
+        setInstallmentsError('');
+        setRepaymentValueError('');
+        setErrors({});
       });
-
-      if (response.ok) {
-        console.log('Contact form webhook sent successfully:', response.status);
-        resetForm();
-        // You could add a success message here if needed
-      } else {
-        console.error('Contact form webhook failed with status:', response.status);
-      }
-    } catch (error) {
-      console.error('Error sending contact form webhook:', error);
-    } finally {
-      setIsSubmitting(false);
     }
   };
 
@@ -275,27 +285,46 @@ const ContactSection: React.FC = () => {
     }
   };
 
+  const handleRepaymentValueChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const value = e.target.value;
+    setRepaymentValuePln(value);
+    
+    // Real-time validation for repayment value
+    if (value.trim()) {
+      const numValue = parseFloat(value);
+      if (isNaN(numValue)) {
+        setRepaymentValueError('Wartość spłaty musi być liczbą.');
+      } else if (numValue <= 0) {
+        setRepaymentValueError('Wartość spłaty musi być większa od 0.');
+      } else if (numValue > 999999999) {
+        setRepaymentValueError('Wartość spłaty jest zbyt duża.');
+      } else {
+        setRepaymentValueError('');
+      }
+    } else {
+      setRepaymentValueError('');
+    }
+  };
+
   return (
-    <section id="contact-section" style={{ backgroundColor: '#0A1A2F', color: '#F5F5F5', padding: '80px 0' }}>
-      <div style={{ maxWidth: '1280px', margin: '0 auto', padding: '0 16px' }}>
-        <div style={{ maxWidth: '1024px', margin: '0 auto', textAlign: 'center', marginBottom: '48px' }}>
-          <h2 style={{ fontSize: '2.5rem', fontWeight: 'bold', marginBottom: '16px', color: '#F5F5F5' }}>
+    <section id="contact-section" className="py-20" style={{ backgroundColor: '#0A1A2F', color: '#F5F5F5' }}>
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="max-w-4xl mx-auto text-center mb-12">
+          <h2 className="text-4xl font-bold mb-4" style={{ color: '#F5F5F5' }}>
             Porozmawiajmy o Twojej toksycznej umowie kredytowej!
           </h2>
-          <p style={{ fontSize: '1.25rem', color: '#F5F5F5' }}>
+          <p className="text-xl" style={{ color: '#F5F5F5' }}>
             Wszystko zaczyna się od decyzji - Twojej decyzji.              
           </p>
-          <p style={{ fontSize: '1.25rem', margin: '28px 0', color: '#D4AF37' }}>
-            Tu zaczyna się Twoja droga do wiecznych wakacji kredytowych czyli unieważnienia toksycznej umowy!
-          </p>
+          <p className="text-xl my-7" style={{ color: '#D4AF37' }}>Tu zaczyna się Twoja droga do wiecznych wakacji kredytowych czyli unieważnienia toksycznej umowy!</p>
         </div>
         
-        <div style={{ display: 'grid', gridTemplateColumns: '1fr', gap: '48px', maxWidth: '1024px', margin: '0 auto' }}>
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 max-w-4xl mx-auto">
           <div>
-            <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '24px' }}>
-              <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))', gap: '16px' }}>
+            <form onSubmit={handleSubmit} className="space-y-6">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div>
-                  <label htmlFor="firstName" style={{ display: 'block', fontSize: '0.875rem', fontWeight: '500', marginBottom: '8px', color: '#F5F5F5' }}>
+                  <label htmlFor="firstName" className="block text-sm font-medium mb-2" style={{ color: '#F5F5F5' }}>
                     Imię <span style={{ color: '#D4AF37' }}>*</span>
                   </label>
                   <input
@@ -304,28 +333,22 @@ const ContactSection: React.FC = () => {
                     name="firstName"
                     value={firstName}
                     onChange={(e) => setFirstName(e.target.value)}
+                    className="w-full px-4 py-3 rounded-lg focus:outline-none focus:ring-2"
                     style={{
-                      width: '100%',
-                      padding: '12px 16px',
-                      borderRadius: '8px',
-                      border: '1px solid rgba(245, 245, 245, 0.2)',
                       backgroundColor: 'rgba(245, 245, 245, 0.1)',
+                      border: '1px solid rgba(245, 245, 245, 0.2)',
                       color: '#F5F5F5',
-                      fontSize: '16px',
-                      outline: 'none',
-                      transition: 'all 0.2s'
+                      '--tw-ring-color': '#D4AF37',
                     }}
                     placeholder="Twoje imię"
                     required
                     aria-invalid={errors.firstName ? "true" : "false"}
                     aria-describedby={errors.firstName ? "firstName-error" : undefined}
-                    onFocus={(e) => e.target.style.borderColor = '#D4AF37'}
-                    onBlur={(e) => e.target.style.borderColor = 'rgba(245, 245, 245, 0.2)'}
                   />
-                  {errors.firstName && <p id="firstName-error" style={{ color: '#ef4444', fontSize: '0.875rem', marginTop: '4px' }}>{errors.firstName}</p>}
+                  {errors.firstName && <p id="firstName-error" className="text-red-500 text-sm mt-1">{errors.firstName}</p>}
                 </div>
                 <div>
-                  <label htmlFor="lastName" style={{ display: 'block', fontSize: '0.875rem', fontWeight: '500', marginBottom: '8px', color: '#F5F5F5' }}>
+                  <label htmlFor="lastName" className="block text-sm font-medium mb-2" style={{ color: '#F5F5F5' }}>
                     Nazwisko <span style={{ color: '#D4AF37' }}>*</span>
                   </label>
                   <input
@@ -334,30 +357,24 @@ const ContactSection: React.FC = () => {
                     name="lastName"
                     value={lastName}
                     onChange={(e) => setLastName(e.target.value)}
+                    className="w-full px-4 py-3 rounded-lg focus:outline-none focus:ring-2"
                     style={{
-                      width: '100%',
-                      padding: '12px 16px',
-                      borderRadius: '8px',
-                      border: '1px solid rgba(245, 245, 245, 0.2)',
                       backgroundColor: 'rgba(245, 245, 245, 0.1)',
+                      border: '1px solid rgba(245, 245, 245, 0.2)',
                       color: '#F5F5F5',
-                      fontSize: '16px',
-                      outline: 'none',
-                      transition: 'all 0.2s'
+                      '--tw-ring-color': '#D4AF37',
                     }}
                     placeholder="Twoje nazwisko"
                     required
                     aria-invalid={errors.lastName ? "true" : "false"}
                     aria-describedby={errors.lastName ? "lastName-error" : undefined}
-                    onFocus={(e) => e.target.style.borderColor = '#D4AF37'}
-                    onBlur={(e) => e.target.style.borderColor = 'rgba(245, 245, 245, 0.2)'}
                   />
-                  {errors.lastName && <p id="lastName-error" style={{ color: '#ef4444', fontSize: '0.875rem', marginTop: '4px' }}>{errors.lastName}</p>}
+                  {errors.lastName && <p id="lastName-error" className="text-red-500 text-sm mt-1">{errors.lastName}</p>}
                 </div>
               </div>
 
               <div>
-                <label htmlFor="email" style={{ display: 'block', fontSize: '0.875rem', fontWeight: '500', marginBottom: '8px', color: '#F5F5F5' }}>
+                <label htmlFor="email" className="block text-sm font-medium mb-2" style={{ color: '#F5F5F5' }}>
                   Email <span style={{ color: '#D4AF37' }}>*</span>
                 </label>
                 <input
@@ -366,29 +383,23 @@ const ContactSection: React.FC = () => {
                   name="email"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
+                  className="w-full px-4 py-3 rounded-lg focus:outline-none focus:ring-2"
                   style={{
-                    width: '100%',
-                    padding: '12px 16px',
-                    borderRadius: '8px',
-                    border: '1px solid rgba(245, 245, 245, 0.2)',
                     backgroundColor: 'rgba(245, 245, 245, 0.1)',
+                    border: '1px solid rgba(245, 245, 245, 0.2)',
                     color: '#F5F5F5',
-                    fontSize: '16px',
-                    outline: 'none',
-                    transition: 'all 0.2s'
+                    '--tw-ring-color': '#D4AF37',
                   }}
                   placeholder="Twój adres email"
                   required
                   aria-invalid={errors.email ? "true" : "false"}
                   aria-describedby={errors.email ? "email-error" : undefined}
-                  onFocus={(e) => e.target.style.borderColor = '#D4AF37'}
-                  onBlur={(e) => e.target.style.borderColor = 'rgba(245, 245, 245, 0.2)'}
                 />
-                {errors.email && <p id="email-error" style={{ color: '#ef4444', fontSize: '0.875rem', marginTop: '4px' }}>{errors.email}</p>}
+                {errors.email && <p id="email-error" className="text-red-500 text-sm mt-1">{errors.email}</p>}
               </div>
 
               <div>
-                <label htmlFor="phone" style={{ display: 'block', fontSize: '0.875rem', fontWeight: '500', marginBottom: '8px', color: '#F5F5F5' }}>
+                <label htmlFor="phone" className="block text-sm font-medium mb-2" style={{ color: '#F5F5F5' }}>
                   Numer telefonu <span style={{ color: '#D4AF37' }}>*</span>
                 </label>
                 <input
@@ -399,34 +410,31 @@ const ContactSection: React.FC = () => {
                   onChange={(e) => {
                     const prefix = '+48 ';
                     let newValue = e.target.value;
+
+                    // If the new value doesn't start with the prefix, or is shorter than the prefix,
+                    // reset it to the prefix.
                     if (!newValue.startsWith(prefix) || newValue.length < prefix.length) {
                       newValue = prefix;
                     }
                     setPhone(newValue);
                   }}
+                  className="w-full px-4 py-3 rounded-lg focus:outline-none focus:ring-2"
                   style={{
-                    width: '100%',
-                    padding: '12px 16px',
-                    borderRadius: '8px',
-                    border: '1px solid rgba(245, 245, 245, 0.2)',
                     backgroundColor: 'rgba(245, 245, 245, 0.1)',
+                    border: '1px solid rgba(245, 245, 245, 0.2)',
                     color: '#F5F5F5',
-                    fontSize: '16px',
-                    outline: 'none',
-                    transition: 'all 0.2s'
+                    '--tw-ring-color': '#D4AF37',
                   }}
                   placeholder="Twój numer telefonu"
                   required
                   aria-invalid={errors.phone ? "true" : "false"}
                   aria-describedby={errors.phone ? "phone-error" : undefined}
-                  onFocus={(e) => e.target.style.borderColor = '#D4AF37'}
-                  onBlur={(e) => e.target.style.borderColor = 'rgba(245, 245, 245, 0.2)'}
                 />
-                {errors.phone && <p id="phone-error" style={{ color: '#ef4444', fontSize: '0.875rem', marginTop: '4px' }}>{errors.phone}</p>}
+                {errors.phone && <p id="phone-error" className="text-red-500 text-sm mt-1">{errors.phone}</p>}
               </div>
 
               <div>
-                <label htmlFor="message" style={{ display: 'block', fontSize: '0.875rem', fontWeight: '500', marginBottom: '8px', color: '#F5F5F5' }}>
+                <label htmlFor="message" className="block text-sm font-medium mb-2" style={{ color: '#F5F5F5' }}>
                   Wiadomość <span style={{ color: '#D4AF37' }}>*</span>
                 </label>
                 <textarea
@@ -434,68 +442,62 @@ const ContactSection: React.FC = () => {
                   name="message"
                   value={message}
                   onChange={(e) => setMessage(e.target.value)}
-                  rows={4}
+                  rows={3}
+                  className="w-full px-4 py-3 rounded-lg focus:outline-none focus:ring-2"
                   style={{
-                    width: '100%',
-                    padding: '12px 16px',
-                    borderRadius: '8px',
-                    border: '1px solid rgba(245, 245, 245, 0.2)',
                     backgroundColor: 'rgba(245, 245, 245, 0.1)',
+                    border: '1px solid rgba(245, 245, 245, 0.2)',
                     color: '#F5F5F5',
-                    fontSize: '16px',
-                    outline: 'none',
-                    transition: 'all 0.2s',
-                    resize: 'vertical',
-                    minHeight: '100px'
+                    '--tw-ring-color': '#D4AF37',
                   }}
                   placeholder="Krótko opisz swoją sprawę"
                   required
                   aria-invalid={errors.message ? "true" : "false"}
                   aria-describedby={errors.message ? "message-error" : undefined}
-                  onFocus={(e) => e.target.style.borderColor = '#D4AF37'}
-                  onBlur={(e) => e.target.style.borderColor = 'rgba(245, 245, 245, 0.2)'}
-                />
-                {errors.message && <p id="message-error" style={{ color: '#ef4444', fontSize: '0.875rem', marginTop: '4px' }}>{errors.message}</p>}
+                ></textarea>
+                {errors.message && <p id="message-error" className="text-red-500 text-sm mt-1">{errors.message}</p>}
               </div>
               
               {/* Loan Type Selection */}
               <div>
-                <label style={{ display: 'block', fontSize: '0.875rem', fontWeight: '500', marginBottom: '8px', color: '#F5F5F5' }}>
+                <label className="block text-sm font-medium mb-2" style={{ color: '#F5F5F5' }}>
                   Rodzaj sprawy <span style={{ color: '#D4AF37' }}>*</span>
                 </label>
-                <div style={{ display: 'flex', gap: '16px', flexWrap: 'wrap' }}>
-                  <label style={{ display: 'inline-flex', alignItems: 'center', cursor: 'pointer' }}>
+                <div className="flex space-x-4">
+                  <label className="inline-flex items-center">
                     <input
                       type="radio"
                       name="loanType"
                       value="currency"
                       checked={loanType === 'currency'}
                       onChange={(e) => setLoanType(e.target.value)}
-                      style={{ accentColor: '#D4AF37', marginRight: '8px' }}
+                      className="form-radio"
+                      style={{ accentColor: '#D4AF37' }}
                       required
                     />
-                    <span style={{ fontSize: '0.875rem', color: '#F5F5F5' }}>Kredyt walutowy</span>
+                    <span className="ml-2 text-sm" style={{ color: '#F5F5F5' }}>Kredyt walutowy</span>
                   </label>
-                  <label style={{ display: 'inline-flex', alignItems: 'center', cursor: 'pointer' }}>
+                  <label className="inline-flex items-center">
                     <input
                       type="radio"
                       name="loanType"
                       value="skd"
                       checked={loanType === 'skd'}
                       onChange={(e) => setLoanType(e.target.value)}
-                      style={{ accentColor: '#D4AF37', marginRight: '8px' }}
+                      className="form-radio"
+                      style={{ accentColor: '#D4AF37' }}
                     />
-                    <span style={{ fontSize: '0.875rem', color: '#F5F5F5' }}>SKD</span>
+                    <span className="ml-2 text-sm" style={{ color: '#F5F5F5' }}>SKD</span>
                   </label>
                 </div>
-                {errors.loanType && <p style={{ color: '#ef4444', fontSize: '0.875rem', marginTop: '4px' }}>{errors.loanType}</p>}
+                {errors.loanType && <p className="text-red-500 text-sm mt-1">{errors.loanType}</p>}
               </div>
 
               {loanType === 'currency' && (
                 <>
                   {/* Date of conclusion of the agreement */}
                   <div>
-                    <label htmlFor="agreementDate" style={{ display: 'block', fontSize: '0.875rem', fontWeight: '500', marginBottom: '8px', color: '#F5F5F5' }}>
+                    <label htmlFor="agreementDate" className="block text-sm font-medium mb-2" style={{ color: '#F5F5F5' }}>
                       Data zawarcia umowy
                     </label>
                     <DatePicker
@@ -514,21 +516,18 @@ const ContactSection: React.FC = () => {
                       wrapperClassName="w-full"
                       placeholderText="DD.MM.YYYY"
                       style={{
-                        width: '100%',
-                        padding: '12px 16px',
-                        borderRadius: '8px',
-                        border: '1px solid rgba(245, 245, 245, 0.2)',
                         backgroundColor: 'rgba(245, 245, 245, 0.1)',
+                        border: '1px solid rgba(245, 245, 245, 0.2)',
                         color: '#F5F5F5',
-                        fontSize: '16px',
-                        outline: 'none'
+                        '--tw-ring-color': '#D4AF37',
                       }}
                     />
+                    {errors.agreementDate && <p className="text-red-500 text-sm mt-1">{errors.agreementDate}</p>}
                   </div>
 
                   {/* Original bank */}
                   <div>
-                    <label htmlFor="originalBank" style={{ display: 'block', fontSize: '0.875rem', fontWeight: '500', marginBottom: '8px', color: '#F5F5F5' }}>
+                    <label htmlFor="originalBank" className="block text-sm font-medium mb-2" style={{ color: '#F5F5F5' }}>
                       Bank pierwotny
                     </label>
                     <select
@@ -536,19 +535,13 @@ const ContactSection: React.FC = () => {
                       name="originalBank"
                       value={originalBank}
                       onChange={(e) => handleBankSelection(e.target.value)}
+                      className="w-full px-4 py-3 rounded-lg focus:outline-none focus:ring-2"
                       style={{
-                        width: '100%',
-                        padding: '12px 16px',
-                        borderRadius: '8px',
-                        border: '1px solid rgba(245, 245, 245, 0.2)',
                         backgroundColor: 'rgba(245, 245, 245, 0.1)',
+                        border: '1px solid rgba(245, 245, 245, 0.2)',
                         color: '#F5F5F5',
-                        fontSize: '16px',
-                        outline: 'none',
-                        transition: 'all 0.2s'
+                        '--tw-ring-color': '#D4AF37',
                       }}
-                      onFocus={(e) => e.target.style.borderColor = '#D4AF37'}
-                      onBlur={(e) => e.target.style.borderColor = 'rgba(245, 245, 245, 0.2)'}
                     >
                       <option value="" style={{ backgroundColor: '#0A1A2F', color: '#F5F5F5' }}>
                         Wybierz bank
@@ -565,68 +558,67 @@ const ContactSection: React.FC = () => {
                     </select>
                     
                     {displayedBankTransition && (
-                      <div style={{ 
-                        marginTop: '12px', 
-                        padding: '12px', 
-                        borderRadius: '8px', 
-                        border: '2px solid #D4AF37',
-                        backgroundColor: 'rgba(212, 175, 55, 0.1)' 
-                      }}>
-                        <p style={{ fontSize: '0.875rem', fontWeight: '500', marginBottom: '4px', color: '#D4AF37' }}>
+                      <div className="mt-3 p-3 rounded-lg border-2" style={{ backgroundColor: 'rgba(212, 175, 55, 0.1)', borderColor: '#D4AF37' }}>
+                        <p className="text-sm font-medium mb-1" style={{ color: '#D4AF37' }}>
                           Łańcuch przejęć banku:
                         </p>
-                        <p style={{ fontSize: '0.875rem', lineHeight: '1.5', color: '#F5F5F5' }}>
+                        <p className="text-sm leading-relaxed" style={{ color: '#F5F5F5' }}>
                           {displayedBankTransition}
                         </p>
                       </div>
                     )}
+                    {errors.originalBank && <p className="text-red-500 text-sm mt-1">{errors.originalBank}</p>}
                   </div>
 
                   {/* Type of loan */}
                   <div>
-                    <label style={{ display: 'block', fontSize: '0.875rem', fontWeight: '500', marginBottom: '8px', color: '#F5F5F5' }}>
+                    <label className="block text-sm font-medium mb-2" style={{ color: '#F5F5F5' }}>
                       Typ kredytu
                     </label>
-                    <div style={{ display: 'flex', flexWrap: 'wrap', gap: '16px' }}>
-                      <label style={{ display: 'inline-flex', alignItems: 'center', cursor: 'pointer' }}>
+                    <div className="flex flex-wrap gap-4">
+                      <label className="inline-flex items-center">
                         <input
                           type="radio"
                           name="loanTypeDetail"
                           value="indexed"
                           checked={loanTypeDetail === 'indexed'}
                           onChange={(e) => setLoanTypeDetail(e.target.value)}
-                          style={{ accentColor: '#D4AF37', marginRight: '8px' }}
+                          className="form-radio"
+                          style={{ accentColor: '#D4AF37' }}
                         />
-                        <span style={{ fontSize: '0.875rem', color: '#F5F5F5' }}>Indeksowany</span>
+                        <span className="ml-2 text-sm" style={{ color: '#F5F5F5' }}>Indeksowany</span>
                       </label>
-                      <label style={{ display: 'inline-flex', alignItems: 'center', cursor: 'pointer' }}>
+                      <label className="inline-flex items-center">
                         <input
                           type="radio"
                           name="loanTypeDetail"
                           value="denominated"
                           checked={loanTypeDetail === 'denominated'}
                           onChange={(e) => setLoanTypeDetail(e.target.value)}
-                          style={{ accentColor: '#D4AF37', marginRight: '8px' }}
+                          className="form-radio"
+                          style={{ accentColor: '#D4AF37' }}
                         />
-                        <span style={{ fontSize: '0.875rem', color: '#F5F5F5' }}>Denominowany</span>
+                        <span className="ml-2 text-sm" style={{ color: '#F5F5F5' }}>Denominowany</span>
                       </label>
-                      <label style={{ display: 'inline-flex', alignItems: 'center', cursor: 'pointer' }}>
+                      <label className="inline-flex items-center">
                         <input
                           type="radio"
                           name="loanTypeDetail"
                           value="unknown"
                           checked={loanTypeDetail === 'unknown'}
                           onChange={(e) => setLoanTypeDetail(e.target.value)}
-                          style={{ accentColor: '#D4AF37', marginRight: '8px' }}
+                          className="form-radio"
+                          style={{ accentColor: '#D4AF37' }}
                         />
-                        <span style={{ fontSize: '0.875rem', color: '#F5F5F5' }}>Nie wiem</span>
+                        <span className="ml-2 text-sm" style={{ color: '#F5F5F5' }}>Nie wiem</span>
                       </label>
                     </div>
+                    {errors.loanTypeDetail && <p className="text-red-500 text-sm mt-1">{errors.loanTypeDetail}</p>}
                   </div>
 
                   {/* Loan currency */}
                   <div>
-                    <label htmlFor="loanCurrency" style={{ display: 'block', fontSize: '0.875rem', fontWeight: '500', marginBottom: '8px', color: '#F5F5F5' }}>
+                    <label htmlFor="loanCurrency" className="block text-sm font-medium mb-2" style={{ color: '#F5F5F5' }}>
                       Waluta kredytu
                     </label>
                     <select
@@ -634,29 +626,30 @@ const ContactSection: React.FC = () => {
                       name="loanCurrency"
                       value={loanCurrency}
                       onChange={(e) => setLoanCurrency(e.target.value)}
+                      className="w-full px-4 py-3 rounded-lg focus:outline-none focus:ring-2"
                       style={{
-                        width: '100%',
-                        padding: '12px 16px',
-                        borderRadius: '8px',
-                        border: '1px solid rgba(245, 245, 245, 0.2)',
                         backgroundColor: 'rgba(245, 245, 245, 0.1)',
+                        border: '1px solid rgba(245, 245, 245, 0.2)',
                         color: '#F5F5F5',
-                        fontSize: '16px',
-                        outline: 'none',
-                        transition: 'all 0.2s'
+                        '--tw-ring-color': '#D4AF37',
                       }}
-                      onFocus={(e) => e.target.style.borderColor = '#D4AF37'}
-                      onBlur={(e) => e.target.style.borderColor = 'rgba(245, 245, 245, 0.2)'}
                     >
-                      <option value="CHF" style={{ backgroundColor: '#0A1A2F', color: '#F5F5F5' }}>CHF</option>
-                      <option value="EUR" style={{ backgroundColor: '#0A1A2F', color: '#F5F5F5' }}>EUR</option>
-                      <option value="USD" style={{ backgroundColor: '#0A1A2F', color: '#F5F5F5' }}>USD</option>
+                      <option value="CHF" style={{ backgroundColor: '#0A1A2F', color: '#F5F5F5' }}>
+                        CHF
+                      </option>
+                      <option value="EUR" style={{ backgroundColor: '#0A1A2F', color: '#F5F5F5' }}>
+                        EUR
+                      </option>
+                      <option value="USD" style={{ backgroundColor: '#0A1A2F', color: '#F5F5F5' }}>
+                        USD
+                      </option>
                     </select>
+                    {errors.loanCurrency && <p className="text-red-500 text-sm mt-1">{errors.loanCurrency}</p>}
                   </div>
 
                   {/* Value in PLN */}
                   <div>
-                    <label htmlFor="loanValuePln" style={{ display: 'block', fontSize: '0.875rem', fontWeight: '500', marginBottom: '8px', color: '#F5F5F5' }}>
+                    <label htmlFor="loanValuePln" className="block text-sm font-medium mb-2" style={{ color: '#F5F5F5' }}>
                       Wartość kredytu w PLN (w momencie zawarcia umowy)
                     </label>
                     <input
@@ -665,33 +658,27 @@ const ContactSection: React.FC = () => {
                       name="loanValuePln"
                       value={loanValuePln}
                       onChange={(e) => setLoanValuePln(e.target.value)}
+                      className="w-full px-4 py-3 rounded-lg focus:outline-none focus:ring-2"
                       style={{
-                        width: '100%',
-                        padding: '12px 16px',
-                        borderRadius: '8px',
-                        border: '1px solid rgba(245, 245, 245, 0.2)',
                         backgroundColor: 'rgba(245, 245, 245, 0.1)',
+                        border: '1px solid rgba(245, 245, 245, 0.2)',
                         color: '#F5F5F5',
-                        fontSize: '16px',
-                        outline: 'none',
-                        transition: 'all 0.2s'
+                        '--tw-ring-color': '#D4AF37',
                       }}
                       placeholder="Wartość w PLN"
                       aria-invalid={errors.loanValuePln ? "true" : "false"}
                       aria-describedby={errors.loanValuePln ? "loanValuePln-error" : undefined}
-                      onFocus={(e) => e.target.style.borderColor = '#D4AF37'}
-                      onBlur={(e) => e.target.style.borderColor = 'rgba(245, 245, 245, 0.2)'}
                     />
-                    {errors.loanValuePln && (
-                      <p id="loanValuePln-error" style={{ color: '#ef4444', fontSize: '0.875rem', marginTop: '4px' }}>
-                        {errors.loanValuePln}
+                    {(loanValueError || errors.loanValuePln) && (
+                      <p id="loanValuePln-error" className="text-red-500 text-sm mt-1">
+                        {loanValueError || errors.loanValuePln}
                       </p>
                     )}
                   </div>
 
                   {/* Number of installments in months */}
                   <div>
-                    <label htmlFor="numberOfInstallments" style={{ display: 'block', fontSize: '0.875rem', fontWeight: '500', marginBottom: '8px', color: '#F5F5F5' }}>
+                    <label htmlFor="numberOfInstallments" className="block text-sm font-medium mb-2" style={{ color: '#F5F5F5' }}>
                       Liczba rat w miesiącach (zgodnie z umową)
                     </label>
                     <input
@@ -700,66 +687,63 @@ const ContactSection: React.FC = () => {
                       name="numberOfInstallments"
                       value={numberOfInstallments}
                       onChange={(e) => setNumberOfInstallments(e.target.value)}
+                      className="w-full px-4 py-3 rounded-lg focus:outline-none focus:ring-2"
                       style={{
-                        width: '100%',
-                        padding: '12px 16px',
-                        borderRadius: '8px',
-                        border: '1px solid rgba(245, 245, 245, 0.2)',
                         backgroundColor: 'rgba(245, 245, 245, 0.1)',
+                        border: '1px solid rgba(245, 245, 245, 0.2)',
                         color: '#F5F5F5',
-                        fontSize: '16px',
-                        outline: 'none',
-                        transition: 'all 0.2s'
+                        '--tw-ring-color': '#D4AF37',
                       }}
                       placeholder="Liczba miesięcy"
                       aria-invalid={errors.numberOfInstallments ? "true" : "false"}
                       aria-describedby={errors.numberOfInstallments ? "numberOfInstallments-error" : undefined}
-                      onFocus={(e) => e.target.style.borderColor = '#D4AF37'}
-                      onBlur={(e) => e.target.style.borderColor = 'rgba(245, 245, 245, 0.2)'}
                     />
-                    {errors.numberOfInstallments && (
-                      <p id="numberOfInstallments-error" style={{ color: '#ef4444', fontSize: '0.875rem', marginTop: '4px' }}>
-                        {errors.numberOfInstallments}
+                    {(installmentsError || errors.numberOfInstallments) && (
+                      <p id="numberOfInstallments-error" className="text-red-500 text-sm mt-1">
+                        {installmentsError || errors.numberOfInstallments}
                       </p>
                     )}
                   </div>
 
                   {/* Active or repaid loan */}
                   <div>
-                    <label style={{ display: 'block', fontSize: '0.875rem', fontWeight: '500', marginBottom: '8px', color: '#F5F5F5' }}>
+                    <label className="block text-sm font-medium mb-2" style={{ color: '#F5F5F5' }}>
                       Status kredytu
                     </label>
-                    <div style={{ display: 'flex', gap: '16px' }}>
-                      <label style={{ display: 'inline-flex', alignItems: 'center', cursor: 'pointer' }}>
+                    <div className="flex space-x-4">
+                      <label className="inline-flex items-center">
                         <input
                           type="radio"
                           name="loanStatus"
                           value="active"
                           checked={loanStatus === 'active'}
                           onChange={(e) => setLoanStatus(e.target.value)}
-                          style={{ accentColor: '#D4AF37', marginRight: '8px' }}
+                          className="form-radio"
+                          style={{ accentColor: '#D4AF37' }}
                         />
-                        <span style={{ fontSize: '0.875rem', color: '#F5F5F5' }}>Aktywny</span>
+                        <span className="ml-2 text-sm" style={{ color: '#F5F5F5' }}>Aktywny</span>
                       </label>
-                      <label style={{ display: 'inline-flex', alignItems: 'center', cursor: 'pointer' }}>
+                      <label className="inline-flex items-center">
                         <input
                           type="radio"
                           name="loanStatus"
                           value="repaid"
                           checked={loanStatus === 'repaid'}
                           onChange={(e) => setLoanStatus(e.target.value)}
-                          style={{ accentColor: '#D4AF37', marginRight: '8px' }}
+                          className="form-radio"
+                          style={{ accentColor: '#D4AF37' }}
                         />
-                        <span style={{ fontSize: '0.875rem', color: '#F5F5F5' }}>Spłacony</span>
+                        <span className="ml-2 text-sm" style={{ color: '#F5F5F5' }}>Spłacony</span>
                       </label>
                     </div>
+                    {errors.loanStatus && <p className="text-red-500 text-sm mt-1">{errors.loanStatus}</p>}
                   </div>
 
                   {loanStatus === 'repaid' && (
                     <>
                       {/* If repaid, enter the date of repayment */}
                       <div>
-                        <label htmlFor="repaymentDate" style={{ display: 'block', fontSize: '0.875rem', fontWeight: '500', marginBottom: '8px', color: '#F5F5F5' }}>
+                        <label htmlFor="repaymentDate" className="block text-sm font-medium mb-2" style={{ color: '#F5F5F5' }}>
                           Data spłaty kredytu
                         </label>
                         <DatePicker
@@ -778,49 +762,41 @@ const ContactSection: React.FC = () => {
                           wrapperClassName="w-full"
                           placeholderText="DD.MM.YYYY"
                           style={{
-                            width: '100%',
-                            padding: '12px 16px',
-                            borderRadius: '8px',
-                            border: '1px solid rgba(245, 245, 245, 0.2)',
                             backgroundColor: 'rgba(245, 245, 245, 0.1)',
+                            border: '1px solid rgba(245, 245, 245, 0.2)',
                             color: '#F5F5F5',
-                            fontSize: '16px',
-                            outline: 'none'
+                            '--tw-ring-color': '#D4AF37',
                           }}
                         />
+                        {errors.repaymentDate && <p className="text-red-500 text-sm mt-1">{errors.repaymentDate}</p>}
                       </div>
 
                       {/* and the value of the payment in PLN. */}
                       <div>
-                        <label htmlFor="repaymentValuePln" style={{ display: 'block', fontSize: '0.875rem', fontWeight: '500', marginBottom: '8px', color: '#F5F5F5' }}>
+                        <label htmlFor="repaymentValuePln" className="block text-sm font-medium mb-2" style={{ color: '#F5F5F5' }}>
                           Wartość spłaty w PLN
                         </label>
                         <input
-                          type="number"
+                          type="text"
+                          inputMode="decimal"
                           id="repaymentValuePln"
                           name="repaymentValuePln"
                           value={repaymentValuePln}
-                          onChange={(e) => setRepaymentValuePln(e.target.value)}
+                          onChange={handleRepaymentValueChange}
+                          className="w-full px-4 py-3 rounded-lg focus:outline-none focus:ring-2"
                           style={{
-                            width: '100%',
-                            padding: '12px 16px',
-                            borderRadius: '8px',
-                            border: '1px solid rgba(245, 245, 245, 0.2)',
                             backgroundColor: 'rgba(245, 245, 245, 0.1)',
+                            border: '1px solid rgba(245, 245, 245, 0.2)',
                             color: '#F5F5F5',
-                            fontSize: '16px',
-                            outline: 'none',
-                            transition: 'all 0.2s'
+                            '--tw-ring-color': '#D4AF37',
                           }}
                           placeholder="Wartość spłaty w PLN"
                           aria-invalid={errors.repaymentValuePln ? "true" : "false"}
                           aria-describedby={errors.repaymentValuePln ? "repaymentValuePln-error" : undefined}
-                          onFocus={(e) => e.target.style.borderColor = '#D4AF37'}
-                          onBlur={(e) => e.target.style.borderColor = 'rgba(245, 245, 245, 0.2)'}
                         />
-                        {errors.repaymentValuePln && (
-                          <p id="repaymentValuePln-error" style={{ color: '#ef4444', fontSize: '0.875rem', marginTop: '4px' }}>
-                            {errors.repaymentValuePln}
+                        {(repaymentValueError || errors.repaymentValuePln) && (
+                          <p id="repaymentValuePln-error" className="text-red-500 text-sm mt-1">
+                            {repaymentValueError || errors.repaymentValuePln}
                           </p>
                         )}
                       </div>
@@ -829,114 +805,78 @@ const ContactSection: React.FC = () => {
                 </>
               )}
 
-              <div style={{ marginBottom: '24px' }}>
-                <label style={{ display: 'flex', alignItems: 'flex-start', fontSize: '0.875rem', fontWeight: '500', width: '100%', color: '#F5F5F5', cursor: 'pointer' }}>
+              <div className="mb-6">
+                <label className="flex items-start text-sm font-medium w-full" style={{ color: '#F5F5F5' }}>
                   <input
                     type="checkbox"
                     id="privacy-consent"
                     name="privacyConsent"
                     checked={privacyConsent}
                     onChange={(e) => setPrivacyConsent(e.target.checked)}
-                    style={{ accentColor: '#D4AF37', marginRight: '8px', marginTop: '4px', flexShrink: 0 }}
+                    className="mr-2 mt-1 flex-shrink-0"
+                    style={{ accentColor: '#D4AF37' }}
                     required
                     aria-invalid={errors.privacyConsent ? "true" : "false"}
                     aria-describedby={errors.privacyConsent ? "privacy-consent-error" : undefined}
                   />
-                  <span style={{ lineHeight: '1.5', flex: 1 }}>
-                    Wyrażam zgodę na przetwarzanie moich danych osobowych przez właściciela strony internetowej uwolnieniekredytowe.pl w celach kontaktowych, marketingowych oraz związanych z nawiązaniem współpracy, zgodnie z <Link to="/privacy-policy" style={{ color: '#fde047', textDecoration: 'underline' }}>polityką prywatności.</Link> Zostałem/am poinformowany/a o przysługujących mi prawach, w tym o możliwości wycofania zgody w dowolnym momencie.<span style={{ color: '#D4AF37' }}>*</span>
+                  <span className="leading-relaxed flex-1">
+                    Wyrażam zgodę na przetwarzanie moich danych osobowych przez właściciela strony internetowej uwolnieniekredytowe.pl w celach kontaktowych, marketingowych oraz związanych z nawiązaniem współpracy, zgodnie z <Link to="/privacy-policy" className="text-yellow-300 underline">polityką prywatności.</Link> Zostałem/am poinformowany/a o przysługujących mi prawach, w tym o możliwości wycofania zgody w dowolnym momencie.<span style={{ color: '#D4AF37' }}>*</span>
                   </span>
                 </label>
-                {errors.privacyConsent && <p id="privacy-consent-error" style={{ color: '#ef4444', fontSize: '0.875rem', marginTop: '4px' }}>{errors.privacyConsent}</p>}
+                {errors.privacyConsent && <p id="privacy-consent-error" className="text-red-500 text-sm mt-1">{errors.privacyConsent}</p>}
               </div>
 
               <button
                 type="submit"
-                disabled={isSubmitting}
-                style={{
-                  width: '100%',
-                  fontWeight: 'bold',
-                  padding: '16px 32px',
-                  borderRadius: '8px',
-                  fontSize: '1.125rem',
-                  transition: 'all 0.3s',
-                  transform: isSubmitting ? 'none' : 'translateY(0)',
-                  backgroundColor: isSubmitting ? 'rgba(245, 245, 245, 0.7)' : '#F5F5F5',
-                  border: `4px solid #D4AF37`,
-                  color: '#0A1A2F',
-                  cursor: isSubmitting ? 'not-allowed' : 'pointer',
-                  boxShadow: '0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06)'
-                }}
-                onMouseEnter={(e) => {
-                  if (!isSubmitting) {
-                    e.target.style.transform = 'translateY(-4px) scale(1.02)';
-                    e.target.style.boxShadow = '0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04)';
-                  }
-                }}
-                onMouseLeave={(e) => {
-                  if (!isSubmitting) {
-                    e.target.style.transform = 'translateY(0) scale(1)';
-                    e.target.style.boxShadow = '0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06)';
-                  }
-                }}
-                onMouseDown={(e) => {
-                  if (!isSubmitting) {
-                    e.target.style.transform = 'translateY(0) scale(0.98)';
-                    e.target.style.boxShadow = 'inset 0 2px 4px 0 rgba(0, 0, 0, 0.06)';
-                  }
-                }}
-                onMouseUp={(e) => {
-                  if (!isSubmitting) {
-                    e.target.style.transform = 'translateY(-4px) scale(1.02)';
-                    e.target.style.boxShadow = '0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04)';
-                  }
-                }}
+                className="w-full font-bold py-4 px-8 rounded-lg text-lg transition-all hover:-translate-y-1 duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl border-4 active:scale-95 active:shadow-inner"
+                style={{ backgroundColor: '#F5F5F5', borderColor: '#D4AF37', color: '#0A1A2F' }}
               >
-                {isSubmitting ? 'Wysyłanie...' : 'Wyślij wiadomość'}
+                Wyślij wiadomość
               </button>
             </form>
           </div>
-        </div>
-
-        {/* Contact Information Section */}
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-16">
-          <div className="space-y-8">
-            <h3 className="text-2xl font-bold mb-6" style={{ color: '#F5F5F5' }}>Skontaktuj się z nami</h3>
-            
-            <div className="flex items-center space-x-4">
-              <div className="w-12 h-12 rounded-lg flex items-center justify-center shadow-md border-4" style={{ backgroundColor: '#F5F5F5', borderColor: '#D4AF37' }}>
-                <Phone size={24} style={{ color: '#0A1A2F' }} />
+          
+          {/* Right side - Contact Information */}
+          <div className="flex flex-col justify-center">
+            <div className="space-y-8">
+              <h3 className="text-2xl font-bold mb-6" style={{ color: '#F5F5F5' }}>Skontaktuj się z nami</h3>
+              
+              <div className="flex items-center space-x-4">
+                <div className="w-12 h-12 rounded-lg flex items-center justify-center shadow-md border-4" style={{ backgroundColor: '#F5F5F5', borderColor: '#D4AF37' }}>
+                  <Phone size={24} style={{ color: '#0A1A2F' }} />
+                </div>
+                <div>
+                  <div className="font-semibold" style={{ color: '#F5F5F5' }}>Telefon</div>
+                  <div style={{ color: '#F5F5F5' }}>+48 601 227 876</div>
+                </div>
               </div>
-              <div>
-                <div className="font-semibold" style={{ color: '#F5F5F5' }}>Telefon</div>
-                <div style={{ color: '#F5F5F5' }}>+48 601 227 876</div>
+              
+              <div className="flex items-center space-x-4">
+                <div className="w-12 h-12 rounded-lg flex items-center justify-center shadow-md border-4" style={{ backgroundColor: '#F5F5F5', borderColor: '#D4AF37' }}>
+                  <Mail size={24} style={{ color: '#0A1A2F' }} />
+                </div>
+                <div>
+                  <div className="font-semibold" style={{ color: '#F5F5F5' }}>Email</div>
+                  <div style={{ color: '#F5F5F5' }}>krzysztof.milewski@dsa.pl</div>
+                </div>
               </div>
-            </div>
-            
-            <div className="flex items-center space-x-4">
-              <div className="w-12 h-12 rounded-lg flex items-center justify-center shadow-md border-4" style={{ backgroundColor: '#F5F5F5', borderColor: '#D4AF37' }}>
-                <Mail size={24} style={{ color: '#0A1A2F' }} />
+              
+              <div className="flex items-center space-x-4">
+                <div className="w-12 h-12 rounded-lg flex items-center justify-center shadow-md border-4" style={{ backgroundColor: '#F5F5F5', borderColor: '#D4AF37' }}>
+                  <MessageCircle size={24} style={{ color: '#0A1A2F' }} />
+                </div>
+                <div>
+                  <div className="font-semibold" style={{ color: '#F5F5F5' }}>WhatsApp</div>
+                  <div style={{ color: '#F5F5F5' }}>Szybka konsultacja dostępna</div>
+                </div>
               </div>
-              <div>
-                <div className="font-semibold" style={{ color: '#F5F5F5' }}>Email</div>
-                <div style={{ color: '#F5F5F5' }}>krzysztof.milewski@dsa.pl</div>
+              
+              <div className="pt-6">
+                <p className="text-sm leading-relaxed" style={{ color: '#F5F5F5' }}>
+                  Wszystkie konsultacje są całkowicie poufne i bezpłatne. 
+                  Na pytania odpowiadam natychmiast w dni robocze.
+                </p>
               </div>
-            </div>
-            
-            <div className="flex items-center space-x-4">
-              <div className="w-12 h-12 rounded-lg flex items-center justify-center shadow-md border-4" style={{ backgroundColor: '#F5F5F5', borderColor: '#D4AF37' }}>
-                <MessageCircle size={24} style={{ color: '#0A1A2F' }} />
-              </div>
-              <div>
-                <div className="font-semibold" style={{ color: '#F5F5F5' }}>WhatsApp</div>
-                <div style={{ color: '#F5F5F5' }}>Szybka konsultacja dostępna</div>
-              </div>
-            </div>
-            
-            <div className="pt-6">
-              <p className="text-sm leading-relaxed" style={{ color: '#F5F5F5' }}>
-                Wszystkie konsultacje są całkowicie poufne i bezpłatne. 
-                Na pytania odpowiadam natychmiast w dni robocze.
-              </p>
             </div>
           </div>
         </div>
