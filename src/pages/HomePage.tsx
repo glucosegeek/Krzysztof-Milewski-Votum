@@ -567,9 +567,7 @@ Nie ryzykujesz nic – możesz tylko zyskać.</li>
                 href="https://www.youtube.com/watch?v=mNILMebMuAE"
                 target="_blank"
                 rel="noopener noreferrer"
-              >
-                <div className="w-32 h-32 rounded-lg flex items-center justify-center border-2" style={{ backgroundColor: '#FF0000', borderColor: '#D4AF37' }}>
-                  
+              >                  
                   {/* YouTube icon with pulse animation */}
                   <div className="relative z-10 transform group-hover:scale-110 transition-transform duration-300">
                     <Youtube size={52} style={{ color: '#FFFFFF' }} className="drop-shadow-lg" />
