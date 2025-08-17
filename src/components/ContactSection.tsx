@@ -319,7 +319,7 @@ const ContactSection: React.FC = () => {
           <p className="text-xl my-7" style={{ color: '#D4AF37' }}>Tu zaczyna się Twoja droga do wiecznych wakacji kredytowych czyli unieważnienia toksycznej umowy!</p>
         </div>
         
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 max-w-4xl mx-auto">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 max-w-6xl mx-auto items-start">
           <div>
             <form onSubmit={handleSubmit} className="space-y-6">
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -837,9 +837,10 @@ const ContactSection: React.FC = () => {
           </div>
           
           {/* Right side - Contact Information */}
-          <div className="flex flex-col justify-center">
-            <div className="space-y-8">
-              <h3 className="text-2xl font-bold mb-6" style={{ color: '#F5F5F5' }}>Skontaktuj się z nami</h3>
+          <div className="lg:pl-8">
+            <div className="sticky top-8">
+              <div className="space-y-8">
+                <h3 className="text-2xl font-bold mb-6" style={{ color: '#F5F5F5' }}>Skontaktuj się z nami</h3>
               
               <div className="flex items-center space-x-4">
                 <div className="w-12 h-12 rounded-lg flex items-center justify-center shadow-md border-4" style={{ backgroundColor: '#F5F5F5', borderColor: '#D4AF37' }}>
