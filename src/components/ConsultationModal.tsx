@@ -743,9 +743,6 @@ const ConsultationModal: React.FC = () => {
                             '--tw-ring-color': '#D4AF37',
                           }}
                         >
-                          <option value="PLN" style={{ backgroundColor: '#0A1A2F', color: '#F5F5F5' }}>
-                            PLN
-                          </option>
                           <option value="CHF" style={{ backgroundColor: '#0A1A2F', color: '#F5F5F5' }}>
                             CHF
                           </option>
