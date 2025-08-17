@@ -39,7 +39,7 @@ const AboutMePage: React.FC = () => {
   <div className="space-y-8 text-lg leading-relaxed"> {/* Container for main content, left-aligned */}
     {/* Experience Section */}
     <p>
-      Od niemal trzech dekad skutecznie zarządzam projektami, buduję ogólnopolskie zespoły sprzedażowe i wdrażam strategie promocyjne dla wielu topowych marek w różnych branżach. Dziś koncentruję się na nowoczesnym marketingu w mediach społecznościowych oraz wykorzystaniu AI do tworzenia efektywnych zespołów handlowych.
+      Przez blisko 3 dekady skutecznie zarządzałem projektami, budowałem ogólnopolskie zespoły sprzedażowe i wdrażałem strategie promocyjne dla wielu topowych marek w różnych branżach. Dziś koncentruję się na nowoczesnym marketingu w mediach społecznościowych oraz wykorzystaniu AI do tworzenia efektywnych zespołów handlowych.
     </p>
 
     {/* Mission Section */}
