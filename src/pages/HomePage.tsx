@@ -18,7 +18,8 @@ import {
   Briefcase,
   Search,
   ChevronDown,
-  ChevronUp
+  ChevronUp,
+  Youtube
 } from 'lucide-react';
 
 interface Testimonial {
