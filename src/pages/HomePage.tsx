@@ -999,7 +999,7 @@ Nie ryzykujesz nic – możesz tylko zyskać.</li>
                   />
                   {errors.email && <p id="email-error" className="text-red-500 text-sm mt-1">{errors.email}</p>}
                 </div>
-            </div>
+            
                 <div>
                   <label htmlFor="phone" className="block text-sm font-medium mb-2" style={{ color: '#F5F5F5' }}>
                     Numer telefonu <span style={{ color: '#D4AF37' }}>*</span>
