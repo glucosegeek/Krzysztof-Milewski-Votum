@@ -76,6 +76,51 @@ const ConsultationModal: React.FC = () => {
   const [installmentsError, setInstallmentsError] = useState('');
   const [repaymentValueError, setRepaymentValueError] = useState('');
   
+  // Real-time validation handlers
+  const handleLoanValueChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const value = e.target.value;
+    setLoanValuePln(value);
+    
+    // Real-time validation for loan value
+    if (value.trim()) {
+      const numValue = parseFloat(value);
+      if (isNaN(numValue)) {
+        setLoanValueError('Wartość kredytu musi być liczbą.');
+      } else if (numValue <= 0) {
+        setLoanValueError('Wartość kredytu musi być większa od 0.');
+      } else if (numValue > 999999999) {
+        setLoanValueError('Wartość kredytu jest zbyt duża.');
+      } else {
+        setLoanValueError('');
+      }
+    } else {
+      setLoanValueError('');
+    }
+  };
+
+  const handleInstallmentsChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const value = e.target.value;
+    setNumberOfInstallments(value);
+    
+    // Real-time validation for installments
+    if (value.trim()) {
+      const numValue = parseInt(value, 10);
+      if (isNaN(numValue)) {
+        setInstallmentsError('Liczba rat musi być liczbą całkowitą.');
+      } else if (numValue <= 0) {
+        setInstallmentsError('Liczba rat musi być większa od 0.');
+      } else if (numValue > 600) {
+        setInstallmentsError('Liczba rat nie może przekraczać 600 miesięcy.');
+      } else if (value.includes('.') || value.includes(',')) {
+        setInstallmentsError('Liczba rat musi być liczbą całkowitą (bez części dziesiętnej).');
+      } else {
+        setInstallmentsError('');
+      }
+    } else {
+      setInstallmentsError('');
+    }
+  };
+
   const [errors, setErrors] = useState<{ 
     firstName?: string; 
     lastName?: string; 
@@ -765,7 +810,9 @@ const ConsultationModal: React.FC = () => {
                           id="modal-loanValuePln"
                           name="loanValuePln"
                           value={loanValuePln}
-                          onChange={(e) => setLoanValuePln(e.target.value)}
+                          onChange={handleLoanValueChange}
+                          min="0.01"
+                          step="0.01"
                           className="w-full px-4 py-3 rounded-lg focus:outline-none focus:ring-2"
                           style={{
                             backgroundColor: 'rgba(245, 245, 245, 0.1)',
@@ -773,8 +820,15 @@ const ConsultationModal: React.FC = () => {
                             color: '#F5F5F5',
                             '--tw-ring-color': '#D4AF37',
                           }}
-                          placeholder="Wartość w PLN"
+                          placeholder="Wartość w PLN (tylko wartości większe od 0)"
+                          aria-invalid={errors.loanValuePln ? "true" : "false"}
+                          aria-describedby={errors.loanValuePln ? "loanValuePln-error" : undefined}
                         />
+                        {(loanValueError || errors.loanValuePln) && (
+                          <p id="loanValuePln-error" className="text-red-500 text-sm mt-1">
+                            {loanValueError || errors.loanValuePln}
+                          </p>
+                        )}
                       </div>
 
                       {/* Number of installments in months */}
@@ -787,7 +841,9 @@ const ConsultationModal: React.FC = () => {
                           id="modal-numberOfInstallments"
                           name="numberOfInstallments"
                           value={numberOfInstallments}
-                          onChange={(e) => setNumberOfInstallments(e.target.value)}
+                          onChange={handleInstallmentsChange}
+                          min="1"
+                          step="1"
                           className="w-full px-4 py-3 rounded-lg focus:outline-none focus:ring-2"
                           style={{
                             backgroundColor: 'rgba(245, 245, 245, 0.1)',
@@ -795,8 +851,15 @@ const ConsultationModal: React.FC = () => {
                             color: '#F5F5F5',
                             '--tw-ring-color': '#D4AF37',
                           }}
-                          placeholder="Liczba miesięcy"
+                          placeholder="Liczba miesięcy (tylko wartości większe od 0)"
+                          aria-invalid={errors.numberOfInstallments ? "true" : "false"}
+                          aria-describedby={errors.numberOfInstallments ? "numberOfInstallments-error" : undefined}
                         />
+                        {(installmentsError || errors.numberOfInstallments) && (
+                          <p id="numberOfInstallments-error" className="text-red-500 text-sm mt-1">
+                            {installmentsError || errors.numberOfInstallments}
+                          </p>
+                        )}
                       </div>
 
                       {/* Active or repaid loan */}
