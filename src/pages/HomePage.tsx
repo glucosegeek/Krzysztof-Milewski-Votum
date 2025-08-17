@@ -562,28 +562,19 @@ Nie ryzykujesz nic – możesz tylko zyskać.</li>
               </div>
 
             {/* YouTube Instructional Video */}
-            <div className="flex flex-col items-center">
+            <div className="flex justify-center">
               <a
                 href="https://www.youtube.com/watch?v=mNILMebMuAE"
                 target="_blank"
                 rel="noopener noreferrer"
-              >                  
-                  {/* YouTube icon with pulse animation */}
-                  <div className="relative z-10 transform group-hover:scale-110 transition-transform duration-300">
-                    <Youtube size={52} style={{ color: '#FFFFFF' }} className="drop-shadow-lg" />
-                  </div>
-                  
-                  {/* Play button overlay effect */}
-                  <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                    <div className="w-16 h-16 rounded-full bg-white bg-opacity-20 flex items-center justify-center">
-                      <div className="w-0 h-0 border-l-8 border-l-white border-t-4 border-t-transparent border-b-4 border-b-transparent ml-1"></div>
-                    </div>
-                  </div>
-                </div>
+                className="inline-flex items-center space-x-3 transition-colors hover:opacity-80"
+                aria-label="Obejrzyj film instruktażowy"
+              >
+                <Youtube size={24} style={{ color: '#D4AF37' }} />
+                <span className="text-lg font-medium" style={{ color: '#F5F5F5' }}>
+                  Film instruktażowy
+                </span>
               </a>
-              <p className="text-lg mt-4 font-semibold" style={{ color: '#F5F5F5' }}>
-                Film instruktażowy
-              </p>
             </div>
             </div>
           </div>
