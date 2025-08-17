@@ -445,9 +445,10 @@ const ContactSection: React.FC = () => {
                     fontSize: '16px',
                     outline: 'none',
                     transition: 'all 0.2s',
-                    resize: 'vertical'
+                    resize: 'vertical',
+                    minHeight: '100px'
                   }}
-                  placeholder="Opisz swoją sytuację..."
+                  placeholder="Krótko opisz swoją sprawę"
                   required
                   aria-invalid={errors.message ? "true" : "false"}
                   aria-describedby={errors.message ? "message-error" : undefined}
@@ -456,7 +457,7 @@ const ContactSection: React.FC = () => {
                 />
                 {errors.message && <p id="message-error" style={{ color: '#ef4444', fontSize: '0.875rem', marginTop: '4px' }}>{errors.message}</p>}
               </div>
-
+              
               {/* Loan Type Selection */}
               <div>
                 <label style={{ display: 'block', fontSize: '0.875rem', fontWeight: '500', marginBottom: '8px', color: '#F5F5F5' }}>
@@ -925,6 +926,17 @@ const ContactSection: React.FC = () => {
               <div className="w-12 h-12 rounded-lg flex items-center justify-center shadow-md border-4" style={{ backgroundColor: '#F5F5F5', borderColor: '#D4AF37' }}>
                 <MessageCircle size={24} style={{ color: '#0A1A2F' }} />
               </div>
+              <div>
+                <div className="font-semibold" style={{ color: '#F5F5F5' }}>WhatsApp</div>
+                <div style={{ color: '#F5F5F5' }}>Szybka konsultacja dostępna</div>
+              </div>
+            </div>
+            
+            <div className="pt-6">
+              <p className="text-sm leading-relaxed" style={{ color: '#F5F5F5' }}>
+                Wszystkie konsultacje są całkowicie poufne i bezpłatne. 
+                Na pytania odpowiadam natychmiast w dni robocze.
+              </p>
             </div>
           </div>
         </div>
