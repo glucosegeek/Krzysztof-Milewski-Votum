@@ -431,11 +431,32 @@ const ContactSection: React.FC = () => {
                 </label>
                 <textarea
                   id="message"
-          {/* Right side - Contact Information */}
+                  name="message"
                   value={message}
-            <div className="space-y-8">
-              <h3 className="text-2xl font-bold mb-6" style={{ color: '#F5F5F5' }}>Skontaktuj się z nami</h3>
-              
+                  onChange={(e) => setMessage(e.target.value)}
+                  rows={4}
+                  style={{
+                    width: '100%',
+                    padding: '12px 16px',
+                    borderRadius: '8px',
+                    border: '1px solid rgba(245, 245, 245, 0.2)',
+                    backgroundColor: 'rgba(245, 245, 245, 0.1)',
+                    color: '#F5F5F5',
+                    fontSize: '16px',
+                    outline: 'none',
+                    transition: 'all 0.2s',
+                    resize: 'vertical'
+                  }}
+                  placeholder="Opisz swoją sytuację..."
+                  required
+                  aria-invalid={errors.message ? "true" : "false"}
+                  aria-describedby={errors.message ? "message-error" : undefined}
+                  onFocus={(e) => e.target.style.borderColor = '#D4AF37'}
+                  onBlur={(e) => e.target.style.borderColor = 'rgba(245, 245, 245, 0.2)'}
+                />
+                {errors.message && <p id="message-error" style={{ color: '#ef4444', fontSize: '0.875rem', marginTop: '4px' }}>{errors.message}</p>}
+              </div>
+
               {/* Loan Type Selection */}
               <div>
                 <label style={{ display: 'block', fontSize: '0.875rem', fontWeight: '500', marginBottom: '8px', color: '#F5F5F5' }}>
@@ -903,6 +924,10 @@ const ContactSection: React.FC = () => {
             <div className="flex items-center space-x-4">
               <div className="w-12 h-12 rounded-lg flex items-center justify-center shadow-md border-4" style={{ backgroundColor: '#F5F5F5', borderColor: '#D4AF37' }}>
                 <MessageCircle size={24} style={{ color: '#0A1A2F' }} />
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </section>
   );
