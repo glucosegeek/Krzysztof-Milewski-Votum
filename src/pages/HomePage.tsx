@@ -42,7 +42,6 @@ const bankData: BankTransition[] = [
   { primaryBank: 'Mazowiecki Bank Regionalny', transitionalBank: null, currentBank: 'SGB Bank S.A.' },
   { primaryBank: 'Alior Bank S.A.', transitionalBank: null, currentBank: 'Alior Bank S.A.' }
 ];
-import { Link } from 'react-router-dom';
 import { 
   Shield, 
   FileText, 
@@ -440,66 +439,65 @@ const conciergeItems = [
     repaymentValuePln: '',
   });
 
+  // const [privacyConsent, setPrivacyConsent] = useState(false);
+  // const [errors, setErrors] = useState<{
+  //   name?: string;
+  //   email?: string;
+  //   phone?: string;
+  //   message?: string;
+  //   privacyConsent?: string;
+  //   loanType?: string;
+  //   agreementDate?: string;
+  //   homeBank?: string;
+  //   originalBank?: string;
+  //   loanTypeDetail?: string;
+  //   loanCurrency?: string;
+  //   loanValuePln?: string;
+  //   numberOfInstallments?: string;
+  //   loanStatus?: string;
+  //   repaymentDate?: string;
+  //   repaymentValuePln?: string;
+  // }>({});
+  // const [isSubmitting, setIsSubmitting] = useState(false);
 
-  const [privacyConsent, setPrivacyConsent] = useState(false);
-  const [errors, setErrors] = useState<{
-    name?: string;
-    email?: string;
-    phone?: string;
-    message?: string;
-    privacyConsent?: string;
-    loanType?: string;
-    agreementDate?: string;
-    homeBank?: string;
-    originalBank?: string;
-    loanTypeDetail?: string;
-    loanCurrency?: string;
-    loanValuePln?: string;
-    numberOfInstallments?: string;
-    loanStatus?: string;
-    repaymentDate?: string;
-    repaymentValuePln?: string;
-  }>({});
-  const [isSubmitting, setIsSubmitting] = useState(false);
 
+  // const validate = (data: typeof formData, consent: boolean) => {
+  //   const newErrors: {
+  //     firstName?: string; lastName?: string; email?: string; phone?: string; message?: string; privacyConsent?: string;
+  //     loanType?: string; agreementDate?: string; homeBank?: string; loanTypeDetail?: string; loanCurrency?: string; loanValuePln?: string; numberOfInstallments?: string; loanStatus?: string; repaymentDate?: string; repaymentValuePln?: string;
+  //   } = {};
 
-  const validate = (data: typeof formData, consent: boolean) => {
-    const newErrors: {
-      firstName?: string; lastName?: string; email?: string; phone?: string; message?: string; privacyConsent?: string;
-      loanType?: string; agreementDate?: string; homeBank?: string; loanTypeDetail?: string; loanCurrency?: string; loanValuePln?: string; numberOfInstallments?: string; loanStatus?: string; repaymentDate?: string; repaymentValuePln?: string;
-    } = {};
+  //   if (!formData.firstName.trim()) {
+  //     newErrors.firstName = 'Imię jest obowiązkowe.';
+  //   }
 
-    if (!formData.firstName.trim()) {
-      newErrors.firstName = 'Imię jest obowiązkowe.';
-    }
+  //   if (!formData.lastName.trim()) {
+  //     newErrors.lastName = 'Nazwisko jest obowiązkowe.';
+  //   }
 
-    if (!formData.lastName.trim()) {
-      newErrors.lastName = 'Nazwisko jest obowiązkowe.';
-    }
+  //   if (!formData.email.trim()) {
+  //     newErrors.email = 'Email jest obowiązkowy.';
+  //   } else if (!/\S+@\S+\.\S+/.test(formData.email)) {
+  //     newErrors.email = 'Nieprawidłowy format email.';
+  //   }
 
-    if (!formData.email.trim()) {
-      newErrors.email = 'Email jest obowiązkowy.';
-    } else if (!/\S+@\S+\.\S+/.test(formData.email)) {
-      newErrors.email = 'Nieprawidłowy format email.';
-    }
-
-    // Basic phone number validation regex (adjust as needed for specific formats)
-    const phoneRegex = /^(?:\+48)?(?:[ -]?\d{3}){3}$/;
-    const cleanedPhone = formData.phone.replace(/[\s-]/g, '');
+  //   // Basic phone number validation regex (adjust as needed for specific formats)
+  //   const phoneRegex = /^(?:\+48)?(?:[ -]?\d{3}){3}$/;
+  //   const cleanedPhone = formData.phone.replace(/[\s-]/g, '');
     
-    if (!cleanedPhone.trim() || cleanedPhone.trim() === '+48') {
-      newErrors.phone = 'Numer telefonu jest obowiązkowy.';
-    } else if (!phoneRegex.test(cleanedPhone)) {
-      newErrors.phone = 'Nieprawidłowy format numeru telefonu.';
-    }
+  //   if (!cleanedPhone.trim() || cleanedPhone.trim() === '+48') {
+  //     newErrors.phone = 'Numer telefonu jest obowiązkowy.';
+  //   } else if (!phoneRegex.test(cleanedPhone)) {
+  //     newErrors.phone = 'Nieprawidłowy format numeru telefonu.';
+  //   }
 
-    if (!consent) {
-      newErrors.privacyConsent = 'Zgoda na przetwarzanie danych jest obowiązkowa.';
-    }
+  //   if (!consent) {
+  //     newErrors.privacyConsent = 'Zgoda na przetwarzanie danych jest obowiązkowa.';
+  //   }
 
-    setErrors(newErrors);
-    return Object.keys(newErrors).length === 0;
-  };
+  //   setErrors(newErrors);
+  //   return Object.keys(newErrors).length === 0;
+  // };
   
   const parseGoogleSheetsTestimonials = (jsonData: any): Testimonial[] => {
     try {
@@ -660,94 +658,94 @@ const conciergeItems = [
   };
 
 
-  const handleSubmit = async (e: React.FormEvent) => {
-  e.preventDefault();
+//   const handleSubmit = async (e: React.FormEvent) => {
+//   e.preventDefault();
 
-  if (!validate(formData, privacyConsent)) {
-    return;
-  }
+//   if (!validate(formData, privacyConsent)) {
+//     return;
+//   }
 
-  setIsSubmitting(true);
+//   setIsSubmitting(true);
 
-  try {
-    // Prepare webhook payload with all form data and metadata
-    const webhookPayload = {
-      // Form data
-      name: `${formData.firstName} ${formData.lastName}`, // Combine for 'name' field
-      firstName: formData.firstName,
-      lastName: formData.lastName,
-      email: formData.email,
-      phone: formData.phone,
-      message: formData.message,
-      loanType: formData.loanType,
-      agreementDate: formData.agreementDate,
-      homeBank: formData.homeBank,
-      originalBank: formData.originalBank,
-      loanTypeDetail: formData.loanTypeDetail,
-      loanCurrency: formData.loanCurrency,
-      loanValuePln: formData.loanValuePln,
-      numberOfInstallments: formData.numberOfInstallments,
-      loanStatus: formData.loanStatus,
-      repaymentDate: formData.repaymentDate,
-      repaymentValuePln: formData.repaymentValuePln,
-      privacyConsent: privacyConsent,
+//   try {
+//     // Prepare webhook payload with all form data and metadata
+//     const webhookPayload = {
+//       // Form data
+//       name: `${formData.firstName} ${formData.lastName}`, // Combine for 'name' field
+//       firstName: formData.firstName,
+//       lastName: formData.lastName,
+//       email: formData.email,
+//       phone: formData.phone,
+//       message: formData.message,
+//       loanType: formData.loanType,
+//       agreementDate: formData.agreementDate,
+//       homeBank: formData.homeBank,
+//       originalBank: formData.originalBank,
+//       loanTypeDetail: formData.loanTypeDetail,
+//       loanCurrency: formData.loanCurrency,
+//       loanValuePln: formData.loanValuePln,
+//       numberOfInstallments: formData.numberOfInstallments,
+//       loanStatus: formData.loanStatus,
+//       repaymentDate: formData.repaymentDate,
+//       repaymentValuePln: formData.repaymentValuePln,
+//       privacyConsent: privacyConsent,
 
-      // Platform and metadata
-      platform: 'web',
-      userAgent: navigator.userAgent,
-      timestamp: new Date().toISOString(),
-      url: window.location.href,
-      referrer: document.referrer || 'direct',
+//       // Platform and metadata
+//       platform: 'web',
+//       userAgent: navigator.userAgent,
+//       timestamp: new Date().toISOString(),
+//       url: window.location.href,
+//       referrer: document.referrer || 'direct',
 
-      formType: 'contact_form',
-      source: 'homepage_contact_section'
-    };
-    const response = await fetch('https://n8n.srv948633.hstgr.cloud/webhook/153565ea-877e-4946-8d32-88596b5fd1d4', {
-      method: 'POST',
-      headers: { 
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify(webhookPayload)
-    });
+//       formType: 'contact_form',
+//       source: 'homepage_contact_section'
+//     };
+//     const response = await fetch('https://n8n.srv948633.hstgr.cloud/webhook/153565ea-877e-4946-8d32-88596b5fd1d4', {
+//       method: 'POST',
+//       headers: { 
+//         'Content-Type': 'application/json'
+//       },
+//       body: JSON.stringify(webhookPayload)
+//     });
 
-    if (response.ok) {
-      console.log('Webhook sent successfully:', response.status);
+//     if (response.ok) {
+//       console.log('Webhook sent successfully:', response.status);
       
-      // Show success modal and reset form only on successful webhook
-      openModal(null, 'form_submission');
+//       // Show success modal and reset form only on successful webhook
+//       openModal(null, 'form_submission');
       
-      // Reset form data
-      setFormData({
-        firstName: '',
-        lastName: '',
-        email: '',
-        phone: '+48 ',
-        message: '',
-        loanType: '',
-        agreementDate: '',
-        homeBank: '',
-        originalBank: '',
-        loanTypeDetail: '',
-        loanCurrency: '',
-        loanValuePln: '',
-        numberOfInstallments: '',
-        loanStatus: '',
-        repaymentDate: '',
-        repaymentValuePln: '',
-      });
-      setPrivacyConsent(false);
-      setErrors({});
-    } else {
-      console.error('Webhook failed with status:', response.status);
-    }
-  } catch (e) {
-    console.error('Error sending webhook:', e);
-  } finally {
-    setIsSubmitting(false);
-  }
-};
+//       // Reset form data
+//       setFormData({
+//         firstName: '',
+//         lastName: '',
+//         email: '',
+//         phone: '+48 ',
+//         message: '',
+//         loanType: '',
+//         agreementDate: '',
+//         homeBank: '',
+//         originalBank: '',
+//         loanTypeDetail: '',
+//         loanCurrency: '',
+//         loanValuePln: '',
+//         numberOfInstallments: '',
+//         loanStatus: '',
+//         repaymentDate: '',
+//         repaymentValuePln: '',
+//       });
+//       setPrivacyConsent(false);
+//       setErrors({});
+//     } else {
+//       console.error('Webhook failed with status:', response.status);
+//     }
+//   } catch (e) {
+//     console.error('Error sending webhook:', e);
+//   } finally {
+//     setIsSubmitting(false);
+//   }
+// };
   
-  
+
   return (
     <div className="min-h-screen pt-16" style={{ backgroundColor: '#0A1A2F' }}>
       {/* Hero Section */}
