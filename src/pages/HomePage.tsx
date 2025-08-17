@@ -842,7 +842,6 @@ Nie ryzykujesz nic – możesz tylko zyskać.</li>
 
       {/* Contact Section */}
       <ContactSection />
-  );
 };
 
 export default HomePage;
