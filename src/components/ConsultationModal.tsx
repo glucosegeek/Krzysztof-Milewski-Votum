@@ -889,7 +889,11 @@ const ConsultationModal: React.FC = () => {
                               aria-invalid={errors.repaymentValuePln ? "true" : "false"}
                               aria-describedby={errors.repaymentValuePln ? "repaymentValuePln-error" : undefined}
                             />
-                            {errors.repaymentValuePln && <p id="repaymentValuePln-error" className="text-red-500 text-sm mt-1">{errors.repaymentValuePln}</p>}
+                            {(repaymentValueError || errors.repaymentValuePln) && (
+                              <p id="repaymentValuePln-error" className="text-red-500 text-sm mt-1">
+                                {repaymentValueError || errors.repaymentValuePln}
+                              </p>
+                            )}
                           </div>
                         </>
                       )}
