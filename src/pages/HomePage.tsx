@@ -843,9 +843,7 @@ Nie ryzykujesz nic – możesz tylko zyskać.</li>
       {/* Contact Section */}
       <ContactSection />
 
-      {/* Contact */}
-      
-            
+      {/* Contact-phone-whatsup */}            
             <div className="space-y-8">
                 <h3 className="text-2xl font-bold mb-6" style={{ color: '#F5F5F5' }}>Skontaktuj się z nami</h3>
                 
