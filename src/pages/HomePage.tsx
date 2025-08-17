@@ -523,7 +523,7 @@ Nie ryzykujesz nic – możesz tylko zyskać.</li>
               Wpisz ten numer K005533, żebym mógł mieć Twoją sprawę zawsze pod opieką!
             </p>
             
-            <div className="flex flex-wrap justify-center gap-12 mt-8">
+            <div className="flex flex-col items-center gap-8 mt-8">
               {/* Apple App Store QR Code */}
               <div className="flex flex-col items-center">
                 <a
