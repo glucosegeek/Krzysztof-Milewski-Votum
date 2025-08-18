@@ -96,13 +96,6 @@ const FAQPage: React.FC = () => {
                 Znajdź odpowiedzi na najważniejsze pytania dotyczące kredytów walutowych, 
                 umów SKD i procesu prawnego. Jeśli nie znajdziesz odpowiedzi, skontaktuj się z nami.
               </p>
-              <button
-                onClick={() => openModal(null, 'direct_consultation')}
-                className="inline-block font-bold py-4 px-8 rounded-lg text-lg transition-all hover:-translate-y-2 duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl border-4 mt-8"
-               style={{ backgroundColor: '#F5F5F5', borderColor: '#D4AF37', color: '#0A1A2F' }}
-              >
-                Umów bezpłatną konsultację
-              </button>
             </div>
           </div>
         </div>
