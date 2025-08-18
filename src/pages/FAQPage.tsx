@@ -67,9 +67,9 @@ const FAQPage: React.FC = () => {
   return (
     <div className="min-h-screen pt-16" style={{ backgroundColor: '#0A1A2F' }}>
       {/* Header */}
-      <section className="py-10 relative overflow-hidden" style={{
+      <section className="relative overflow-hidden" style={{
         backgroundImage: 'url(/faq-background.png)',
-        backgroundSize: 'contain',
+        backgroundSize: 'cover',
         backgroundPosition: 'center',
         backgroundRepeat: 'no-repeat'
       }}>
