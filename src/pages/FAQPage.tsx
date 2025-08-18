@@ -69,7 +69,7 @@ const FAQPage: React.FC = () => {
       {/* Header */}
       <section className="py-10 relative overflow-hidden" style={{
         backgroundImage: 'url(/faq-background.png)',
-        backgroundSize: 'contain',
+        backgroundSize: 'cover',
         backgroundPosition: 'center',
         backgroundRepeat: 'no-repeat'
       }}>
