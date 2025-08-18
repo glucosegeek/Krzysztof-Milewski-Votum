@@ -486,7 +486,7 @@ const conciergeItems = [
           <div className="max-w-4xl mx-auto">
             <div className="grid lg:grid-cols-2 gap-12 items-center">
               <div>
-                <div className="w-100 h-180 rounded-2xl mx-auto lg:mx-0 flex items-center justify-center shadow-xl border-8 overflow-hidden" style={{ backgroundColor: '#F5F5F5', borderColor: '#D4AF37' }}>
+                <div className="w-100 h-180 mx-auto lg:mx-0 flex items-center justify-center shadow-xl overflow-hidden" style={{ backgroundColor: '#F5F5F5', borderColor: '#D4AF37' }}>
   <img
   src="/votum-background.jpg"
   alt="Krzysztof Milewski - Expert ds. unieważniania kredytów walutowych"
