@@ -211,7 +211,7 @@ const KnowledgeBasePage: React.FC = () => {
         className="relative py-20 min-h-[60vh] flex items-center justify-center"
         style={{
           backgroundImage: 'url(knowledgebase-background.png)',
-          backgroundSize: 'cover',
+          backgroundSize: 'contain',
           backgroundPosition: 'center',
           backgroundRepeat: 'no-repeat'
         }}
