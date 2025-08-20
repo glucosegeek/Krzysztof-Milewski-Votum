@@ -21,9 +21,22 @@ const AboutMePage: React.FC = () => {
         {/* Dark Overlay for dimming */}
         <div 
           className="absolute inset-0"
-          style={{ backgroundColor: 'rgba(10, 26, 47, 0.7)' }}
+          style={{ backgroundColor: 'rgba(10, 26, 47, 0.85)' }}
         ></div>
         
+        {/* Content - Only back link */}
+        <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="max-w-4xl mx-auto text-center">
+            <Link
+              to="/"
+              className="inline-flex items-center space-x-2 mb-8 text-lg transition-colors hover:opacity-80"
+              style={{ color: '#D4AF37' }}
+            >
+              <ArrowLeft size={20} />
+              <span>Powrót do strony głównej</span>
+            </Link>
+          </div>
+        </div>
       </section>
 
       {/* Main Content Section */}
