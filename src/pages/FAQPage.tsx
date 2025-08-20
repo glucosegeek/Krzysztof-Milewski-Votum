@@ -66,16 +66,25 @@ const FAQPage: React.FC = () => {
 
   return (
     <div className="min-h-screen pt-16" style={{ backgroundColor: '#0A1A2F' }}>
-      {/* Header */}
-      <section className="py-10 relative overflow-hidden" style={{
-        backgroundImage: 'url(/faq-background.png)',
-        backgroundSize: 'cover',
-        backgroundPosition: 'center',
-        backgroundRepeat: 'no-repeat'
-      }}>
-        <div className="absolute inset-0 bg-black/70"></div>
-        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="max-w-4xl mx-auto">
+      {/* Hero Section with Background Image - Only Link */}
+      <section 
+        className="relative py-20 min-h-[60vh] flex items-center justify-center"
+        style={{
+          backgroundImage: 'url(/faq-background.png)',
+          backgroundSize: 'cover',
+          backgroundPosition: 'center',
+          backgroundRepeat: 'no-repeat'
+        }}
+      >
+        {/* Dark Overlay for dimming */}
+        <div 
+          className="absolute inset-0"
+          style={{ backgroundColor: 'rgba(10, 26, 47, 0.85)' }}
+        ></div>
+        
+        {/* Content - Only back link */}
+        <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="max-w-4xl mx-auto text-center">
             <Link 
               to="/" 
               className="inline-flex items-center space-x-2 mb-8 text-lg transition-colors hover:opacity-80"
@@ -84,16 +93,21 @@ const FAQPage: React.FC = () => {
               <ArrowLeft size={20} />
               <span>Powrót do strony głównej</span>
             </Link>
-            
-            <div className="text-center mb-16">
-              <h1 className="text-4xl md:text-6xl font-bold mb-6" style={{ color: '#F5F5F5' }}>
-                Najczęściej zadawane pytania
-              </h1>
-              <p className="text-xl max-w-3xl mx-auto leading-relaxed" style={{ color: '#F5F5F5' }}>
-                Znajdź odpowiedzi na najważniejsze pytania dotyczące kredytów walutowych, 
-                umów SKD i procesu prawnego. Jeśli nie znajdziesz odpowiedzi, skontaktuj się z nami.
-              </p>
-            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Title Section */}
+      <section className="py-20" style={{ backgroundColor: '#0A1A2F' }}>
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="max-w-4xl mx-auto text-center">
+            <h1 className="text-4xl md:text-6xl font-bold mb-6" style={{ color: '#F5F5F5' }}>
+              Najczęściej zadawane pytania
+            </h1>
+            <p className="text-xl max-w-3xl mx-auto leading-relaxed mb-16" style={{ color: '#F5F5F5' }}>
+              Znajdź odpowiedzi na najważniejsze pytania dotyczące kredytów walutowych, 
+              umów SKD i procesu prawnego. Jeśli nie znajdziesz odpowiedzi, skontaktuj się z nami.
+            </p>
           </div>
         </div>
       </section>
