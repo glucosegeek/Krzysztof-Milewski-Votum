@@ -65,7 +65,7 @@ const Navbar: React.FC = () => {
               onMouseLeave={() => {
                 const timeout = setTimeout(() => {
                   setIsServicesOpen(false);
-                }, 300);
+                }, 500);
                 setCloseTimeout(timeout);
               }}
             >
@@ -90,7 +90,7 @@ const Navbar: React.FC = () => {
                   onMouseLeave={() => {
                     const timeout = setTimeout(() => {
                       setIsServicesOpen(false);
-                    }, 300);
+                    }, 500);
                     setCloseTimeout(timeout);
                   }}
                 >
