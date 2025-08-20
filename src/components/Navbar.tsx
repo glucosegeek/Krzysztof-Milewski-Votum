@@ -6,21 +6,23 @@ import { useConsultationModal } from '../context/ConsultationModalContext';
 const Navbar: React.FC = () => {
   const [isServicesOpen, setIsServicesOpen] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [closeTimeout, setCloseTimeout] = useState<NodeJS.Timeout | null>(null); // Dodany state dla opóźnienia
+
   useEffect(() => {
-  const handleScroll = () => {
-    if (isMobileMenuOpen) {
-      setIsMobileMenuOpen(false);
-      setIsServicesOpen(false); // Also close services dropdown if open
-    }
-  };
+    const handleScroll = () => {
+      if (isMobileMenuOpen) {
+        setIsMobileMenuOpen(false);
+        setIsServicesOpen(false);
+      }
+    };
 
-  window.addEventListener('scroll', handleScroll);
+    window.addEventListener('scroll', handleScroll);
 
-  // Cleanup function to remove the event listener
-  return () => {
-    window.removeEventListener('scroll', handleScroll);
-  };
-}, [isMobileMenuOpen]); // Dependency array: re-run effect if isMobileMenuOpen changes
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    };
+  }, [isMobileMenuOpen]);
+
   const { openModal } = useConsultationModal();
 
   const closeMobileMenu = () => {
@@ -41,63 +43,89 @@ const Navbar: React.FC = () => {
 
           {/* Navigation Links */}
           <div className="hidden md:flex items-center space-x-8">
-              <Link
-                to="/news"
-                className="px-3 py-2 rounded-md text-sm font-medium transition-colors hover:bg-opacity-10 hover:bg-white"
-                style={{ color: '#F5F5F5' }}
-                onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
-              >
+            <Link
+              to="/news"
+              className="px-3 py-2 rounded-md text-sm font-medium transition-colors hover:bg-opacity-10 hover:bg-white"
+              style={{ color: '#F5F5F5' }}
+              onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+            >
               Aktualności
             </Link>
 
-            {/* Usługi Dropdown */}
+            {/* Usługi Dropdown - ZMODYFIKOWANY FRAGMENT */}
             <div
               className="relative"
-              onMouseEnter={() => setIsServicesOpen(true)}
-              onMouseLeave={() => setIsServicesOpen(false)}
+              onMouseEnter={() => {
+                if (closeTimeout) {
+                  clearTimeout(closeTimeout);
+                  setCloseTimeout(null);
+                }
+                setIsServicesOpen(true);
+              }}
+              onMouseLeave={() => {
+                const timeout = setTimeout(() => {
+                  setIsServicesOpen(false);
+                }, 300);
+                setCloseTimeout(timeout);
+              }}
             >
-  <button
-    className="flex items-center space-x-1 px-3 py-2 rounded-md text-sm font-medium transition-colors hover:bg-opacity-10 hover:bg-white"
-    style={{ color: '#F5F5F5' }}
-  >
-    <span>Usługi</span>
-    <ChevronDown size={16} className={`transform transition-transform ${isServicesOpen ? 'rotate-180' : ''}`} />
-  </button>
+              <button
+                className="flex items-center space-x-1 px-3 py-2 rounded-md text-sm font-medium transition-colors hover:bg-opacity-10 hover:bg-white"
+                style={{ color: '#F5F5F5' }}
+              >
+                <span>Usługi</span>
+                <ChevronDown size={16} className={`transform transition-transform ${isServicesOpen ? 'rotate-180' : ''}`} />
+              </button>
 
-  {isServicesOpen && (
-    <div className="absolute top-full left-0 mt-1 w-64 rounded-md shadow-lg border-2" style={{ backgroundColor: '#0A1A2F', borderColor: '#D4AF37' }}>
-      <div className="py-1">
-        <Link
-          to="/services/currency"
-          className="block px-4 py-2 text-sm transition-colors hover:bg-opacity-10 hover:bg-white"
-          style={{ color: '#F5F5F5' }}
-          onClick={() => setIsServicesOpen(false)}
-        >
-          Unieważnianie umów walutowych
-        </Link>
-        <Link
-          to="/services/skd"
-          className="block px-4 py-2 text-sm transition-colors hover:bg-opacity-10 hover:bg-white"
-          style={{ color: '#F5F5F5' }}
-          onClick={() => setIsServicesOpen(false)}
-        >
-          Unieważnianie umów SKD
-        </Link>
-      </div>
-    </div>
-  )}
-</div>
+              {isServicesOpen && (
+                <div 
+                  className="absolute top-full left-0 mt-1 w-64 rounded-md shadow-lg border-2" 
+                  style={{ backgroundColor: '#0A1A2F', borderColor: '#D4AF37' }}
+                  onMouseEnter={() => {
+                    if (closeTimeout) {
+                      clearTimeout(closeTimeout);
+                      setCloseTimeout(null);
+                    }
+                  }}
+                  onMouseLeave={() => {
+                    const timeout = setTimeout(() => {
+                      setIsServicesOpen(false);
+                    }, 300);
+                    setCloseTimeout(timeout);
+                  }}
+                >
+                  <div className="py-1">
+                    <Link
+                      to="/services/currency"
+                      className="block px-4 py-2 text-sm transition-colors hover:bg-opacity-10 hover:bg-white"
+                      style={{ color: '#F5F5F5' }}
+                      onClick={() => setIsServicesOpen(false)}
+                    >
+                      Unieważnianie umów walutowych
+                    </Link>
+                    <Link
+                      to="/services/skd"
+                      className="block px-4 py-2 text-sm transition-colors hover:bg-opacity-10 hover:bg-white"
+                      style={{ color: '#F5F5F5' }}
+                      onClick={() => setIsServicesOpen(false)}
+                    >
+                      Unieważnianie umów SKD
+                    </Link>
+                  </div>
+                </div>
+              )}
+            </div>
 
-<Link
-  to="/about-me"
-  className="px-3 py-2 rounded-md text-sm font-medium transition-colors hover:bg-opacity-10 hover:bg-white"
-  style={{ color: '#F5F5F5' }}
-  onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
->
-  O mnie
-</Link>
+            <Link
+              to="/about-me"
+              className="px-3 py-2 rounded-md text-sm font-medium transition-colors hover:bg-opacity-10 hover:bg-white"
+              style={{ color: '#F5F5F5' }}
+              onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+            >
+              O mnie
+            </Link>
             
-<Link
+            <Link
               to="/knowledge-base"
               className="px-3 py-2 rounded-md text-sm font-medium transition-colors hover:bg-opacity-10 hover:bg-white"
               style={{ color: '#F5F5F5' }}
@@ -116,12 +144,12 @@ const Navbar: React.FC = () => {
             </Link>
 
             <Link
-                  to="/#contact-section"
-                  className="px-4 py-3 rounded-md text-sm font-medium transition-colors hover:bg-opacity-10 hover:bg-white"
-                  style={{ color: '#F5F5F5' }}
-                  onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
-                >
-                  Kontakt
+              to="/#contact-section"
+              className="px-4 py-3 rounded-md text-sm font-medium transition-colors hover:bg-opacity-10 hover:bg-white"
+              style={{ color: '#F5F5F5' }}
+              onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+            >
+              Kontakt
             </Link>
           </div>
 
@@ -137,7 +165,7 @@ const Navbar: React.FC = () => {
           </div>
         </div>
 
-        {/* Mobile Menu */}
+        {/* Mobile Menu - POZOSTAJE BEZ ZMIAN */}
         {isMobileMenuOpen && (
           <div className="md:hidden absolute top-full left-0 right-0 shadow-lg border-t-2" style={{ backgroundColor: '#0A1A2F', borderColor: '#D4AF37' }}>
             <div className="px-4 py-2 space-y-1">
@@ -229,17 +257,16 @@ const Navbar: React.FC = () => {
               </Link>
 
               <Link
-                  to="/#contact-section"
-                  className="block px-3 py-2 rounded-md text-sm font-medium transition-colors hover:bg-opacity-10 hover:bg-white"
-                  style={{ color: '#F5F5F5' }}
-                  onClick={() => {
-                    closeMobileMenu();
-                    window.scrollTo({ top: 0, behavior: 'smooth' });
-                  }}
-                >
-                  Kontakt
-            </Link>
-
+                to="/#contact-section"
+                className="block px-3 py-2 rounded-md text-sm font-medium transition-colors hover:bg-opacity-10 hover:bg-white"
+                style={{ color: '#F5F5F5' }}
+                onClick={() => {
+                  closeMobileMenu();
+                  window.scrollTo({ top: 0, behavior: 'smooth' });
+                }}
+              >
+                Kontakt
+              </Link>
             </div>
           </div>
         )}
