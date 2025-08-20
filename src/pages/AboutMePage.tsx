@@ -20,9 +20,8 @@ const AboutMePage: React.FC = () => {
       >
         {/* Dark Overlay for dimming */}
         <div 
-          to="/" 
-              className="inline-flex items-center space-x-2 mb-8 text-lg transition-colors hover:opacity-80"
-              style={{ color: '#D4AF37' }}
+           className="absolute inset-0"
+  style={{ backgroundColor: 'rgba(0, 0, 0, 0.6)' }}
         ></div>
         
       </section>
