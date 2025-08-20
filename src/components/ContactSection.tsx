@@ -517,7 +517,7 @@ const ContactSection: React.FC = () => {
                     color: '#F5F5F5',
                     '--tw-ring-color': '#D4AF37',
                   }}
-                  placeholder="Krótko opisz swoją sprawę"
+                  placeholder="Zadaj mi pytanie..."
                   required
                   aria-invalid={errors.message ? "true" : "false"}
                   aria-describedby={errors.message ? "message-error" : undefined}
