@@ -73,6 +73,9 @@ const ContactSection: React.FC = () => {
   const [installmentsError, setInstallmentsError] = useState('');
   const [repaymentValueError, setRepaymentValueError] = useState('');
 
+  // Loading state for form submission
+  const [isSubmitting, setIsSubmitting] = useState(false);
+
   // Real-time validation handlers
   const handleLoanValueChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value;
@@ -232,7 +235,15 @@ const ContactSection: React.FC = () => {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
+    
+    // Prevent multiple submissions
+    if (isSubmitting) {
+      return;
+    }
+    
     if (validate()) {
+      setIsSubmitting(true);
+      
       // Prepare webhook payload (keeping original webhook intact)
       const webhookPayload = {
         // Form data
@@ -279,33 +290,44 @@ const ContactSection: React.FC = () => {
           console.log('Contact form webhook sent successfully:', response.status);
         } else {
           console.error('Contact form webhook failed with status:', response.status);
+          // Re-enable button on error
+          setIsSubmitting(false);
         }
       }).catch(e => {
         console.error('Error sending contact form webhook:', e);
+        // Re-enable button on error
+        setIsSubmitting(false);
       }).finally(() => {
-        // Reset form after submission
-        setFirstName('');
-        setLastName('');
-        setEmail('');
-        setPhone('+48 ');
-        setMessage('');
-        setLoanType('');
-        setAgreementDate(null);
-        setOriginalBank('');
-        setLoanTypeDetail('');
-        setLoanCurrency('CHF');
-        setLoanValuePln('');
-        setNumberOfInstallments('');
-        setLoanStatus('');
-        setRepaymentDate(null);
-        setRepaymentValuePln('');
-        setPrivacyConsent(false);
-        setDisplayedBankTransition('');
-        setLoanValueError('');
-        setInstallmentsError('');
-        setRepaymentValueError('');
-        setErrors({});
+        // Only reset form and re-enable button on successful submission
+        if (!isSubmitting) {
+          // Reset form after successful submission
+          setFirstName('');
+          setLastName('');
+          setEmail('');
+          setPhone('+48 ');
+          setMessage('');
+          setLoanType('');
+          setAgreementDate(null);
+          setOriginalBank('');
+          setLoanTypeDetail('');
+          setLoanCurrency('CHF');
+          setLoanValuePln('');
+          setNumberOfInstallments('');
+          setLoanStatus('');
+          setRepaymentDate(null);
+          setRepaymentValuePln('');
+          setPrivacyConsent(false);
+          setDisplayedBankTransition('');
+          setLoanValueError('');
+          setInstallmentsError('');
+          setRepaymentValueError('');
+          setErrors({});
+        }
+        setIsSubmitting(false);
       });
+    } else {
+      // Re-enable button if validation fails
+      setIsSubmitting(false);
     }
   };
 
@@ -877,10 +899,44 @@ const ContactSection: React.FC = () => {
 
               <button
                 type="submit"
-                className="w-full font-bold py-4 px-8 rounded-lg text-lg transition-all hover:-translate-y-1 duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl border-4 active:scale-95 active:shadow-inner"
+                disabled={isSubmitting}
+                className={`w-full font-bold py-4 px-8 rounded-lg text-lg transition-all duration-300 transform shadow-lg border-4 flex items-center justify-center ${
+                  isSubmitting 
+                    ? 'opacity-75 cursor-not-allowed' 
+                    : 'hover:-translate-y-1 hover:scale-105 hover:shadow-xl active:scale-95 active:shadow-inner'
+                }`}
                 style={{ backgroundColor: '#F5F5F5', borderColor: '#D4AF37', color: '#0A1A2F' }}
+                aria-label={isSubmitting ? 'Wysyłanie wiadomości...' : 'Wyślij wiadomość'}
               >
-                Wyślij wiadomość
+                {isSubmitting ? (
+                  <>
+                    {/* Loading Spinner */}
+                    <svg 
+                      className="animate-spin -ml-1 mr-3 h-5 w-5" 
+                      xmlns="http://www.w3.org/2000/svg" 
+                      fill="none" 
+                      viewBox="0 0 24 24"
+                      aria-hidden="true"
+                    >
+                      <circle 
+                        className="opacity-25" 
+                        cx="12" 
+                        cy="12" 
+                        r="10" 
+                        stroke="currentColor" 
+                        strokeWidth="4"
+                      />
+                      <path 
+                        className="opacity-75" 
+                        fill="currentColor" 
+                        d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
+                      />
+                    </svg>
+                    Wysyłanie...
+                  </>
+                ) : (
+                  'Wyślij wiadomość'
+                )}
               </button>
             </form>
           </div>

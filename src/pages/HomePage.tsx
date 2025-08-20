@@ -103,7 +103,7 @@ const conciergeItems = [
     {
       id: 4,
       title: "Zgłoszenie roszczeń",
-      description: "Po skompletowaniu niezbędnych dokumentów przygotowuję i złożę w Twoim imieniu reklamację do banku, jasno i precyzyjnie przedstawiając roszczenia. Kancelaria dba o każdy szczegół – od podstawy prawnej po spełnienie wszystkich wymogów formalnych – aby zwiększyć szanse na pozytywne rozpatrzenie sprawy.",
+      description: "Po skompletowaniu niezbędnych dokumentów kancelaria przygotowuje i złoży w Twoim imieniu reklamację do banku, jasno i precyzyjnie przedstawiając roszczenia. Kancelaria dba o każdy szczegół – od podstawy prawnej po spełnienie wszystkich wymogów formalnych – aby zwiększyć szanse na pozytywne rozpatrzenie sprawy.",
     },
     {
       id: 5,
