@@ -206,17 +206,40 @@ const KnowledgeBasePage: React.FC = () => {
 
   return (
     <div className="min-h-screen pt-16" style={{ backgroundColor: '#0A1A2F', color: '#F5F5F5' }}>
-      {/* Header */}
+      {/* Hero Section with Background Image - Only Link */}
+      <section 
+        className="relative py-20 min-h-[60vh] flex items-center justify-center"
+        style={{
+          backgroundImage: 'url(knowledgebase-background.png)',
+          backgroundSize: 'cover',
+          backgroundPosition: 'center',
+          backgroundRepeat: 'no-repeat'
+        }}
+      >
+        {/* Dark Overlay for dimming */}
+        <div 
+          className="absolute inset-0"
+          style={{ backgroundColor: 'rgba(0, 0, 0, 0.6)' }}
+        ></div>
+        
+        {/* Content - Only back link */}
+        <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="max-w-4xl mx-auto text-center">
+            <Link
+              to="/"
+              className="inline-flex items-center space-x-2 mb-8 text-lg transition-colors hover:opacity-80"
+              style={{ color: '#D4AF37' }}
+            >
+              <ArrowLeft size={20} />
+              <span>Powrót do strony głównej</span>
+            </Link>
+          </div>
+        </div>
+      </section>
+
+      {/* Title Section */}
       <section className="py-20 text-center">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <Link
-            to="/"
-            className="inline-flex items-center space-x-2 mb-8 text-lg transition-colors hover:opacity-80"
-            style={{ color: '#D4AF37' }}
-          >
-            <ArrowLeft size={20} />
-            <span>Powrót do strony głównej</span>
-          </Link>
           <h1 className="text-4xl md:text-6xl font-bold mb-6">
             Baza wiedzy
           </h1>
