@@ -13,7 +13,7 @@ const AboutMePage: React.FC = () => {
         className="relative py-20 min-h-[60vh] flex items-center justify-center"
         style={{
           backgroundImage: 'url(aboutme-background.png)',
-          backgroundSize: 'cover',
+          backgroundSize: 'compose',
           backgroundPosition: 'center',
           backgroundRepeat: 'no-repeat'
         }}
