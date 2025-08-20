@@ -8,7 +8,7 @@ const AboutMePage: React.FC = () => {
   return (
     <div className="min-h-screen pt-16" style={{ backgroundColor: '#0A1A2F', color: '#F5F5F5' }}>
       
-      {/* Hero Section with Background Image */}
+      {/* Hero Section with Background Image - Only Link */}
       <section 
         className="relative py-20 min-h-[60vh] flex items-center justify-center"
         style={{
@@ -24,7 +24,7 @@ const AboutMePage: React.FC = () => {
           style={{ backgroundColor: 'rgba(10, 26, 47, 0.7)' }}
         ></div>
         
-        {/* Content */}
+        {/* Content - Only back link */}
         <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="max-w-4xl mx-auto text-center">
             <Link
@@ -35,14 +35,6 @@ const AboutMePage: React.FC = () => {
               <ArrowLeft size={20} />
               <span>Powrót do strony głównej</span>
             </Link>
-            <h1 className="text-4xl md:text-6xl font-bold mb-6">
-              O mnie
-            </h1>
-            {/* Introduction/Summary */}
-            <p className="text-xl max-w-3xl mx-auto leading-relaxed mb-8 text-center">
-              Ekspert ds. unieważniania kredytów walutowych | Przedstawiciel Votum Consumer Care<br />
-              Strateg sprzedaży i marketingu z 30-letnim doświadczeniem
-            </p>
           </div>
         </div>
       </section>
@@ -51,6 +43,16 @@ const AboutMePage: React.FC = () => {
       <section className="py-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="max-w-4xl mx-auto text-center">
+            
+            {/* Title and Description moved here */}
+            <h1 className="text-4xl md:text-6xl font-bold mb-6">
+              O mnie
+            </h1>
+            {/* Introduction/Summary */}
+            <p className="text-xl max-w-3xl mx-auto leading-relaxed mb-8 text-center">
+              Ekspert ds. unieważniania kredytów walutowych | Przedstawiciel Votum Consumer Care<br />
+              Strateg sprzedaży i marketingu z 30-letnim doświadczeniem
+            </p>
             
             {/* Image Placeholder for Client */}
             <div className="w-64 h-64 rounded-full mx-auto mb-12 overflow-hidden shadow-xl border-4" style={{ borderColor: '#D4AF37' }}>
