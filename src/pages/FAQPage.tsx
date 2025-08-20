@@ -78,8 +78,8 @@ const FAQPage: React.FC = () => {
       >
         {/* Dark Overlay for dimming */}
         <div 
-          className="absolute inset-0"
-          style={{ backgroundColor: 'rgba(10, 26, 47, 0.85)' }}
+           className="absolute inset-0"
+  style={{ backgroundColor: 'rgba(0, 0, 0, 0.6)' }}
         ></div>
         
       </section>
