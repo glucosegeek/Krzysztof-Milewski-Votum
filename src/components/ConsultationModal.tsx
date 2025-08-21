@@ -296,7 +296,7 @@ const ConsultationModal: React.FC = () => {
         };
 
         // Send to webhook
-        fetch('https://n8n.srv948633.hstgr.cloud/webhook-test/4123415be-451h-4446-8h22-52186b5fd6d4', {
+        fetch('https://n8n.srv948633.hstgr.cloud/webhook-test/consultation-form', {
           method: 'POST',
           headers: { 
             'Content-Type': 'application/json'
