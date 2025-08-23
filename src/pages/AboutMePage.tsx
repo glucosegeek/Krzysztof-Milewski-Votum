@@ -37,7 +37,7 @@ const AboutMePage: React.FC = () => {
             </h1>
             {/* Introduction/Summary */}
             <p className="text-xl max-w-3xl mx-auto leading-relaxed mb-8 text-center">
-              Ekspert ds. unieważniania kredytów walutowych | Przedstawiciel Votum Consumer Care<br />
+              Ekspert ds. unieważniania kredytów walutowych | Przedstawiciel DSA Investment S.A<br />
               Strateg sprzedaży i marketingu z 30-letnim doświadczeniem
             </p>
             
