@@ -8,24 +8,6 @@ const AboutMePage: React.FC = () => {
   return (
     <div className="min-h-screen pt-16" style={{ backgroundColor: '#0A1A2F', color: '#F5F5F5' }}>
       
-      {/* Hero Section with Background Image - Only Link */}
-      <section 
-        className="relative py-20 min-h-[60vh] flex items-center justify-center"
-        style={{
-          backgroundImage: 'url(aboutme-background.png)',
-          backgroundSize: 'cover',
-          backgroundPosition: 'center',
-          backgroundRepeat: 'no-repeat'
-        }}
-      >
-        {/* Dark Overlay for dimming */}
-        <div 
-           className="absolute inset-0"
-  style={{ backgroundColor: 'rgba(0, 0, 0, 0.6)' }}
-        ></div>
-        
-      </section>
-
       {/* Main Content Section */}
       <section className="py-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
