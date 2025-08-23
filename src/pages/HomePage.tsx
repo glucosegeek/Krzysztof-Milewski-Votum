@@ -470,7 +470,7 @@ const conciergeItems = [
               <span className="block mt-2" style={{ color: '#D4AF37' }}>Przedstawiciel DSA Investment S.A</span>
             </h1>
             <p className="text-xl md:text-2xl mb-6 max-w-3xl mx-auto leading-relaxed" style={{ color: '#D4AF37' }}>
-  Ekspert ds. unieważniania kredytów walutowych (CHF | EUR | USD) oraz kredytów SKD
+  Należymy do VOTUM GROUP, jesteśmy Partnerem VOTUM CONSUMER CARE
 </p>
             <button 
               className="font-bold py-4 px-8 rounded-lg text-lg transition-all hover:-translate-y-2 duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl border-4"
