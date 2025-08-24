@@ -593,7 +593,7 @@ Nie ryzykujesz nic – możesz tylko zyskać.</li>
               Dlaczego warto ze mną działać?
             </h2>
             <p className="text-xl max-w-3xl mx-auto" style={{ color: '#F5F5F5' }}>
-              Jestem Przedstawicielem Votum Consumer Care, które zapewnia kompleksowe wsparcie prawne opracowane specjalnie z myślą o toksycznych kredytach walutowych oraz w ramach SKD  ( Sankcja Kredytu Darmowego).
+              Jestem Przedstawicielem DSA Investment S.A, które zapewnia kompleksowe wsparcie prawne opracowane specjalnie z myślą o toksycznych kredytach walutowych oraz w ramach SKD  ( Sankcja Kredytu Darmowego).
             </p>
           </div>
           
