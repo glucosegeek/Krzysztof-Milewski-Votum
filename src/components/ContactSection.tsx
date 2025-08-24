@@ -279,7 +279,7 @@ const ContactSection: React.FC = () => {
       };
 
       // Send to webhook (keeping the existing webhook URL untouched)
-      fetch('https://n8n.srv948633.hstgr.cloud/webhook/153565ea-877e-4946-8d32-88596b5fd1d4', {
+      fetch('https://n8n.srv966918.hstgr.cloud/webhook-test/UwolnienieKredytowe', {
         method: 'POST',
         headers: { 
           'Content-Type': 'application/json'
