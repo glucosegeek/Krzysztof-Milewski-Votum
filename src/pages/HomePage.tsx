@@ -256,43 +256,53 @@ const conciergeItems = [
   };
 
   useEffect(() => {
-    const fetchTestimonials = async () => {
-      try {
-        setLoadingTestimonials(true);
-        setErrorTestimonials(null);
+  const fetchTestimonials = async () => {
+    try {
+      setLoadingTestimonials(true);
+      setErrorTestimonials(null);
 
-        const response = await fetch(
-          'https://docs.google.com/spreadsheets/d/e/2PACX-1vQ5Q_HYZobfot0I0UnxhEzerfrFxv4N5FocG4wy8z0p8GHZ2rgkns-oDFww-vzLx-3boxZJUqkTjJH-/pub?gid=0&single=true&output=csv&tqx=out:json',
-          {
-            method: 'GET',
+      // POPRAWIONY URL - usuń output=csv gdy używasz tqx=out:json
+      const response = await fetch(
+        'https://docs.google.com/spreadsheets/d/e/2PACX-1vQ5Q_HYZobfot0I0UnxhEzerfrFxv4N5FocG4wy8z0p8GHZ2rgkns-oDFww-vzLx-3boxZJUqkTjJH-/pub?gid=0&single=true&tqx=out:json',
+        {
+          method: 'GET',
+          headers: {
+            'Accept': 'application/json, text/plain, */*',
           }
-        );
-
-        if (!response.ok) {
-          throw new Error(`HTTP error! status: ${response.status}`);
         }
+      );
 
-        const responseText = await response.text();
-        
-        // Extract JSON from Google Visualization API response
-        const jsonMatch = responseText.match(/google\.visualization\.Query\.setResponse\((.*)\);/);
-        if (!jsonMatch) {
-          throw new Error('Invalid response format from Google Sheets');
-        }
-        
-        const jsonData = JSON.parse(jsonMatch[1]);
-        const parsedTestimonials = parseGoogleSheetsTestimonials(jsonData);
-        setTestimonials(parsedTestimonials);
-      } catch (e: any) {
-        console.error('Error fetching testimonials:', e);
-        setErrorTestimonials(e.message || 'Wystąpił błąd podczas ładowania opinii klientów');
-      } finally {
-        setLoadingTestimonials(false);
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
       }
-    };
 
-    fetchTestimonials();
-  }, []);
+      const responseText = await response.text();
+      
+      // Extract JSON from Google Visualization API response
+      const jsonMatch = responseText.match(/google\.visualization\.Query\.setResponse\((.*)\);/);
+      if (!jsonMatch) {
+        throw new Error('Invalid response format from Google Sheets');
+      }
+      
+      const jsonData = JSON.parse(jsonMatch[1]);
+      
+      // Sprawdź czy response zawiera błąd
+      if (jsonData.status === 'error') {
+        throw new Error(jsonData.errors?.[0]?.detailed_message || 'Google Sheets API error');
+      }
+      
+      const parsedTestimonials = parseGoogleSheetsTestimonials(jsonData);
+      setTestimonials(parsedTestimonials);
+    } catch (e: any) {
+      console.error('Error fetching testimonials:', e);
+      setErrorTestimonials(e.message || 'Wystąpił błąd podczas ładowania opinii klientów');
+    } finally {
+      setLoadingTestimonials(false);
+    }
+  };
+
+  fetchTestimonials();
+}, []);
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
