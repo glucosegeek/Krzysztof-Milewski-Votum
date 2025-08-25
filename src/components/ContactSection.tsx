@@ -549,18 +549,6 @@ const ContactSection: React.FC = () => {
                     />
                     <span className="ml-2 text-sm" style={{ color: '#F5F5F5' }}>SKD (Sankcja Kredytu Darmowego)</span>
                   </label>
-                  <label className="inline-flex items-center">
-                    <input
-                      type="radio"
-                      name="loanType"
-                      value="other"
-                      checked={loanType === 'other'}
-                      onChange={(e) => setLoanType(e.target.value)}
-                      className="form-radio"
-                      style={{ accentColor: '#D4AF37' }}
-                    />
-                    <span className="ml-2 text-sm" style={{ color: '#F5F5F5' }}>Inne</span>
-                  </label>
                 </div>
                 {errors.loanType && <p className="text-red-500 text-sm mt-1">{errors.loanType}</p>}
               </div>
