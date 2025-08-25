@@ -6,7 +6,7 @@ import { useConsultationModal } from '../context/ConsultationModalContext';
 const Navbar: React.FC = () => {
   const [isServicesOpen, setIsServicesOpen] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-  const [closeTimeout, setCloseTimeout] = useState<NodeJS.Timeout | null>(null); // Dodany state dla opóźnienia
+  const [closeTimeout, setCloseTimeout] = useState<NodeJS.Timeout | null>(null);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -28,6 +28,20 @@ const Navbar: React.FC = () => {
   const closeMobileMenu = () => {
     setIsMobileMenuOpen(false);
     setIsServicesOpen(false);
+  };
+
+  // Funkcja do przewijania do sekcji kontaktowej
+  const scrollToContactSection = () => {
+    const contactSection = document.querySelector('[data-section="contact"]') || 
+                          document.querySelector('section[style*="0A1A2F"]') ||
+                          document.querySelector('section:has(h2:contains("Porozmawiajmy"))');
+    
+    if (contactSection) {
+      contactSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    } else {
+      // Fallback - przewiń do końca strony jeśli nie znajdzie sekcji
+      window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' });
+    }
   };
 
   return (
@@ -52,7 +66,7 @@ const Navbar: React.FC = () => {
               Aktualności
             </Link>
 
-            {/* Usługi Dropdown - ZMODYFIKOWANY FRAGMENT */}
+            {/* Usługi Dropdown */}
             <div
               className="relative"
               onMouseEnter={() => {
@@ -143,11 +157,15 @@ const Navbar: React.FC = () => {
               FAQ
             </Link>
 
+            {/* ZMIENIONY LINK KONTAKT */}
             <Link
-              to="/#contact-section"
+              to="/"
               className="px-4 py-3 rounded-md text-sm font-medium transition-colors hover:bg-opacity-10 hover:bg-white"
               style={{ color: '#F5F5F5' }}
-              onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+              onClick={(e) => {
+                e.preventDefault();
+                scrollToContactSection();
+              }}
             >
               Kontakt
             </Link>
@@ -165,7 +183,7 @@ const Navbar: React.FC = () => {
           </div>
         </div>
 
-        {/* Mobile Menu - POZOSTAJE BEZ ZMIAN */}
+        {/* Mobile Menu */}
         {isMobileMenuOpen && (
           <div className="md:hidden absolute top-full left-0 right-0 shadow-lg border-t-2" style={{ backgroundColor: '#0A1A2F', borderColor: '#D4AF37' }}>
             <div className="px-4 py-2 space-y-1">
@@ -256,13 +274,15 @@ const Navbar: React.FC = () => {
                 FAQ
               </Link>
 
+              {/* ZMIENIONY LINK KONTAKT W MOBILE MENU */}
               <Link
-                to="/#contact-section"
+                to="/"
                 className="block px-3 py-2 rounded-md text-sm font-medium transition-colors hover:bg-opacity-10 hover:bg-white"
                 style={{ color: '#F5F5F5' }}
-                onClick={() => {
+                onClick={(e) => {
+                  e.preventDefault();
                   closeMobileMenu();
-                  window.scrollTo({ top: 0, behavior: 'smooth' });
+                  scrollToContactSection();
                 }}
               >
                 Kontakt
