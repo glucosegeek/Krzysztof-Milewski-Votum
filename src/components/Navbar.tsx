@@ -33,41 +33,51 @@ const Navbar: React.FC = () => {
   };
 
   // Funkcja do przewijania do sekcji kontaktowej
-  const scrollToContactSection = () => {
-    // Najpierw sprawdź czy jest atrybut data-section
-    let contactSection = document.querySelector('[data-section="contact"]');
-    
-    // Jeśli nie ma, szukaj po kolorze tła
-    if (!contactSection) {
-      const sections = document.querySelectorAll('section');
-      for (const section of sections) {
-        const style = window.getComputedStyle(section);
-        if (style.backgroundColor === 'rgb(10, 26, 47)' || 
-            section.style.backgroundColor === '#0A1A2F') {
-          contactSection = section;
-          break;
-        }
+const scrollToContactSection = () => {
+  // Najpierw sprawdź czy jest atrybut data-section (najniezawodniejszy sposób)
+  let contactSection = document.querySelector('[data-section="contact"]');
+  
+  // Jeśli nie ma, szukaj po tekście w h2 (bardziej precyzyjne niż kolor)
+  if (!contactSection) {
+    const headings = document.querySelectorAll('h2');
+    for (const heading of headings) {
+      if (heading.textContent?.includes('Porozmawiajmy') || 
+          heading.textContent?.includes('toksycznej umowie')) {
+        contactSection = heading.closest('section');
+        break;
       }
     }
-    
-    // Jeśli nadal nie ma, szukaj po tekście w h2
-    if (!contactSection) {
-      const headings = document.querySelectorAll('h2');
-      for (const heading of headings) {
-        if (heading.textContent?.includes('Porozmawiajmy')) {
-          contactSection = heading.closest('section');
-          break;
-        }
+  }
+  
+  // Jako ostateczność szukaj po kolorze tła, ale tylko sekcje z formularzem
+  if (!contactSection) {
+    const sections = document.querySelectorAll('section');
+    for (const section of sections) {
+      const style = window.getComputedStyle(section);
+      const hasForm = section.querySelector('form');
+      if ((style.backgroundColor === 'rgb(10, 26, 47)' || 
+           section.style.backgroundColor === '#0A1A2F') && hasForm) {
+        contactSection = section;
+        break;
       }
     }
+  }
+  
+  if (contactSection) {
+    // Dodaj offset dla navbar (który ma fixed position)
+    const navbarHeight = 64; // wysokość navbar w px
+    const elementPosition = contactSection.getBoundingClientRect().top + window.pageYOffset;
+    const offsetPosition = elementPosition - navbarHeight;
     
-    if (contactSection) {
-      contactSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
-    } else {
-      // Fallback - przewiń do końca strony jeśli nie znajdzie sekcji
-      window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' });
-    }
-  };
+    window.scrollTo({
+      top: offsetPosition,
+      behavior: 'smooth'
+    });
+  } else {
+    // Fallback - przewiń do końca strony jeśli nie znajdzie sekcji
+    window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' });
+  }
+};
 
   // Funkcja do obsługi kliknięcia w "Kontakt"
   const handleContactClick = (e: React.MouseEvent) => {
