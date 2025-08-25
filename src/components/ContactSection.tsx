@@ -1,7 +1,8 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import { Phone, Mail, MessageCircle } from 'lucide-react';
 import DatePicker from 'react-datepicker';
+import { useStickyButtonVisibility } from '../context/StickyButtonVisibilityContext';
 
 interface BankTransition {
   primaryBank: string;
@@ -43,6 +44,15 @@ const bankData: BankTransition[] = [
 ];
 
 const ContactSection: React.FC = () => {
+  const { registerContactSection } = useStickyButtonVisibility();
+  const contactSectionRef = useRef<HTMLElement>(null);
+
+  // Register contact section with visibility context
+  useEffect(() => {
+    registerContactSection(contactSectionRef.current);
+    return () => registerContactSection(null);
+  }, [registerContactSection]);
+
   // Calculate today's date in YYYY-MM-DD format for max date constraint
   const today = new Date();
   const year = today.getFullYear();
@@ -118,6 +128,27 @@ const ContactSection: React.FC = () => {
       }
     } else {
       setInstallmentsError('');
+    }
+  };
+
+  const handleRepaymentValueChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const value = e.target.value;
+    setRepaymentValuePln(value);
+    
+    // Real-time validation for repayment value
+    if (value.trim()) {
+      const numValue = parseFloat(value);
+      if (isNaN(numValue)) {
+        setRepaymentValueError('Wartość spłaty musi być liczbą.');
+      } else if (numValue <= 0) {
+        setRepaymentValueError('Wartość spłaty musi być większa od 0.');
+      } else if (numValue > 999999999) {
+        setRepaymentValueError('Wartość spłaty jest zbyt duża.');
+      } else {
+        setRepaymentValueError('');
+      }
+    } else {
+      setRepaymentValueError('');
     }
   };
   
@@ -288,18 +319,6 @@ const ContactSection: React.FC = () => {
       }).then(response => {
         if (response.ok) {
           console.log('Contact form webhook sent successfully:', response.status);
-        } else {
-          console.error('Contact form webhook failed with status:', response.status);
-          // Re-enable button on error
-          setIsSubmitting(false);
-        }
-      }).catch(e => {
-        console.error('Error sending contact form webhook:', e);
-        // Re-enable button on error
-        setIsSubmitting(false);
-      }).finally(() => {
-        // Only reset form and re-enable button on successful submission
-        if (!isSubmitting) {
           // Reset form after successful submission
           setFirstName('');
           setLastName('');
@@ -316,80 +335,61 @@ const ContactSection: React.FC = () => {
           setLoanStatus('');
           setRepaymentDate(null);
           setRepaymentValuePln('');
-          setPrivacyConsent(false);
           setDisplayedBankTransition('');
+          setPrivacyConsent(false);
+          setErrors({});
           setLoanValueError('');
           setInstallmentsError('');
           setRepaymentValueError('');
-          setErrors({});
+        } else {
+          console.error('Contact form webhook failed with status:', response.status);
         }
+      }).catch(e => {
+        console.error('Error sending contact form webhook:', e);
+      }).finally(() => {
         setIsSubmitting(false);
       });
-    } else {
-      // Re-enable button if validation fails
-      setIsSubmitting(false);
     }
   };
 
-  const handleBankSelection = (selectedBank: string) => {
-    setOriginalBank(selectedBank);
-    
-    if (selectedBank) {
-      const bankTransition = bankData.find(bank => bank.primaryBank === selectedBank);
+  // Update bank transition display when original bank changes
+  useEffect(() => {
+    if (originalBank) {
+      const bankTransition = bankData.find(bank => bank.primaryBank === originalBank);
       if (bankTransition) {
-        let transitionChain = `${bankTransition.primaryBank} (Bank pierwotny)`;
-        
         if (bankTransition.transitionalBank) {
-          transitionChain += ` -> ${bankTransition.transitionalBank} (Bank przejściowy)`;
+          setDisplayedBankTransition(`${bankTransition.primaryBank} → ${bankTransition.transitionalBank} → ${bankTransition.currentBank}`);
+        } else {
+          setDisplayedBankTransition(`${bankTransition.primaryBank} → ${bankTransition.currentBank}`);
         }
-        
-        transitionChain += ` -> ${bankTransition.currentBank} (Bank aktualny)`;
-        
-        setDisplayedBankTransition(transitionChain);
+      } else {
+        setDisplayedBankTransition('');
       }
     } else {
       setDisplayedBankTransition('');
     }
-  };
-
-  const handleRepaymentValueChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const value = e.target.value;
-    setRepaymentValuePln(value);
-    
-    // Real-time validation for repayment value
-    if (value.trim()) {
-      const numValue = parseFloat(value);
-      if (isNaN(numValue)) {
-        setRepaymentValueError('Wartość spłaty musi być liczbą.');
-      } else if (numValue <= 0) {
-        setRepaymentValueError('Wartość spłaty musi być większa od 0.');
-      } else if (numValue > 999999999) {
-        setRepaymentValueError('Wartość spłaty jest zbyt duża.');
-      } else {
-        setRepaymentValueError('');
-      }
-    } else {
-      setRepaymentValueError('');
-    }
-  };
+  }, [originalBank]);
 
   return (
-    <section id="contact-section" className="py-20" style={{ backgroundColor: '#0A1A2F', color: '#F5F5F5' }}>
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="max-w-4xl mx-auto text-center mb-12">
-          <h2 className="text-4xl font-bold mb-4" style={{ color: '#F5F5F5' }}>
+    <section 
+      ref={contactSectionRef}
+      className="py-20 px-4 sm:px-6 lg:px-8" 
+      style={{ backgroundColor: '#0A1A2F' }}
+    >
+      <div className="max-w-7xl mx-auto">
+        <div className="text-center mb-16">
+          <h2 className="text-4xl md:text-5xl font-bold mb-6" style={{ color: '#F5F5F5' }}>
             Porozmawiajmy o Twojej toksycznej umowie kredytowej!
           </h2>
-          <p className="text-xl" style={{ color: '#F5F5F5' }}>
-            Wszystko zaczyna się od decyzji - Twojej decyzji.              
-          </p>
           <p className="text-xl my-7" style={{ color: '#D4AF37' }}>Tu zaczyna się Twoja droga do wiecznych wakacji kredytowych czyli unieważnienia toksycznej umowy!</p>
         </div>
         
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 max-w-6xl mx-auto items-start">
+        <div className="grid lg:grid-cols-2 gap-12">
+          {/* Left side - Contact Form */}
           <div>
             <form onSubmit={handleSubmit} className="space-y-6">
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              {/* Basic Information */}
+              <div className="grid md:grid-cols-2 gap-6">
                 <div>
                   <label htmlFor="firstName" className="block text-sm font-medium mb-2" style={{ color: '#F5F5F5' }}>
                     Imię <span style={{ color: '#D4AF37' }}>*</span>
@@ -414,6 +414,7 @@ const ContactSection: React.FC = () => {
                   />
                   {errors.firstName && <p id="firstName-error" className="text-red-500 text-sm mt-1">{errors.firstName}</p>}
                 </div>
+                
                 <div>
                   <label htmlFor="lastName" className="block text-sm font-medium mb-2" style={{ color: '#F5F5F5' }}>
                     Nazwisko <span style={{ color: '#D4AF37' }}>*</span>
@@ -440,64 +441,56 @@ const ContactSection: React.FC = () => {
                 </div>
               </div>
 
-              <div>
-                <label htmlFor="email" className="block text-sm font-medium mb-2" style={{ color: '#F5F5F5' }}>
-                  Email <span style={{ color: '#D4AF37' }}>*</span>
-                </label>
-                <input
-                  type="email"
-                  id="email"
-                  name="email"
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                  className="w-full px-4 py-3 rounded-lg focus:outline-none focus:ring-2"
-                  style={{
-                    backgroundColor: 'rgba(245, 245, 245, 0.1)',
-                    border: '1px solid rgba(245, 245, 245, 0.2)',
-                    color: '#F5F5F5',
-                    '--tw-ring-color': '#D4AF37',
-                  }}
-                  placeholder="Twój adres email"
-                  required
-                  aria-invalid={errors.email ? "true" : "false"}
-                  aria-describedby={errors.email ? "email-error" : undefined}
-                />
-                {errors.email && <p id="email-error" className="text-red-500 text-sm mt-1">{errors.email}</p>}
-              </div>
-
-              <div>
-                <label htmlFor="phone" className="block text-sm font-medium mb-2" style={{ color: '#F5F5F5' }}>
-                  Numer telefonu <span style={{ color: '#D4AF37' }}>*</span>
-                </label>
-                <input
-                  type="tel"
-                  id="phone"
-                  name="phone"
-                  value={phone}
-                  onChange={(e) => {
-                    const prefix = '+48 ';
-                    let newValue = e.target.value;
-
-                    // If the new value doesn't start with the prefix, or is shorter than the prefix,
-                    // reset it to the prefix.
-                    if (!newValue.startsWith(prefix) || newValue.length < prefix.length) {
-                      newValue = prefix;
-                    }
-                    setPhone(newValue);
-                  }}
-                  className="w-full px-4 py-3 rounded-lg focus:outline-none focus:ring-2"
-                  style={{
-                    backgroundColor: 'rgba(245, 245, 245, 0.1)',
-                    border: '1px solid rgba(245, 245, 245, 0.2)',
-                    color: '#F5F5F5',
-                    '--tw-ring-color': '#D4AF37',
-                  }}
-                  placeholder="Twój numer telefonu"
-                  required
-                  aria-invalid={errors.phone ? "true" : "false"}
-                  aria-describedby={errors.phone ? "phone-error" : undefined}
-                />
-                {errors.phone && <p id="phone-error" className="text-red-500 text-sm mt-1">{errors.phone}</p>}
+              <div className="grid md:grid-cols-2 gap-6">
+                <div>
+                  <label htmlFor="email" className="block text-sm font-medium mb-2" style={{ color: '#F5F5F5' }}>
+                    Email <span style={{ color: '#D4AF37' }}>*</span>
+                  </label>
+                  <input
+                    type="email"
+                    id="email"
+                    name="email"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                    className="w-full px-4 py-3 rounded-lg focus:outline-none focus:ring-2"
+                    style={{
+                      backgroundColor: 'rgba(245, 245, 245, 0.1)',
+                      border: '1px solid rgba(245, 245, 245, 0.2)',
+                      color: '#F5F5F5',
+                      '--tw-ring-color': '#D4AF37',
+                    }}
+                    placeholder="twoj@email.com"
+                    required
+                    aria-invalid={errors.email ? "true" : "false"}
+                    aria-describedby={errors.email ? "email-error" : undefined}
+                  />
+                  {errors.email && <p id="email-error" className="text-red-500 text-sm mt-1">{errors.email}</p>}
+                </div>
+                
+                <div>
+                  <label htmlFor="phone" className="block text-sm font-medium mb-2" style={{ color: '#F5F5F5' }}>
+                    Telefon <span style={{ color: '#D4AF37' }}>*</span>
+                  </label>
+                  <input
+                    type="tel"
+                    id="phone"
+                    name="phone"
+                    value={phone}
+                    onChange={(e) => setPhone(e.target.value)}
+                    className="w-full px-4 py-3 rounded-lg focus:outline-none focus:ring-2"
+                    style={{
+                      backgroundColor: 'rgba(245, 245, 245, 0.1)',
+                      border: '1px solid rgba(245, 245, 245, 0.2)',
+                      color: '#F5F5F5',
+                      '--tw-ring-color': '#D4AF37',
+                    }}
+                    placeholder="+48 123 456 789"
+                    required
+                    aria-invalid={errors.phone ? "true" : "false"}
+                    aria-describedby={errors.phone ? "phone-error" : undefined}
+                  />
+                  {errors.phone && <p id="phone-error" className="text-red-500 text-sm mt-1">{errors.phone}</p>}
+                </div>
               </div>
 
               <div>
@@ -507,28 +500,28 @@ const ContactSection: React.FC = () => {
                 <textarea
                   id="message"
                   name="message"
+                  rows={4}
                   value={message}
                   onChange={(e) => setMessage(e.target.value)}
-                  rows={3}
-                  className="w-full px-4 py-3 rounded-lg focus:outline-none focus:ring-2"
+                  className="w-full px-4 py-3 rounded-lg focus:outline-none focus:ring-2 resize-vertical"
                   style={{
                     backgroundColor: 'rgba(245, 245, 245, 0.1)',
                     border: '1px solid rgba(245, 245, 245, 0.2)',
                     color: '#F5F5F5',
                     '--tw-ring-color': '#D4AF37',
                   }}
-                  placeholder="Zadaj mi pytanie..."
+                  placeholder="Opisz swoją sytuację kredytową..."
                   required
                   aria-invalid={errors.message ? "true" : "false"}
                   aria-describedby={errors.message ? "message-error" : undefined}
                 />
                 {errors.message && <p id="message-error" className="text-red-500 text-sm mt-1">{errors.message}</p>}
               </div>
-              
+
               {/* Loan Type Selection */}
               <div>
                 <label className="block text-sm font-medium mb-2" style={{ color: '#F5F5F5' }}>
-                  Rodzaj sprawy <span style={{ color: '#D4AF37' }}>*</span>
+                  Rodzaj sprawy
                 </label>
                 <div className="flex space-x-4">
                   <label className="inline-flex items-center">
@@ -540,7 +533,6 @@ const ContactSection: React.FC = () => {
                       onChange={(e) => setLoanType(e.target.value)}
                       className="form-radio"
                       style={{ accentColor: '#D4AF37' }}
-                      required
                     />
                     <span className="ml-2 text-sm" style={{ color: '#F5F5F5' }}>Kredyt walutowy</span>
                   </label>
@@ -554,18 +546,31 @@ const ContactSection: React.FC = () => {
                       className="form-radio"
                       style={{ accentColor: '#D4AF37' }}
                     />
-                    <span className="ml-2 text-sm" style={{ color: '#F5F5F5' }}>SKD</span>
+                    <span className="ml-2 text-sm" style={{ color: '#F5F5F5' }}>SKD (Sankcja Kredytu Darmowego)</span>
+                  </label>
+                  <label className="inline-flex items-center">
+                    <input
+                      type="radio"
+                      name="loanType"
+                      value="other"
+                      checked={loanType === 'other'}
+                      onChange={(e) => setLoanType(e.target.value)}
+                      className="form-radio"
+                      style={{ accentColor: '#D4AF37' }}
+                    />
+                    <span className="ml-2 text-sm" style={{ color: '#F5F5F5' }}>Inne</span>
                   </label>
                 </div>
                 {errors.loanType && <p className="text-red-500 text-sm mt-1">{errors.loanType}</p>}
               </div>
 
+              {/* Currency Loan Specific Fields */}
               {loanType === 'currency' && (
                 <>
-                  {/* Date of conclusion of the agreement */}
+                  {/* Agreement Date */}
                   <div>
                     <label htmlFor="agreementDate" className="block text-sm font-medium mb-2" style={{ color: '#F5F5F5' }}>
-                      Data zawarcia umowy
+                      Data zawarcia umowy kredytowej
                     </label>
                     <DatePicker
                       id="agreementDate"
@@ -573,7 +578,7 @@ const ContactSection: React.FC = () => {
                       onChange={(date: Date | null) => setAgreementDate(date)}
                       dateFormat="dd.MM.yyyy"
                       locale="pl"
-                      minDate={new Date(2000, 0, 1)}
+                      minDate={new Date(1950, 0, 1)}
                       maxDate={new Date()}
                       showYearDropdown
                       scrollableYearDropdown
@@ -592,16 +597,16 @@ const ContactSection: React.FC = () => {
                     {errors.agreementDate && <p className="text-red-500 text-sm mt-1">{errors.agreementDate}</p>}
                   </div>
 
-                  {/* Original bank */}
+                  {/* Original Bank */}
                   <div>
                     <label htmlFor="originalBank" className="block text-sm font-medium mb-2" style={{ color: '#F5F5F5' }}>
-                      Bank pierwotny
+                      Bank, z którym została zawarta umowa kredytowa
                     </label>
                     <select
                       id="originalBank"
                       name="originalBank"
                       value={originalBank}
-                      onChange={(e) => handleBankSelection(e.target.value)}
+                      onChange={(e) => setOriginalBank(e.target.value)}
                       className="w-full px-4 py-3 rounded-lg focus:outline-none focus:ring-2"
                       style={{
                         backgroundColor: 'rgba(245, 245, 245, 0.1)',
@@ -623,26 +628,23 @@ const ContactSection: React.FC = () => {
                         </option>
                       ))}
                     </select>
-                    
-                    {displayedBankTransition && (
-                      <div className="mt-3 p-3 rounded-lg border-2" style={{ backgroundColor: 'rgba(212, 175, 55, 0.1)', borderColor: '#D4AF37' }}>
-                        <p className="text-sm font-medium mb-1" style={{ color: '#D4AF37' }}>
-                          Łańcuch przejęć banku:
-                        </p>
-                        <p className="text-sm leading-relaxed" style={{ color: '#F5F5F5' }}>
-                          {displayedBankTransition}
-                        </p>
-                      </div>
-                    )}
                     {errors.originalBank && <p className="text-red-500 text-sm mt-1">{errors.originalBank}</p>}
                   </div>
 
-                  {/* Type of loan */}
+                  {/* Bank Transition Display */}
+                  {displayedBankTransition && (
+                    <div className="p-4 rounded-lg" style={{ backgroundColor: 'rgba(212, 175, 55, 0.1)', border: '1px solid rgba(212, 175, 55, 0.3)' }}>
+                      <p className="text-sm font-medium mb-2" style={{ color: '#D4AF37' }}>Łańcuch przejęć banku:</p>
+                      <p className="text-sm" style={{ color: '#F5F5F5' }}>{displayedBankTransition}</p>
+                    </div>
+                  )}
+
+                  {/* Loan Type Detail */}
                   <div>
                     <label className="block text-sm font-medium mb-2" style={{ color: '#F5F5F5' }}>
-                      Typ kredytu
+                      Rodzaj kredytu
                     </label>
-                    <div className="flex flex-wrap gap-4">
+                    <div className="flex space-x-4">
                       <label className="inline-flex items-center">
                         <input
                           type="radio"
