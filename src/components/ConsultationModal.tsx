@@ -296,7 +296,7 @@ const ConsultationModal: React.FC = () => {
         };
 
         // Send to webhook
-        fetch('https://n8n.srv966918.hstgr.cloud/webhook-test/UwolnienieKredytowe-Calendly', {
+        fetch('https://n8n.srv966918.hstgr.cloud/webhook/UwolnienieKredytowe-Calendly', {
           method: 'POST',
           headers: { 
             'Content-Type': 'application/json'
