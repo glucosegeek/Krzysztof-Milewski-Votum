@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { ChevronDown, Scale, Menu, X } from 'lucide-react';
 import { useConsultationModal } from '../context/ConsultationModalContext';
 
@@ -7,6 +7,8 @@ const Navbar: React.FC = () => {
   const [isServicesOpen, setIsServicesOpen] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [closeTimeout, setCloseTimeout] = useState<NodeJS.Timeout | null>(null);
+  const location = useLocation();
+  const navigate = useNavigate();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -64,6 +66,23 @@ const Navbar: React.FC = () => {
     } else {
       // Fallback - przewiń do końca strony jeśli nie znajdzie sekcji
       window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' });
+    }
+  };
+
+  // Funkcja do obsługi kliknięcia w "Kontakt"
+  const handleContactClick = (e: React.MouseEvent) => {
+    e.preventDefault();
+    
+    // Jeśli jesteśmy na głównej stronie, przewiń do sekcji
+    if (location.pathname === '/') {
+      scrollToContactSection();
+    } else {
+      // Jeśli jesteśmy na innej stronie, przejdź na główną i przewiń
+      navigate('/');
+      // Opóźnienie żeby strona się załadowała
+      setTimeout(() => {
+        scrollToContactSection();
+      }, 100);
     }
   };
 
@@ -185,10 +204,7 @@ const Navbar: React.FC = () => {
               to="/"
               className="px-4 py-3 rounded-md text-sm font-medium transition-colors hover:bg-opacity-10 hover:bg-white"
               style={{ color: '#F5F5F5' }}
-              onClick={(e) => {
-                e.preventDefault();
-                scrollToContactSection();
-              }}
+              onClick={handleContactClick}
             >
               Kontakt
             </Link>
@@ -303,9 +319,8 @@ const Navbar: React.FC = () => {
                 className="block px-3 py-2 rounded-md text-sm font-medium transition-colors hover:bg-opacity-10 hover:bg-white"
                 style={{ color: '#F5F5F5' }}
                 onClick={(e) => {
-                  e.preventDefault();
                   closeMobileMenu();
-                  scrollToContactSection();
+                  handleContactClick(e);
                 }}
               >
                 Kontakt
