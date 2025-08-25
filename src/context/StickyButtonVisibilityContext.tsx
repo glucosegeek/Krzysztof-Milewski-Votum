@@ -5,6 +5,7 @@ interface StickyButtonVisibilityContextType {
   showButton: boolean;
   registerHeroSection: (element: HTMLElement | null) => void;
   registerFooterSection: (element: HTMLElement | null) => void;
+  registerContactSection: (element: HTMLElement | null) => void;
 }
 
 const StickyButtonVisibilityContext = createContext<StickyButtonVisibilityContextType | undefined>(undefined);
@@ -25,6 +26,7 @@ export const StickyButtonVisibilityProvider: React.FC<StickyButtonVisibilityProv
   const [showButton, setShowButton] = useState(true);
   const [heroElement, setHeroElement] = useState<HTMLElement | null>(null);
   const [footerElement, setFooterElement] = useState<HTMLElement | null>(null);
+  const [contactElement, setContactElement] = useState<HTMLElement | null>(null);
   const location = useLocation();
 
   const registerHeroSection = (element: HTMLElement | null) => {
@@ -35,13 +37,18 @@ export const StickyButtonVisibilityProvider: React.FC<StickyButtonVisibilityProv
     setFooterElement(element);
   };
 
+  const registerContactSection = (element: HTMLElement | null) => {
+    setContactElement(element);
+  };
+
   useEffect(() => {
     let heroIntersecting = false;
     let footerIntersecting = false;
+    let contactIntersecting = false;
 
     const updateButtonVisibility = () => {
-      // Hide button if hero is intersecting (home page only) OR footer is intersecting (any page)
-      const shouldHide = (location.pathname === '/' && heroIntersecting) || footerIntersecting;
+      // Hide button if hero is intersecting (home page only) OR footer is intersecting OR contact is intersecting
+      const shouldHide = (location.pathname === '/' && heroIntersecting) || footerIntersecting || contactIntersecting;
       setShowButton(!shouldHide);
     };
 
@@ -54,10 +61,7 @@ export const StickyButtonVisibilityProvider: React.FC<StickyButtonVisibilityProv
           heroIntersecting = entry.isIntersecting;
           updateButtonVisibility();
         },
-        {
-          threshold: 0.1,
-          rootMargin: '-50px 0px 0px 0px'
-        }
+        { threshold: 0.1 }
       );
       heroObserver.observe(heroElement);
     }
@@ -71,29 +75,42 @@ export const StickyButtonVisibilityProvider: React.FC<StickyButtonVisibilityProv
           footerIntersecting = entry.isIntersecting;
           updateButtonVisibility();
         },
-        {
-          threshold: 0.1,
-          rootMargin: '0px 0px -50px 0px'
-        }
+        { threshold: 0.1 }
       );
       footerObserver.observe(footerElement);
+    }
+
+    // Set up intersection observer for contact section (all pages)
+    let contactObserver: IntersectionObserver | null = null;
+    if (contactElement) {
+      contactObserver = new IntersectionObserver(
+        (entries) => {
+          const [entry] = entries;
+          contactIntersecting = entry.isIntersecting;
+          updateButtonVisibility();
+        },
+        { threshold: 0.1 }
+      );
+      contactObserver.observe(contactElement);
     }
 
     // Initial visibility update
     updateButtonVisibility();
 
     return () => {
-      if (heroObserver) {
-        heroObserver.disconnect();
-      }
-      if (footerObserver) {
-        footerObserver.disconnect();
-      }
+      if (heroObserver) heroObserver.disconnect();
+      if (footerObserver) footerObserver.disconnect();
+      if (contactObserver) contactObserver.disconnect();
     };
-  }, [heroElement, footerElement, location.pathname]);
+  }, [heroElement, footerElement, contactElement, location.pathname]);
 
   return (
-    <StickyButtonVisibilityContext.Provider value={{ showButton, registerHeroSection, registerFooterSection }}>
+    <StickyButtonVisibilityContext.Provider value={{
+      showButton,
+      registerHeroSection,
+      registerFooterSection,
+      registerContactSection
+    }}>
       {children}
     </StickyButtonVisibilityContext.Provider>
   );
