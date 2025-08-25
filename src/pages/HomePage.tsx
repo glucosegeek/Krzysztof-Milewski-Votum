@@ -518,10 +518,12 @@ const conciergeItems = [
             <div className="grid lg:grid-cols-2 gap-12 items-center">
               <div>
                 <div className="w-100 h-180 mx-auto lg:mx-0 flex items-center justify-center">
-  {/* POPRAWIONE - usuń odwołanie do nieistniejącego pliku */}
-  <div className="w-full h-full bg-gradient-to-br from-gray-200 to-gray-400 rounded-lg flex items-center justify-center">
-    <span className="text-gray-600 text-lg">Zdjęcie Krzysztofa Milewskiego</span>
-  </div>
+   <img
+  src="/votum-background.jpg"
+  alt="Krzysztof Milewski - Expert ds. unieważniania kredytów walutowych"
+  className="w-full h-full object-cover" // Ensure the image covers the div
+/>
+
 </div>
 
               </div>
