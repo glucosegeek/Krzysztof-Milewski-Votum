@@ -32,7 +32,6 @@ const Navbar: React.FC = () => {
     setIsServicesOpen(false);
   };
 
-  // Funkcja do przewijania do sekcji kontaktowej
 // Funkcja do obsługi kliknięcia w "Kontakt"
 const handleContactClick = (e: React.MouseEvent) => {
   e.preventDefault();
@@ -83,23 +82,6 @@ const handleContactClick = (e: React.MouseEvent) => {
     setTimeout(() => checkAndScroll(), 200);
   }
 };
-
-  // Funkcja do obsługi kliknięcia w "Kontakt"
-  const handleContactClick = (e: React.MouseEvent) => {
-    e.preventDefault();
-    
-    // Jeśli jesteśmy na głównej stronie, przewiń do sekcji
-    if (location.pathname === '/') {
-      scrollToContactSection();
-    } else {
-      // Jeśli jesteśmy na innej stronie, przejdź na główną i przewiń
-      navigate('/');
-      // Opóźnienie żeby strona się załadowała
-      setTimeout(() => {
-        scrollToContactSection();
-      }, 100);
-    }
-  };
 
   return (
     <nav className="fixed top-0 left-0 right-0 z-50 shadow-lg border-b-4" style={{ backgroundColor: '#0A1A2F', borderColor: '#D4AF37' }}>
