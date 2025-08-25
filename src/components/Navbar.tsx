@@ -33,49 +33,54 @@ const Navbar: React.FC = () => {
   };
 
   // Funkcja do przewijania do sekcji kontaktowej
-const scrollToContactSection = () => {
-  // Najpierw sprawdź czy jest atrybut data-section (najniezawodniejszy sposób)
-  let contactSection = document.querySelector('[data-section="contact"]');
+// Funkcja do obsługi kliknięcia w "Kontakt"
+const handleContactClick = (e: React.MouseEvent) => {
+  e.preventDefault();
   
-  // Jeśli nie ma, szukaj po tekście w h2 (bardziej precyzyjne niż kolor)
-  if (!contactSection) {
-    const headings = document.querySelectorAll('h2');
-    for (const heading of headings) {
-      if (heading.textContent?.includes('Porozmawiajmy') || 
-          heading.textContent?.includes('toksycznej umowie')) {
-        contactSection = heading.closest('section');
-        break;
-      }
-    }
-  }
-  
-  // Jako ostateczność szukaj po kolorze tła, ale tylko sekcje z formularzem
-  if (!contactSection) {
-    const sections = document.querySelectorAll('section');
-    for (const section of sections) {
-      const style = window.getComputedStyle(section);
-      const hasForm = section.querySelector('form');
-      if ((style.backgroundColor === 'rgb(10, 26, 47)' || 
-           section.style.backgroundColor === '#0A1A2F') && hasForm) {
-        contactSection = section;
-        break;
-      }
-    }
-  }
-  
-  if (contactSection) {
-    // Dodaj offset dla navbar (który ma fixed position)
-    const navbarHeight = 64; // wysokość navbar w px
-    const elementPosition = contactSection.getBoundingClientRect().top + window.pageYOffset;
-    const offsetPosition = elementPosition - navbarHeight;
-    
-    window.scrollTo({
-      top: offsetPosition,
-      behavior: 'smooth'
-    });
+  // Jeśli jesteśmy na głównej stronie, przewiń do sekcji
+  if (location.pathname === '/') {
+    scrollToContactSection();
   } else {
-    // Fallback - przewiń do końca strony jeśli nie znajdzie sekcji
-    window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' });
+    // Jeśli jesteśmy na innej stronie, przejdź na główną i przewiń
+    navigate('/');
+    
+    // Użyj dłuższego opóźnienia i sprawdzaj czy element istnieje
+    const checkAndScroll = (attempts = 0) => {
+      const maxAttempts = 20; // maksymalnie 2 sekundy (20 * 100ms)
+      
+      const contactSection = document.querySelector('[data-section="contact"]') ||
+                            document.querySelector('section:has(form)') ||
+                            (() => {
+                              const headings = document.querySelectorAll('h2');
+                              for (const heading of headings) {
+                                if (heading.textContent?.includes('Porozmawiajmy')) {
+                                  return heading.closest('section');
+                                }
+                              }
+                              return null;
+                            })();
+      
+      if (contactSection) {
+        // Element znaleziony, przewiń
+        const navbarHeight = 64;
+        const elementPosition = contactSection.getBoundingClientRect().top + window.pageYOffset;
+        const offsetPosition = elementPosition - navbarHeight;
+        
+        window.scrollTo({
+          top: offsetPosition,
+          behavior: 'smooth'
+        });
+      } else if (attempts < maxAttempts) {
+        // Element jeszcze nie istnieje, spróbuj ponownie za 100ms
+        setTimeout(() => checkAndScroll(attempts + 1), 100);
+      } else {
+        // Fallback - przewiń do końca strony
+        window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' });
+      }
+    };
+    
+    // Rozpocznij sprawdzanie po 200ms
+    setTimeout(() => checkAndScroll(), 200);
   }
 };
 
