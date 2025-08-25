@@ -482,7 +482,7 @@ const conciergeItems = [
           </div>
         </div>
       </section>
-
+      
       {/* About the Agent */}
       <section className="py-20" style={{ backgroundColor: '#0A1A2F' }}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
