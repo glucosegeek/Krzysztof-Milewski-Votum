@@ -32,9 +32,32 @@ const Navbar: React.FC = () => {
 
   // Funkcja do przewijania do sekcji kontaktowej
   const scrollToContactSection = () => {
-    const contactSection = document.querySelector('[data-section="contact"]') || 
-                          document.querySelector('section[style*="0A1A2F"]') ||
-                          document.querySelector('section:has(h2:contains("Porozmawiajmy"))');
+    // Najpierw sprawdź czy jest atrybut data-section
+    let contactSection = document.querySelector('[data-section="contact"]');
+    
+    // Jeśli nie ma, szukaj po kolorze tła
+    if (!contactSection) {
+      const sections = document.querySelectorAll('section');
+      for (const section of sections) {
+        const style = window.getComputedStyle(section);
+        if (style.backgroundColor === 'rgb(10, 26, 47)' || 
+            section.style.backgroundColor === '#0A1A2F') {
+          contactSection = section;
+          break;
+        }
+      }
+    }
+    
+    // Jeśli nadal nie ma, szukaj po tekście w h2
+    if (!contactSection) {
+      const headings = document.querySelectorAll('h2');
+      for (const heading of headings) {
+        if (heading.textContent?.includes('Porozmawiajmy')) {
+          contactSection = heading.closest('section');
+          break;
+        }
+      }
+    }
     
     if (contactSection) {
       contactSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
