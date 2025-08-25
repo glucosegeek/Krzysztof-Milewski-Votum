@@ -491,7 +491,7 @@ const conciergeItems = [
               <div>
                 <div className="w-100 h-180 mx-auto lg:mx-0 flex items-center justify-center">
   <img
-  src="/votum-background.jpg"
+  src="/phone-votum-app.png"
   alt="Krzysztof Milewski - Expert ds. unieważniania kredytów walutowych"
   className="w-full h-full object-cover" // Ensure the image covers the div
 />
