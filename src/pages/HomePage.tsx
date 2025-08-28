@@ -576,7 +576,7 @@ Nie ryzykujesz nic – możesz tylko zyskać.</li>
             <h2 className="text-4xl font-bold mb-4" style={{ color: '#F5F5F5' }}>
               Pobierz naszą aplikację na swój telefon.
             </h2>
-            <p className="text-xl mb-8 rounded-2xl border-4" style={{ color: '#D4AF37', borderColor: '#D4AF37' }}>
+            <p className="text-xl mb-4 rounded-2xl border-4" style={{ color: '#D4AF37', borderColor: '#D4AF37' }}>
               Wpisz ten numer <b>K005533</b>, żebym mógł mieć Twoją sprawę zawsze pod opieką!
             </p>
             
