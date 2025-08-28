@@ -34,11 +34,10 @@ const Navbar: React.FC = () => {
         <div className="flex justify-between items-center h-16">
           {/* Logo */}
           <Link to="/" className="flex items-center space-x-2" onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}>
-           <img 
- src="/miles-logo.png" 
- alt="Krzysztof Milewski Logo" 
- className="h-20 w-auto object-contain transition-opacity hover:opacity-80"
-/>
+           <span className="text-xl font-bold" style={{ color: '
+#F5F5F5' }}>
+              Krzysztof Milewski
+            </span>
          </Link>
 
           {/* Navigation Links */}
