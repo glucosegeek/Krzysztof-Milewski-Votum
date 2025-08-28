@@ -150,9 +150,17 @@ const Footer: React.FC<FooterProps> = ({ registerFooterSection }) => {
           <h3 className="text-xl font-bold py-6" style={{ color: '#F5F5F5' }}>
             Pobierz aplikację
           </h3>
-          <p className="text-l mb-8 leading-relaxed" style={{ color: '#D4AF37' }}>
-            Wpisz ten numer K005533, żebym mógł mieć Twoją sprawę zawsze pod opieką!
-          </p>
+          <p className="text-xl font-semibold mb-8 px-4 py-3 rounded-2xl border-4 shadow-md text-center inline-block" 
+   style={{ 
+     color: '#D4AF37', 
+     borderColor: '#D4AF37',
+     backgroundColor: '#0A1A2F',
+     boxShadow: '0 4px 12px rgba(212, 175, 55, 0.15)'
+   }}>
+  Wpisz ten numer <span className="bg-yellow-100 px-2 py-1 rounded font-bold text-2xl border border-yellow-300 text-black">K005533</span>
+  <br />
+  żebym mógł mieć Twoją sprawę zawsze pod opieką!
+</p>
           <div className="flex justify-center md:justify-start space-x-8 mb-8">
             <a
               href="https://apps.apple.com/pl/app/moja-sprawa/id6736989155?l=pl"
