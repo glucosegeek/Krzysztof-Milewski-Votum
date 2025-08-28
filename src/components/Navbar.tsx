@@ -33,12 +33,12 @@ const Navbar: React.FC = () => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-16">
           {/* Logo */}
-          <Link to="/" className="h-10 w-auto sm:h-12 flex items-center space-x-2" onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}>
+          <Link to="/" className="flex items-center space-x-2" onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}>
            <img 
-             src="/miles-logo.png" 
-             alt="Krzysztof Milewski Logo" 
-             className="h-15 w-auto object-contain transition-opacity hover:opacity-80"
-           />
+ src="/miles-logo.png" 
+ alt="Krzysztof Milewski Logo" 
+ className="h-12 w-auto md:h-14 lg:h-16 object-contain transition-opacity hover:opacity-80"
+/>
          </Link>
 
           {/* Navigation Links */}
