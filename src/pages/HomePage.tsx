@@ -576,13 +576,14 @@ Nie ryzykujesz nic – możesz tylko zyskać.</li>
             <h2 className="text-4xl font-bold mb-4" style={{ color: '#F5F5F5' }}>
               Pobierz naszą aplikację na swój telefon.
             </h2>
-            <p className="text-xl font-semibold mb-8 p-5 rounded-2xl border-4 shadow-md bg-amber-50 text-center" 
+            <p className="text-xl font-semibold mb-8 px-4 py-3 rounded-2xl border-4 shadow-md text-center inline-block" 
    style={{ 
      color: '#D4AF37', 
      borderColor: '#D4AF37',
+     backgroundColor: '#0A1A2F',
      boxShadow: '0 4px 12px rgba(212, 175, 55, 0.15)'
    }}>
-  Wpisz ten numer <span className="bg-0A1A2F px-2 py-1 rounded font-bold text-2xl border border-yellow-300">K005533</span>
+  Wpisz ten numer <span className="bg-yellow-100 px-2 py-1 rounded font-bold text-2xl border border-yellow-300 text-black">K005533</span>
   <br />
   żebym mógł mieć Twoją sprawę zawsze pod opieką!
 </p>
