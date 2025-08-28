@@ -37,7 +37,7 @@ const Navbar: React.FC = () => {
             <img 
               src="/miles-logo.png" 
               alt="Krzysztof Milewski Logo" 
-              className="h-24 w-auto transition-opacity hover:opacity-100"
+              className="h-28 w-auto transition-opacity hover:opacity-100"
             />
          </Link>
 
