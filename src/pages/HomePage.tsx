@@ -582,7 +582,6 @@ Nie ryzykujesz nic – możesz tylko zyskać.</li>
      borderColor: '#D4AF37',
      boxShadow: '0 0 20px rgba(212, 175, 55, 0.3)'
    }}>
-  🔥 <span className="text-3xl">WAŻNE!</span> 🔥
   <br />
   Wpisz ten numer <span className="bg-yellow-200 px-3 py-1 rounded text-black font-black text-3xl border-2 border-yellow-400">K005533</span>
   <br />
