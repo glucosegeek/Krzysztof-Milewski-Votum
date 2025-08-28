@@ -514,6 +514,11 @@ const conciergeItems = [
         <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 lg:py-32">
           <div className="max-w-4xl mx-auto text-center">
             <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold mb-6 leading-tight">
+               <img 
+ src="/miles-logo.png" 
+ alt="Krzysztof Milewski Logo" 
+ className="h-30 w-auto object-contain transition-opacity hover:opacity-80"
+/>
               <span style={{ color: '#F5F5F5' }}>Krzysztof Milewski</span>
             </h1>
             <p className="text-xl md:text-2xl mb-6 max-w-3xl mx-auto leading-relaxed" style={{ color: '#F5F5F5' }}>
