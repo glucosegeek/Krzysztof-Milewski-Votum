@@ -583,7 +583,7 @@ Nie ryzykujesz nic – możesz tylko zyskać.</li>
      backgroundColor: '#0A1A2F',
      boxShadow: '0 4px 12px rgba(212, 175, 55, 0.15)'
    }}>
-  Wpisz ten numer <span className="bg-#0A1A2F px-2 py-1 rounded font-bold text-2xl border border-yellow-300 text-black">K005533</span>
+  Wpisz ten numer <span className="bg-0A1A2F px-2 py-1 rounded font-bold text-2xl border border-yellow-300 text-black">K005533</span>
   <br />
   żebym mógł mieć Twoją sprawę zawsze pod opieką!
 </p>
