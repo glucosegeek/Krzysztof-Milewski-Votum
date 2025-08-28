@@ -517,7 +517,7 @@ const conciergeItems = [
                <img 
  src="/miles-logo.png" 
  alt="Krzysztof Milewski Logo" 
- className="h-30 w-auto object-contain transition-opacity hover:opacity-80"
+ className="h-30 w-auto object-contain"
 />
               <span style={{ color: '#F5F5F5' }}>Krzysztof Milewski</span>
             </h1>
