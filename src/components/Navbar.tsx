@@ -11,12 +11,10 @@ const Navbar: React.FC = () => {
   const location = useLocation();
   const navigate = useNavigate();
 
-  // Funkcja do przewijania do sekcji kontaktowej - PRZENIESIONA NA GÓRĘ
+  // Funkcja do przewijania do sekcji kontaktowej
   const scrollToContactSection = () => {
-    // Najpierw sprawdź czy jest atrybut data-section (najniezawodniejszy sposób)
     let contactSection = document.querySelector('[data-section="contact"]');
     
-    // Jeśli nie ma, szukaj po tekście w h2 (bardziej precyzyjne niż kolor)
     if (!contactSection) {
       const headings = document.querySelectorAll('h2');
       for (const heading of headings) {
@@ -28,7 +26,6 @@ const Navbar: React.FC = () => {
       }
     }
     
-    // Jako ostateczność szukaj po kolorze tła, ale tylko sekcje z formularzem
     if (!contactSection) {
       const sections = document.querySelectorAll('section');
       for (const section of sections) {
@@ -43,8 +40,7 @@ const Navbar: React.FC = () => {
     }
     
     if (contactSection) {
-      // Dodaj offset dla navbar (który ma fixed position)
-      const navbarHeight = 64; // wysokość navbar w px
+      const navbarHeight = 64;
       const elementPosition = contactSection.getBoundingClientRect().top + window.pageYOffset;
       const offsetPosition = elementPosition - navbarHeight;
       
@@ -53,12 +49,10 @@ const Navbar: React.FC = () => {
         behavior: 'smooth'
       });
     } else {
-      // Fallback - przewiń do końca strony jeśli nie znajdzie sekcji
       window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' });
     }
   };
 
-  // Efekt do przewijania po zmianie lokalizacji
   useEffect(() => {
     if (shouldScrollToContact && location.pathname === '/') {
       const timer = setTimeout(() => {
@@ -92,7 +86,6 @@ const Navbar: React.FC = () => {
     setIsServicesOpen(false);
   };
 
-  // Funkcja do obsługi kliknięcia w "Kontakt"
   const handleContactClick = (e: React.MouseEvent) => {
     e.preventDefault();
     
@@ -109,12 +102,16 @@ const Navbar: React.FC = () => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-16">
           {/* Logo */}
-          <Link to="/" className="flex items-center space-x-2" onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}>
+          <Link 
+            to="/" 
+            className="flex items-center transition-opacity hover:opacity-80" 
+            onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+          >
             <img 
-                src="/miles-logo.png" 
-                alt="Krzysztof Milewski Logo" 
-                className="h-20 w-20 w-auto transition-opacity hover:opacity-80"
-              />
+              src="/miles-logo.png" 
+              alt="Krzysztof Milewski Logo" 
+              className="h-10 w-auto sm:h-12 object-contain"
+            />
           </Link>
 
           {/* Navigation Links */}
@@ -200,7 +197,7 @@ const Navbar: React.FC = () => {
             >
               O mnie
             </Link>
-            
+
             <Link
               to="/knowledge-base"
               className="px-3 py-2 rounded-md text-sm font-medium transition-colors hover:bg-opacity-10 hover:bg-white"
@@ -209,7 +206,7 @@ const Navbar: React.FC = () => {
             >
               Baza wiedzy
             </Link>
-            
+
             <Link
               to="/faq"
               className="px-3 py-2 rounded-md text-sm font-medium transition-colors hover:bg-opacity-10 hover:bg-white"
@@ -219,23 +216,33 @@ const Navbar: React.FC = () => {
               FAQ
             </Link>
 
-            {/* LINK KONTAKT */}
+            {/* PRZYCISK KONTAKT */}
             <Link
               to="/"
-              className="px-4 py-3 rounded-md text-sm font-medium transition-colors hover:bg-opacity-10 hover:bg-white"
-              style={{ color: '#F5F5F5' }}
+              className="px-4 py-2 rounded-md text-sm font-medium border-2 transition-all hover:bg-opacity-10 hover:bg-white"
+              style={{ color: '#F5F5F5', borderColor: '#D4AF37' }}
               onClick={handleContactClick}
             >
               Kontakt
             </Link>
+
+            {/* PRZYCISK UMÓW KONSULTACJĘ */}
+            <button
+              onClick={openModal}
+              className="px-4 py-2 rounded-md text-sm font-medium border-2 transition-colors hover:bg-opacity-90"
+              style={{ backgroundColor: '#D4AF37', color: '#0A1A2F', borderColor: '#D4AF37' }}
+            >
+              Umów konsultację
+            </button>
           </div>
 
-          {/* Mobile Menu Button */}
+          {/* Hamburger Menu Button */}
           <div className="md:hidden">
             <button
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
               className="p-2 rounded-md transition-colors hover:bg-opacity-10 hover:bg-white"
               style={{ color: '#F5F5F5' }}
+              aria-label="Toggle menu"
             >
               {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
             </button>
@@ -333,7 +340,6 @@ const Navbar: React.FC = () => {
                 FAQ
               </Link>
 
-              {/* LINK KONTAKT W MOBILE MENU */}
               <Link
                 to="/"
                 className="block px-3 py-2 rounded-md text-sm font-medium transition-colors hover:bg-opacity-10 hover:bg-white"
@@ -345,6 +351,17 @@ const Navbar: React.FC = () => {
               >
                 Kontakt
               </Link>
+
+              <button
+                onClick={() => {
+                  closeMobileMenu();
+                  openModal();
+                }}
+                className="w-full text-left px-3 py-2 rounded-md text-sm font-medium transition-colors hover:bg-opacity-10 hover:bg-white"
+                style={{ color: '#D4AF37' }}
+              >
+                Umów konsultację
+              </button>
             </div>
           </div>
         )}
