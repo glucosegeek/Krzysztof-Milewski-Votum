@@ -6,6 +6,23 @@ import { useConsultationModal } from '../context/ConsultationModalContext';
 const Navbar: React.FC = () => {
   const [isServicesOpen, setIsServicesOpen] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [timeoutId, setTimeoutId] = useState<NodeJS.Timeout | null>(null);
+
+ const handleMouseEnter = () => {
+    if (timeoutId) {
+      clearTimeout(timeoutId);
+      setTimeoutId(null);
+    }
+    setIsServicesOpen(true);
+  };
+
+  const handleMouseLeave = () => {
+    const id = setTimeout(() => {
+      setIsServicesOpen(false);
+    }, 300); // 300ms opóźnienia
+    setTimeoutId(id);
+  };
+  
   useEffect(() => {
   const handleScroll = () => {
     if (isMobileMenuOpen) {
@@ -54,20 +71,25 @@ const Navbar: React.FC = () => {
 
             {/* Usługi Dropdown */}
             <div
-              className="relative"
-              onMouseEnter={() => setIsServicesOpen(true)}
-              onMouseLeave={() => setIsServicesOpen(false)}
-            >
-  <button
-    className="flex items-center space-x-1 px-3 py-2 rounded-md text-sm font-medium transition-colors hover:bg-opacity-10 hover:bg-white"
-    style={{ color: '#F5F5F5' }}
-  >
-    <span>Usługi</span>
-    <ChevronDown size={16} className={`transform transition-transform ${isServicesOpen ? 'rotate-180' : ''}`} />
-  </button>
+      className="relative"
+      onMouseEnter={handleMouseEnter}
+      onMouseLeave={handleMouseLeave}
+    >
+      <button
+        className="flex items-center space-x-1 px-3 py-2 rounded-md text-sm font-medium transition-colors hover:bg-opacity-10 hover:bg-white"
+        style={{ color: '#F5F5F5' }}
+      >
+        <span>Usługi</span>
+        <ChevronDown size={16} className={`transform transition-transform ${isServicesOpen ? 'rotate-180' : ''}`} />
+      </button>
 
-  {isServicesOpen && (
-    <div className="absolute top-full left-0 mt-1 w-64 rounded-md shadow-lg border-2" style={{ backgroundColor: '#0A1A2F', borderColor: '#D4AF37' }}>
+      {isServicesOpen && (
+        <div 
+          className="absolute top-full left-0 mt-1 w-64 rounded-md shadow-lg border-2" 
+          style={{ backgroundColor: '#0A1A2F', borderColor: '#D4AF37' }}
+          onMouseEnter={handleMouseEnter}
+          onMouseLeave={handleMouseLeave}
+        >
       <div className="py-1">
         <Link
           to="/services/currency"
