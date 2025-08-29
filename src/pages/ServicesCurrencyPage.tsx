@@ -75,13 +75,19 @@ const ServicesCurrencyPage: React.FC = () => {
                 </p>
               </div>
               <div className="flex items-center justify-center">
-                <div className="w-80 h-80 rounded-2xl shadow-xl border-8 flex items-center justify-center" style={{ backgroundColor: '#0A1A2F', borderColor: '#D4AF37' }}>
-                  <img 
-      src="/CurrencyPage.png" 
-      alt="Opis zdjęcia"
-      className="w-32 h-32 object-contain"
-    />
-                </div>
+                <div 
+    className="w-80 h-80 rounded-2xl shadow-xl border-8 flex items-center justify-center" 
+    style={{ 
+      backgroundColor: '#0A1A2F', 
+      borderColor: '#D4AF37',
+      backgroundImage: 'url(/image.png)',
+      backgroundSize: 'contain',
+      backgroundPosition: 'center',
+      backgroundRepeat: 'no-repeat'
+    }}
+  >
+    {/* Pusty div lub usuń zawartość */}
+  </div>
               </div>
             </div>
 
