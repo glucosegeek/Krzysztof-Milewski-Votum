@@ -371,8 +371,7 @@ const ContactSection: React.FC = () => {
   }, [originalBank]);
 
   return (
-    <section id="contact-section"
-      ref={contactSectionRef}
+    <section id="contact-section"      ref={contactSectionRef}
   data-section="contact"
   className="py-20 px-4 sm:px-6 lg:px-8" 
   style={{ backgroundColor: '#0A1A2F' }}
