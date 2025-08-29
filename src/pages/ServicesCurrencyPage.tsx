@@ -27,16 +27,7 @@ const ServicesCurrencyPage: React.FC = () => {
       {/* Header */}
       <section className="py-20" style={{ backgroundColor: '#0A1A2F' }}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="max-w-4xl mx-auto">
-            <Link 
-              to="/" 
-              className="inline-flex items-center space-x-2 mb-8 text-lg transition-colors hover:opacity-80"
-              style={{ color: '#D4AF37' }}
-            >
-              <ArrowLeft size={20} />
-              <span>Powrót do strony głównej</span>
-            </Link>
-            
+          <div className="max-w-4xl mx-auto">            
             <div className="text-center mb-16">
               <div className="w-24 h-24 rounded-2xl shadow-xl border-4 flex items-center justify-center mx-auto mb-8 transition-all duration-500" style={{ backgroundColor: '#F5F5F5', borderColor: '#D4AF37' }}>                
                 <span className="text-2xl font-bold" style={{ color: '#0A1A2F' }}>
