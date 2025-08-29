@@ -12,7 +12,7 @@ const StickyLogo: React.FC = () => {
         <img 
           src="/miles-logo.png" 
           alt="Krzysztof Milewski Logo" 
-          className="h-35 w-auto transition-opacity hover:opacity-80 drop-shadow-lg"
+          className="h-25 w-auto transition-opacity hover:opacity-80 drop-shadow-lg"
         />
       </Link>
     </div>
