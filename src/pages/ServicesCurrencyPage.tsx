@@ -38,14 +38,7 @@ const ServicesCurrencyPage: React.FC = () => {
             </Link>
             
             <div className="text-center mb-16">
-              <div className="w-24 h-24 rounded-2xl shadow-xl border-4 flex items-center justify-center mx-auto mb-8 transition-all duration-500" style={{ backgroundColor: '#F5F5F5', borderColor: '#D4AF37' }}>
-                <div className="relative overflow-hidden" style={{
-        backgroundImage: 'url(/hero-background.jpg)',
-        backgroundSize: 'cover',
-        backgroundPosition: 'center',
-        backgroundRepeat: 'no-repeat'
-      }}></div>
-                
+              <div className="w-24 h-24 rounded-2xl shadow-xl border-4 flex items-center justify-center mx-auto mb-8 transition-all duration-500" style={{ backgroundColor: '#F5F5F5', borderColor: '#D4AF37' }}>                
                 <span className="text-2xl font-bold" style={{ color: '#0A1A2F' }}>
                   {currencyIcons[currentIconIndex].name}
                 </span>
