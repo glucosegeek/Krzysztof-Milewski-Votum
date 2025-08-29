@@ -86,7 +86,6 @@ const ServicesCurrencyPage: React.FC = () => {
       backgroundRepeat: 'no-repeat'
     }}
   >
-    {/* Pusty div lub usuń zawartość */}
   </div>
               </div>
             </div>
