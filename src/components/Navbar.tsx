@@ -31,7 +31,15 @@ const Navbar: React.FC = () => {
   return (
     <nav className="fixed top-0 left-0 right-0 z-50 shadow-lg border-b-4" style={{ backgroundColor: '#0A1A2F', borderColor: '#D4AF37' }}>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex justify-end items-center h-20 md:h-32">
+        <div className="flex justify-between items-center h-16">
+          {/* Logo */}
+          {/* <Link to="/" className="flex items-center space-x-2" onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}>
+            <img 
+              src="/miles-logo.png" 
+              alt="Krzysztof Milewski Logo" 
+              className="h-20 w-auto transition-opacity hover:opacity-100"
+            />
+         </Link> */}
 
           {/* Navigation Links */}
           <div className="hidden md:flex items-center space-x-8">
@@ -134,24 +142,6 @@ const Navbar: React.FC = () => {
         {/* Mobile Menu */}
         {isMobileMenuOpen && (
           <div className="md:hidden absolute top-full left-0 right-0 shadow-lg border-t-2" style={{ backgroundColor: '#0A1A2F', borderColor: '#D4AF37' }}>
-            {/* Mobile Logo */}
-            <div className="flex items-center justify-center py-4 border-b-2" style={{ borderColor: '#D4AF37' }}>
-              <Link
-                to="/"
-                className="flex items-center space-x-2"
-                onClick={() => {
-                  closeMobileMenu();
-                  window.scrollTo({ top: 0, behavior: 'smooth' });
-                }}
-              >
-                <img 
-                  src="/miles-logo.png" 
-                  alt="Krzysztof Milewski Logo" 
-                  className="h-16 w-auto transition-opacity hover:opacity-80"
-                />
-              </Link>
-            </div>
-            
             <div className="px-4 py-2 space-y-1">
               <Link
                 to="/news"

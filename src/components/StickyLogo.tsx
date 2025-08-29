@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 
 const StickyLogo: React.FC = () => {
   return (
-    <div className="fixed top-0 left-0 z-50 p-4">
+    <div className="fixed top-4 left-4 z-50 hidden lg:block">
       <Link 
         to="/" 
         className="flex items-center space-x-2" 
