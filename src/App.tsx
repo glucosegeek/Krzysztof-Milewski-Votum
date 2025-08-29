@@ -49,6 +49,7 @@ useEffect(() => {
         </Routes>
         <Footer registerFooterSection={registerFooterSection} />
         <StickyContactButton />
+        <StickyLogo />
         <ConsultationModal />
       </ConsultationModalProvider>
     </div>
