@@ -118,7 +118,7 @@ const Navbar: React.FC = () => {
             </Link>
 
             <Link
-                  to="/#contact-section"
+                  to="/contactSection"
                   className="px-4 py-3 rounded-md text-sm font-medium transition-colors hover:bg-opacity-10 hover:bg-white"
                   style={{ color: '#F5F5F5' }}
                   onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
