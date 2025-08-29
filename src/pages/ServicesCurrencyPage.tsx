@@ -25,8 +25,7 @@ const ServicesCurrencyPage: React.FC = () => {
   return (
     <div className="min-h-screen pt-16" style={{ backgroundColor: '#0A1A2F' }}>
       {/* Header */}
-      <section className="py-20 " style={{backgroundColor: '#0A1A2F'
-    }}>
+      <section className="py-20 " style={{backgroundColor: '#0A1A2F'}}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="max-w-4xl mx-auto">            
             <div className="text-center mb-16">
