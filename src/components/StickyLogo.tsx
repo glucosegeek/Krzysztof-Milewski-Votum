@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 
 const StickyLogo: React.FC = () => {
   return (
-    <div className="fixed top-10 right-4 z-50 hidden lg:block">
+    <div className="fixed top-20 right-4 z-50 hidden lg:block">
       <Link 
         to="/" 
         className="flex items-center space-x-2" 
@@ -12,7 +12,7 @@ const StickyLogo: React.FC = () => {
         <img 
           src="/miles-logo.png" 
           alt="Krzysztof Milewski Logo" 
-          className="h-20 w-auto transition-opacity hover:opacity-80 drop-shadow-lg"
+          className="h-25 w-auto transition-opacity hover:opacity-80 drop-shadow-lg"
         />
       </Link>
     </div>
