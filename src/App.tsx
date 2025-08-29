@@ -5,7 +5,6 @@ import { ConsultationModalProvider } from './context/ConsultationModalContext';
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
 import StickyContactButton from './components/StickyContactButton';
-import StickyLogo from './components/StickyLogo';
 import ConsultationModal from './components/ConsultationModal';
 import HomePage from './pages/HomePage';
 import ServicesCurrencyPage from './pages/ServicesCurrencyPage';
@@ -50,7 +49,6 @@ useEffect(() => {
         </Routes>
         <Footer registerFooterSection={registerFooterSection} />
         <StickyContactButton />
-        <StickyLogo />
         <ConsultationModal />
       </ConsultationModalProvider>
     </div>
