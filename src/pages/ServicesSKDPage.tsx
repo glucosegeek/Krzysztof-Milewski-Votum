@@ -58,7 +58,11 @@ const ServicesSKDPage: React.FC = () => {
               </div>
               <div className="flex items-center justify-center">
                 <div className="w-80 h-80 rounded-2xl shadow-xl border-8 flex items-center justify-center" style={{ backgroundColor: '#0A1A2F', borderColor: '#D4AF37' }}>
-                  <CreditCard size={120} style={{ color: '#F5F5F5' }} />
+                  <img 
+        src="/SKDpage.png" 
+        alt="Kredyty walutowe"
+        className="w-full h-full object-cover"
+      />
                 </div>
               </div>
             </div>
