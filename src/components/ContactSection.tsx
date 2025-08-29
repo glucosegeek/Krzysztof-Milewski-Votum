@@ -3,7 +3,6 @@ import { Link } from 'react-router-dom';
 import { Phone, Mail, MessageCircle } from 'lucide-react';
 import DatePicker from 'react-datepicker';
 import { useStickyButtonVisibility } from '../context/StickyButtonVisibilityContext';
-import { useConsultationModal } from '../context/ConsultationModalContext';
 
 interface BankTransition {
   primaryBank: string;
