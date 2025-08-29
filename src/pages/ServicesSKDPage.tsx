@@ -9,24 +9,36 @@ const ServicesSKDPage: React.FC = () => {
   return (
     <div className="min-h-screen pt-16" style={{ backgroundColor: '#0A1A2F' }}>
       {/* Header */}
-      <section className="py-20" style={{ backgroundColor: '#0A1A2F' }}>
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="max-w-4xl mx-auto">            
-            <div className="text-center mb-16">
-              <div className="w-24 h-24 rounded-2xl shadow-xl border-4 flex items-center justify-center mx-auto mb-8" style={{ backgroundColor: '#F5F5F5', borderColor: '#D4AF37' }}>
-                <CreditCard size={48} style={{ color: '#0A1A2F' }} />
-              </div>
-              <h1 className="text-4xl md:text-6xl font-bold mb-6" style={{ color: '#F5F5F5' }}>
-                Unieważnianie umów SKD
-              </h1>
-              <p className="text-xl max-w-3xl mx-auto leading-relaxed" style={{ color: '#F5F5F5' }}>
-                Pomoc prawna w sprawach dotyczących umów sprzedaży konsumenckiej na odległość (SKD) 
-                oraz nieuczciwych praktyk handlowych.
-              </p>
-            </div>
-          </div>
+      <section 
+  className="py-20 relative overflow-hidden" 
+  style={{
+    backgroundImage: 'url(/hero-background.jpg)',
+    backgroundSize: 'cover',
+    backgroundPosition: 'center',
+    backgroundRepeat: 'no-repeat'
+  }}
+>
+  {/* Ciemna nakładka */}
+  <div className="absolute inset-0 bg-black/70"></div>
+  
+  {/* Treść z relative positioning */}
+  <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div className="max-w-4xl mx-auto">            
+      <div className="text-center mb-16">
+        <div className="w-24 h-24 rounded-2xl shadow-xl border-4 flex items-center justify-center mx-auto mb-8" style={{ backgroundColor: '#F5F5F5', borderColor: '#D4AF37' }}>
+          <CreditCard size={48} style={{ color: '#0A1A2F' }} />
         </div>
-      </section>
+        <h1 className="text-4xl md:text-6xl font-bold mb-6" style={{ color: '#F5F5F5' }}>
+          Unieważnianie umów SKD
+        </h1>
+        <p className="text-xl max-w-3xl mx-auto leading-relaxed" style={{ color: '#F5F5F5' }}>
+          Pomoc prawna w sprawach dotyczących umów sprzedaży konsumenckiej na odległość (SKD) 
+          oraz nieuczciwych praktyk handlowych.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
 
       {/* Main Content */}
       <section className="py-20" style={{ backgroundColor: '#F5F5F5' }}>
