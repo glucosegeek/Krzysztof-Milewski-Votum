@@ -32,8 +32,9 @@ const ServicesCurrencyPage: React.FC = () => {
       backgroundPosition: 'center',
       backgroundRepeat: 'no-repeat'
     }}>
+        <div className="absolute inset-0 bg-black bg-opacity-50"></div>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="absolute inset-0 bg-black bg-opacity-50"></div>
+          
           <div className="max-w-4xl mx-auto">            
             <div className="text-center mb-16">
               <div className="w-24 h-24 rounded-2xl shadow-xl border-4 flex items-center justify-center mx-auto mb-8 transition-all duration-500" style={{ backgroundColor: '#F5F5F5', borderColor: '#D4AF37' }}>                
