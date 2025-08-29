@@ -31,15 +31,15 @@ const Navbar: React.FC = () => {
   return (
     <nav className="fixed top-0 left-0 right-0 z-50 shadow-lg border-b-4" style={{ backgroundColor: '#0A1A2F', borderColor: '#D4AF37' }}>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex justify-between items-center h-16">
+        <div className="flex justify-between items-center h-32">
           {/* Logo */}
-          {/* <Link to="/" className="flex items-center space-x-2" onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}>
+          <Link to="/" className="flex items-center space-x-2" onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}>
             <img 
               src="/miles-logo.png" 
               alt="Krzysztof Milewski Logo" 
-              className="h-20 w-auto transition-opacity hover:opacity-100"
+              className="h-28 w-auto transition-opacity hover:opacity-100"
             />
-         </Link> */}
+         </Link>
 
           {/* Navigation Links */}
           <div className="hidden md:flex items-center space-x-8">
@@ -118,7 +118,7 @@ const Navbar: React.FC = () => {
             </Link>
 
             <Link
-                  to="/#contact-section"
+                  to="/#contactSection"
                   className="px-4 py-3 rounded-md text-sm font-medium transition-colors hover:bg-opacity-10 hover:bg-white"
                   style={{ color: '#F5F5F5' }}
                   onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
