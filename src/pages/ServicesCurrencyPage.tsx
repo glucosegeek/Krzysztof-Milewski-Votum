@@ -25,7 +25,7 @@ const ServicesCurrencyPage: React.FC = () => {
   return (
     <div className="min-h-screen pt-16" style={{ backgroundColor: '#0A1A2F' }}>
       {/* Header */}
-      <section className="py-20 absolute inset-0 bg-black/70" style={{ 
+      <section className="py-20 " style={{ 
       backgroundColor: '#0A1A2F', 
       backgroundImage: 'url(/hero-background.jpg)',
       backgroundSize: 'cover',
@@ -33,6 +33,7 @@ const ServicesCurrencyPage: React.FC = () => {
       backgroundRepeat: 'no-repeat'
     }}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="absolute inset-0 bg-black bg-opacity-50"></div>
           <div className="max-w-4xl mx-auto">            
             <div className="text-center mb-16">
               <div className="w-24 h-24 rounded-2xl shadow-xl border-4 flex items-center justify-center mx-auto mb-8 transition-all duration-500" style={{ backgroundColor: '#F5F5F5', borderColor: '#D4AF37' }}>                
