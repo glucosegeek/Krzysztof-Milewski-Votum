@@ -971,7 +971,7 @@ const ContactSection: React.FC = () => {
                 <div className="pt-6">
                   <p className="text-sm leading-relaxed" style={{ color: '#F5F5F5' }}>
                     Wszystkie konsultacje są całkowicie poufne i bezpłatne. 
-                    Na pytania odpowiadam natychmiast w dni robocze.
+                    Na pytania odpowiadam natychmiast.
                   </p>
                 </div>
               </div>
