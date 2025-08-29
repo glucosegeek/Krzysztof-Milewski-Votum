@@ -14,6 +14,7 @@ import NewsPage from './pages/NewsPage';
 import FAQPage from './pages/FAQPage';
 import AboutMePage from './pages/AboutMePage';
 import PrivacyPolicyPage from './pages/PrivacyPolicyPage';
+import ContactSection from './components/ContactSection';
 
 function App() {
   const { registerFooterSection } = useStickyButtonVisibility();
