@@ -32,7 +32,7 @@ const AboutMePage: React.FC = () => {
               />
             </div>
             
-            <div className="space-y-8 text-lg leading-relaxed rounded-2xl shadow-lg border-4 overflow-hidden" style={{ backgroundColor: '#0A1A2F', borderColor: '#D4AF37', color: '#F5F5F5' }}> {/* Container for main content, left-aligned */}
+            <div className="space-y-8 p-6 text-lg leading-relaxed rounded-2xl shadow-lg border-4 overflow-hidden" style={{ backgroundColor: '#0A1A2F', borderColor: '#D4AF37', color: '#F5F5F5' }}> {/* Container for main content, left-aligned */}
               {/* Experience Section */}
               <p>
                 Przez blisko 3 dekady skutecznie zarządzałem projektami, budowałem ogólnopolskie zespoły sprzedażowe i wdrażałem strategie promocyjne dla wielu topowych marek w różnych branżach. Dziś koncentruję się na nowoczesnym marketingu w mediach społecznościowych oraz wykorzystaniu AI do tworzenia efektywnych zespołów handlowych.
