@@ -6,7 +6,7 @@ import { useConsultationModal } from '../context/ConsultationModalContext';
 const AboutMePage: React.FC = () => {
   const { openModal } = useConsultationModal();
   return (
-    <div className="min-h-screen pt-16" style={{ backgroundColor: '#0A1A2F', color: '#F5F5F5' }}>
+    <div className="min-h-screen pt-16" style={{ backgroundColor: '#F5F5F5', color: '#F5F5F5' }}>
       
       {/* Main Content Section */}
       <section className="py-20">
