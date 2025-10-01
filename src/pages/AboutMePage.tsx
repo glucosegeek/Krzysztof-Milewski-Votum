@@ -138,7 +138,7 @@ const AboutMePage: React.FC = () => {
                   <h3 className="text-2xl font-bold mb-2" style={{ color: '#F5F5F5' }}>
                     Krzysztof Milewski
                   </h3>
-                  <p>
+                  <p className="text-base font-semibold" style={{ color: '#D4AF37' }}>
                     Ekspert ds. unieważniania kredytów walutowych | Przedstawiciel DSA Investment S.A
 Strateg sprzedaży i marketingu z 30-letnim doświadczeniem
                   </p>
