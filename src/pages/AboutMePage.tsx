@@ -17,11 +17,11 @@ const AboutMePage: React.FC = () => {
           <div className="text-center mb-20">
             <h1 className="text-5xl md:text-6xl font-bold mb-8" style={{ color: '#0A1A2F' }}>
               O mnie
-            </h1>
-            <p className="text-xl md:text-2xl max-w-4xl mx-auto leading-relaxed" style={{ color: '#0A1A2F' }}>
+            </h1> 
+            {/* <p className="text-xl md:text-2xl max-w-4xl mx-auto leading-relaxed" style={{ color: '#0A1A2F' }}>
               Ekspert ds. unieważniania kredytów walutowych | Przedstawiciel DSA Investment S.A<br />
               <span className="font-semibold" style={{ color: '#D4AF37' }}>Strateg sprzedaży i marketingu z 30-letnim doświadczeniem</span>
-            </p>
+            </p> */}
           </div>
           
           {/* Two Column Layout: Text Left, Image Right */}
