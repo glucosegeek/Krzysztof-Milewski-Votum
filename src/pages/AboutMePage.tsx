@@ -112,18 +112,18 @@ const AboutMePage: React.FC = () => {
               
               {/* Top Image - aboutme-background.jpg */}
               <div className="relative group w-full max-w-md mx-auto">
-    <div className="relative w-full h-64 lg:h-80 rounded-3xl overflow-hidden border-4 transform group-hover:scale-105 transition-all duration-500" 
-         style={{ borderColor: '#D4AF37' }}>
-      <img
-        src="/aboutme-background.png"
-        alt="Tło - Profesjonalne doradztwo"
-        className="w-auto h-auto object-cover object-center"
-      />
-                  
-                  {/* Overlay gradient on hover */}
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-    </div>
+  <div className="relative w-full rounded-3xl overflow-hidden border-4 transform group-hover:scale-105 transition-all duration-500 bg-white" 
+       style={{ borderColor: '#D4AF37' }}>
+    <img
+      src="/aboutme-background.png"
+      alt="Tło - Profesjonalne doradztwo"
+      className="w-full h-auto object-contain"
+    />
+    
+    {/* Overlay gradient on hover */}
+    <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
   </div>
+</div>
               
               {/* Bottom Image - miles-zdjecie.jpg with name tag */}
               <div className="relative group w-full max-w-md mx-auto">
