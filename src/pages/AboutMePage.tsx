@@ -52,17 +52,17 @@ const AboutMePage: React.FC = () => {
               <div className="h-px w-full" style={{ background: 'linear-gradient(90deg, transparent, #D4AF37, transparent)' }}></div>
 
               {/* Key Benefits List */}
-              <div className="bg-opacity-10 rounded-2xl p-6" style={{ backgroundColor: '#D4AF37' }}>
+              <div className="space-y-4">
                 <ul className="list-none space-y-4">
                   <li className="flex items-start">
                     <span className="mr-4 text-3xl flex-shrink-0" style={{ color: '#D4AF37' }}>✓</span>
-                    <span className="text-base md:text-lg">
+                    <span className="text-base md:text-lg leading-relaxed">
                       Analiza wstępna i wyliczenie korzyści są całkowicie <strong className="font-bold text-xl" style={{ color: '#D4AF37' }}>BEZPŁATNE</strong>.
                     </span>
                   </li>
                   <li className="flex items-start">
                     <span className="mr-4 text-3xl flex-shrink-0" style={{ color: '#D4AF37' }}>✓</span>
-                    <span className="text-base md:text-lg">
+                    <span className="text-base md:text-lg leading-relaxed">
                       Nie ryzykujesz nic – <strong className="font-bold" style={{ color: '#D4AF37' }}>możesz tylko zyskać</strong>.
                     </span>
                   </li>
@@ -110,12 +110,8 @@ const AboutMePage: React.FC = () => {
             {/* Right Column - Image (2/5 width) */}
             <div className="lg:col-span-2 flex items-center justify-center">
               <div className="relative group">
-                {/* Decorative background element */}
-                <div className="absolute -inset-4 rounded-3xl opacity-30 blur-xl group-hover:opacity-40 transition-opacity duration-500" 
-                     style={{ backgroundColor: '#D4AF37' }}></div>
-                
-                {/* Main image container */}
-                <div className="relative w-80 h-80 lg:w-96 lg:h-96 rounded-3xl overflow-hidden shadow-2xl border-4 transform group-hover:scale-105 transition-all duration-500" 
+                {/* Main image container - NO SHADOW */}
+                <div className="relative w-80 h-80 lg:w-96 lg:h-96 rounded-3xl overflow-hidden border-4 transform group-hover:scale-105 transition-all duration-500" 
                      style={{ borderColor: '#D4AF37' }}>
                   <img
                     src="/miles-zdjecie.jpg"
