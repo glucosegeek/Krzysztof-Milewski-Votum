@@ -117,7 +117,7 @@ const AboutMePage: React.FC = () => {
       <img
         src="/aboutme-background.png"
         alt="Tło - Profesjonalne doradztwo"
-        className="w-full h-60 object-cover object-center"
+        className="w-full h-50 object-cover object-center"
       />
                   
                   {/* Overlay gradient on hover */}
