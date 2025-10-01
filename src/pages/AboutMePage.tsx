@@ -142,7 +142,7 @@ const AboutMePage: React.FC = () => {
                     Ekspert ds. unieważniania kredytów walutowych | Przedstawiciel DSA Investment S.A
 Strateg sprzedaży i marketingu z 30-letnim doświadczeniem
                   </p>
-                  <p className="text-base font-semibold" style={{ color: '#D4AF37' }}>
+                  <p className="text-base font-semibold" style={{ color: '#F5F5F5' }}>
                     +48 601 227 876
                   </p>
                   <p className="text-sm mt-1" style={{ color: '#F5F5F5' }}>
