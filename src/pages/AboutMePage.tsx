@@ -111,14 +111,14 @@ const AboutMePage: React.FC = () => {
             <div className="lg:col-span-2 flex flex-col items-center space-y-8">
               
               {/* Top Image - aboutme-background.jpg */}
-              <div className="relative group w-full">
-                <div className="relative w-full h-64 lg:h-80 rounded-3xl overflow-hidden border-4 transform group-hover:scale-105 transition-all duration-500" 
-                     style={{ borderColor: '#D4AF37' }}>
-                  <img
-                    src="/aboutme-background.png"
-                    alt="Tło - Profesjonalne doradztwo"
-                    className="w-full h-full object-cover object-center"
-                  />
+              <div className="relative group w-full max-w-md mx-auto">
+    <div className="relative w-full h-64 lg:h-80 rounded-3xl overflow-hidden border-4 transform group-hover:scale-105 transition-all duration-500" 
+         style={{ borderColor: '#D4AF37' }}>
+      <img
+        src="/aboutme-background.png"
+        alt="Tło - Profesjonalne doradztwo"
+        className="w-full h-full object-contain object-center"
+      />
                   
                   {/* Overlay gradient on hover */}
                   <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
