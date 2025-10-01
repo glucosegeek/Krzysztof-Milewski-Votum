@@ -26,12 +26,12 @@ const AboutMePage: React.FC = () => {
           {/* Title - Centered Above */}
           <div className="text-center mb-20">
             <h1 className="text-5xl md:text-6xl font-bold mb-8" style={{ color: '#F5F5F5' }}>
-              O mnie
+              O mnie 
             </h1>
-            <p className="text-xl md:text-2xl max-w-4xl mx-auto leading-relaxed" style={{ color: '#F5F5F5' }}>
+            {/* <p className="text-xl md:text-2xl max-w-4xl mx-auto leading-relaxed" style={{ color: '#F5F5F5' }}>
               Ekspert ds. unieważniania kredytów walutowych | Przedstawiciel DSA Investment S.A<br />
               <span className="font-semibold" style={{ color: '#D4AF37' }}>Strateg sprzedaży i marketingu z 30-letnim doświadczeniem</span>
-            </p>
+            </p> */}
           </div>
           
           {/* Two Column Layout: Text Left, Image Right */}
