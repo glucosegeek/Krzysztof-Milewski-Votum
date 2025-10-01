@@ -156,6 +156,7 @@ const AboutMePage: React.FC = () => {
           krzysztof.milewski@dsa.pl
         </p>
                 </div>
+                  </div>
               </div>
               
             </div>
