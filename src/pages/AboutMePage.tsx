@@ -140,20 +140,21 @@ const AboutMePage: React.FC = () => {
     </div>
                 
                 {/* Name tag below image */}
-                <div className="mt-6 text-center p-4 rounded-2xl border-2" style={{ backgroundColor: '#0A1A2F', borderColor: '#D4AF37' }}>
-                  <h3 className="text-2xl font-bold mb-2" style={{ color: '#F5F5F5' }}>
-                    Krzysztof Milewski
-                  </h3>
-                  <p className="text-base font-semibold" style={{ color: '#D4AF37' }}>
-                  Ekspert ds. unieważniania kredytów walutowych | Przedstawiciel DSA Investment S.A
-Strateg sprzedaży i marketingu z 30-letnim doświadczeniem
-                  </p>
-                  <p className="text-base font-semibold" style={{ color: '#F5F5F5' }}>
-                    +48 601 227 876
-                  </p>
-                  <p className="text-sm mt-1" style={{ color: '#F5F5F5' }}>
-                    krzysztof.milewski@dsa.pl
-                  </p>
+                <div className="mt-6 text-center p-6 rounded-2xl border-2" style={{ backgroundColor: '#0A1A2F', borderColor: '#D4AF37' }}>
+      <h3 className="text-2xl font-bold mb-3" style={{ color: '#F5F5F5' }}>
+        Krzysztof Milewski
+      </h3>
+      <p className="text-sm md:text-base mb-4 leading-relaxed font-semibold" style={{ color: '#D4AF37' }}>
+        Ekspert ds. unieważniania kredytów walutowych | Przedstawiciel DSA Investment S.A<br />
+        Strateg sprzedaży i marketingu z 30-letnim doświadczeniem
+      </p>
+      <div className="space-y-2">
+        <p className="text-base font-semibold" style={{ color: '#F5F5F5' }}>
+          +48 601 227 876
+        </p>
+        <p className="text-sm" style={{ color: '#F5F5F5' }}>
+          krzysztof.milewski@dsa.pl
+        </p>
                 </div>
               </div>
               
