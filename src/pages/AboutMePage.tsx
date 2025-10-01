@@ -7,18 +7,28 @@ const AboutMePage: React.FC = () => {
   const { openModal } = useConsultationModal();
   
   return (
-    <div className="min-h-screen pt-16" style={{ backgroundColor: '#F5F5F5', color: '#0A1A2F' }}>
+    <div className="min-h-screen pt-16" style={{ backgroundColor: '#0A1A2F' }}>
       
-      {/* Main Content Section */}
-      <section className="py-20">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      {/* Main Content Section with Background */}
+      <section className="relative py-20" style={{
+        backgroundImage: 'url(/aboutme-background.jpg)',
+        backgroundSize: 'cover',
+        backgroundPosition: 'center',
+        backgroundRepeat: 'no-repeat',
+        backgroundAttachment: 'fixed'
+      }}>
+        {/* Dark overlay - same as landing page */}
+        <div className="absolute inset-0 bg-black/70"></div>
+        
+        {/* Content */}
+        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           
           {/* Title - Centered Above */}
           <div className="text-center mb-20">
-            <h1 className="text-5xl md:text-6xl font-bold mb-8" style={{ color: '#0A1A2F' }}>
+            <h1 className="text-5xl md:text-6xl font-bold mb-8" style={{ color: '#F5F5F5' }}>
               O mnie
             </h1>
-            <p className="text-xl md:text-2xl max-w-4xl mx-auto leading-relaxed" style={{ color: '#0A1A2F' }}>
+            <p className="text-xl md:text-2xl max-w-4xl mx-auto leading-relaxed" style={{ color: '#F5F5F5' }}>
               Ekspert ds. unieważniania kredytów walutowych | Przedstawiciel DSA Investment S.A<br />
               <span className="font-semibold" style={{ color: '#D4AF37' }}>Strateg sprzedaży i marketingu z 30-letnim doświadczeniem</span>
             </p>
@@ -28,8 +38,8 @@ const AboutMePage: React.FC = () => {
           <div className="grid lg:grid-cols-5 gap-12 items-center mb-16">
             
             {/* Left Column - Text Content (3/5 width) */}
-            <div className="lg:col-span-3 space-y-8 p-10 text-lg leading-relaxed rounded-3xl shadow-2xl border-4" 
-                 style={{ backgroundColor: '#0A1A2F', borderColor: '#D4AF37', color: '#F5F5F5' }}>
+            <div className="lg:col-span-3 space-y-8 p-10 text-lg leading-relaxed rounded-3xl shadow-2xl border-4 backdrop-blur-sm" 
+                 style={{ backgroundColor: 'rgba(10, 26, 47, 0.95)', borderColor: '#D4AF37', color: '#F5F5F5' }}>
               
               {/* Experience Section */}
               <div>
@@ -110,9 +120,9 @@ const AboutMePage: React.FC = () => {
             {/* Right Column - Image (2/5 width) */}
             <div className="lg:col-span-2 flex items-center justify-center">
               <div className="relative group">
-                {/* Main image container - NO SHADOW */}
-                <div className="relative w-80 h-80 lg:w-96 lg:h-96 rounded-3xl overflow-hidden border-4 transform group-hover:scale-105 transition-all duration-500" 
-                     style={{ borderColor: '#D4AF37' }}>
+                {/* Main image container */}
+                <div className="relative w-80 h-80 lg:w-96 lg:h-96 rounded-3xl overflow-hidden border-4 transform group-hover:scale-105 transition-all duration-500 backdrop-blur-sm" 
+                     style={{ borderColor: '#D4AF37', backgroundColor: 'rgba(10, 26, 47, 0.3)' }}>
                   <img
                     src="/miles-zdjecie.jpg"
                     alt="Krzysztof Milewski - Ekspert ds. unieważniania kredytów"
@@ -124,14 +134,14 @@ const AboutMePage: React.FC = () => {
                 </div>
                 
                 {/* Name tag below image */}
-                <div className="mt-6 text-center">
-                  <h3 className="text-2xl font-bold mb-2" style={{ color: '#0A1A2F' }}>
+                <div className="mt-6 text-center p-4 rounded-2xl backdrop-blur-md" style={{ backgroundColor: 'rgba(10, 26, 47, 0.8)' }}>
+                  <h3 className="text-2xl font-bold mb-2" style={{ color: '#F5F5F5' }}>
                     Krzysztof Milewski
                   </h3>
-                  <p className="text-base" style={{ color: '#D4AF37' }}>
+                  <p className="text-base font-semibold" style={{ color: '#D4AF37' }}>
                     +48 601 227 876
                   </p>
-                  <p className="text-sm mt-1" style={{ color: '#0A1A2F' }}>
+                  <p className="text-sm mt-1" style={{ color: '#F5F5F5' }}>
                     krzysztof.milewski@dsa.pl
                   </p>
                 </div>
