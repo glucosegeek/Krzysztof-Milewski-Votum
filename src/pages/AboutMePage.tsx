@@ -115,7 +115,7 @@ const AboutMePage: React.FC = () => {
                 <div className="relative w-full h-64 lg:h-80 rounded-3xl overflow-hidden border-4 transform group-hover:scale-105 transition-all duration-500" 
                      style={{ borderColor: '#D4AF37' }}>
                   <img
-                    src="/aboutme-background.jpg"
+                    src="/aboutme-background.png"
                     alt="Tło - Profesjonalne doradztwo"
                     className="w-full h-full object-cover object-center"
                   />
