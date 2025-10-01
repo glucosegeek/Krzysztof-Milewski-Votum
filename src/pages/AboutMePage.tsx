@@ -126,14 +126,14 @@ const AboutMePage: React.FC = () => {
   </div>
               
               {/* Bottom Image - miles-zdjecie.jpg with name tag */}
-              <div className="relative group w-full">
-                <div className="relative w-80 h-80 lg:w-96 lg:h-96 mx-auto rounded-3xl overflow-hidden border-4 transform group-hover:scale-105 transition-all duration-500" 
-                     style={{ borderColor: '#D4AF37' }}>
-                  <img
-                    src="/miles-zdjecie.jpg"
-                    alt="Krzysztof Milewski - Ekspert ds. unieważniania kredytów"
-                    className="w-full h-full object-cover object-center"
-                  />
+              <div className="relative group w-full max-w-md mx-auto">
+    <div className="relative w-full aspect-square rounded-3xl overflow-hidden border-4 transform group-hover:scale-105 transition-all duration-500" 
+         style={{ borderColor: '#D4AF37' }}>
+      <img
+        src="/miles-zdjecie.jpg"
+        alt="Krzysztof Milewski - Ekspert ds. unieważniania kredytów"
+        className="w-full h-full object-cover object-center"
+      />
                   
                   {/* Overlay gradient on hover */}
                   <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
