@@ -137,7 +137,7 @@ const AboutMePage: React.FC = () => {
                   
                   {/* Overlay gradient on hover */}
                   <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-                </div>
+    </div>
                 
                 {/* Name tag below image */}
                 <div className="mt-6 text-center p-4 rounded-2xl border-2" style={{ backgroundColor: '#0A1A2F', borderColor: '#D4AF37' }}>
