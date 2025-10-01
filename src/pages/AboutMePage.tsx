@@ -11,7 +11,7 @@ const AboutMePage: React.FC = () => {
       
       {/* Main Content Section with Background */}
       <section className="relative py-20" style={{
-        backgroundImage: 'url(/aboutme-background.jpg)',
+        backgroundImage: '/miles-zdjecie.jpg',
         backgroundSize: 'cover',
         backgroundPosition: 'center',
         backgroundRepeat: 'no-repeat',
