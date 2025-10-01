@@ -151,7 +151,7 @@ Strateg sprzedaży i marketingu z 30-letnim doświadczeniem
                   <p className="text-base font-semibold" style={{ color: '#F5F5F5' }}>
                     +48 601 227 876
                   </p>
-                  <p className="text-sm mt-1" style={{ color: '#0A1A2F' }}>
+                  <p className="text-sm mt-1" style={{ color: '#F5F5F5' }}>
                     krzysztof.milewski@dsa.pl
                   </p>
                 </div>
