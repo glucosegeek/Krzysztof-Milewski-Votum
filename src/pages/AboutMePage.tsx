@@ -26,7 +26,7 @@ const AboutMePage: React.FC = () => {
             {/* Image Placeholder for Client */}
             <div className="w-64 h-64 rounded-full mx-auto mb-12 overflow-hidden shadow-xl border-4" style={{ borderColor: '#D4AF37' }}>
               <img
-                src="AboutMe-placeholder.jpg" // Replace with your client's image URL
+                src="miles-zdjecie.jpg" // Replace with your client's image URL
                 alt="Krzysztof Milewski"
                 className="w-full h-full object-cover object-center"
               />
