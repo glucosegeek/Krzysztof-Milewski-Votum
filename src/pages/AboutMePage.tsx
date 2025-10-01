@@ -7,39 +7,29 @@ const AboutMePage: React.FC = () => {
   const { openModal } = useConsultationModal();
   
   return (
-    <div className="min-h-screen pt-16" style={{ backgroundColor: '#0A1A2F' }}>
+    <div className="min-h-screen pt-16" style={{ backgroundColor: '#F5F5F5', color: '#0A1A2F' }}>
       
-      {/* Main Content Section with Background */}
-      <section className="relative py-20" style={{
-        backgroundImage: 'url(/aboutme-background.png)',
-        backgroundSize: 'cover',
-        backgroundPosition: 'center',
-        backgroundRepeat: 'no-repeat',
-        backgroundAttachment: 'fixed'
-      }}>
-        {/* Dark overlay - same as landing page */}
-        <div className="absolute inset-0 bg-black/70"></div>
-        
-        {/* Content */}
-        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      {/* Main Content Section */}
+      <section className="py-20">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           
           {/* Title - Centered Above */}
           <div className="text-center mb-20">
-            <h1 className="text-5xl md:text-6xl font-bold mb-8" style={{ color: '#F5F5F5' }}>
-              O mnie 
+            <h1 className="text-5xl md:text-6xl font-bold mb-8" style={{ color: '#0A1A2F' }}>
+              O mnie
             </h1>
-            {/* <p className="text-xl md:text-2xl max-w-4xl mx-auto leading-relaxed" style={{ color: '#F5F5F5' }}>
+            <p className="text-xl md:text-2xl max-w-4xl mx-auto leading-relaxed" style={{ color: '#0A1A2F' }}>
               Ekspert ds. unieważniania kredytów walutowych | Przedstawiciel DSA Investment S.A<br />
               <span className="font-semibold" style={{ color: '#D4AF37' }}>Strateg sprzedaży i marketingu z 30-letnim doświadczeniem</span>
-            </p> */}
+            </p>
           </div>
           
           {/* Two Column Layout: Text Left, Image Right */}
-          <div className="grid lg:grid-cols-5 gap-12 items-center mb-16">
+          <div className="grid lg:grid-cols-5 gap-12 items-start mb-16">
             
             {/* Left Column - Text Content (3/5 width) */}
-            <div className="lg:col-span-3 space-y-8 p-10 text-lg leading-relaxed rounded-3xl shadow-2xl border-4 backdrop-blur-sm" 
-                 style={{ backgroundColor: 'rgba(10, 26, 47, 0.95)', borderColor: '#D4AF37', color: '#F5F5F5' }}>
+            <div className="lg:col-span-3 space-y-8 p-10 text-lg leading-relaxed rounded-3xl shadow-2xl border-4" 
+                 style={{ backgroundColor: '#0A1A2F', borderColor: '#D4AF37', color: '#F5F5F5' }}>
               
               {/* Experience Section */}
               <div>
@@ -117,12 +107,28 @@ const AboutMePage: React.FC = () => {
               </div>
             </div>
             
-            {/* Right Column - Image (2/5 width) */}
-            <div className="lg:col-span-2 flex items-center justify-center">
-              <div className="relative group">
-                {/* Main image container */}
-                <div className="relative w-80 h-80 lg:w-96 lg:h-96 rounded-3xl overflow-hidden border-4 transform group-hover:scale-105 transition-all duration-500 backdrop-blur-sm" 
-                     style={{ borderColor: '#D4AF37', backgroundColor: 'rgba(10, 26, 47, 0.3)' }}>
+            {/* Right Column - Images stacked (2/5 width) */}
+            <div className="lg:col-span-2 flex flex-col items-center space-y-8">
+              
+              {/* Top Image - aboutme-background.jpg */}
+              <div className="relative group w-full">
+                <div className="relative w-full h-64 lg:h-80 rounded-3xl overflow-hidden border-4 transform group-hover:scale-105 transition-all duration-500" 
+                     style={{ borderColor: '#D4AF37' }}>
+                  <img
+                    src="/aboutme-background.jpg"
+                    alt="Tło - Profesjonalne doradztwo"
+                    className="w-full h-full object-cover object-center"
+                  />
+                  
+                  {/* Overlay gradient on hover */}
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                </div>
+              </div>
+              
+              {/* Bottom Image - miles-zdjecie.jpg with name tag */}
+              <div className="relative group w-full">
+                <div className="relative w-80 h-80 lg:w-96 lg:h-96 mx-auto rounded-3xl overflow-hidden border-4 transform group-hover:scale-105 transition-all duration-500" 
+                     style={{ borderColor: '#D4AF37' }}>
                   <img
                     src="/miles-zdjecie.jpg"
                     alt="Krzysztof Milewski - Ekspert ds. unieważniania kredytów"
@@ -134,22 +140,19 @@ const AboutMePage: React.FC = () => {
                 </div>
                 
                 {/* Name tag below image */}
-                <div className="mt-6 text-center p-4 rounded-2xl backdrop-blur-md" style={{ backgroundColor: 'rgba(10, 26, 47, 0.8)' }}>
-                  <h3 className="text-2xl font-bold mb-2" style={{ color: '#F5F5F5' }}>
+                <div className="mt-6 text-center p-4 rounded-2xl border-2" style={{ backgroundColor: '#F5F5F5', borderColor: '#D4AF37' }}>
+                  <h3 className="text-2xl font-bold mb-2" style={{ color: '#0A1A2F' }}>
                     Krzysztof Milewski
                   </h3>
                   <p className="text-base font-semibold" style={{ color: '#D4AF37' }}>
-                    Ekspert ds. unieważniania kredytów walutowych | Przedstawiciel DSA Investment S.A
-Strateg sprzedaży i marketingu z 30-letnim doświadczeniem
-                  </p>
-                  <p className="text-base font-semibold" style={{ color: '#F5F5F5' }}>
                     +48 601 227 876
                   </p>
-                  <p className="text-sm mt-1" style={{ color: '#F5F5F5' }}>
+                  <p className="text-sm mt-1" style={{ color: '#0A1A2F' }}>
                     krzysztof.milewski@dsa.pl
                   </p>
                 </div>
               </div>
+              
             </div>
             
           </div>
