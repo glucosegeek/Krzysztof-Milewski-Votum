@@ -237,6 +237,89 @@ export const testimonialsApi = {
   }
 };
 
+// News API
+export const newsApi = {
+  async getAll() {
+    const { data, error } = await supabase
+      .from('news')
+      .select('*')
+      .order('date', { ascending: false });
+    
+    if (error) throw error;
+    return data;
+  },
+
+  async getAllVisible() {
+    const { data, error } = await supabase
+      .from('news')
+      .select('*')
+      .eq('is_visible', true)
+      .order('date', { ascending: false });
+    
+    if (error) throw error;
+    return data;
+  },
+
+  async getById(id: string) {
+    const { data, error } = await supabase
+      .from('news')
+      .select('*')
+      .eq('id', id)
+      .single();
+    
+    if (error) throw error;
+    return data;
+  },
+
+  async create(news: {
+    title: string;
+    content: string;
+    author: string;
+    date: string;
+    category?: string;
+    is_visible?: boolean;
+    display_order?: number;
+  }) {
+    const { data, error } = await supabase
+      .from('news')
+      .insert([news])
+      .select()
+      .single();
+    
+    if (error) throw error;
+    return data;
+  },
+
+  async update(id: string, news: Partial<{
+    title: string;
+    content: string;
+    author: string;
+    date: string;
+    category: string;
+    is_visible: boolean;
+    display_order: number;
+  }>) {
+    const { data, error } = await supabase
+      .from('news')
+      .update({ ...news, updated_at: new Date().toISOString() })
+      .eq('id', id)
+      .select()
+      .single();
+    
+    if (error) throw error;
+    return data;
+  },
+
+  async delete(id: string) {
+    const { error } = await supabase
+      .from('news')
+      .delete()
+      .eq('id', id);
+    
+    if (error) throw error;
+  }
+};
+
 export const statisticsApi = {
   async getByPageType(pageType: 'ongoing' | 'won') {
     const { data, error } = await supabase
