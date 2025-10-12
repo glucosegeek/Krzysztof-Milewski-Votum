@@ -435,27 +435,42 @@ const KnowledgeBaseAdmin: React.FC = () => {
               </div>
 
               <div>
-                <label className="block text-sm font-medium mb-2" style={{ color: '#0A1A2F' }}>
-                  Treść Artykułu (HTML) *
-                </label>
-                <textarea
-                  value={formData.content}
-                  onChange={(e) => setFormData({ ...formData, content: e.target.value })}
-                  rows={16}
-                  className="w-full px-4 py-3 rounded-lg border-2 font-mono text-sm"
-                  style={{ backgroundColor: '#FFFFFF', borderColor: '#D4AF37', color: '#0A1A2F' }}
-                  placeholder="<p>Wpisz treść artykułu używając HTML...</p>"
-                  required
-                />
-                <div className="mt-2 p-3 rounded-lg" style={{ backgroundColor: 'rgba(212, 175, 55, 0.1)' }}>
-                  <p className="text-xs font-medium mb-2" style={{ color: '#0A1A2F' }}>
-                    💡 Dozwolone tagi HTML:
-                  </p>
-                  <code className="text-xs" style={{ color: '#D4AF37' }}>
-                    &lt;p&gt;, &lt;strong&gt;, &lt;em&gt;, &lt;ul&gt;, &lt;li&gt;, &lt;br&gt;, &lt;h3&gt;, &lt;h4&gt;
-                  </code>
-                </div>
-              </div>
+  <label className="block text-sm font-medium mb-2" style={{ color: '#0A1A2F' }}>
+    Treść Artykułu *
+  </label>
+  <textarea
+    value={formData.content}
+    onChange={(e) => setFormData({ ...formData, content: e.target.value })}
+    rows={16}
+    className="w-full px-4 py-3 rounded-lg border-2"
+    style={{ backgroundColor: '#FFFFFF', borderColor: '#D4AF37', color: '#0A1A2F' }}
+    placeholder="Wpisz treść artykułu. Możesz używać:
+
+Pusta linia tworzy nowy akapit.
+
+**pogrubiony tekst** - otocz tekst gwiazdkami
+*kursywa* - otocz tekst pojedynczą gwiazdką
+
+Lista:
+- Punkt pierwszy
+- Punkt drugi
+- Punkt trzeci
+
+To proste!"
+    required
+  />
+  <div className="mt-2 p-3 rounded-lg" style={{ backgroundColor: 'rgba(212, 175, 55, 0.1)' }}>
+    <p className="text-xs font-medium mb-2" style={{ color: '#0A1A2F' }}>
+      💡 Formatowanie tekstu:
+    </p>
+    <ul className="text-xs space-y-1" style={{ color: '#0A1A2F' }}>
+      <li>• <strong>Pusta linia</strong> = nowy akapit</li>
+      <li>• <strong>**tekst**</strong> = pogrubienie</li>
+      <li>• <strong>*tekst*</strong> = kursywa</li>
+      <li>• <strong>- tekst</strong> na początku linii = lista punktowana</li>
+    </ul>
+  </div>
+</div>
 
               <div>
                 <label className="flex items-center space-x-3 cursor-pointer">
