@@ -156,6 +156,87 @@ export const wonCasesApi = {
   }
 };
 
+// Testimonials API
+export const testimonialsApi = {
+  async getAll() {
+    const { data, error } = await supabase
+      .from('testimonials')
+      .select('*')
+      .order('display_order', { ascending: true });
+    
+    if (error) throw error;
+    return data;
+  },
+
+  async getAllVisible() {
+    const { data, error } = await supabase
+      .from('testimonials')
+      .select('*')
+      .eq('is_visible', true)
+      .order('display_order', { ascending: true });
+    
+    if (error) throw error;
+    return data;
+  },
+
+  async getById(id: string) {
+    const { data, error } = await supabase
+      .from('testimonials')
+      .select('*')
+      .eq('id', id)
+      .single();
+    
+    if (error) throw error;
+    return data;
+  },
+
+  async create(testimonial: {
+    name: string;
+    description: string;
+    stars: number;
+    city: string;
+    is_visible?: boolean;
+    display_order?: number;
+  }) {
+    const { data, error } = await supabase
+      .from('testimonials')
+      .insert([testimonial])
+      .select()
+      .single();
+    
+    if (error) throw error;
+    return data;
+  },
+
+  async update(id: string, testimonial: Partial<{
+    name: string;
+    description: string;
+    stars: number;
+    city: string;
+    is_visible: boolean;
+    display_order: number;
+  }>) {
+    const { data, error } = await supabase
+      .from('testimonials')
+      .update({ ...testimonial, updated_at: new Date().toISOString() })
+      .eq('id', id)
+      .select()
+      .single();
+    
+    if (error) throw error;
+    return data;
+  },
+
+  async delete(id: string) {
+    const { error } = await supabase
+      .from('testimonials')
+      .delete()
+      .eq('id', id);
+    
+    if (error) throw error;
+  }
+};
+
 export const statisticsApi = {
   async getByPageType(pageType: 'ongoing' | 'won') {
     const { data, error } = await supabase
