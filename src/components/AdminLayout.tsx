@@ -6,7 +6,7 @@ import { useAuth } from '../context/AuthContext';
 const AdminLayout: React.FC = () => {
   const location = useLocation();
   const { signOut, user } = useAuth();
-  const [sidebarOpen, setSidebarOpen] = useState(false);
+  const [sidebarOpen, setSidebarOpen] = useState(false); 
 
   const handleSignOut = async () => {
     try {
