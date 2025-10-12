@@ -119,114 +119,27 @@ const NewsPage: React.FC = () => {
   useEffect(() => {
   const fetchNews = async () => {
     try {
-      setLoading(true);
-      setError(null);
-
-      const response = await fetch(
-        'https://docs.google.com/spreadsheets/d/1lzN_O5z6z4Ed-Lvo0TK9PqU4bQ3sJqUD7poNnuhi6RY/gviz/tq?gid=0&tqx=out:json',
-        {
-          method: 'GET',
-          headers: {
-            'Accept': 'application/json',
-          },
-        }
-      );
-
-      if (!response.ok) {
-        throw new Error(`HTTP error! status: ${response.status}`);
-      }
-
-      const responseText = await response.text();
+      const data = await newsApi.getAllVisible();
       
-      // Remove the Google Visualization API wrapper
-      const jsonStart = responseText.indexOf('{');
-      const jsonEnd = responseText.lastIndexOf('}');
-      let jsonString = '';
-      if (jsonStart !== -1 && jsonEnd !== -1 && jsonEnd > jsonStart) {
-        jsonString = responseText.substring(jsonStart, jsonEnd + 1);
-      } else {
-        console.error('Could not find valid JSON in responseText:', responseText);
-        throw new Error('Invalid JSON response from Google Sheets.');
+      if (data && data.length > 0) {
+        const processedData = data.map((article: any) => ({
+          ...article,
+          // Konwersja treści - zamień \n na prawdziwe newliny
+          content: article.content.replace(/\\n/g, '\n')
+        }));
+        
+        setNewsArticles(processedData);
       }
-      const jsonData = JSON.parse(jsonString);
-      
-      const parsedData = parseGoogleSheetsJson(jsonData);
-
-      // --- START OF NEW CONTENT PROCESSING LOGIC ---
-      const processedData = parsedData.map(article => {
-  let rawContent = article.content;
-
-  const lines = rawContent.split('\n');
-  let newContentLines: string[] = [];
-  let inList = false;
-
-  lines.forEach((line) => {
-    const trimmedLine = line.trim();
-    // Check if the line starts with a tab followed by a bullet point and a space
-    const isListItem = line.startsWith('\t• ');
-
-    if (isListItem) {
-      if (!inList) {
-        newContentLines.push('<ul>');
-        inList = true;
-      }
-      // Remove the leading tab and bullet point, then wrap in <li>
-      // The substring(3) removes '\t• '
-      newContentLines.push(`<li>${line.substring(3)}</li>`);
-    } else {
-      if (inList) {
-        newContentLines.push('</ul>');
-        inList = false;
-      }
-      // For non-list lines, just add them. Newlines will be handled by CSS.
-      newContentLines.push(line);
+    } catch (e: any) {
+      console.error('Error fetching news:', e);
+      setError(e.message || 'Wystąpił błąd podczas ładowania aktualności');
+    } finally {
+      setLoading(false);
     }
-  });
+  };
 
-  // Close any open list at the end of the content
-  if (inList) {
-    newContentLines.push('</ul>');
-  }
-
-// Format the date for display
-  const parsedDate = parseDateString(article.date);
-  let formattedDate = article.date; // Fallback to original if parsing fails
-  if (!isNaN(parsedDate.getTime())) {
-    const day = String(parsedDate.getDate()).padStart(2, '0');
-    const month = String(parsedDate.getMonth() + 1).padStart(2, '0'); // Month is 0-indexed
-    const year = parsedDate.getFullYear();
-    formattedDate = `${day}.${month}.${year}`;
-  }
-        
-  // Join the processed lines. The newlines here will be rendered by `white-space: pre-wrap;`
-  return { ...article, content: newContentLines.join('\n'), date: formattedDate };
-
-});
-
-        // --- END OF NEW CONTENT PROCESSING LOGIC ---
-
-        // Sort articles by date (newest first)
-        const sortedData = processedData.sort((a, b) => {
-          const dateA = parseDateString(a.date);
-          const dateB = parseDateString(b.date);
-
-          if (isNaN(dateA.getTime()) || isNaN(dateB.getTime())) {
-            return 0;
-          }
-          return dateB.getTime() - dateA.getTime();
-        });
-        
-        setNewsArticles(sortedData);
-      } catch (e: any) {
-        console.error('Error fetching news:', e);
-        setError(e.message || 'Wystąpił błąd podczas ładowania aktualności');
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    fetchNews();
-  }, []);
+  fetchNews();
+}, []);
 
   const handleReadMoreClick = (article: NewsArticle) => {
     setSelectedNewsArticle(article);
