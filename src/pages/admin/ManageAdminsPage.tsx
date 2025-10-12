@@ -371,7 +371,7 @@ export default function ManageAdminsPage() {
           <li>Nowi administratorzy muszą ustawić swoje hasło za pomocą linku weryfikacyjnego.</li>
           <li>Nie można dezaktywować własnego konta.</li>
           <li>W systemie musi pozostać co najmniej jeden aktywny administrator.</li>
-          <li>Dezaktywowani administratorzy nie mają dostępu do panelu administracyjnego./li>
+          <li>Dezaktywowani administratorzy nie mają dostępu do panelu administracyjnego.</li>
         </ul>
       </div>
     </div>
