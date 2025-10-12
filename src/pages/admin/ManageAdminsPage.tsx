@@ -266,37 +266,6 @@ export default function ManageAdminsPage() {
         </div>
       )}
 
-      <div className="bg-white rounded-lg shadow-md p-6">
-        <h2 className="text-xl font-semibold text-gray-900 mb-4 flex items-center gap-2">
-          <UserPlus className="w-6 h-6" />
-          Invite New Admin
-        </h2>
-        <form onSubmit={handleInviteAdmin} className="flex gap-4">
-          <div className="flex-1">
-            <input
-              type="email"
-              value={newAdminEmail}
-              onChange={(e) => setNewAdminEmail(e.target.value)}
-              placeholder="Enter admin email address"
-              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-              required
-              disabled={inviting}
-            />
-          </div>
-          <button
-            type="submit"
-            disabled={inviting || !newAdminEmail}
-            className="px-6 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 disabled:bg-gray-400 disabled:cursor-not-allowed transition-colors flex items-center gap-2"
-          >
-            <Mail className="w-5 h-5" />
-            {inviting ? 'Sending...' : 'Send Invitation'}
-          </button>
-        </form>
-        <p className="mt-3 text-sm text-gray-500">
-          An invitation email will be sent to the provided address. The new admin will need to set their password through the verification link.
-        </p>
-      </div>
-
       <div className="bg-white rounded-lg shadow-md overflow-hidden">
         <div className="px-6 py-4 border-b border-gray-200">
           <h2 className="text-xl font-semibold text-gray-900">Admin Users</h2>
