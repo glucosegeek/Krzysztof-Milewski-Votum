@@ -249,10 +249,6 @@ export default function ManageAdminsPage() {
 
   return (
     <div className="space-y-8">
-      <div>
-        <h1 className="text-3xl font-bold text-gray-900 mb-2">Manage Admins</h1>
-        <p className="text-gray-600">Invite new admins and manage existing admin accounts</p>
-      </div>
 
       {error && (
         <div className="bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded-lg">
