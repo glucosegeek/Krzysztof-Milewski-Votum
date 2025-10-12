@@ -368,10 +368,10 @@ export default function ManageAdminsPage() {
         <h3 className="text-sm font-semibold text-blue-900 mb-2">Uwagi dotyczące bezpieczeństwa:</h3>
         <ul className="text-sm text-blue-800 space-y-1 list-disc list-inside">
           <li>Zaproszeni administratorzy otrzymają wiadomość e-mail z linkiem weryfikacyjnym.</li>
-          <li>New admins must set their password through the verification link</li>
-          <li>You cannot deactivate your own account</li>
-          <li>At least one active admin must remain in the system</li>
-          <li>Deactivated admins cannot access the admin panel</li>
+          <li>Nowi administratorzy muszą ustawić swoje hasło za pomocą linku weryfikacyjnego.</li>
+          <li>Nie można dezaktywować własnego konta.</li>
+          <li>W systemie musi pozostać co najmniej jeden aktywny administrator.</li>
+          <li>Dezaktywowani administratorzy nie mają dostępu do panelu administracyjnego./li>
         </ul>
       </div>
     </div>
