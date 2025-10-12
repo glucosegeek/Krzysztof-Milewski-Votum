@@ -21,6 +21,7 @@ const AdminLayout: React.FC = () => {
     { name: 'Sprawy W Trakcie', href: '/admin/ongoing-cases', icon: Clock },
     { name: 'Wygrane Sprawy', href: '/admin/won-cases', icon: Trophy },
     { name: 'Statystyki', href: '/admin/statistics', icon: BarChart3 },
+    { name: 'Opinie Klientów', href: '/admin/testimonials', icon: Star },
     { name: 'Zarządzaj Adminami', href: '/admin/manage-admins', icon: Users },
   ];
 
