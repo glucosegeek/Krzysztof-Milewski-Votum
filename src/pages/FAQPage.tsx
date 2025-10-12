@@ -1,145 +1,122 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { ArrowLeft, HelpCircle, ChevronDown, ChevronUp } from 'lucide-react';
+import { ArrowLeft, ChevronDown, ChevronUp } from 'lucide-react';
+import { faqApi } from '../lib/supabase';
 import { useConsultationModal } from '../context/ConsultationModalContext';
 
+interface FAQ {
+  id: string;
+  question: string;
+  answer: string;
+  category?: string;
+}
+
 const FAQPage: React.FC = () => {
-  const [openFAQ, setOpenFAQ] = useState<number | null>(null);
   const { openModal } = useConsultationModal();
+  const [faqs, setFaqs] = useState<FAQ[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [openFAQ, setOpenFAQ] = useState<string | null>(null);
 
-  const faqs = [
-    {
-      id: 1,
-      question: "Czy konsultacja jest rzeczywiście bezpłatna?",
-      answer: "Tak, pierwsza konsultacja jest całkowicie bezpłatna i bez zobowiązań. Podczas niej analizujemy Twoją sytuację, sprawdzamy dokumenty i informujemy o możliwościach prawnych. Nie ponosisz żadnych kosztów za tę usługę.",
-    },
-    {
-      id: 2,
-      question: "Ile trwa proces sądowy z bankiem?",
-      answer: "Czas trwania procesu sądowego może się różnić w zależności od złożoności sprawy i obciążenia sądu. Zazwyczaj postępowanie w pierwszej instancji trwa od 12 do 24 miesięcy. W przypadku apelacji proces może się wydłużyć o kolejne 6-12 miesięcy.",
-    },
-    {
-      id: 3,
-      question: "Co się stanie, jeśli przegram sprawę?",
-      answer: "Działamy w oparciu o sukces, co oznacza, że nasze wynagrodzenie uzależnione jest od wygranej. W przypadku przegranej nie płacisz nam honorarium. Jednak mogą wystąpić koszty sądowe, które zazwyczaj pokrywa przegrywająca strona. Szczegóły omawiamy podczas konsultacji.",
-    },
-    {
-      id: 4,
-      question: "Czy mogę dochodzić roszczeń, jeśli spłaciłem już kredyt?",
-      answer: "Tak, możesz dochodzić zwrotu nadpłaconych kwot nawet po spłaceniu kredytu. Jeśli umowa zawierała klauzule abuzywne, masz prawo do odzyskania różnicy między tym, co zapłaciłeś, a tym, co powinieneś był zapłacić zgodnie z prawem.",
-    },
-    {
-      id: 5,
-      question: "Jakie dokumenty potrzebuję do analizy sprawy?",
-      answer: "Do wstępnej analizy potrzebujemy: umowę kredytową, harmonogram spłat, wyciągi z konta kredytowego, korespondencję z bankiem. Jeśli nie masz wszystkich dokumentów, pomożemy Ci je uzyskać od banku.",
-    },
-    {
-      id: 6,
-      question: "Czy każdy kredyt CHF można skutecznie zaskarżyć?",
-      answer: "Nie każdy kredyt CHF automatycznie daje podstawy do wygranej sprawy. Sukces zależy od konkretnych zapisów w umowie, sposobu jej zawarcia i innych czynników. Dlatego każdą sprawę analizujemy indywidualnie podczas bezpłatnej konsultacji.",
-    },
-    {
-      id: 7,
-      question: "Co to znaczy 'działanie w oparciu o sukces'?",
-      answer: "Oznacza to, że nasze wynagrodzenie uzależnione jest od pozytywnego wyniku sprawy. Jeśli nie wygramy, nie płacisz nam honorarium. Nasze wynagrodzenie stanowi procent od odzyskanej kwoty, co motywuje nas do jak najlepszego reprezentowania Twoich interesów.",
-    },
-    {
-      id: 8,
-      question: "Czy mogę odstąpić od umowy SKD po jej podpisaniu?",
-      answer: "Tak, w przypadku umów SKD (sprzedaży konsumenckiej na odległość) masz prawo odstąpić od umowy w terminie 14 dni bez podania przyczyny. Termin liczy się od dnia zawarcia umowy lub otrzymania produktu. Sprzedawca musi Cię o tym prawie poinformować.",
-    },
-    {
-      id: 9,
-      question: "Jak długo trwa analiza mojej umowy?",
-      answer: "Wstępną analizę przeprowadzamy zazwyczaj w ciągu 2-3 dni roboczych od otrzymania dokumentów. Szczegółowa analiza prawna może zająć do tygodnia. O wynikach informujemy telefonicznie lub mailowo, a następnie omawiamy dalsze kroki.",
-    },
-    {
-      id: 10,
-      question: "Czy bank może podwyższyć ratę podczas procesu?",
-      answer: "Bank nie może arbitralnie podwyższać rat podczas toczącego się procesu sądowego. Jeśli jednak nadal spłacasz kredyt, raty mogą się zmieniać zgodnie z zapisami umowy (np. ze względu na zmiany stóp procentowych). Szczegóły zależą od konkretnej umowy.",
-    }
-  ];
+  useEffect(() => {
+    const fetchFAQs = async () => {
+      try {
+        const data = await faqApi.getAllVisible();
+        setFaqs(data);
+      } catch (error) {
+        console.error('Error fetching FAQs:', error);
+      } finally {
+        setLoading(false);
+      }
+    };
 
-  const toggleFAQ = (id: number) => {
+    fetchFAQs();
+  }, []);
+
+  const toggleFAQ = (id: string) => {
     setOpenFAQ(openFAQ === id ? null : id);
   };
 
   return (
-    <div className="min-h-screen pt-16" style={{ backgroundColor: '#0A1A2F' }}>
-      {/* Hero Section with Background Image - Only Link */}
-      <section 
-        className="relative py-20 min-h-[60vh] flex items-center justify-center"
-        style={{
-          backgroundImage: 'url(/faq-background.png)',
-          backgroundSize: 'cover',
-          backgroundPosition: 'center',
-          backgroundRepeat: 'no-repeat'
-        }}
-      >
-        {/* Dark Overlay for dimming */}
-        <div 
-           className="absolute inset-0"
-  style={{ backgroundColor: 'rgba(0, 0, 0, 0.6)' }}
-        ></div>
-        
-      </section>
-
-      {/* Title Section */}
-      <section className="py-20" style={{ backgroundColor: '#0A1A2F' }}>
+    <div className="min-h-screen pt-16" style={{ backgroundColor: '#0A1A2F', color: '#F5F5F5' }}>
+      {/* Hero Section */}
+      <section className="py-20 text-center" style={{ backgroundColor: '#0A1A2F' }}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="max-w-4xl mx-auto text-center">
-            <h1 className="text-4xl md:text-6xl font-bold mb-6" style={{ color: '#F5F5F5' }}>
-              Najczęściej zadawane pytania
-            </h1>
-            <p className="text-xl max-w-3xl mx-auto leading-relaxed mb-16" style={{ color: '#F5F5F5' }}>
-              Znajdź odpowiedzi na najważniejsze pytania dotyczące kredytów walutowych, 
-              umów SKD i procesu prawnego. Jeśli nie znajdziesz odpowiedzi, skontaktuj się z nami.
-            </p>
-          </div>
+          <Link
+            to="/"
+            className="inline-flex items-center space-x-2 mb-8 text-lg transition-colors hover:opacity-80"
+            style={{ color: '#D4AF37' }}
+          >
+            <ArrowLeft size={20} />
+            <span>Powrót do strony głównej</span>
+          </Link>
+          <h1 className="text-4xl md:text-6xl font-bold mb-6">
+            Najczęściej zadawane pytania
+          </h1>
+          <p className="text-xl max-w-3xl mx-auto leading-relaxed">
+            Znajdź odpowiedzi na pytania dotyczące kredytów walutowych i umów SKD.
+            Jeśli nie znajdziesz odpowiedzi, skontaktuj się z nami.
+          </p>
         </div>
       </section>
 
       {/* FAQ Section */}
       <section className="py-20" style={{ backgroundColor: '#F5F5F5' }}>
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="space-y-4">
-            {faqs.map((faq) => (
-              <div 
-                key={faq.id}
-                className="rounded-2xl shadow-lg border-4 overflow-hidden"
-                style={{ backgroundColor: '#0A1A2F', borderColor: '#D4AF37' }}
-              >
-                <button
-                  onClick={() => toggleFAQ(faq.id)}
-                  className="w-full p-6 text-left flex items-center justify-between transition-all hover:bg-opacity-90"
-                  style={{ backgroundColor: 'transparent' }}
+          {loading ? (
+            <div className="flex justify-center items-center py-20">
+              <div
+                className="animate-spin rounded-full h-16 w-16 border-b-4"
+                style={{ borderColor: '#D4AF37' }}
+              ></div>
+            </div>
+          ) : (
+            <div className="space-y-4">
+              {faqs.map((faq) => (
+                <div
+                  key={faq.id}
+                  className="rounded-2xl shadow-lg border-4 overflow-hidden"
+                  style={{ backgroundColor: '#0A1A2F', borderColor: '#D4AF37' }}
                 >
-                  <div className="flex items-center space-x-4">
-                    <h3 className="text-lg font-semibold" style={{ color: '#F5F5F5' }}>
-                      {faq.question}
-                    </h3>
-                  </div>
-                  <div className="flex-shrink-0 ml-4">
-                    {openFAQ === faq.id ? (
-                      <ChevronUp size={24} style={{ color: '#D4AF37' }} />
-                    ) : (
-                      <ChevronDown size={24} style={{ color: '#D4AF37' }} />
-                    )}
-                  </div>
-                </button>
-                
-                {openFAQ === faq.id && (
-                  <div className="px-6 pb-6">
-                    <div className="pt-4 border-t" style={{ borderColor: 'rgba(212, 175, 55, 0.3)' }}>
-                      <p className="text-lg leading-relaxed" style={{ color: '#F5F5F5' }}>
-                        {faq.answer}
-                      </p>
+                  <button
+                    onClick={() => toggleFAQ(faq.id)}
+                    className="w-full p-6 text-left flex items-center justify-between transition-all hover:bg-opacity-90"
+                    style={{ backgroundColor: 'transparent' }}
+                  >
+                    <div className="flex items-center space-x-4">
+                      <h3 className="text-lg font-semibold" style={{ color: '#F5F5F5' }}>
+                        {faq.question}
+                      </h3>
                     </div>
-                  </div>
-                )}
-              </div>
-            ))}
-          </div>
+                    <div className="flex-shrink-0 ml-4">
+                      {openFAQ === faq.id ? (
+                        <ChevronUp size={24} style={{ color: '#D4AF37' }} />
+                      ) : (
+                        <ChevronDown size={24} style={{ color: '#D4AF37' }} />
+                      )}
+                    </div>
+                  </button>
+
+                  {openFAQ === faq.id && (
+                    <div className="px-6 pb-6">
+                      <div className="pt-4 border-t" style={{ borderColor: 'rgba(212, 175, 55, 0.3)' }}>
+                        <p className="text-lg leading-relaxed" style={{ color: '#F5F5F5' }}>
+                          {faq.answer}
+                        </p>
+                      </div>
+                    </div>
+                  )}
+                </div>
+              ))}
+
+              {faqs.length === 0 && (
+                <div className="text-center py-12">
+                  <p className="text-xl" style={{ color: '#0A1A2F' }}>
+                    Brak pytań do wyświetlenia
+                  </p>
+                </div>
+              )}
+            </div>
+          )}
         </div>
       </section>
 
@@ -151,17 +128,16 @@ const FAQPage: React.FC = () => {
               Nie znalazłeś odpowiedzi na swoje pytanie?
             </h2>
             <p className="text-xl mb-8 max-w-2xl mx-auto leading-relaxed" style={{ color: '#F5F5F5' }}>
-              Skontaktuj się z nami bezpośrednio. Każda sytuacja jest inna i wymaga indywidualnego podejścia. 
+              Skontaktuj się z nami bezpośrednio. Każda sytuacja jest inna i wymaga indywidualnego podejścia.
               Chętnie odpowiemy na wszystkie Twoje pytania podczas bezpłatnej konsultacji.
             </p>
-            <Link 
-              to="/#contact-section"
-              state={{ scrollToContact: true }}
+            <button
+              onClick={() => openModal(null, 'direct_consultation')}
               className="inline-block font-bold py-4 px-8 rounded-lg text-lg transition-all hover:-translate-y-2 duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl border-4"
               style={{ backgroundColor: '#F5F5F5', borderColor: '#D4AF37', color: '#0A1A2F' }}
             >
-              Zadaj pytanie
-            </Link>
+              Umów bezpłatną konsultację
+            </button>
           </div>
         </div>
       </section>
