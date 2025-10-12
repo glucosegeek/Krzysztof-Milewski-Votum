@@ -1,4 +1,3 @@
-import * as LucideIcons from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { ArrowLeft, Scale, FileText, DollarSign, Shield, Gavel, BookOpen, Search } from 'lucide-react';
 import { useConsultationModal } from '../context/ConsultationModalContext';
