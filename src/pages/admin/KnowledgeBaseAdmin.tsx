@@ -164,6 +164,32 @@ const handleSubmit = async (e: React.FormEvent) => {
   }
 };
 
+// Funkcja konwertująca HTML z powrotem na zwykły tekst (dla edycji)
+const convertHTMLToText = (html: string): string => {
+  let text = html;
+  
+  // Konwertuj listy
+  text = text.replace(/<ul>/g, '');
+  text = text.replace(/<\/ul>/g, '\n');
+  text = text.replace(/<li>/g, '- ');
+  text = text.replace(/<\/li>/g, '\n');
+  
+  // Konwertuj akapity
+  text = text.replace(/<p>/g, '');
+  text = text.replace(/<\/p>/g, '\n\n');
+  
+  // Konwertuj formatowanie
+  text = text.replace(/<strong>/g, '**');
+  text = text.replace(/<\/strong>/g, '**');
+  text = text.replace(/<em>/g, '*');
+  text = text.replace(/<\/em>/g, '*');
+  
+  // Usuń podwójne puste linie
+  text = text.replace(/\n\n\n+/g, '\n\n');
+  
+  return text.trim();
+};
+  
 const handleEdit = (article: KnowledgeBaseArticle) => {
   setEditingArticle(article);
   setFormData({
