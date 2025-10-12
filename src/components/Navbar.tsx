@@ -158,7 +158,7 @@ const Navbar: React.FC = () => {
                 className="flex items-center space-x-1 px-3 py-2 rounded-md text-sm font-medium transition-colors hover:bg-opacity-10 hover:bg-white"
                 style={{ color: '#F5F5F5' }}
               >
-                <span>Wygrane Sprawy</span>
+                <span>Sprawy</span>
                 <ChevronDown size={16} className={`transform transition-transform ${isWonCasesOpen ? 'rotate-180' : ''}`} />
               </button>
 
