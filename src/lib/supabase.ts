@@ -413,6 +413,97 @@ export const knowledgeBaseApi = {
   }
 };
 
+// FAQ API
+export const faqApi = {
+  async getAll() {
+    const { data, error } = await supabase
+      .from('faq')
+      .select('*')
+      .order('display_order', { ascending: true });
+    
+    if (error) throw error;
+    return data;
+  },
+
+  async getAllVisible() {
+    const { data, error } = await supabase
+      .from('faq')
+      .select('*')
+      .eq('is_visible', true)
+      .order('display_order', { ascending: true });
+    
+    if (error) throw error;
+    return data;
+  },
+
+  async getByCategory(category: string) {
+    const { data, error } = await supabase
+      .from('faq')
+      .select('*')
+      .eq('category', category)
+      .eq('is_visible', true)
+      .order('display_order', { ascending: true });
+    
+    if (error) throw error;
+    return data;
+  },
+
+  async getById(id: string) {
+    const { data, error } = await supabase
+      .from('faq')
+      .select('*')
+      .eq('id', id)
+      .single();
+    
+    if (error) throw error;
+    return data;
+  },
+
+  async create(faq: {
+    question: string;
+    answer: string;
+    category?: string;
+    is_visible?: boolean;
+    display_order?: number;
+  }) {
+    const { data, error } = await supabase
+      .from('faq')
+      .insert([faq])
+      .select()
+      .single();
+    
+    if (error) throw error;
+    return data;
+  },
+
+  async update(id: string, faq: Partial<{
+    question: string;
+    answer: string;
+    category: string;
+    is_visible: boolean;
+    display_order: number;
+  }>) {
+    const { data, error } = await supabase
+      .from('faq')
+      .update({ ...faq, updated_at: new Date().toISOString() })
+      .eq('id', id)
+      .select()
+      .single();
+    
+    if (error) throw error;
+    return data;
+  },
+
+  async delete(id: string) {
+    const { error } = await supabase
+      .from('faq')
+      .delete()
+      .eq('id', id);
+    
+    if (error) throw error;
+  }
+};
+
 export const statisticsApi = {
   async getByPageType(pageType: 'ongoing' | 'won') {
     const { data, error } = await supabase
