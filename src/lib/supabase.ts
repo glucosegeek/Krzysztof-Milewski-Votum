@@ -3,7 +3,6 @@ import { createClient } from '@supabase/supabase-js';
 const supabaseUrl = 'https://tzznxyggyurbfnjquswu.supabase.co';
 const supabaseAnonKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InR6em54eWdneXVyYmZuanF1c3d1Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjAxOTI4NDksImV4cCI6MjA3NTc2ODg0OX0.G5roin_z9FxootZZSvTFJnc8iSrTX96TWj7fCHSJq6w';
 
-export const supabase = createClient(supabaseUrl, supabaseAnonKey);
 
 if (!supabaseUrl || !supabaseAnonKey) {
   throw new Error('Missing Supabase environment variables');
