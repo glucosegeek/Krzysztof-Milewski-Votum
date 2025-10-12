@@ -5,8 +5,10 @@ import { useConsultationModal } from '../context/ConsultationModalContext';
 
 const Navbar: React.FC = () => {
   const [isServicesOpen, setIsServicesOpen] = useState(false);
+  const [isWonCasesOpen, setIsWonCasesOpen] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [timeoutId, setTimeoutId] = useState<NodeJS.Timeout | null>(null);
+  const [wonCasesTimeoutId, setWonCasesTimeoutId] = useState<NodeJS.Timeout | null>(null);
 
  const handleMouseEnter = () => {
     if (timeoutId) {
@@ -19,15 +21,31 @@ const Navbar: React.FC = () => {
   const handleMouseLeave = () => {
     const id = setTimeout(() => {
       setIsServicesOpen(false);
-    }, 300); // 300ms opóźnienia
+    }, 300);
     setTimeoutId(id);
+  };
+
+  const handleWonCasesMouseEnter = () => {
+    if (wonCasesTimeoutId) {
+      clearTimeout(wonCasesTimeoutId);
+      setWonCasesTimeoutId(null);
+    }
+    setIsWonCasesOpen(true);
+  };
+
+  const handleWonCasesMouseLeave = () => {
+    const id = setTimeout(() => {
+      setIsWonCasesOpen(false);
+    }, 300);
+    setWonCasesTimeoutId(id);
   };
   
   useEffect(() => {
   const handleScroll = () => {
     if (isMobileMenuOpen) {
       setIsMobileMenuOpen(false);
-      setIsServicesOpen(false); // Also close services dropdown if open
+      setIsServicesOpen(false);
+      setIsWonCasesOpen(false);
     }
   };
 
@@ -43,6 +61,7 @@ const Navbar: React.FC = () => {
   const closeMobileMenu = () => {
     setIsMobileMenuOpen(false);
     setIsServicesOpen(false);
+    setIsWonCasesOpen(false);
   };
 
   return (
@@ -120,7 +139,7 @@ const Navbar: React.FC = () => {
 >
   O mnie
 </Link>
-            
+
 <Link
               to="/knowledge-base"
               className="px-3 py-2 rounded-md text-sm font-medium transition-colors hover:bg-opacity-10 hover:bg-white"
@@ -130,14 +149,47 @@ const Navbar: React.FC = () => {
               Baza wiedzy
             </Link>
 
-            <Link
-              to="/wygrane-sprawy"
-              className="px-3 py-2 rounded-md text-sm font-medium transition-colors hover:bg-opacity-10 hover:bg-white"
-              style={{ color: '#F5F5F5' }}
-              onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+            <div
+              className="relative"
+              onMouseEnter={handleWonCasesMouseEnter}
+              onMouseLeave={handleWonCasesMouseLeave}
             >
-              Wygrane Sprawy
-            </Link>
+              <button
+                className="flex items-center space-x-1 px-3 py-2 rounded-md text-sm font-medium transition-colors hover:bg-opacity-10 hover:bg-white"
+                style={{ color: '#F5F5F5' }}
+              >
+                <span>Wygrane Sprawy</span>
+                <ChevronDown size={16} className={`transform transition-transform ${isWonCasesOpen ? 'rotate-180' : ''}`} />
+              </button>
+
+              {isWonCasesOpen && (
+                <div
+                  className="absolute top-full left-0 mt-1 w-64 rounded-md shadow-lg border-2"
+                  style={{ backgroundColor: '#0A1A2F', borderColor: '#D4AF37' }}
+                  onMouseEnter={handleWonCasesMouseEnter}
+                  onMouseLeave={handleWonCasesMouseLeave}
+                >
+                  <div className="py-1">
+                    <Link
+                      to="/wygrane-sprawy/w-trakcie"
+                      className="block px-4 py-2 text-sm transition-colors hover:bg-opacity-10 hover:bg-white"
+                      style={{ color: '#F5F5F5' }}
+                      onClick={() => setIsWonCasesOpen(false)}
+                    >
+                      W trakcie
+                    </Link>
+                    <Link
+                      to="/wygrane-sprawy"
+                      className="block px-4 py-2 text-sm transition-colors hover:bg-opacity-10 hover:bg-white"
+                      style={{ color: '#F5F5F5' }}
+                      onClick={() => setIsWonCasesOpen(false)}
+                    >
+                      Skończone
+                    </Link>
+                  </div>
+                </div>
+              )}
+            </div>
 
             <Link
               to="/faq"
@@ -249,17 +301,43 @@ const Navbar: React.FC = () => {
                 Baza wiedzy
               </Link>
 
-              <Link
-                to="/wygrane-sprawy"
-                className="block px-3 py-2 rounded-md text-sm font-medium transition-colors hover:bg-opacity-10 hover:bg-white"
-                style={{ color: '#F5F5F5' }}
-                onClick={() => {
-                  closeMobileMenu();
-                  window.scrollTo({ top: 0, behavior: 'smooth' });
-                }}
-              >
-                Wygrane Sprawy
-              </Link>
+              <div>
+                <button
+                  onClick={() => setIsWonCasesOpen(!isWonCasesOpen)}
+                  className="w-full flex items-center justify-between px-3 py-2 rounded-md text-sm font-medium transition-colors hover:bg-opacity-10 hover:bg-white"
+                  style={{ color: '#F5F5F5' }}
+                >
+                  <span>Wygrane Sprawy</span>
+                  <ChevronDown size={16} className={`transform transition-transform ${isWonCasesOpen ? 'rotate-180' : ''}`} />
+                </button>
+
+                {isWonCasesOpen && (
+                  <div className="ml-4 space-y-1">
+                    <Link
+                      to="/wygrane-sprawy/w-trakcie"
+                      className="block px-3 py-2 text-sm transition-colors hover:bg-opacity-10 hover:bg-white rounded-md"
+                      style={{ color: '#F5F5F5' }}
+                      onClick={() => {
+                        closeMobileMenu();
+                        window.scrollTo({ top: 0, behavior: 'smooth' });
+                      }}
+                    >
+                      W trakcie
+                    </Link>
+                    <Link
+                      to="/wygrane-sprawy"
+                      className="block px-3 py-2 text-sm transition-colors hover:bg-opacity-10 hover:bg-white rounded-md"
+                      style={{ color: '#F5F5F5' }}
+                      onClick={() => {
+                        closeMobileMenu();
+                        window.scrollTo({ top: 0, behavior: 'smooth' });
+                      }}
+                    >
+                      Skończone
+                    </Link>
+                  </div>
+                )}
+              </div>
 
               <Link
                 to="/faq"

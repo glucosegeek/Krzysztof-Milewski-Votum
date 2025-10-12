@@ -14,6 +14,7 @@ import NewsPage from './pages/NewsPage';
 import FAQPage from './pages/FAQPage';
 import AboutMePage from './pages/AboutMePage';
 import WygraneSsprawyPage from './pages/WygraneSsprawyPage';
+import WTrakcePage from './pages/WTrakcePage';
 import PrivacyPolicyPage from './pages/PrivacyPolicyPage';
 import ContactSection from './components/ContactSection';
 
@@ -44,6 +45,7 @@ useEffect(() => {
           <Route path="/knowledge-base" element={<KnowledgeBasePage />} />
           <Route path="/news" element={<NewsPage />} />
           <Route path="/wygrane-sprawy" element={<WygraneSsprawyPage />} />
+          <Route path="/wygrane-sprawy/w-trakcie" element={<WTrakcePage />} />
           <Route path="/faq" element={<FAQPage />} />
           <Route path="/privacy-policy" element={<PrivacyPolicyPage />} />
            <Route path="/about-me" element={<AboutMePage />} />
