@@ -1,23 +1,6 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-
-/* Globalne style dla wszystkich list w artykułach */
-article ul,
-.article-content ul,
-.knowledge-base-article-content ul {
-  list-style-position: inside;
-  padding-left: 0;
-  margin-left: 1rem;
-}
-
-article ul li::before,
-.article-content ul li::before,
-.knowledge-base-article-content ul li::before {
-  content: '' !important;
-  display: none !important;
-}
-
 .news-article-content ul {
   list-style: none; /* Remove default bullet */
   padding-left: 0; /* Remove default padding */
