@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { useStickyButtonVisibility } from '../context/StickyButtonVisibilityContext';
 import { useConsultationModal } from '../context/ConsultationModalContext';
+import { testimonialsApi } from '../lib/supabase';
 import ContactSection from '../components/ContactSection';
 import { Link } from 'react-router-dom';
 import { 
