@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Link, useLocation, Outlet } from 'react-router-dom';
-import { LogOut, Menu, X, LayoutDashboard, Clock, Trophy, BarChart3, Users, Star, Newspaper, BookOpen } from 'lucide-react';
+import { LogOut, Menu, X, LayoutDashboard, Clock, Trophy, BarChart3, Users, Star, Newspaper, BookOpen, HelpCircle } from 'lucide-react';
 import { useAuth } from '../context/AuthContext';
 
 const AdminLayout: React.FC = () => {
@@ -24,6 +24,7 @@ const AdminLayout: React.FC = () => {
     { name: 'Opinie Klientów', href: '/admin/testimonials', icon: Star },
     { name: 'Aktualności', href: '/admin/news', icon: Newspaper },
     { name: 'Baza Wiedzy', href: '/admin/knowledge-base', icon: BookOpen },
+    { name: 'FAQ', href: '/admin/faq', icon: HelpCircle },
     { name: 'Zarządzaj Adminami', href: '/admin/manage-admins', icon: Users },
   ];
 
