@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Link, useLocation, Outlet } from 'react-router-dom';
-import { LogOut, Menu, X, LayoutDashboard, Clock, Trophy, BarChart3, Users, Star } from 'lucide-react';
+import { LogOut, Menu, X, LayoutDashboard, Clock, Trophy, BarChart3, Users, Star, Newspaper } from 'lucide-react';
 import { useAuth } from '../context/AuthContext';
 
 const AdminLayout: React.FC = () => {
