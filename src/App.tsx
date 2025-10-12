@@ -70,6 +70,7 @@ useEffect(() => {
               <Route path="testimonials" element={<TestimonialsAdmin />} />
               <Route path="news" element={<NewsAdmin />} />
               <Route path="knowledge-base" element={<KnowledgeBaseAdmin />} />
+              <Route path="faq" element={<FAQAdmin />} />
               <Route path="manage-admins" element={<ManageAdminsPage />} />
             </Route>
 
