@@ -372,4 +372,141 @@ const NewsAdmin: React.FC = () => {
                   <input
                     type="text"
                     value={formData.author}
-                    onCha
+                    onChange={(e) => setFormData({ ...formData, author: e.target.value })}
+                    className="w-full px-4 py-3 rounded-lg border-2"
+                    style={{ backgroundColor: '#FFFFFF', borderColor: '#D4AF37', color: '#0A1A2F' }}
+                    required
+                  />
+                </div>
+
+                <div>
+                  <label className="block text-sm font-medium mb-2" style={{ color: '#0A1A2F' }}>
+                    Data Publikacji *
+                  </label>
+                  <input
+                    type="date"
+                    value={formData.date}
+                    onChange={(e) => setFormData({ ...formData, date: e.target.value })}
+                    className="w-full px-4 py-3 rounded-lg border-2"
+                    style={{ backgroundColor: '#FFFFFF', borderColor: '#D4AF37', color: '#0A1A2F' }}
+                    required
+                  />
+                </div>
+
+                <div>
+                  <label className="block text-sm font-medium mb-2" style={{ color: '#0A1A2F' }}>
+                    Kategoria
+                  </label>
+                  <select
+                    value={formData.category}
+                    onChange={(e) => setFormData({ ...formData, category: e.target.value })}
+                    className="w-full px-4 py-3 rounded-lg border-2"
+                    style={{ backgroundColor: '#FFFFFF', borderColor: '#D4AF37', color: '#0A1A2F' }}
+                  >
+                    <option value="">Wybierz kategorię</option>
+                    {categories.map((cat) => (
+                      <option key={cat} value={cat}>
+                        {cat}
+                      </option>
+                    ))}
+                  </select>
+                </div>
+              </div>
+
+              <div>
+                <label className="block text-sm font-medium mb-2" style={{ color: '#0A1A2F' }}>
+                  Treść Artykułu *
+                </label>
+                <textarea
+                  value={formData.content}
+                  onChange={(e) => setFormData({ ...formData, content: e.target.value })}
+                  rows={12}
+                  className="w-full px-4 py-3 rounded-lg border-2 font-mono text-sm"
+                  style={{ backgroundColor: '#FFFFFF', borderColor: '#D4AF37', color: '#0A1A2F' }}
+                  placeholder="Wpisz treść artykułu. Możesz użyć pustych linii do oddzielania akapitów."
+                  required
+                />
+                <p className="text-xs mt-1" style={{ color: '#0A1A2F', opacity: 0.7 }}>
+                  💡 Wskazówka: Pusta linia tworzy nowy akapit
+                </p>
+              </div>
+
+              <div className="grid md:grid-cols-2 gap-4">
+                <div>
+                  <label className="block text-sm font-medium mb-2" style={{ color: '#0A1A2F' }}>
+                    Kolejność wyświetlania
+                  </label>
+                  <input
+                    type="number"
+                    value={formData.display_order}
+                    onChange={(e) =>
+                      setFormData({ ...formData, display_order: parseInt(e.target.value) || 0 })
+                    }
+                    className="w-full px-4 py-3 rounded-lg border-2"
+                    style={{ backgroundColor: '#FFFFFF', borderColor: '#D4AF37', color: '#0A1A2F' }}
+                    placeholder="0"
+                  />
+                  <p className="text-xs mt-1" style={{ color: '#0A1A2F', opacity: 0.7 }}>
+                    Artykuły są domyślnie sortowane po dacie (najnowsze najpierw)
+                  </p>
+                </div>
+
+                <div>
+                  <label className="flex items-center space-x-3 cursor-pointer pt-8">
+                    <input
+                      type="checkbox"
+                      checked={formData.is_visible}
+                      onChange={(e) => setFormData({ ...formData, is_visible: e.target.checked })}
+                      className="w-5 h-5 rounded border-2"
+                      style={{ accentColor: '#D4AF37' }}
+                    />
+                    <span className="text-sm font-medium" style={{ color: '#0A1A2F' }}>
+                      Opublikuj artykuł (widoczny publicznie)
+                    </span>
+                  </label>
+                </div>
+              </div>
+
+              <div className="flex space-x-4 pt-4">
+                <button
+                  type="submit"
+                  className="flex-1 px-6 py-3 rounded-lg font-medium transition-all hover:scale-105 border-4"
+                  style={{ backgroundColor: '#D4AF37', borderColor: '#D4AF37', color: '#0A1A2F' }}
+                >
+                  {editingNews ? 'Zapisz Zmiany' : 'Dodaj Artykuł'}
+                </button>
+                <button
+                  type="button"
+                  onClick={handleCloseForm}
+                  className="px-6 py-3 rounded-lg font-medium transition-all hover:scale-105 border-2"
+                  style={{ borderColor: '#D4AF37', color: '#0A1A2F' }}
+                >
+                  Anuluj
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      )}
+
+      {/* Info Box */}
+      <div
+        className="mt-8 p-6 rounded-2xl shadow-xl border-4"
+        style={{ backgroundColor: '#F5F5F5', borderColor: '#D4AF37' }}
+      >
+        <h3 className="text-xl font-bold mb-3" style={{ color: '#0A1A2F' }}>
+          Informacje
+        </h3>
+        <ul className="space-y-2 text-sm" style={{ color: '#0A1A2F' }}>
+          <li>• Artykuły są wyświetlane na stronie /news (Aktualności)</li>
+          <li>• Domyślnie artykuły sortowane są po dacie publikacji (najnowsze najpierw)</li>
+          <li>• Możesz ukryć artykuł bez usuwania - użyj przycisku widoczności</li>
+          <li>• W treści artykułu używaj pustych linii do tworzenia nowych akapitów</li>
+          <li>• Zmiany są natychmiast widoczne na stronie publicznej</li>
+        </ul>
+      </div>
+    </div>
+  );
+};
+
+export default NewsAdmin;
