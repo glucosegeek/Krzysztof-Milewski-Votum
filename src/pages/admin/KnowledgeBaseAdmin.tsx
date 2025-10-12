@@ -553,10 +553,10 @@ To proste!"
       💡 Formatowanie tekstu:
     </p>
     <ul className="text-xs space-y-1" style={{ color: '#0A1A2F' }}>
-      <li>• <strong>Pusta linia</strong> = nowy akapit</li>
-      <li>• <strong>**tekst**</strong> = pogrubienie</li>
-      <li>• <strong>*tekst*</strong> = kursywa</li>
-      <li>• <strong>- tekst</strong> na początku linii = lista punktowana</li>
+      <li><strong>Pusta linia</strong> = nowy akapit</li>
+      <li><strong>**tekst**</strong> = pogrubienie</li>
+      <li><strong>*tekst*</strong> = kursywa</li>
+      <li><strong>- tekst</strong> na początku linii = lista punktowana</li>
     </ul>
   </div>
 </div>
