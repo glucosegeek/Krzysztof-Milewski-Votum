@@ -121,6 +121,9 @@ const NewsPage: React.FC = () => {
   const fetchNews = async () => {
     try {
       const data = await newsApi.getAllVisible();
+
+console.log('🔍 Liczba artykułów z API:', data?.length); // 👈 DODAJ
+    console.log('🔍 Wszystkie artykuły:', data); // 👈 DODAJ
       
       if (data && data.length > 0) {
         const processedData = data.map((article: any) => ({
@@ -128,7 +131,7 @@ const NewsPage: React.FC = () => {
           // Konwersja treści - zamień \n na prawdziwe newliny
           content: article.content.replace(/\\n/g, '\n')
         }));
-        
+         console.log('🔍 Po przetworzeniu:', processedData.length); // 👈 DODAJ
         setNewsArticles(processedData);
       }
     } catch (e: any) {
