@@ -128,57 +128,37 @@ const KnowledgeBasePage: React.FC = () => {
   };
 
   useEffect(() => {
-    const fetchKnowledgeBaseArticles = async () => {
-      try {
-        setLoading(true);
-        setError(null);
-
-        const response = await fetch(
-          'https://docs.google.com/spreadsheets/d/1ypoRLuL0-k1RzsbQ_OEiYJZRZ8LfJF_lssq0vnyzH3A/gviz/tq?gid=0&tqx=out:json',
-          {
-            method: 'GET',
-            headers: {
-              'Accept': 'application/json',
-            },
-          }
-        );
-
-        if (!response.ok) {
-          throw new Error(`HTTP error! status: ${response.status}`);
-        }
-
-        const responseText = await response.text();
-        
-        const jsonStart = responseText.indexOf('{');
-        const jsonEnd = responseText.lastIndexOf('}');
-        let jsonString = '';
-        if (jsonStart !== -1 && jsonEnd !== -1 && jsonEnd > jsonStart) {
-          jsonString = responseText.substring(jsonStart, jsonEnd + 1);
-        } else {
-          console.error('Could not find valid JSON in responseText:', responseText);
-          throw new Error('Invalid JSON response from Google Sheets.');
-        }
-        const jsonData = JSON.parse(jsonString);
-        
-        const rawArticles = parseGoogleSheetsJson(jsonData);
-
-        const processedArticles: Article[] = rawArticles.map(article => ({
-          ...article,
-          icon: iconMap[article.iconName] || <BookOpen size={24} />,
-          fullContent: processArticleContent(article.fullContent)
-        }));
+  const fetchKnowledgeBaseArticles = async () => {
+    try {
+      const data = await knowledgeBaseApi.getAllVisible();
+      
+      if (data && data.length > 0) {
+        const processedArticles: Article[] = data.map((article: any) => {
+          // Dynamiczne pobranie ikony z Lucide
+          const IconComponent = (LucideIcons as any)[article.icon_name] || LucideIcons.BookOpen;
+          
+          return {
+            id: article.id,
+            title: article.title,
+            category: article.category,
+            iconName: article.icon_name,
+            icon: <IconComponent size={24} />,
+            fullContent: article.content // HTML jest już gotowe
+          };
+        });
         
         setArticles(processedArticles);
-      } catch (e: any) {
-        console.error('Error fetching knowledge base articles:', e);
-        setError(e.message || 'Wystąpił błąd podczas ładowania artykułów');
-      } finally {
-        setLoading(false);
       }
-    };
+    } catch (e: any) {
+      console.error('Error fetching knowledge base articles:', e);
+      setError(e.message || 'Wystąpił błąd podczas ładowania artykułów');
+    } finally {
+      setLoading(false);
+    }
+  };
 
-    fetchKnowledgeBaseArticles();
-  }, []);
+  fetchKnowledgeBaseArticles();
+}, []);
 
   const categories = [
     { name: "Wszystkie", value: "all" },
