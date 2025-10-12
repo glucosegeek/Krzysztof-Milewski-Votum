@@ -29,6 +29,7 @@ import ManageAdminsPage from './pages/admin/ManageAdminsPage';
 import TestimonialsAdmin from './pages/admin/TestimonialsAdmin';
 import NewsAdmin from './pages/admin/NewsAdmin';
 import KnowledgeBaseAdmin from './pages/admin/KnowledgeBaseAdmin';
+import FAQAdmin from './pages/admin/FAQAdmin';
 
 function App() {
   const { registerFooterSection } = useStickyButtonVisibility();
