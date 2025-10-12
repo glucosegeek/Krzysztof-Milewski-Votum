@@ -15,6 +15,61 @@ interface KnowledgeBaseArticle {
 }
 
 const KnowledgeBaseAdmin: React.FC = () => {
+  // Funkcja konwertująca zwykły tekst na HTML
+const convertTextToHTML = (text: string): string => {
+  // Dzielimy tekst na linie
+  const lines = text.split('\n');
+  let html = '';
+  let inList = false;
+  
+  for (let i = 0; i < lines.length; i++) {
+    let line = lines[i].trim();
+    
+    // Pusta linia = koniec akapitu lub listy
+    if (line === '') {
+      if (inList) {
+        html += '</ul>';
+        inList = false;
+      }
+      continue;
+    }
+    
+    // Lista punktowana (zaczyna się od "- ")
+    if (line.startsWith('- ')) {
+      if (!inList) {
+        html += '<ul>';
+        inList = true;
+      }
+      line = line.substring(2); // Usuń "- "
+      
+      // Formatowanie wewnątrz elementu listy
+      line = line.replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>'); // **bold**
+      line = line.replace(/\*(.+?)\*/g, '<em>$1</em>'); // *italic*
+      
+      html += `<li>${line}</li>`;
+    } 
+    // Zwykła linia tekstu
+    else {
+      if (inList) {
+        html += '</ul>';
+        inList = false;
+      }
+      
+      // Formatowanie w linii
+      line = line.replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>'); // **bold**
+      line = line.replace(/\*(.+?)\*/g, '<em>$1</em>'); // *italic*
+      
+      html += `<p>${line}</p>`;
+    }
+  }
+  
+  // Zamknij listę jeśli była otwarta
+  if (inList) {
+    html += '</ul>';
+  }
+  
+  return html;
+};
   const [articles, setArticles] = useState<KnowledgeBaseArticle[]>([]);
   const [loading, setLoading] = useState(true);
   const [showForm, setShowForm] = useState(false);
