@@ -173,7 +173,7 @@ export const testimonialsApi = {
       .from('testimonials')
       .select('*')
       .eq('is_visible', true)
-      .order('date', { ascending: false });
+      .order('display_order', { ascending: true  });
     
     if (error) throw error;
     return data;
