@@ -1,163 +1,62 @@
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { ArrowLeft, Scale, FileText, DollarSign, Shield, Gavel, BookOpen, Search } from 'lucide-react';
-import { useConsultationModal } from '../context/ConsultationModalContext';
+import { ArrowLeft, Search } from 'lucide-react';
+import * as LucideIcons from 'lucide-react';
 import { knowledgeBaseApi } from '../lib/supabase';
+import { useConsultationModal } from '../context/ConsultationModalContext';
 import ArticleDetailModal from '../components/ArticleDetailModal';
 
 interface Article {
-  id: number;
+  id: string;
   title: string;
-  fullContent: string;
-  iconName: string;
-  icon: React.ReactNode;
   category: string;
+  iconName: string;
+  icon: React.ReactElement;
+  fullContent: string;
 }
 
 const KnowledgeBasePage: React.FC = () => {
-  const [searchTerm, setSearchTerm] = useState('');
-  const [selectedCategory, setSelectedCategory] = useState('all');
+  const { openModal } = useConsultationModal();
   const [articles, setArticles] = useState<Article[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
-  const { openModal } = useConsultationModal();
-
-  // State for the ArticleDetailModal
+  const [selectedCategory, setSelectedCategory] = useState('all');
+  const [searchTerm, setSearchTerm] = useState('');
   const [showArticleModal, setShowArticleModal] = useState(false);
   const [selectedArticle, setSelectedArticle] = useState<Article | null>(null);
 
-  // Icon mapping
-  const iconMap: { [key: string]: React.ReactNode } = {
-    'Scale': <Scale size={24} />,
-    'FileText': <FileText size={24} />,
-    'DollarSign': <DollarSign size={24} />,
-    'Shield': <Shield size={24} />,
-    'Gavel': <Gavel size={24} />,
-    'BookOpen': <BookOpen size={24} />,
-  };
-
-  const parseGoogleSheetsJson = (jsonData: any): any[] => {
-    try {
-      const table = jsonData.table;
-      if (!table || !table.rows || !table.cols) {
-        console.error('Invalid Google Sheets JSON structure');
-        return [];
-      }
-
-      const headers = table.cols.map((col: any) => col.label || col.id || '');
-      
-      const idIndex = headers.findIndex((h: string) => h.toLowerCase().includes('id'));
-      const titleIndex = headers.findIndex((h: string) => h.toLowerCase().includes('title'));
-      const fullContentIndex = headers.findIndex((h: string) => h.toLowerCase().includes('fullcontent') || h.toLowerCase().includes('full_content'));
-      const iconIndex = headers.findIndex((h: string) => h.toLowerCase().includes('icon'));
-      const categoryIndex = headers.findIndex((h: string) => h.toLowerCase().includes('category'));
-
-      if (idIndex === -1 || titleIndex === -1 || fullContentIndex === -1 || iconIndex === -1 || categoryIndex === -1) {
-        console.error('Required columns not found in Google Sheets');
-        return [];
-      }
-
-      const rawArticles: any[] = [];
-      
-      table.rows.forEach((row: any, index: number) => {
-        if (index === 0 && row.c && row.c[titleIndex] && 
-            row.c[titleIndex].v && 
-            row.c[titleIndex].v.toString().toLowerCase().includes('title')) {
-          return;
-        }
-
-        if (!row.c) return;
-
-        const id = row.c[idIndex]?.v?.toString() || '';
-        const title = row.c[titleIndex]?.v?.toString() || '';
-        const fullContent = row.c[fullContentIndex]?.v?.toString() || '';
-        const iconName = row.c[iconIndex]?.v?.toString() || '';
-        const category = row.c[categoryIndex]?.v?.toString() || '';
-
-        if (id && title && fullContent && iconName && category) {
-          rawArticles.push({
-            id: parseInt(id, 10),
-            title,
-            fullContent,
-            iconName,
-            category
-          });
-        }
-      });
-
-      return rawArticles;
-    } catch (error) {
-      console.error('Error parsing Google Sheets JSON:', error);
-      return [];
-    }
-  };
-
-  const processArticleContent = (rawContent: string): string => {
-    const lines = rawContent.split('\n');
-    let processedLines: string[] = [];
-    let inList = false;
-
-    lines.forEach((line) => {
-      const trimmedLine = line.trim();
-      const isListItem = line.startsWith('\t• ');
-
-      if (isListItem) {
-        if (!inList) {
-          processedLines.push('<ul>');
-          inList = true;
-        }
-        processedLines.push(`<li>${line.substring(3)}</li>`);
-      } else {
-        if (inList) {
-          processedLines.push('</ul>');
-          inList = false;
-        }
-        if (trimmedLine) {
-          processedLines.push(`<p>${line}</p>`);
-        } else {
-          processedLines.push(line);
-        }
-      }
-    });
-
-    if (inList) {
-      processedLines.push('</ul>');
-    }
-
-    return processedLines.join('\n');
-  };
-
   useEffect(() => {
-  const fetchKnowledgeBaseArticles = async () => {
-    try {
-      const data = await knowledgeBaseApi.getAllVisible();
-      
-      if (data && data.length > 0) {
-        const processedArticles: Article[] = data.map((article: any) => {
-          // Dynamiczne pobranie ikony z Lucide
-          const IconComponent = (LucideIcons as any)[article.icon_name] || LucideIcons.BookOpen;
-          
-          return {
-            id: article.id,
-            title: article.title,
-            category: article.category,
-            iconName: article.icon_name,
-            icon: <IconComponent size={24} />,
-            fullContent: article.content // HTML jest już gotowe
-          };
-        });
+    const fetchKnowledgeBaseArticles = async () => {
+      try {
+        const data = await knowledgeBaseApi.getAllVisible();
         
-        setArticles(processedArticles);
+        if (data && data.length > 0) {
+          const processedArticles: Article[] = data.map((article: any) => {
+            // Dynamiczne pobranie ikony z Lucide
+            const IconComponent = (LucideIcons as any)[article.icon_name] || LucideIcons.BookOpen;
+            
+            return {
+              id: article.id,
+              title: article.title,
+              category: article.category,
+              iconName: article.icon_name,
+              icon: <IconComponent size={24} />,
+              fullContent: article.content
+            };
+          });
+          
+          setArticles(processedArticles);
+        }
+      } catch (e: any) {
+        console.error('Error fetching knowledge base articles:', e);
+        setError(e.message || 'Wystąpił błąd podczas ładowania artykułów');
+      } finally {
+        setLoading(false);
       }
-    } catch (e: any) {
-      console.error('Error fetching knowledge base articles:', e);
-      setError(e.message || 'Wystąpił błąd podczas ładowania artykułów');
-    } finally {
-      setLoading(false);
-    }
-  };
+    };
 
-  fetchKnowledgeBaseArticles();
-}, []);
+    fetchKnowledgeBaseArticles();
+  }, []);
 
   const categories = [
     { name: "Wszystkie", value: "all" },
@@ -186,7 +85,7 @@ const KnowledgeBasePage: React.FC = () => {
 
   return (
     <div className="min-h-screen pt-16" style={{ backgroundColor: '#0A1A2F', color: '#F5F5F5' }}>
-      {/* Hero Section with Background Image - Only Link */}
+      {/* Hero Section with Background Image */}
       <section 
         className="relative py-20 min-h-[60vh] flex items-center justify-center"
         style={{
@@ -196,12 +95,21 @@ const KnowledgeBasePage: React.FC = () => {
           backgroundRepeat: 'no-repeat'
         }}
       >
-        {/* Dark Overlay for dimming */}
         <div 
           className="absolute inset-0"
           style={{ backgroundColor: 'rgba(0, 0, 0, 0.6)' }}
         ></div>
         
+        <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+          <Link
+            to="/"
+            className="inline-flex items-center space-x-2 mb-8 text-lg transition-colors hover:opacity-80"
+            style={{ color: '#D4AF37' }}
+          >
+            <ArrowLeft size={20} />
+            <span>Powrót do strony głównej</span>
+          </Link>
+        </div>
       </section>
 
       {/* Title Section */}
@@ -217,56 +125,59 @@ const KnowledgeBasePage: React.FC = () => {
         </div>
       </section>
 
-      {/* Search and Filter */}
-      <section className="py-10" style={{ backgroundColor: '#0A1A2F' }}>
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex flex-col md:flex-row gap-4 mb-8">
-            <div className="relative flex-grow">
+      {/* Search and Filter Section */}
+      <section className="pb-12" style={{ backgroundColor: '#0A1A2F' }}>
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="mb-8">
+            <div className="relative max-w-2xl mx-auto">
+              <Search 
+                size={20} 
+                className="absolute left-4 top-1/2 transform -translate-y-1/2" 
+                style={{ color: '#0A1A2F', opacity: 0.5 }} 
+              />
               <input
                 type="text"
-                placeholder="Szukaj artykułów..."
-                className="w-full px-4 py-3 pl-12 rounded-lg focus:outline-none focus:ring-2"
-                style={{
-                  backgroundColor: 'rgba(245, 245, 245, 0.1)',
-                  border: '1px solid rgba(245, 245, 245, 0.2)',
-                  color: '#F5F5F5',
-                  '--tw-ring-color': '#D4AF37'
-                }}
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
+                placeholder="Szukaj artykułów..."
+                className="w-full pl-12 pr-4 py-4 rounded-2xl border-4 text-lg"
+                style={{ backgroundColor: '#F5F5F5', borderColor: '#D4AF37', color: '#0A1A2F' }}
               />
-              <Search size={20} className="absolute left-4 top-1/2 transform -translate-y-1/2" style={{ color: '#D4AF37' }} />
             </div>
-            <select
-              className="px-4 py-3 rounded-lg focus:outline-none focus:ring-2 appearance-none"
-              style={{
-                backgroundColor: 'rgba(245, 245, 245, 0.1)',
-                border: '1px solid rgba(245, 245, 245, 0.2)',
-                color: '#F5F5F5',
-                '--tw-ring-color': '#D4AF37'
-              }}
-              value={selectedCategory}
-              onChange={(e) => setSelectedCategory(e.target.value)}
-            >
-              {categories.map((category) => (
-                <option key={category.value} value={category.value} style={{ backgroundColor: '#0A1A2F', color: '#F5F5F5' }}>
-                  {category.name}
-                </option>
-              ))}
-            </select>
+          </div>
+
+          <div className="flex flex-wrap justify-center gap-3">
+            {categories.map((category) => (
+              <button
+                key={category.value}
+                onClick={() => setSelectedCategory(category.value)}
+                className={`px-6 py-3 rounded-xl font-medium transition-all duration-200 border-2 ${
+                  selectedCategory === category.value
+                    ? 'shadow-lg scale-105'
+                    : 'hover:scale-105'
+                }`}
+                style={
+                  selectedCategory === category.value
+                    ? { backgroundColor: '#D4AF37', borderColor: '#D4AF37', color: '#0A1A2F' }
+                    : { backgroundColor: 'transparent', borderColor: '#D4AF37', color: '#D4AF37' }
+                }
+              >
+                {category.name}
+              </button>
+            ))}
           </div>
         </div>
       </section>
 
       {/* Articles Grid */}
-      <section className="py-20" style={{ backgroundColor: '#F5F5F5' }}>
+      <section className="py-12" style={{ backgroundColor: '#0A1A2F' }}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           {loading && (
-            <div className="text-center">
-              <div className="inline-block animate-spin rounded-full h-8 w-8 border-b-2" style={{ borderColor: '#D4AF37' }}></div>
-              <p className="text-xl mt-4" style={{ color: '#0A1A2F' }}>
-                Ładowanie artykułów...
-              </p>
+            <div className="flex justify-center items-center py-20">
+              <div 
+                className="animate-spin rounded-full h-16 w-16 border-b-4"
+                style={{ borderColor: '#D4AF37' }}
+              ></div>
             </div>
           )}
           
