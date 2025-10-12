@@ -99,17 +99,6 @@ const KnowledgeBasePage: React.FC = () => {
           className="absolute inset-0"
           style={{ backgroundColor: 'rgba(0, 0, 0, 0.6)' }}
         ></div>
-        
-        <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <Link
-            to="/"
-            className="inline-flex items-center space-x-2 mb-8 text-lg transition-colors hover:opacity-80"
-            style={{ color: '#D4AF37' }}
-          >
-            <ArrowLeft size={20} />
-            <span>Powrót do strony głównej</span>
-          </Link>
-        </div>
       </section>
 
       {/* Title Section */}
