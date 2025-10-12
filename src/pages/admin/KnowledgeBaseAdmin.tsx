@@ -136,25 +136,33 @@ const convertTextToHTML = (text: string): string => {
     setTimeout(() => setNotification(null), 3000);
   };
 
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
+const handleSubmit = async (e: React.FormEvent) => {
+  e.preventDefault();
 
-    try {
-      if (editingArticle) {
-        await knowledgeBaseApi.update(editingArticle.id, formData);
-        showNotification('success', 'Artykuł został zaktualizowany');
-      } else {
-        await knowledgeBaseApi.create(formData);
-        showNotification('success', 'Artykuł został dodany');
-      }
+  try {
+    // Konwertuj zwykły tekst na HTML przed zapisaniem
+    const htmlContent = convertTextToHTML(formData.content);
+    
+    const dataToSave = {
+      ...formData,
+      content: htmlContent
+    };
 
-      await fetchArticles();
-      handleCloseForm();
-    } catch (error) {
-      console.error('Error saving article:', error);
-      showNotification('error', 'Błąd podczas zapisywania artykułu');
+    if (editingArticle) {
+      await knowledgeBaseApi.update(editingArticle.id, dataToSave);
+      showNotification('success', 'Artykuł został zaktualizowany');
+    } else {
+      await knowledgeBaseApi.create(dataToSave);
+      showNotification('success', 'Artykuł został dodany');
     }
-  };
+
+    await fetchArticles();
+    handleCloseForm();
+  } catch (error) {
+    console.error('Error saving article:', error);
+    showNotification('error', 'Błąd podczas zapisywania artykułu');
+  }
+};
 
   const handleEdit = (article: KnowledgeBaseArticle) => {
     setEditingArticle(article);
