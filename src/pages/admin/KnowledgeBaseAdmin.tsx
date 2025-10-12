@@ -164,18 +164,18 @@ const handleSubmit = async (e: React.FormEvent) => {
   }
 };
 
-  const handleEdit = (article: KnowledgeBaseArticle) => {
-    setEditingArticle(article);
-    setFormData({
-      title: article.title,
-      content: article.content,
-      category: article.category,
-      icon_name: article.icon_name,
-      is_visible: article.is_visible,
-      display_order: article.display_order,
-    });
-    setShowForm(true);
-  };
+const handleEdit = (article: KnowledgeBaseArticle) => {
+  setEditingArticle(article);
+  setFormData({
+    title: article.title,
+    content: convertHTMLToText(article.content), // Konwertuj HTML na tekst do edycji
+    category: article.category,
+    icon_name: article.icon_name,
+    is_visible: article.is_visible,
+    display_order: article.display_order,
+  });
+  setShowForm(true);
+};
 
   const handleDelete = async (id: string) => {
     try {
