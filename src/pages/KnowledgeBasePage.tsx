@@ -1,7 +1,8 @@
-import React, { useState, useEffect } from 'react';
+import * as LucideIcons from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { ArrowLeft, Scale, FileText, DollarSign, Shield, Gavel, BookOpen, Search } from 'lucide-react';
 import { useConsultationModal } from '../context/ConsultationModalContext';
+import { knowledgeBaseApi } from '../lib/supabase';
 import ArticleDetailModal from '../components/ArticleDetailModal';
 
 interface Article {
