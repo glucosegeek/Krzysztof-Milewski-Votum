@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Link, useLocation, Outlet } from 'react-router-dom';
-import { LogOut, Menu, X, LayoutDashboard, Clock, Trophy, BarChart3 } from 'lucide-react';
+import { LogOut, Menu, X, LayoutDashboard, Clock, Trophy, BarChart3, Users } from 'lucide-react';
 import { useAuth } from '../context/AuthContext';
 
 const AdminLayout: React.FC = () => {
@@ -21,6 +21,7 @@ const AdminLayout: React.FC = () => {
     { name: 'Sprawy W Trakcie', href: '/admin/ongoing-cases', icon: Clock },
     { name: 'Wygrane Sprawy', href: '/admin/won-cases', icon: Trophy },
     { name: 'Statystyki', href: '/admin/statistics', icon: BarChart3 },
+    { name: 'Zarządzaj Adminami', href: '/admin/manage-admins', icon: Users },
   ];
 
   const isActive = (path: string) => {

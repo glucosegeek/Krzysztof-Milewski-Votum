@@ -25,6 +25,7 @@ import AdminDashboard from './pages/admin/AdminDashboard';
 import OngoingCasesAdmin from './pages/admin/OngoingCasesAdmin';
 import WonCasesAdmin from './pages/admin/WonCasesAdmin';
 import StatisticsAdmin from './pages/admin/StatisticsAdmin';
+import ManageAdminsPage from './pages/admin/ManageAdminsPage';
 
 function App() {
   const { registerFooterSection } = useStickyButtonVisibility();
@@ -62,6 +63,7 @@ useEffect(() => {
               <Route path="ongoing-cases" element={<OngoingCasesAdmin />} />
               <Route path="won-cases" element={<WonCasesAdmin />} />
               <Route path="statistics" element={<StatisticsAdmin />} />
+              <Route path="manage-admins" element={<ManageAdminsPage />} />
             </Route>
 
             <Route

@@ -7,7 +7,7 @@ interface ProtectedRouteProps {
 }
 
 const ProtectedRoute: React.FC<ProtectedRouteProps> = ({ children }) => {
-  const { user, loading } = useAuth();
+  const { user, loading, isAdmin } = useAuth();
 
   if (loading) {
     return (
@@ -22,6 +22,26 @@ const ProtectedRoute: React.FC<ProtectedRouteProps> = ({ children }) => {
 
   if (!user) {
     return <Navigate to="/admin/login" replace />;
+  }
+
+  if (!isAdmin) {
+    return (
+      <div className="min-h-screen flex items-center justify-center" style={{ backgroundColor: '#0A1A2F' }}>
+        <div className="text-center max-w-md mx-auto p-8 rounded-lg" style={{ backgroundColor: '#1A2942' }}>
+          <h1 className="text-2xl font-bold mb-4" style={{ color: '#D4AF37' }}>Brak dostępu</h1>
+          <p className="mb-6" style={{ color: '#F5F5F5' }}>
+            Nie masz uprawnień administratora do przeglądania tej strony.
+          </p>
+          <button
+            onClick={() => window.location.href = '/'}
+            className="px-6 py-2 rounded-lg font-medium transition-colors"
+            style={{ backgroundColor: '#D4AF37', color: '#0A1A2F' }}
+          >
+            Wróć do strony głównej
+          </button>
+        </div>
+      </div>
+    );
   }
 
   return <>{children}</>;
