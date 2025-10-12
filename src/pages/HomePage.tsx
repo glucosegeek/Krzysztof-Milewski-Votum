@@ -255,22 +255,22 @@ const conciergeItems = [
     }
   };
 
-  useEffect(() => {
+useEffect(() => {
   const fetchTestimonials = async () => {
     try {
-      setLoadingTestimonials(true);
-      setErrorTestimonials(null);
-
-      const response = await fetch(
-        'https://docs.google.com/spreadsheets/d/e/2PACX-1vQ5Q_HYZobfot0I0UnxhEzerfrFxv4N5FocG4wy8z0p8GHZ2rgkns-oDFww-vzLx-3boxZJUqkTjJH-/pub?output=csv',
-        {
-          method: 'GET',
-        }
-      );
-
-      if (!response.ok) {
-        // Jeśli Google Sheets nie działa, użyj przykładowych danych
-        console.warn('Google Sheets not accessible, using fallback data');
+      const data = await testimonialsApi.getAllVisible();
+      
+      if (data && data.length > 0) {
+        const mappedTestimonials: Testimonial[] = data.map((item: any) => ({
+          id: item.id,
+          name: item.name,
+          description: item.description,
+          stars: item.stars,
+          city: item.city
+        }));
+        setTestimonials(mappedTestimonials);
+      } else {
+        // Fallback jeśli baza jest pusta
         const fallbackTestimonials: Testimonial[] = [
           {
             id: 'testimonial-1',
@@ -295,16 +295,11 @@ const conciergeItems = [
           }
         ];
         setTestimonials(fallbackTestimonials);
-        return;
       }
-
-      const csvText = await response.text();
-      const parsedTestimonials = parseCSVTestimonials(csvText);
-      setTestimonials(parsedTestimonials);
     } catch (e: any) {
       console.error('Error fetching testimonials:', e);
       
-      // W przypadku błędu, użyj przykładowych danych zamiast pokazywać błąd
+      // W przypadku błędu, użyj przykładowych danych
       const fallbackTestimonials: Testimonial[] = [
         {
           id: 'testimonial-1',
@@ -329,8 +324,6 @@ const conciergeItems = [
         }
       ];
       setTestimonials(fallbackTestimonials);
-      // NIE ustawiaj błędu, bo mamy fallback
-      // setErrorTestimonials(e.message || 'Wystąpił błąd podczas ładowania opinii klientów');
     } finally {
       setLoadingTestimonials(false);
     }
