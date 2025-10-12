@@ -49,7 +49,6 @@
 }
 
 .knowledge-base-article-content ul li::before {
-  content: '•'; /* Custom bullet character */
   color: #D4AF37; /* Gold color for bullet */
   position: absolute;
   left: 0;
