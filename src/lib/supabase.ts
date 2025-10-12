@@ -320,6 +320,99 @@ export const newsApi = {
   }
 };
 
+// Knowledge Base API
+export const knowledgeBaseApi = {
+  async getAll() {
+    const { data, error } = await supabase
+      .from('knowledge_base')
+      .select('*')
+      .order('display_order', { ascending: true });
+    
+    if (error) throw error;
+    return data;
+  },
+
+  async getAllVisible() {
+    const { data, error } = await supabase
+      .from('knowledge_base')
+      .select('*')
+      .eq('is_visible', true)
+      .order('display_order', { ascending: true });
+    
+    if (error) throw error;
+    return data;
+  },
+
+  async getByCategory(category: string) {
+    const { data, error } = await supabase
+      .from('knowledge_base')
+      .select('*')
+      .eq('category', category)
+      .eq('is_visible', true)
+      .order('display_order', { ascending: true });
+    
+    if (error) throw error;
+    return data;
+  },
+
+  async getById(id: string) {
+    const { data, error } = await supabase
+      .from('knowledge_base')
+      .select('*')
+      .eq('id', id)
+      .single();
+    
+    if (error) throw error;
+    return data;
+  },
+
+  async create(article: {
+    title: string;
+    content: string;
+    category: string;
+    icon_name?: string;
+    is_visible?: boolean;
+    display_order?: number;
+  }) {
+    const { data, error } = await supabase
+      .from('knowledge_base')
+      .insert([article])
+      .select()
+      .single();
+    
+    if (error) throw error;
+    return data;
+  },
+
+  async update(id: string, article: Partial<{
+    title: string;
+    content: string;
+    category: string;
+    icon_name: string;
+    is_visible: boolean;
+    display_order: number;
+  }>) {
+    const { data, error } = await supabase
+      .from('knowledge_base')
+      .update({ ...article, updated_at: new Date().toISOString() })
+      .eq('id', id)
+      .select()
+      .single();
+    
+    if (error) throw error;
+    return data;
+  },
+
+  async delete(id: string) {
+    const { error } = await supabase
+      .from('knowledge_base')
+      .delete()
+      .eq('id', id);
+    
+    if (error) throw error;
+  }
+};
+
 export const statisticsApi = {
   async getByPageType(pageType: 'ongoing' | 'won') {
     const { data, error } = await supabase
