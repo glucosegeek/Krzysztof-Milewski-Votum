@@ -1,17 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Clock, TrendingUp, Users, FileText, ChevronDown, ChevronUp, Briefcase, Target } from 'lucide-react';
 import { useConsultationModal } from '../context/ConsultationModalContext';
-
-interface OngoingCase {
-  id: string;
-  case_type: string;
-  current_status: string;
-  start_date: string;
-  expected_amount: number;
-  description: string;
-  client_location: string;
-  stage: string;
-}
+import { ongoingCasesApi, type OngoingCase } from '../lib/supabase';
 
 const WTrakcePage: React.FC = () => {
   const { openModal } = useConsultationModal();
@@ -27,90 +17,8 @@ const WTrakcePage: React.FC = () => {
         setLoading(true);
         setError(null);
 
-        const fallbackCases: OngoingCase[] = [
-          {
-            id: 'ongoing-1',
-            case_type: 'Kredyt walutowy CHF',
-            current_status: 'W toku postępowania sądowego',
-            start_date: '2024-08-15',
-            expected_amount: 285000,
-            description: 'Sprawa przeciwko bankowi w związku z kredytem frankowym. Obecnie trwają rozprawy, złożono wszystkie niezbędne dowody i opinie biegłych.',
-            client_location: 'Warszawa',
-            stage: 'Postępowanie sądowe'
-          },
-          {
-            id: 'ongoing-2',
-            case_type: 'Kredyt SKD',
-            current_status: 'Oczekiwanie na dokumenty',
-            start_date: '2024-09-01',
-            expected_amount: 145000,
-            description: 'Przygotowanie do zastosowania sankcji kredytu darmowego. Obecnie zbieramy pełną dokumentację kredytową i analizujemy umowę pod kątem nieprawidłowości.',
-            client_location: 'Kraków',
-            stage: 'Przygotowanie dokumentacji'
-          },
-          {
-            id: 'ongoing-3',
-            case_type: 'Kredyt walutowy EUR',
-            current_status: 'Analiza prawna',
-            start_date: '2024-09-20',
-            expected_amount: 310000,
-            description: 'Szczegółowa analiza umowy kredytu denominowanego w euro. Identyfikacja klauzul abuzywnych i przygotowanie strategii procesowej.',
-            client_location: 'Gdańsk',
-            stage: 'Analiza prawna'
-          },
-          {
-            id: 'ongoing-4',
-            case_type: 'Kredyt walutowy CHF',
-            current_status: 'W toku postępowania sądowego',
-            start_date: '2024-07-10',
-            expected_amount: 390000,
-            description: 'Zaawansowane postępowanie sądowe dotyczące unieważnienia umowy kredytu frankowego. Oczekujemy na wydanie wyroku w najbliższych tygodniach.',
-            client_location: 'Wrocław',
-            stage: 'Postępowanie sądowe'
-          },
-          {
-            id: 'ongoing-5',
-            case_type: 'Kredyt SKD',
-            current_status: 'Negocjacje z bankiem',
-            start_date: '2024-10-01',
-            expected_amount: 120000,
-            description: 'Prowadzone są negocjacje z bankiem w sprawie polubownego rozwiązania sporu. Bank rozważa uznanie naszych roszczeń bez konieczności postępowania sądowego.',
-            client_location: 'Poznań',
-            stage: 'Negocjacje pozasądowe'
-          },
-          {
-            id: 'ongoing-6',
-            case_type: 'Kredyt walutowy USD',
-            current_status: 'Przygotowanie pozwu',
-            start_date: '2024-10-05',
-            expected_amount: 265000,
-            description: 'Finalizacja przygotowania pozwu o unieważnienie umowy kredytu denominowanego w dolarach. Pozew zostanie złożony w sądzie w ciągu najbliższych dni.',
-            client_location: 'Łódź',
-            stage: 'Przygotowanie pozwu'
-          },
-          {
-            id: 'ongoing-7',
-            case_type: 'Kredyt walutowy CHF',
-            current_status: 'Odwołanie do sądu wyższej instancji',
-            start_date: '2024-05-20',
-            expected_amount: 445000,
-            description: 'Po niekorzystnym wyroku sądu pierwszej instancji, złożyliśmy apelację. Trwa postępowanie przed sądem apelacyjnym z dużą szansą na pomyślne rozstrzygnięcie.',
-            client_location: 'Katowice',
-            stage: 'Postępowanie apelacyjne'
-          },
-          {
-            id: 'ongoing-8',
-            case_type: 'Kredyt SKD',
-            current_status: 'W toku postępowania sądowego',
-            start_date: '2024-06-30',
-            expected_amount: 175000,
-            description: 'Sprawa w toku postępowania sądowego dotycząca zastosowania sankcji kredytu darmowego. Przedstawiliśmy kompleksową argumentację prawną i oczekujemy na rozstrzygnięcie.',
-            client_location: 'Szczecin',
-            stage: 'Postępowanie sądowe'
-          }
-        ];
-
-        setOngoingCases(fallbackCases);
+        const cases = await ongoingCasesApi.getAll();
+        setOngoingCases(cases);
       } catch (e: any) {
         console.error('Error fetching ongoing cases:', e);
         setError(e.message || 'Wystąpił błąd podczas ładowania spraw w trakcie');

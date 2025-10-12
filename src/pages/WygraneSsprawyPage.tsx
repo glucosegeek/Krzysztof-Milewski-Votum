@@ -1,15 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Trophy, TrendingUp, Users, CheckCircle, ChevronDown, ChevronUp, Award, DollarSign } from 'lucide-react';
 import { useConsultationModal } from '../context/ConsultationModalContext';
-
-interface WonCase {
-  id: string;
-  case_type: string;
-  amount_recovered: number;
-  date_won: string;
-  description: string;
-  client_location: string;
-}
+import { wonCasesApi, type WonCase } from '../lib/supabase';
 
 const WygraneSsprawyPage: React.FC = () => {
   const { openModal } = useConsultationModal();
@@ -25,58 +17,8 @@ const WygraneSsprawyPage: React.FC = () => {
         setLoading(true);
         setError(null);
 
-        const fallbackCases: WonCase[] = [
-          {
-            id: 'case-1',
-            case_type: 'Kredyt walutowy CHF',
-            amount_recovered: 250000,
-            date_won: '2024-09-15',
-            description: 'Unieważnienie umowy kredytu frankowego. Klient odzyskał nadpłacone raty i został zwolniony z pozostałego zadłużenia wobec banku.',
-            client_location: 'Warszawa'
-          },
-          {
-            id: 'case-2',
-            case_type: 'Kredyt SKD',
-            amount_recovered: 180000,
-            date_won: '2024-08-22',
-            description: 'Skuteczne zastosowanie sankcji kredytu darmowego. Bank zobowiązany do zwrotu wszystkich odsetek i prowizji.',
-            client_location: 'Kraków'
-          },
-          {
-            id: 'case-3',
-            case_type: 'Kredyt walutowy EUR',
-            amount_recovered: 320000,
-            date_won: '2024-07-10',
-            description: 'Wyrok unieważniający umowę kredytu denominowanego w euro. Zwrot nadpłaconych środków oraz anulowanie zadłużenia.',
-            client_location: 'Gdańsk'
-          },
-          {
-            id: 'case-4',
-            case_type: 'Kredyt walutowy CHF',
-            amount_recovered: 410000,
-            date_won: '2024-06-18',
-            description: 'Sprawa przeciwko dużemu bankowi komercyjnemu. Całkowite unieważnienie umowy kredytowej z tytułu klauzul abuzywnych.',
-            client_location: 'Wrocław'
-          },
-          {
-            id: 'case-5',
-            case_type: 'Kredyt SKD',
-            amount_recovered: 95000,
-            date_won: '2024-05-30',
-            description: 'Sankcja kredytu darmowego za nieprawidłowe informacje przedkontraktowe. Zwrot wszystkich kosztów kredytu.',
-            client_location: 'Poznań'
-          },
-          {
-            id: 'case-6',
-            case_type: 'Kredyt walutowy USD',
-            amount_recovered: 275000,
-            date_won: '2024-04-12',
-            description: 'Unieważnienie kredytu denominowanego w dolarach. Klient odzyskał znaczną część wpłaconych środków.',
-            client_location: 'Łódź'
-          }
-        ];
-
-        setWonCases(fallbackCases);
+        const cases = await wonCasesApi.getAll();
+        setWonCases(cases);
       } catch (e: any) {
         console.error('Error fetching won cases:', e);
         setError(e.message || 'Wystąpił błąd podczas ładowania wygranych spraw');
