@@ -365,9 +365,9 @@ export default function ManageAdminsPage() {
       </div>
 
       <div className="bg-blue-50 border border-blue-200 rounded-lg p-4">
-        <h3 className="text-sm font-semibold text-blue-900 mb-2">Security Notes:</h3>
+        <h3 className="text-sm font-semibold text-blue-900 mb-2">Uwagi dotyczące bezpieczeństwa:</h3>
         <ul className="text-sm text-blue-800 space-y-1 list-disc list-inside">
-          <li>Invited admins will receive an email with a verification link</li>
+          <li>Zaproszeni administratorzy otrzymają wiadomość e-mail z linkiem weryfikacyjnym.</li>
           <li>New admins must set their password through the verification link</li>
           <li>You cannot deactivate your own account</li>
           <li>At least one active admin must remain in the system</li>
