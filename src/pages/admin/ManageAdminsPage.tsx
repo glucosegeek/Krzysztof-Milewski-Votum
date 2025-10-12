@@ -304,7 +304,7 @@ export default function ManageAdminsPage() {
                         <Mail className="w-4 h-4 text-gray-400" />
                         <span className="text-sm font-medium text-gray-900">{admin.email}</span>
                         {admin.email === user?.email && (
-                          <span className="text-xs text-blue-600 font-medium">(You)</span>
+                          <span className="text-xs text-blue-600 font-medium">(Ty)</span>
                         )}
                       </div>
                     </td>
