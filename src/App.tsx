@@ -66,6 +66,7 @@ useEffect(() => {
               <Route path="won-cases" element={<WonCasesAdmin />} />
               <Route path="statistics" element={<StatisticsAdmin />} />
               <Route path="testimonials" element={<TestimonialsAdmin />} />
+              <Route path="news" element={<NewsAdmin />} />
               <Route path="manage-admins" element={<ManageAdminsPage />} />
             </Route>
 
