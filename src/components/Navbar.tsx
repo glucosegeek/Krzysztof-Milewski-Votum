@@ -129,7 +129,16 @@ const Navbar: React.FC = () => {
             >
               Baza wiedzy
             </Link>
-            
+
+            <Link
+              to="/wygrane-sprawy"
+              className="px-3 py-2 rounded-md text-sm font-medium transition-colors hover:bg-opacity-10 hover:bg-white"
+              style={{ color: '#F5F5F5' }}
+              onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+            >
+              Wygrane Sprawy
+            </Link>
+
             <Link
               to="/faq"
               className="px-3 py-2 rounded-md text-sm font-medium transition-colors hover:bg-opacity-10 hover:bg-white"
@@ -238,6 +247,18 @@ const Navbar: React.FC = () => {
                 }}
               >
                 Baza wiedzy
+              </Link>
+
+              <Link
+                to="/wygrane-sprawy"
+                className="block px-3 py-2 rounded-md text-sm font-medium transition-colors hover:bg-opacity-10 hover:bg-white"
+                style={{ color: '#F5F5F5' }}
+                onClick={() => {
+                  closeMobileMenu();
+                  window.scrollTo({ top: 0, behavior: 'smooth' });
+                }}
+              >
+                Wygrane Sprawy
               </Link>
 
               <Link

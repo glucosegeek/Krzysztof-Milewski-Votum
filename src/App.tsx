@@ -13,6 +13,7 @@ import KnowledgeBasePage from './pages/KnowledgeBasePage';
 import NewsPage from './pages/NewsPage';
 import FAQPage from './pages/FAQPage';
 import AboutMePage from './pages/AboutMePage';
+import WygraneSsprawyPage from './pages/WygraneSsprawyPage';
 import PrivacyPolicyPage from './pages/PrivacyPolicyPage';
 import ContactSection from './components/ContactSection';
 
@@ -42,6 +43,7 @@ useEffect(() => {
           <Route path="/services/skd" element={<ServicesSKDPage />} />
           <Route path="/knowledge-base" element={<KnowledgeBasePage />} />
           <Route path="/news" element={<NewsPage />} />
+          <Route path="/wygrane-sprawy" element={<WygraneSsprawyPage />} />
           <Route path="/faq" element={<FAQPage />} />
           <Route path="/privacy-policy" element={<PrivacyPolicyPage />} />
            <Route path="/about-me" element={<AboutMePage />} />
