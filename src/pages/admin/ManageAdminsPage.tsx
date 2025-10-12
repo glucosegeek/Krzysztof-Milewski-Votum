@@ -264,13 +264,13 @@ export default function ManageAdminsPage() {
 
       <div className="bg-white rounded-lg shadow-md overflow-hidden">
         <div className="px-6 py-4 border-b border-gray-200">
-          <h2 className="text-xl font-semibold text-gray-900">Admin Users</h2>
+          <h2 className="text-xl font-semibold text-gray-900">Admini</h2>
         </div>
 
         {loading ? (
-          <div className="p-8 text-center text-gray-500">Loading admins...</div>
+          <div className="p-8 text-center text-gray-500">Ładowanie administratorów...</div>
         ) : admins.length === 0 ? (
-          <div className="p-8 text-center text-gray-500">No admin users found</div>
+          <div className="p-8 text-center text-gray-500">Brak administratorów</div>
         ) : (
           <div className="overflow-x-auto">
             <table className="w-full">
@@ -283,16 +283,16 @@ export default function ManageAdminsPage() {
                     Status
                   </th>
                   <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                    Invited By
+                    Zaproszony przez
                   </th>
                   <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                    Invited At
+                    Zaproszony w dniu
                   </th>
                   <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                    Accepted At
+                    Zaakceptowany dnia
                   </th>
                   <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                    Actions
+                    Akcje
                   </th>
                 </tr>
               </thead>
