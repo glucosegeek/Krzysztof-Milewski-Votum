@@ -16,8 +16,8 @@ interface KnowledgeBaseArticle {
 
 const KnowledgeBaseAdmin: React.FC = () => {
   // Funkcja konwertująca zwykły tekst na HTML
+// Funkcja konwertująca zwykły tekst na HTML
 const convertTextToHTML = (text: string): string => {
-  // Dzielimy tekst na linie
   const lines = text.split('\n');
   let html = '';
   let inList = false;
@@ -25,47 +25,38 @@ const convertTextToHTML = (text: string): string => {
   for (let i = 0; i < lines.length; i++) {
     let line = lines[i].trim();
     
-    // Pusta linia = koniec akapitu lub listy
     if (line === '') {
       if (inList) {
-        html += '</ul>';
+        html += '</ul>\n';
         inList = false;
       }
       continue;
     }
     
-    // Lista punktowana (zaczyna się od "- ")
+    // Lista punktowana
     if (line.startsWith('- ')) {
       if (!inList) {
-        html += '<ul>';
+        html += '<ul style="list-style-type: disc; padding-left: 1.5rem; margin: 1rem 0;">\n';
         inList = true;
       }
-      line = line.substring(2); // Usuń "- "
-      
-      // Formatowanie wewnątrz elementu listy
-      line = line.replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>'); // **bold**
-      line = line.replace(/\*(.+?)\*/g, '<em>$1</em>'); // *italic*
-      
-      html += `<li>${line}</li>`;
+      line = line.substring(2);
+      line = line.replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>');
+      line = line.replace(/\*(.+?)\*/g, '<em>$1</em>');
+      html += `<li style="margin-bottom: 0.5rem;">${line}</li>\n`;
     } 
-    // Zwykła linia tekstu
     else {
       if (inList) {
-        html += '</ul>';
+        html += '</ul>\n';
         inList = false;
       }
-      
-      // Formatowanie w linii
-      line = line.replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>'); // **bold**
-      line = line.replace(/\*(.+?)\*/g, '<em>$1</em>'); // *italic*
-      
-      html += `<p>${line}</p>`;
+      line = line.replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>');
+      line = line.replace(/\*(.+?)\*/g, '<em>$1</em>');
+      html += `<p style="margin-bottom: 1rem;">${line}</p>\n`;
     }
   }
   
-  // Zamknij listę jeśli była otwarta
   if (inList) {
-    html += '</ul>';
+    html += '</ul>\n';
   }
   
   return html;
