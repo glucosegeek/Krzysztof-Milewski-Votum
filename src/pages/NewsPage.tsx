@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { ArrowLeft } from 'lucide-react';
+import { newsApi } from '../lib/supabase';
 import NewsArticleDetailModal from '../components/NewsArticleDetailModal';
 
 interface NewsArticle {
